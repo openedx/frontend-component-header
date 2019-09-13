@@ -1,0 +1,17 @@
+language: node_js
+node_js: 12
+install:
+  - npm install
+script:
+  - npm run lint
+  - npm run test
+  - npm run build
+after_success:
+  - npm run semantic-release
+  - codecov
+env:
+  global:
+    # NPM_TOKEN
+    secure: "dFD/tKL94CVp+c35JU69rA0iYoUGTAKWYXTBYnrObCIonCd8qoJi6Ubp5XcohU2nasqevPiicDQ4ySd3w5YiFyX/ILP8yJ//HvvHqpOYgy8fIhQHerg4Nrhv976FdKSeKQPd97BnkxCsoVZDHb3RKYYthCTuLwoAhgNKTV6tEPhr9CcLJHombRCGEnBdQsSRxy1lpGBynDD0I9FXwV+8tjVc7rGxZe7XNB6VRjQ71S8aekmmCadiSzObF8NOFEdqHPBfJlDiqCSpL2wwKkGmsLDEAmbIkaUh1LG3/uATqya6qSZR6aaTcqVcCGG4WSUtW24N1fWjN1xJ5oni6f/zuZGRou9MKLQNGU7aJmGEoIJ8QJGHs6BHmcUd/apSjNhxq131u313uUa5/AMw8UKvuyXeIQHTKXRckigsQpPOhF/VQGVlMktQvUMIkTzQvhXsFPr+O7ZUD2F2ODepNkVJVeW/hrvTARzqsAudAYAV6aHarS3GR/8IUMuTVu93rdKXvhUVH88QqFODi5aBj0ElS0DXe8Rp0IRCD55SA+4fQRjija7RLk0lkNBLiwD/z8hzXgt95q53IORuyfh+1sBozHp3XPXiw6vNEThczr0iBjcIytqdw9cdHbrb6gX1L69Mb7Uhc02e55VjAmlzFj99BjetxsGuTQaLrFBpnxzmWvw="
+    # GH_TOKEN
+    secure: "CFN/uOByWC+7S+AAXECLQ0mNgoiyCDl1ZB5AT5+/qP+xEVs0ysFKDWrD9W8KeQqHqCMPUKNt23nrgxwvFCkSx+n1MAnxZmOdVJWbzGbUB9TsqrwVUALkqof1MrRB8UFVEzIRaO60iRN/L3zVXML+4GsycYX6rHyptbAypxplpljDyKrY8tc/mM7AGZ9eVFGSq+7CXXmdvkhP9kLkH1tIYvR7wjTKvZHbHf6YRjIVCiyzxM4S/E9l8JRnbERp02XosRD62PUJXXk6EJVn6Qoub6CaPnpew5crW0iRF1UJs54U29zWd/S+LuW66WkLfJu7rDq6AFJNMtMNusJxwVkOv4X+p0oJDWZEhojW+/Wm10UAu8/g5oAqeePZEGiSbT3Hp1VqOc4FY/kmOLiM+L6oq/AA2XX6iiE8lA64IH5R8ApQamF4GTUYTvKHeLPgXnGJH7A95Xy9/+jmX9I9wJREMrHrkyPjoX/NTRdG+RrebB1+An9Bt9vAbG862gbOZfgTcuWHDOlG5gcA964Fr7RqR5a62yr45Gw+Q0lTrLj5mGAjjSpMRIAQzi9e7oXmoMZnvenu/WJAe5M+u+/gv82HeXcMwLvNNGSvz+0i1xNUOoX1zHG046oGKiX0Zu+l0JfNwihJTO7vJlaITmjhfOyufwpk74xEyrhf8nLF9e5Frec="
