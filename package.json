@@ -1,7 +1,7 @@
 {
-  "name": "@edx/frontend-component-header-edx",
+  "name": "@edx/frontend-component-header",
   "version": "1.0.0-semantically-released",
-  "description": "The standard header for edX",
+  "description": "The standard header for Open edX",
   "publishConfig": {
     "access": "public"
   },
@@ -20,14 +20,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/edx/frontend-component-header-edx.git"
+    "url": "git+https://github.com/edx/frontend-component-header.git"
   },
   "author": "edX",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/edx/frontend-component-header-edx/issues"
+    "url": "https://github.com/edx/frontend-component-header/issues"
   },
-  "homepage": "https://github.com/edx/frontend-component-header-edx#readme",
+  "homepage": "https://github.com/edx/frontend-component-header#readme",
   "devDependencies": {
     "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",
