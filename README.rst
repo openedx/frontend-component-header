@@ -3,7 +3,9 @@ frontend-component-header
 
 |Build Status| |Codecov| |npm_version| |npm_downloads| |license| |semantic-release|
 
-This repository is a work in progress.  Nothing found here is at all production-ready.
+This is the standard Open edX header for use in React applications. It has two exports:
+  - **default**: The Header Component
+  - **messages**: for i18n in the form of ``{ locale: { key: translatedString } }``
 
 .. |Build Status| image:: https://api.travis-ci.org/edx/frontend-component-header.svg?branch=master-edx
    :target: https://travis-ci.org/edx/frontend-component-header

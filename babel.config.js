@@ -13,6 +13,17 @@ module.exports = {
     '@babel/plugin-proposal-class-properties',
   ],
   env: {
+    i18n: {
+      plugins: [
+        [
+          'react-intl',
+          {
+            messagesDir: './temp/babel-plugin-react-intl',
+            moduleSourceName: '@edx/frontend-i18n',
+          },
+        ],
+      ],
+    },
     test: {
       presets: [
         '@babel/preset-env',
