@@ -7,7 +7,7 @@ This is the standard Open edX header for use in React applications. It has two e
   - **default**: The Header Component
   - **messages**: for i18n in the form of ``{ locale: { key: translatedString } }``
 
-.. |Build Status| image:: https://api.travis-ci.com/edx/frontend-component-header.svg?branch=master-edx
+.. |Build Status| image:: https://api.travis-ci.com/edx/frontend-component-header.svg?branch=master
    :target: https://travis-ci.com/edx/frontend-component-header
 .. |Codecov| image:: https://img.shields.io/codecov/c/github/edx/frontend-component-header
    :target: @edx/frontend-component-header
