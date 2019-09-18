@@ -1,5 +1,5 @@
 import SiteHeader from './SiteHeader';
-import messages from './SiteHeader.messages';
+import messages from './i18n/index';
 
 export { messages };
 
