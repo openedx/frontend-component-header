@@ -37,14 +37,15 @@
     "@babel/preset-react": "^7.0.0",
     "@edx/frontend-analytics": "^2.0.0",
     "@edx/frontend-auth": "^6.0.1",
-    "@edx/frontend-base": "^1.1.1",
+    "@edx/frontend-base": "^2.0.0",
     "@edx/frontend-i18n": "^3.0.2",
     "@edx/frontend-logging": "^3.0.1",
     "@edx/paragon": "^7.1.2",
     "babel-eslint": "^10.0.3",
     "babel-plugin-react-intl": "^4.1.18",
     "dotenv": "^8.1.0",
-    "enzyme": "^3.10.0",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.14.0",
     "eslint": "^6.3.0",
     "eslint-config-edx": "^4.0.4",
     "jest": "^24.9.0",
@@ -63,12 +64,13 @@
   },
   "peerDependencies": {
     "@edx/frontend-analytics": "^2.0.0",
-    "@edx/frontend-base": "^1.1.1",
+    "@edx/frontend-base": "^2.0.0",
     "@edx/frontend-i18n": "^3.0.2",
     "prop-types": "^15.7.2",
     "react": "^16.9.0"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "react-responsive": "^8.0.1",
     "react-transition-group": "^4.3.0"
   },
@@ -88,6 +90,7 @@
       "/node_modules/(?!@edx)"
     ],
     "setupFiles": [
+      "./src/setupTest.js",
       "dotenv/config"
     ]
   }

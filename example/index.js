@@ -1,35 +1,45 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { IntlProvider } from '@edx/frontend-i18n';
-import { AuthenticationContext } from '@edx/frontend-base';
+import 'babel-polyfill';
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { App, AppContext, APP_READY, AppProvider } from '@edx/frontend-base';
+import { NewRelicLoggingService } from '@edx/frontend-logging';
 import './index.scss';
 import SiteHeader from '../src/';
 
-const App = () => (
-  <div>
-    <IntlProvider locale="en">
-      <>
-        <AuthenticationContext.Provider value={{
+App.subscribe(APP_READY, () => {
+  ReactDOM.render(
+    <AppProvider>
+      {/* We can fake out authentication by including another provider here with the data we want */}
+      <AppContext.Provider value={{
+        authenticatedUser: {
           userId: null,
           username: null,
+          roles: [],
           administrator: false,
-        }}>
-          <SiteHeader />
-        </AuthenticationContext.Provider>
-        <h5 className="mt-2 mb-5">Logged out state</h5>
+        },
+        config: App.config
+      }}>
+        <SiteHeader />
+      </AppContext.Provider>
+      <h5 className="mt-2 mb-5">Logged out state</h5>
 
-        <AuthenticationContext.Provider value={{
+      {/* We can fake out authentication by including another provider here with the data we want */}
+      <AppContext.Provider value={{
+        authenticatedUser: {
           userId: null,
           username: 'testuser',
+          roles: [],
           administrator: false,
-        }}>
-          <SiteHeader />
-        </AuthenticationContext.Provider>
-        <h5 className="mt-2">Logged in state</h5>
-      </>
-    </IntlProvider>
-  </div>
-);
+        },
+        config: App.config
+      }}>
+        <SiteHeader />
+      </AppContext.Provider>
+      <h5 className="mt-2">Logged in state</h5>
+    </AppProvider>,
+    document.getElementById('root'),
+  );
+});
 
-render(<App />, document.getElementById('root'));
+App.initialize({ messages: [], loggingService: NewRelicLoggingService });

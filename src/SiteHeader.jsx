@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Responsive from 'react-responsive';
 import { injectIntl, intlShape } from '@edx/frontend-i18n';
-import { App, AuthenticationContext } from '@edx/frontend-base';
+import { App, AppContext, APP_CONFIGURED } from '@edx/frontend-base';
 
 import DesktopHeader from './DesktopHeader';
 import MobileHeader from './MobileHeader';
@@ -10,27 +10,22 @@ import LogoSVG from './logo.svg';
 
 import messages from './SiteHeader.messages';
 
-App.requireConfig([
-  'LMS_BASE_URL',
-  'LOGOUT_URL',
-  'LOGIN_URL',
-  'SITE_NAME',
-], 'Header component');
-
-const {
-  LMS_BASE_URL,
-  LOGOUT_URL,
-  LOGIN_URL,
-  SITE_NAME,
-} = App.config;
+App.subscribe(APP_CONFIGURED, () => {
+  App.requireConfig([
+    'LMS_BASE_URL',
+    'LOGOUT_URL',
+    'LOGIN_URL',
+    'SITE_NAME',
+  ], 'Header component');
+});
 
 function SiteHeader({ intl }) {
-  const { username, avatar } = useContext(AuthenticationContext);
+  const { authenticatedUser, config } = useContext(AppContext);
 
   const mainMenu = [
     {
       type: 'item',
-      href: `${LMS_BASE_URL}/dashboard`,
+      href: `${config.LMS_BASE_URL}/dashboard`,
       content: intl.formatMessage(messages['header.links.courses']),
     },
   ];
@@ -38,22 +33,22 @@ function SiteHeader({ intl }) {
   const userMenu = [
     {
       type: 'item',
-      href: `${LMS_BASE_URL}/dashboard`,
+      href: `${config.LMS_BASE_URL}/dashboard`,
       content: intl.formatMessage(messages['header.user.menu.dashboard']),
     },
     {
       type: 'item',
-      href: `${LMS_BASE_URL}/u/${username}`,
+      href: `${config.LMS_BASE_URL}/u/${authenticatedUser.username}`,
       content: intl.formatMessage(messages['header.user.menu.profile']),
     },
     {
       type: 'item',
-      href: `${LMS_BASE_URL}/account/settings`,
+      href: `${config.LMS_BASE_URL}/account/settings`,
       content: intl.formatMessage(messages['header.user.menu.account.settings']),
     },
     {
       type: 'item',
-      href: LOGOUT_URL,
+      href: config.LOGOUT_URL,
       content: intl.formatMessage(messages['header.user.menu.logout']),
     },
   ];
@@ -61,24 +56,24 @@ function SiteHeader({ intl }) {
   const loggedOutItems = [
     {
       type: 'item',
-      href: LOGIN_URL,
+      href: config.LOGIN_URL,
       content: intl.formatMessage(messages['header.user.menu.login']),
     },
     {
       type: 'item',
-      href: `${LMS_BASE_URL}/register`,
+      href: `${config.LMS_BASE_URL}/register`,
       content: intl.formatMessage(messages['header.user.menu.register']),
     },
   ];
 
   const props = {
     logo: LogoSVG,
-    logoAltText: SITE_NAME,
-    siteName: SITE_NAME,
-    logoDestination: `${LMS_BASE_URL}/dashboard`,
-    loggedIn: !!username,
-    username,
-    avatar,
+    logoAltText: config.SITE_NAME,
+    siteName: config.SITE_NAME,
+    logoDestination: `${config.LMS_BASE_URL}/dashboard`,
+    loggedIn: !!authenticatedUser.username,
+    username: authenticatedUser.username,
+    avatar: authenticatedUser.avatar,
     mainMenu,
     userMenu,
     loggedOutItems,
