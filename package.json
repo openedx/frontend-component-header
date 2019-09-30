@@ -58,7 +58,7 @@
     "react-test-renderer": "16.9.0",
     "reactifex": "1.1.1",
     "redux": "4.0.4",
-    "redux-saga": "1.0.5",
+    "redux-saga": "1.1.1",
     "sass": "1.22.12",
     "semantic-release": "15.13.24"
   },
