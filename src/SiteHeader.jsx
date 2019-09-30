@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Responsive from 'react-responsive';
 import { injectIntl, intlShape } from '@edx/frontend-i18n';
-import { App, AppContext, APP_CONFIGURED } from '@edx/frontend-base';
+import { App, AppContext } from '@edx/frontend-base';
 
 import DesktopHeader from './DesktopHeader';
 import MobileHeader from './MobileHeader';
@@ -10,14 +10,12 @@ import LogoSVG from './logo.svg';
 
 import messages from './SiteHeader.messages';
 
-App.subscribe(APP_CONFIGURED, () => {
-  App.requireConfig([
-    'LMS_BASE_URL',
-    'LOGOUT_URL',
-    'LOGIN_URL',
-    'SITE_NAME',
-  ], 'Header component');
-});
+App.requireConfig([
+  'LMS_BASE_URL',
+  'LOGOUT_URL',
+  'LOGIN_URL',
+  'SITE_NAME',
+], 'Header component');
 
 function SiteHeader({ intl }) {
   const { authenticatedUser, config } = useContext(AppContext);
