@@ -37,7 +37,7 @@
     "@babel/preset-react": "7.0.0",
     "@edx/frontend-analytics": "3.0.0",
     "@edx/frontend-auth": "7.0.1",
-    "@edx/frontend-base": "3.0.0",
+    "@edx/frontend-base": "4.0.0",
     "@edx/frontend-i18n": "3.0.3",
     "@edx/frontend-logging": "3.0.1",
     "@edx/paragon": "7.1.4",
@@ -69,7 +69,7 @@
   },
   "peerDependencies": {
     "@edx/frontend-analytics": "^3.0.0",
-    "@edx/frontend-base": "^3.0.0",
+    "@edx/frontend-base": "^4.0.0",
     "@edx/frontend-i18n": "^3.0.3",
     "prop-types": "^15.7.2",
     "react": "^16.9.0"
