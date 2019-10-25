@@ -46,7 +46,7 @@
     "dotenv": "8.1.0",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
-    "eslint": "6.3.0",
+    "eslint": "6.6.0",
     "eslint-config-edx": "4.0.4",
     "jest": "24.9.0",
     "parcel-bundler": "1.12.3",
