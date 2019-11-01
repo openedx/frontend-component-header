@@ -12,12 +12,7 @@ App.subscribe(APP_READY, () => {
     <AppProvider>
       {/* We can fake out authentication by including another provider here with the data we want */}
       <AppContext.Provider value={{
-        authenticatedUser: {
-          userId: null,
-          username: null,
-          roles: [],
-          administrator: false,
-        },
+        authenticatedUser: null,
         config: App.config
       }}>
         <Header />
@@ -27,7 +22,7 @@ App.subscribe(APP_READY, () => {
       {/* We can fake out authentication by including another provider here with the data we want */}
       <AppContext.Provider value={{
         authenticatedUser: {
-          userId: null,
+          userId: '123abc',
           username: 'testuser',
           roles: [],
           administrator: false,
@@ -42,4 +37,6 @@ App.subscribe(APP_READY, () => {
   );
 });
 
-App.initialize({ messages: [], loggingService: NewRelicLoggingService });
+App.initialize({
+  messages: []
+});
