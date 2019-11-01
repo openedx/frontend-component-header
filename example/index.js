@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { App, AppContext, APP_READY, AppProvider } from '@edx/frontend-base';
 import { NewRelicLoggingService } from '@edx/frontend-logging';
 import './index.scss';
-import SiteHeader from '../src/';
+import Header from '../src/';
 
 App.subscribe(APP_READY, () => {
   ReactDOM.render(
@@ -20,7 +20,7 @@ App.subscribe(APP_READY, () => {
         },
         config: App.config
       }}>
-        <SiteHeader />
+        <Header />
       </AppContext.Provider>
       <h5 className="mt-2 mb-5">Logged out state</h5>
 
@@ -34,7 +34,7 @@ App.subscribe(APP_READY, () => {
         },
         config: App.config
       }}>
-        <SiteHeader />
+        <Header />
       </AppContext.Provider>
       <h5 className="mt-2">Logged in state</h5>
     </AppProvider>,

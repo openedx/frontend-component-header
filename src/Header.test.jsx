@@ -5,9 +5,9 @@ import TestRenderer from 'react-test-renderer';
 import { AppContext } from '@edx/frontend-base';
 import { Context as ResponsiveContext } from 'react-responsive';
 
-import SiteHeader from './index';
+import Header from './index';
 
-describe('<SiteHeader />', () => {
+describe('<Header />', () => {
   it('renders correctly for desktop', () => {
     const component = (
       <ResponsiveContext.Provider value={{ width: 1280 }}>
@@ -27,7 +27,7 @@ describe('<SiteHeader />', () => {
             },
             }}
           >
-            <SiteHeader />
+            <Header />
           </AppContext.Provider>
         </IntlProvider>
       </ResponsiveContext.Provider>
@@ -57,7 +57,7 @@ describe('<SiteHeader />', () => {
             },
             }}
           >
-            <SiteHeader />
+            <Header />
           </AppContext.Provider>
         </IntlProvider>
       </ResponsiveContext.Provider>

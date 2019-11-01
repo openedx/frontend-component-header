@@ -8,7 +8,7 @@ import Avatar from './Avatar';
 import { LinkedLogo, Logo } from './Logo';
 
 // i18n
-import messages from './SiteHeader.messages';
+import messages from './Header.messages';
 
 // Assets
 import { CaretIcon } from './Icons';
