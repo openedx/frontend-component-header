@@ -60,7 +60,7 @@
     "redux": "4.0.4",
     "redux-saga": "1.0.5",
     "sass": "1.22.12",
-    "semantic-release": "15.13.24"
+    "semantic-release": "15.13.30"
   },
   "dependencies": {
     "babel-polyfill": "6.26.0",
