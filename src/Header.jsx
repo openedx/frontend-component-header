@@ -8,7 +8,7 @@ import MobileHeader from './MobileHeader';
 
 import LogoSVG from './logo.svg';
 
-import messages from './SiteHeader.messages';
+import messages from './Header.messages';
 
 App.ensureConfig([
   'LMS_BASE_URL',
@@ -17,7 +17,7 @@ App.ensureConfig([
   'SITE_NAME',
 ], 'Header component');
 
-function SiteHeader({ intl }) {
+function Header({ intl }) {
   const { authenticatedUser, config } = useContext(AppContext);
 
   const mainMenu = [
@@ -28,7 +28,7 @@ function SiteHeader({ intl }) {
     },
   ];
 
-  const userMenu = [
+  const userMenu = authenticatedUser === null ? [] : [
     {
       type: 'item',
       href: `${config.LMS_BASE_URL}/dashboard`,
@@ -69,9 +69,9 @@ function SiteHeader({ intl }) {
     logoAltText: config.SITE_NAME,
     siteName: config.SITE_NAME,
     logoDestination: `${config.LMS_BASE_URL}/dashboard`,
-    loggedIn: !!authenticatedUser.username,
-    username: authenticatedUser.username,
-    avatar: authenticatedUser.avatar,
+    loggedIn: authenticatedUser !== null,
+    username: authenticatedUser !== null ? authenticatedUser.username : null,
+    avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
     mainMenu,
     userMenu,
     loggedOutItems,
@@ -89,8 +89,8 @@ function SiteHeader({ intl }) {
   );
 }
 
-SiteHeader.propTypes = {
+Header.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(SiteHeader);
+export default injectIntl(Header);

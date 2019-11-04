@@ -5,36 +5,31 @@ import ReactDOM from 'react-dom';
 import { App, AppContext, APP_READY, AppProvider } from '@edx/frontend-base';
 import { NewRelicLoggingService } from '@edx/frontend-logging';
 import './index.scss';
-import SiteHeader from '../src/';
+import Header from '../src/';
 
 App.subscribe(APP_READY, () => {
   ReactDOM.render(
     <AppProvider>
       {/* We can fake out authentication by including another provider here with the data we want */}
       <AppContext.Provider value={{
-        authenticatedUser: {
-          userId: null,
-          username: null,
-          roles: [],
-          administrator: false,
-        },
+        authenticatedUser: null,
         config: App.config
       }}>
-        <SiteHeader />
+        <Header />
       </AppContext.Provider>
       <h5 className="mt-2 mb-5">Logged out state</h5>
 
       {/* We can fake out authentication by including another provider here with the data we want */}
       <AppContext.Provider value={{
         authenticatedUser: {
-          userId: null,
+          userId: '123abc',
           username: 'testuser',
           roles: [],
           administrator: false,
         },
         config: App.config
       }}>
-        <SiteHeader />
+        <Header />
       </AppContext.Provider>
       <h5 className="mt-2">Logged in state</h5>
     </AppProvider>,
@@ -42,4 +37,6 @@ App.subscribe(APP_READY, () => {
   );
 });
 
-App.initialize({ messages: [], loggingService: NewRelicLoggingService });
+App.initialize({
+  messages: []
+});
