@@ -66,7 +66,7 @@
   },
   "peerDependencies": {
     "@edx/frontend-analytics": "^3.0.0",
-    "@edx/frontend-base": "^4.0.0",
+    "@edx/frontend-base": "^4.0.0 || ^5.0.0",
     "@edx/frontend-i18n": "^3.0.3",
     "@edx/frontend-logging": "^3.0.0",
     "@edx/paragon": "^7.0.0",
