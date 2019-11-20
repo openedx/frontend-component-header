@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import Responsive from 'react-responsive';
-import { injectIntl, intlShape } from '@edx/frontend-i18n';
-import { App, AppContext } from '@edx/frontend-base';
+import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import { AppContext } from '@edx/frontend-platform/react';
+import { ensureConfig } from '@edx/frontend-platform/config';
 
 import DesktopHeader from './DesktopHeader';
 import MobileHeader from './MobileHeader';
@@ -10,7 +11,7 @@ import LogoSVG from './logo.svg';
 
 import messages from './Header.messages';
 
-App.ensureConfig([
+ensureConfig([
   'LMS_BASE_URL',
   'LOGOUT_URL',
   'LOGIN_URL',
