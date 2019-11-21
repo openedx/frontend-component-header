@@ -1,8 +1,7 @@
-
 import React from 'react';
-import { IntlProvider } from '@edx/frontend-i18n';
+import { IntlProvider } from '@edx/frontend-platform/i18n';
 import TestRenderer from 'react-test-renderer';
-import { AppContext } from '@edx/frontend-base';
+import { AppContext } from '@edx/frontend-platform/react';
 import { Context as ResponsiveContext } from 'react-responsive';
 
 import Header from './index';
