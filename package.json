@@ -57,7 +57,7 @@
   },
   "dependencies": {
     "babel-polyfill": "6.26.0",
-    "react-responsive": "8.0.2",
+    "react-responsive": "8.0.3",
     "react-transition-group": "4.3.0"
   },
   "peerDependencies": {
