@@ -41,7 +41,7 @@
     "@edx/frontend-build": "^2.0.4",
     "@edx/frontend-platform": "1.1.14",
     "@edx/paragon": "7.1.5",
-    "codecov": "3.6.4",
+    "codecov": "3.6.5",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
     "husky": "3.0.9",
