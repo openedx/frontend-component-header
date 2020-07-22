@@ -40,7 +40,7 @@
     "@commitlint/prompt-cli": "8.2.0",
     "@edx/frontend-build": "^2.0.4",
     "@edx/frontend-platform": "1.1.14",
-    "@edx/paragon": "7.1.5",
+    "@edx/paragon": "7.2.1",
     "codecov": "3.7.2",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
