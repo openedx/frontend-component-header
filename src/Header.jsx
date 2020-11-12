@@ -16,6 +16,7 @@ ensureConfig([
   'LOGOUT_URL',
   'LOGIN_URL',
   'SITE_NAME',
+  'HIDE_HEADER_NAV',
 ], 'Header component');
 
 function Header({ intl }) {
@@ -65,18 +66,21 @@ function Header({ intl }) {
     },
   ];
 
-  const props = {
-    logo: LogoSVG,
-    logoAltText: config.SITE_NAME,
-    siteName: config.SITE_NAME,
-    logoDestination: `${config.LMS_BASE_URL}/dashboard`,
-    loggedIn: authenticatedUser !== null,
-    username: authenticatedUser !== null ? authenticatedUser.username : null,
-    avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
-    mainMenu,
-    userMenu,
-    loggedOutItems,
+  let props = {
+        logo: LogoSVG,
+        logoAltText: config.SITE_NAME,
+        siteName: config.SITE_NAME,
+        logoDestination: `${config.LMS_BASE_URL}/dashboard`,
+        loggedIn: authenticatedUser !== null,
+        username: authenticatedUser !== null ? authenticatedUser.username : null,
+        avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
   };
+
+  if ( !config.HIDE_HEADER_NAV ){
+    props['mainMenu'] = mainMenu;
+    props['userMenu'] = userMenu;
+    props['loggedOutItems'] = loggedOutItems;
+  }
 
   return (
     <React.Fragment>
