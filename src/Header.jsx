@@ -73,10 +73,13 @@ function Header({ intl }) {
     loggedIn: authenticatedUser !== null,
     username: authenticatedUser !== null ? authenticatedUser.username : null,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
-    mainMenu,
-    userMenu,
-    loggedOutItems,
   };
+
+  if (!config.HIDE_HEADER_NAV) {
+    props.mainMenu = mainMenu;
+    props.userMenu = userMenu;
+    props.loggedOutItems = loggedOutItems;
+  }
 
   return (
     <React.Fragment>
