@@ -21,7 +21,7 @@ ensureConfig([
 function Header({ intl }) {
   const { authenticatedUser, config } = useContext(AppContext);
 
-  const mainMenu = config.HIDE_HEADER_NAV === 'true' ? [] : [
+  const mainMenu = [
     {
       type: 'item',
       href: `${config.LMS_BASE_URL}/dashboard`,
@@ -52,7 +52,7 @@ function Header({ intl }) {
     },
   ];
 
-  const loggedOutItems = config.HIDE_HEADER_NAV === 'true' ? [] : [
+  const loggedOutItems = [
     {
       type: 'item',
       href: config.LOGIN_URL,
