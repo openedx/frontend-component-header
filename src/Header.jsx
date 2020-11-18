@@ -2,7 +2,13 @@ import React, { useContext } from 'react';
 import Responsive from 'react-responsive';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { AppContext } from '@edx/frontend-platform/react';
-import { ensureConfig } from '@edx/frontend-platform/config';
+import {
+  APP_CONFIG_INITIALIZED,
+  ensureConfig,
+  mergeConfig,
+  getConfig,
+  subscribe,
+} from '@edx/frontend-platform';
 
 import DesktopHeader from './DesktopHeader';
 import MobileHeader from './MobileHeader';
@@ -17,6 +23,12 @@ ensureConfig([
   'LOGIN_URL',
   'SITE_NAME',
 ], 'Header component');
+
+subscribe(APP_CONFIG_INITIALIZED, () => {
+  mergeConfig({
+    LOGISTRATION_MINIMAL_HEADER: !!process.env.LOGISTRATION_MINIMAL_HEADER,
+  }, 'Header additional config');
+});
 
 function Header({ intl }) {
   const { authenticatedUser, config } = useContext(AppContext);
@@ -73,9 +85,9 @@ function Header({ intl }) {
     loggedIn: authenticatedUser !== null,
     username: authenticatedUser !== null ? authenticatedUser.username : null,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
-    mainMenu,
+    mainMenu: getConfig().LOGISTRATION_MINIMAL_HEADER ? [] : mainMenu,
     userMenu,
-    loggedOutItems,
+    loggedOutItems: getConfig().LOGISTRATION_MINIMAL_HEADER ? [] : loggedOutItems,
   };
 
   return (
