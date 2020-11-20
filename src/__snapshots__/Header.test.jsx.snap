@@ -17,7 +17,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
         <img
           alt="edX"
           className="d-block"
-          src="icon/mock/path"
+          src="https://edx-cdn.org/v3/default/logo-trademark.svg"
         />
       </a>
       <nav
@@ -126,7 +126,7 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
       <img
         alt="edX"
         className="d-block"
-        src="icon/mock/path"
+        src="https://edx-cdn.org/v3/default/logo-trademark.svg"
       />
     </a>
   </div>
@@ -159,7 +159,6 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
         >
           <svg
             aria-hidden={true}
-            className="text-muted"
             focusable="false"
             height="24px"
             role="img"
@@ -202,7 +201,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
         <img
           alt="edX"
           className="d-block"
-          src="icon/mock/path"
+          src="https://edx-cdn.org/v3/default/logo-trademark.svg"
         />
       </a>
       <nav
@@ -230,7 +229,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
             aria-expanded={false}
             aria-haspopup="menu"
             aria-label="Account menu for edX"
-            className="menu-trigger btn btn-light d-inline-flex align-items-center pl-2 pr-3"
+            className="menu-trigger btn btn-outline-primary d-inline-flex align-items-center pl-2 pr-3"
             onClick={[Function]}
           >
             <span
@@ -244,7 +243,6 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="text-muted"
                 focusable="false"
                 height="24px"
                 role="img"
@@ -362,7 +360,7 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
       <img
         alt="edX"
         className="d-block"
-        src="icon/mock/path"
+        src="https://edx-cdn.org/v3/default/logo-trademark.svg"
       />
     </a>
   </div>
@@ -395,7 +393,6 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
         >
           <svg
             aria-hidden={true}
-            className="text-muted"
             focusable="false"
             height="24px"
             role="img"

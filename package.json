@@ -38,9 +38,10 @@
     "@commitlint/config-angular": "8.2.0",
     "@commitlint/prompt": "8.2.0",
     "@commitlint/prompt-cli": "8.2.0",
-    "@edx/frontend-build": "^2.0.4",
-    "@edx/frontend-platform": "1.1.14",
-    "@edx/paragon": "7.1.5",
+    "@edx/brand": "npm:@edx/brand-openedx@1.1.0",
+    "@edx/frontend-build": "5.4.0",
+    "@edx/frontend-platform": "1.8.0",
+    "@edx/paragon": "12.0.5",
     "codecov": "3.7.2",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
@@ -48,12 +49,12 @@
     "prop-types": "15.7.2",
     "react": "16.9.0",
     "react-dom": "16.9.0",
-    "react-redux": "^7.1.1",
-    "react-router-dom": "^5.1.2",
+    "react-redux": "7.1.1",
+    "react-router-dom": "5.1.2",
     "react-test-renderer": "16.9.0",
     "reactifex": "1.1.1",
-    "redux": "^4.0.4",
-    "redux-saga": "^1.1.1"
+    "redux": "4.0.4",
+    "redux-saga": "1.1.1"
   },
   "dependencies": {
     "babel-polyfill": "6.26.0",
@@ -61,7 +62,7 @@
     "react-transition-group": "4.3.0"
   },
   "peerDependencies": {
-    "@edx/frontend-platform": "^1.1.4",
+    "@edx/frontend-platform": "^1.8.0",
     "@edx/paragon": "^7.0.0",
     "prop-types": "^15.5.10",
     "react": "^16.9.0",

@@ -5,3 +5,4 @@ dist
 node_modules
 temp
 src/i18n/transifex_input.json
+module.config.js
