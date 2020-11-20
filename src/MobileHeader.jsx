@@ -22,7 +22,9 @@ class MobileHeader extends React.Component {
     const { mainMenu } = this.props;
 
     // Nodes are accepted as a prop
-    if (!Array.isArray(mainMenu)) return mainMenu;
+    if (!Array.isArray(mainMenu)) {
+      return mainMenu;
+    }
 
     return mainMenu.map((menuItem) => {
       const {
@@ -99,7 +101,7 @@ class MobileHeader extends React.Component {
         className={`site-header-mobile d-flex justify-content-between align-items-center shadow ${stickyClassName}`}
       >
         <div className="w-100 d-flex justify-content-start">
-          {mainMenu.length > 0 ?
+          {mainMenu.length > 0 ? (
             <Menu className="position-static">
               <MenuTrigger
                 tag="button"
@@ -116,7 +118,8 @@ class MobileHeader extends React.Component {
               >
                 {this.renderMainMenu()}
               </MenuContent>
-            </Menu> : null }
+            </Menu>
+          ) : null}
         </div>
         <div className="w-100 d-flex justify-content-center">
           { logoDestination === null ? <Logo className="logo" src={logo} alt={logoAltText} /> : <LinkedLogo className="logo" {...logoProps} itemType="http://schema.org/Organization" />}

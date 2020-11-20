@@ -2,7 +2,6 @@ import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 
-
 function MenuTrigger({ tag, className, ...attributes }) {
   return React.createElement(tag, {
     className: `menu-trigger ${className}`,
@@ -19,7 +18,6 @@ MenuTrigger.defaultProps = {
 };
 const MenuTriggerType = <MenuTrigger />.type;
 
-
 function MenuContent({ tag, className, ...attributes }) {
   return React.createElement(tag, {
     className: ['menu-content', className].join(' '),
@@ -35,6 +33,17 @@ MenuContent.defaultProps = {
   className: null,
 };
 
+const menuPropTypes = {
+  tag: PropTypes.string,
+  onClose: PropTypes.func,
+  onOpen: PropTypes.func,
+  closeOnDocumentClick: PropTypes.bool,
+  respondToPointerEvents: PropTypes.bool,
+  className: PropTypes.string,
+  transitionTimeout: PropTypes.number,
+  transitionClassName: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.node).isRequired,
+};
 
 class Menu extends React.Component {
   constructor(props) {
@@ -66,10 +75,14 @@ class Menu extends React.Component {
 
   // Event handlers
   onDocumentClick(e) {
-    if (!this.props.closeOnDocumentClick) return;
+    if (!this.props.closeOnDocumentClick) {
+      return;
+    }
 
     const clickIsInMenu = this.menu.current === e.target || this.menu.current.contains(e.target);
-    if (clickIsInMenu) return;
+    if (clickIsInMenu) {
+      return;
+    }
 
     this.close();
   }
@@ -77,7 +90,9 @@ class Menu extends React.Component {
   onTriggerClick(e) {
     // Let the browser follow the link of the trigger if the menu
     // is already expanded and the trigger has an href attribute
-    if (this.state.expanded && e.target.getAttribute('href')) return;
+    if (this.state.expanded && e.target.getAttribute('href')) {
+      return;
+    }
 
     e.preventDefault();
     this.toggle();
@@ -89,7 +104,9 @@ class Menu extends React.Component {
   }
 
   onKeyDown(e) {
-    if (!this.state.expanded) return;
+    if (!this.state.expanded) {
+      return;
+    }
     switch (e.key) {
       case 'Escape': {
         e.preventDefault();
@@ -131,15 +148,18 @@ class Menu extends React.Component {
   }
 
   onMouseEnter() {
-    if (!this.props.respondToPointerEvents) return;
+    if (!this.props.respondToPointerEvents) {
+      return;
+    }
     this.open();
   }
 
   onMouseLeave() {
-    if (!this.props.respondToPointerEvents) return;
+    if (!this.props.respondToPointerEvents) {
+      return;
+    }
     this.close();
   }
-
 
   // Internal functions
 
@@ -151,7 +171,7 @@ class Menu extends React.Component {
     // Any extra props are attributes for the menu
     const attributes = {};
     Object.keys(this.props)
-      .filter(property => Menu.propTypes[property] === undefined)
+      .filter(property => menuPropTypes[property] === undefined)
       .forEach((property) => {
         attributes[property] = this.props[property];
       });
@@ -173,7 +193,9 @@ class Menu extends React.Component {
   }
 
   open() {
-    if (this.props.onOpen) this.props.onOpen();
+    if (this.props.onOpen) {
+      this.props.onOpen();
+    }
     this.setState({ expanded: true });
     // Listen to touchend and click events to ensure the menu
     // can be closed on mobile, pointer, and mixed input devices
@@ -182,7 +204,9 @@ class Menu extends React.Component {
   }
 
   close() {
-    if (this.props.onClose) this.props.onClose();
+    if (this.props.onClose) {
+      this.props.onClose();
+    }
     this.setState({ expanded: false });
     document.removeEventListener('touchend', this.onDocumentClick, true);
     document.removeEventListener('click', this.onDocumentClick, true);
@@ -240,18 +264,7 @@ class Menu extends React.Component {
   }
 }
 
-
-Menu.propTypes = {
-  tag: PropTypes.string,
-  onClose: PropTypes.func,
-  onOpen: PropTypes.func,
-  closeOnDocumentClick: PropTypes.bool,
-  respondToPointerEvents: PropTypes.bool,
-  className: PropTypes.string,
-  transitionTimeout: PropTypes.number,
-  transitionClassName: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.node).isRequired,
-};
+Menu.propTypes = menuPropTypes;
 Menu.defaultProps = {
   tag: 'div',
   className: null,
@@ -262,6 +275,5 @@ Menu.defaultProps = {
   transitionTimeout: 250,
   transitionClassName: 'menu-content',
 };
-
 
 export { Menu, MenuTrigger, MenuContent };

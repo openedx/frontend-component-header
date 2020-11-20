@@ -11,14 +11,15 @@ describe('<Header />', () => {
     const component = (
       <ResponsiveContext.Provider value={{ width: 1280 }}>
         <IntlProvider locale="en" messages={{}}>
-          <AppContext.Provider value={{
-            authenticatedUser: null,
-            config: {
-              LMS_BASE_URL: process.env.LMS_BASE_URL,
-              SITE_NAME: process.env.SITE_NAME,
-              LOGIN_URL: process.env.LOGIN_URL,
-              LOGOUT_URL: process.env.LOGOUT_URL,
-            },
+          <AppContext.Provider
+            value={{
+              authenticatedUser: null,
+              config: {
+                LMS_BASE_URL: process.env.LMS_BASE_URL,
+                SITE_NAME: process.env.SITE_NAME,
+                LOGIN_URL: process.env.LOGIN_URL,
+                LOGOUT_URL: process.env.LOGOUT_URL,
+              },
             }}
           >
             <Header />
@@ -36,19 +37,20 @@ describe('<Header />', () => {
     const component = (
       <ResponsiveContext.Provider value={{ width: 1280 }}>
         <IntlProvider locale="en" messages={{}}>
-          <AppContext.Provider value={{
-            authenticatedUser: {
-              userId: 'abc123',
-              username: 'edX',
-              roles: [],
-              administrator: false,
-            },
-            config: {
-              LMS_BASE_URL: process.env.LMS_BASE_URL,
-              SITE_NAME: process.env.SITE_NAME,
-              LOGIN_URL: process.env.LOGIN_URL,
-              LOGOUT_URL: process.env.LOGOUT_URL,
-            },
+          <AppContext.Provider
+            value={{
+              authenticatedUser: {
+                userId: 'abc123',
+                username: 'edX',
+                roles: [],
+                administrator: false,
+              },
+              config: {
+                LMS_BASE_URL: process.env.LMS_BASE_URL,
+                SITE_NAME: process.env.SITE_NAME,
+                LOGIN_URL: process.env.LOGIN_URL,
+                LOGOUT_URL: process.env.LOGOUT_URL,
+              },
             }}
           >
             <Header />
@@ -66,14 +68,15 @@ describe('<Header />', () => {
     const component = (
       <ResponsiveContext.Provider value={{ width: 500 }}>
         <IntlProvider locale="en" messages={{}}>
-          <AppContext.Provider value={{
-            authenticatedUser: null,
-            config: {
-              LMS_BASE_URL: process.env.LMS_BASE_URL,
-              SITE_NAME: process.env.SITE_NAME,
-              LOGIN_URL: process.env.LOGIN_URL,
-              LOGOUT_URL: process.env.LOGOUT_URL,
-            },
+          <AppContext.Provider
+            value={{
+              authenticatedUser: null,
+              config: {
+                LMS_BASE_URL: process.env.LMS_BASE_URL,
+                SITE_NAME: process.env.SITE_NAME,
+                LOGIN_URL: process.env.LOGIN_URL,
+                LOGOUT_URL: process.env.LOGOUT_URL,
+              },
             }}
           >
             <Header />
@@ -91,19 +94,20 @@ describe('<Header />', () => {
     const component = (
       <ResponsiveContext.Provider value={{ width: 500 }}>
         <IntlProvider locale="en" messages={{}}>
-          <AppContext.Provider value={{
-            authenticatedUser: {
-              userId: 'abc123',
-              username: 'edX',
-              roles: [],
-              administrator: false,
-            },
-            config: {
-              LMS_BASE_URL: process.env.LMS_BASE_URL,
-              SITE_NAME: process.env.SITE_NAME,
-              LOGIN_URL: process.env.LOGIN_URL,
-              LOGOUT_URL: process.env.LOGOUT_URL,
-            },
+          <AppContext.Provider
+            value={{
+              authenticatedUser: {
+                userId: 'abc123',
+                username: 'edX',
+                roles: [],
+                administrator: false,
+              },
+              config: {
+                LMS_BASE_URL: process.env.LMS_BASE_URL,
+                SITE_NAME: process.env.SITE_NAME,
+                LOGIN_URL: process.env.LOGIN_URL,
+                LOGOUT_URL: process.env.LOGOUT_URL,
+              },
             }}
           >
             <Header />

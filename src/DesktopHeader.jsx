@@ -22,7 +22,9 @@ class DesktopHeader extends React.Component {
     const { mainMenu } = this.props;
 
     // Nodes are accepted as a prop
-    if (!Array.isArray(mainMenu)) return mainMenu;
+    if (!Array.isArray(mainMenu)) {
+      return mainMenu;
+    }
 
     return mainMenu.map((menuItem) => {
       const {
@@ -106,7 +108,7 @@ class DesktopHeader extends React.Component {
       <header className="site-header-desktop">
         <div className="container-fluid">
           <div className="nav-container position-relative d-flex align-items-center">
-            { logoDestination === null ? <Logo className="logo" src={logo} alt={logoAltText} /> : <LinkedLogo className="logo" {...logoProps} />}
+            {logoDestination === null ? <Logo className="logo" src={logo} alt={logoAltText} /> : <LinkedLogo className="logo" {...logoProps} />}
             <nav
               aria-label={intl.formatMessage(messages['header.label.main.nav'])}
               className="nav main-nav"

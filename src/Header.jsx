@@ -7,8 +7,6 @@ import { ensureConfig } from '@edx/frontend-platform/config';
 import DesktopHeader from './DesktopHeader';
 import MobileHeader from './MobileHeader';
 
-import LogoSVG from './logo.svg';
-
 import messages from './Header.messages';
 
 ensureConfig([
@@ -16,6 +14,7 @@ ensureConfig([
   'LOGOUT_URL',
   'LOGIN_URL',
   'SITE_NAME',
+  'LOGO_TRADEMARK_URL',
 ], 'Header component');
 
 function Header({ intl }) {
@@ -66,7 +65,7 @@ function Header({ intl }) {
   ];
 
   const props = {
-    logo: LogoSVG,
+    logo: config.LOGO_TRADEMARK_URL,
     logoAltText: config.SITE_NAME,
     siteName: config.SITE_NAME,
     logoDestination: `${config.LMS_BASE_URL}/dashboard`,
@@ -79,14 +78,14 @@ function Header({ intl }) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Responsive maxWidth={768}>
         <MobileHeader {...props} />
       </Responsive>
       <Responsive minWidth={769}>
         <DesktopHeader {...props} />
       </Responsive>
-    </React.Fragment>
+    </>
   );
 }
 
