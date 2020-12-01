@@ -20,7 +20,7 @@ ensureConfig([
   'LOGOUT_URL',
   'LOGIN_URL',
   'SITE_NAME',
-  'LOGO_TRADEMARK_URL',
+  'LOGO_URL',
 ], 'Header component');
 
 subscribe(APP_CONFIG_INITIALIZED, () => {
@@ -77,7 +77,7 @@ function Header({ intl }) {
   ];
 
   const props = {
-    logo: config.LOGO_TRADEMARK_URL,
+    logo: config.LOGO_URL,
     logoAltText: config.SITE_NAME,
     siteName: config.SITE_NAME,
     logoDestination: `${config.LMS_BASE_URL}/dashboard`,

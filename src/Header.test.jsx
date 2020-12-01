@@ -19,7 +19,7 @@ describe('<Header />', () => {
                 SITE_NAME: process.env.SITE_NAME,
                 LOGIN_URL: process.env.LOGIN_URL,
                 LOGOUT_URL: process.env.LOGOUT_URL,
-                LOGO_TRADEMARK_URL: process.env.LOGO_TRADEMARK_URL,
+                LOGO_URL: process.env.LOGO_URL,
               },
             }}
           >
@@ -51,7 +51,7 @@ describe('<Header />', () => {
                 SITE_NAME: process.env.SITE_NAME,
                 LOGIN_URL: process.env.LOGIN_URL,
                 LOGOUT_URL: process.env.LOGOUT_URL,
-                LOGO_TRADEMARK_URL: process.env.LOGO_TRADEMARK_URL,
+                LOGO_URL: process.env.LOGO_URL,
               },
             }}
           >
@@ -78,7 +78,7 @@ describe('<Header />', () => {
                 SITE_NAME: process.env.SITE_NAME,
                 LOGIN_URL: process.env.LOGIN_URL,
                 LOGOUT_URL: process.env.LOGOUT_URL,
-                LOGO_TRADEMARK_URL: process.env.LOGO_TRADEMARK_URL,
+                LOGO_URL: process.env.LOGO_URL,
               },
             }}
           >
@@ -110,7 +110,7 @@ describe('<Header />', () => {
                 SITE_NAME: process.env.SITE_NAME,
                 LOGIN_URL: process.env.LOGIN_URL,
                 LOGOUT_URL: process.env.LOGOUT_URL,
-                LOGO_TRADEMARK_URL: process.env.LOGO_TRADEMARK_URL,
+                LOGO_URL: process.env.LOGO_URL,
               },
             }}
           >
