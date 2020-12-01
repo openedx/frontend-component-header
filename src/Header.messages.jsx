@@ -67,7 +67,7 @@ const messages = defineMessages({
     description: 'The aria label for the account menu trigger',
   },
   'header.label.account.menu.for': {
-    id: 'header.label.account.menu',
+    id: 'header.label.account.menu.for',
     defaultMessage: 'Account menu for {username}',
     description: 'The aria label for the account menu trigger when the username is displayed in it',
   },
