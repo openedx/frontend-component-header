@@ -91,6 +91,8 @@ class MobileHeader extends React.Component {
       stickyOnMobile,
       intl,
       mainMenu,
+      userMenu,
+      loggedOutItems,
     } = this.props;
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
     const stickyClassName = stickyOnMobile ? 'sticky-top' : '';
@@ -125,19 +127,21 @@ class MobileHeader extends React.Component {
           { logoDestination === null ? <Logo className="logo" src={logo} alt={logoAltText} /> : <LinkedLogo className="logo" {...logoProps} itemType="http://schema.org/Organization" />}
         </div>
         <div className="w-100 d-flex justify-content-end align-items-center">
-          <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="position-static">
-            <MenuTrigger
-              tag="button"
-              className="icon-button"
-              aria-label={intl.formatMessage(messages['header.label.account.menu'])}
-              title={intl.formatMessage(messages['header.label.account.menu'])}
-            >
-              <Avatar size="1.5rem" src={avatar} alt={username} />
-            </MenuTrigger>
-            <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
-              {loggedIn ? this.renderUserMenuItems() : this.renderLoggedOutItems()}
-            </MenuContent>
-          </Menu>
+          {userMenu.length > 0 || loggedOutItems.length > 0 ? (
+            <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="position-static">
+              <MenuTrigger
+                tag="button"
+                className="icon-button"
+                aria-label={intl.formatMessage(messages['header.label.account.menu'])}
+                title={intl.formatMessage(messages['header.label.account.menu'])}
+              >
+                <Avatar size="1.5rem" src={avatar} alt={username} />
+              </MenuTrigger>
+              <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
+                {loggedIn ? this.renderUserMenuItems() : this.renderLoggedOutItems()}
+              </MenuContent>
+            </Menu>
+          ) : null}
         </div>
       </header>
     );
