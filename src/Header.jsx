@@ -85,7 +85,7 @@ function Header({ intl }) {
     username: authenticatedUser !== null ? authenticatedUser.username : null,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
     mainMenu: getConfig().LOGISTRATION_MINIMAL_HEADER ? [] : mainMenu,
-    userMenu,
+    userMenu: getConfig().LOGISTRATION_MINIMAL_HEADER ? [] : userMenu,
     loggedOutItems: getConfig().LOGISTRATION_MINIMAL_HEADER ? [] : loggedOutItems,
   };
 
