@@ -25,7 +25,7 @@ ensureConfig([
 
 subscribe(APP_CONFIG_INITIALIZED, () => {
   mergeConfig({
-    AUTHN_MINIMAL_HEADER: !!process.env.AUTHN_MINIMAL_HEADER,
+    LOGISTRATION_MINIMAL_HEADER: !!process.env.LOGISTRATION_MINIMAL_HEADER,
   }, 'Header additional config');
 });
 
@@ -84,9 +84,9 @@ function Header({ intl }) {
     loggedIn: authenticatedUser !== null,
     username: authenticatedUser !== null ? authenticatedUser.username : null,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
-    mainMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : mainMenu,
-    userMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : userMenu,
-    loggedOutItems: getConfig().AUTHN_MINIMAL_HEADER ? [] : loggedOutItems,
+    mainMenu: getConfig().LOGISTRATION_MINIMAL_HEADER ? [] : mainMenu,
+    userMenu: getConfig().LOGISTRATION_MINIMAL_HEADER ? [] : userMenu,
+    loggedOutItems: getConfig().LOGISTRATION_MINIMAL_HEADER ? [] : loggedOutItems,
   };
 
   return (
