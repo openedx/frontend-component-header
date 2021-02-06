@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import { getConfig } from '@edx/frontend-platform';
 
 // Local Components
 import { Menu, MenuTrigger, MenuContent } from './Menu';
@@ -103,10 +104,11 @@ class DesktopHeader extends React.Component {
       intl,
     } = this.props;
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
+    const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'mw-100' : null;
 
     return (
       <header className="site-header-desktop">
-        <div className="container-fluid">
+        <div className={`container-fluid ${logoClasses}`}>
           <div className="nav-container position-relative d-flex align-items-center">
             {logoDestination === null ? <Logo className="logo" src={logo} alt={logoAltText} /> : <LinkedLogo className="logo" {...logoProps} />}
             <nav
