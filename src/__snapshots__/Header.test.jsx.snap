@@ -5,7 +5,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
   className="site-header-desktop"
 >
   <div
-    className="container-fluid"
+    className="container-fluid null"
   >
     <div
       className="nav-container position-relative d-flex align-items-center"
@@ -189,7 +189,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
   className="site-header-desktop"
 >
   <div
-    className="container-fluid"
+    className="container-fluid null"
   >
     <div
       className="nav-container position-relative d-flex align-items-center"
