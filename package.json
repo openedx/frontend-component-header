@@ -54,7 +54,7 @@
     "react-test-renderer": "16.9.0",
     "reactifex": "1.1.1",
     "redux": "4.0.5",
-    "redux-saga": "1.1.1"
+    "redux-saga": "1.1.3"
   },
   "dependencies": {
     "babel-polyfill": "6.26.0",
