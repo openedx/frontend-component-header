@@ -91,6 +91,11 @@ const messages = defineMessages({
     defaultMessage: 'Secondary',
     description: 'The aria label for the seconary nav',
   },
+  'header.label.skip.nav': {
+    id: 'header.label.skip.nav',
+    defaultMessage: 'Skip to main content',
+    description: 'A link used by screen readers to allow users to skip to the main content of the page.',
+  },
 });
 
 export default messages;
