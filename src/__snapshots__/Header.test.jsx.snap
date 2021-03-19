@@ -4,12 +4,6 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
 <header
   className="site-header-desktop"
 >
-  <a
-    className="nav-skip sr-only sr-only-focusable"
-    href="#main"
-  >
-    Skip to main content
-  </a>
   <div
     className="container-fluid null"
   >
@@ -64,12 +58,6 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
   aria-label="Main"
   className="site-header-mobile d-flex justify-content-between align-items-center shadow sticky-top"
 >
-  <a
-    className="nav-skip sr-only sr-only-focusable"
-    href="#main"
-  >
-    Skip to main content
-  </a>
   <div
     className="w-100 d-flex justify-content-start"
   >
@@ -200,12 +188,6 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
 <header
   className="site-header-desktop"
 >
-  <a
-    className="nav-skip sr-only sr-only-focusable"
-    href="#main"
-  >
-    Skip to main content
-  </a>
   <div
     className="container-fluid null"
   >
@@ -310,12 +292,6 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
   aria-label="Main"
   className="site-header-mobile d-flex justify-content-between align-items-center shadow sticky-top"
 >
-  <a
-    className="nav-skip sr-only sr-only-focusable"
-    href="#main"
-  >
-    Skip to main content
-  </a>
   <div
     className="w-100 d-flex justify-content-start"
   >
