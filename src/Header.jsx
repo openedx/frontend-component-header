@@ -79,7 +79,6 @@ function Header({ intl }) {
   const props = {
     logo: config.LOGO_URL,
     logoAltText: config.SITE_NAME,
-    siteName: config.SITE_NAME,
     logoDestination: `${config.LMS_BASE_URL}/dashboard`,
     loggedIn: authenticatedUser !== null,
     username: authenticatedUser !== null ? authenticatedUser.username : null,
