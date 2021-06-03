@@ -1,9 +1,21 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
+    "schedule:weekly",
+    ":automergeMinor",
+    ":enableVulnerabilityAlerts",
+    ":rebaseStalePrs",
+    ":semanticCommits",
+    ":updateNotScheduled"
   ],
-  "patch": {
-    "automerge": true
-  },
-  "rebaseStalePrs": true
+  "packageRules": [
+    {
+      "matchDepTypes": [
+        "devDependencies",
+        "lockFileMaintenance"
+      ],
+      "automerge": true
+    }
+  ],
+  "timezone": "America/New_York"
 }
