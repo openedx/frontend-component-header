@@ -25,6 +25,7 @@ Environment Variables
 * ``SITE_NAME`` - The user-facing name of the site, used as `alt` text on the logo in the header.
   Defaults to "localhost" in development.
 * ``LOGO_URL`` - The URL of the site's logo.  This logo is displayed in the header.
+* ``ORDER_HISTORY_URL`` - The URL of the order history page.
 * ``AUTHN_MINIMAL_HEADER`` - A boolean flag which hides the main menu, user menu, and logged-out
   menu items when truthy.  This is intended to be used in micro-frontends like
   frontend-app-authentication in which these menus are considered distractions from the user's task.
