@@ -21,6 +21,7 @@ ensureConfig([
   'LOGIN_URL',
   'SITE_NAME',
   'LOGO_URL',
+  'ORDER_HISTORY_URL',
 ], 'Header component');
 
 subscribe(APP_CONFIG_INITIALIZED, () => {
@@ -55,6 +56,11 @@ function Header({ intl }) {
       type: 'item',
       href: `${config.LMS_BASE_URL}/account/settings`,
       content: intl.formatMessage(messages['header.user.menu.account.settings']),
+    },
+    {
+      type: 'item',
+      href: config.ORDER_HISTORY_URL,
+      content: intl.formatMessage(messages['header.user.menu.order.history']),
     },
     {
       type: 'item',
