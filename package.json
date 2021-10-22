@@ -19,8 +19,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint",
-      "commit-msg": "commitlint -e $GIT_PARAMS"
+      "pre-commit": "npm run lint"
     }
   },
   "repository": {
@@ -34,10 +33,6 @@
   },
   "homepage": "https://github.com/edx/frontend-component-header#readme",
   "devDependencies": {
-    "@commitlint/cli": "13.2.0",
-    "@commitlint/config-angular": "13.2.0",
-    "@commitlint/prompt": "13.2.0",
-    "@commitlint/prompt-cli": "13.2.0",
     "@edx/brand": "npm:@edx/brand-openedx@1.1.0",
     "@edx/frontend-build": "5.6.14",
     "@edx/frontend-platform": "1.12.7",
