@@ -41,6 +41,12 @@ function Header({ intl }) {
     },
   ];
 
+  const orderHistoryItem = {
+    type: 'item',
+    href: config.ORDER_HISTORY_URL,
+    content: intl.formatMessage(messages['header.user.menu.order.history']),
+  };
+
   const userMenu = authenticatedUser === null ? [] : [
     {
       type: 'item',
@@ -59,15 +65,15 @@ function Header({ intl }) {
     },
     {
       type: 'item',
-      href: config.ORDER_HISTORY_URL,
-      content: intl.formatMessage(messages['header.user.menu.order.history']),
-    },
-    {
-      type: 'item',
       href: config.LOGOUT_URL,
       content: intl.formatMessage(messages['header.user.menu.logout']),
     },
   ];
+
+  // Users should only see Order History if have a ORDER_HISTORY_URL define in the environment.
+  if (config.ORDER_HISTORY_URL) {
+    userMenu.splice(-1, 0, orderHistoryItem);
+  }
 
   const loggedOutItems = [
     {
