@@ -1,5 +1,5 @@
 transifex_resource = frontend-component-header
-transifex_langs = "ar,fr,es_419,zh_CN"
+transifex_langs = "ar,fr,fr_CA,es_419,zh_CN"
 
 transifex_utils = ./node_modules/.bin/transifex-utils.js
 i18n = ./src/i18n
