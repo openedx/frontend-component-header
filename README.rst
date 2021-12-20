@@ -56,6 +56,7 @@ Examples
 * `An example of component and messages usage. <https://github.com/edx/frontend-template-application/blob/3355bb3a96232390e9056f35b06ffa8f105ed7ca/src/index.jsx#L21>`_
 * `An example of SCSS file usage. <https://github.com/edx/frontend-template-application/blob/3cd5485bf387b8c479baf6b02bf59e3061dc3465/src/index.scss#L8>`_
 
+
 ***********
 Development
 ***********
