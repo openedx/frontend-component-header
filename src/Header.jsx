@@ -28,6 +28,10 @@ ensureConfig([
 subscribe(APP_CONFIG_INITIALIZED, () => {
   mergeConfig({
     AUTHN_MINIMAL_HEADER: !!process.env.AUTHN_MINIMAL_HEADER,
+    DASHBOARD_URL: process.env.DASHBOARD_URL,
+    EXTERNAL_ACCOUNT_PROFILE_URL: process.env.EXTERNAL_ACCOUNT_PROFILE_URL,
+    SHOW_FULLNAME: process.env.SHOW_FULLNAME,
+    SHOW_SETTINGS_LABEL: process.env.SHOW_SETTINGS_LABEL,
   }, 'Header additional config');
 });
 
@@ -50,11 +54,11 @@ const Header = ({
   intl, mainMenuItems, secondaryMenuItems, userMenuItems,
 }) => {
   const { authenticatedUser, config } = useContext(AppContext);
-
+  const dashboardURL = config.DASHBOARD_URL ? config.DASHBOARD_URL : `${config.LMS_BASE_URL}/dashboard`;
   const defaultMainMenu = [
     {
       type: 'item',
-      href: `${config.LMS_BASE_URL}/dashboard`,
+      href: dashboardURL,
       content: intl.formatMessage(messages['header.links.courses']),
     },
   ];
@@ -63,18 +67,18 @@ const Header = ({
     items: [
       {
         type: 'item',
-        href: `${config.LMS_BASE_URL}/dashboard`,
+        href: dashboardURL,
         content: intl.formatMessage(messages['header.user.menu.dashboard']),
       },
       {
         type: 'item',
-        href: `${config.ACCOUNT_PROFILE_URL}/u/${authenticatedUser.username}`,
+        href: config.EXTERNAL_ACCOUNT_PROFILE_URL ? config.EXTERNAL_ACCOUNT_PROFILE_URL : `${config.ACCOUNT_PROFILE_URL}/u/${authenticatedUser.username}`,
         content: intl.formatMessage(messages['header.user.menu.profile']),
       },
       {
         type: 'item',
         href: config.ACCOUNT_SETTINGS_URL,
-        content: intl.formatMessage(messages['header.user.menu.account.settings']),
+        content: config.SHOW_SETTINGS_LABEL === 'true' ? intl.formatMessage(messages['header.user.menu.settings']) : intl.formatMessage(messages['header.user.menu.account']),
       },
       // Users should only see Order History if have a ORDER_HISTORY_URL define in the environment.
       ...(config.ORDER_HISTORY_URL ? [{
@@ -107,12 +111,19 @@ const Header = ({
     },
   ];
 
+  let name = null;
+  if (authenticatedUser !== null && config.SHOW_FULLNAME === 'true') {
+    name = authenticatedUser.name;
+  } else if (authenticatedUser !== null) {
+    name = authenticatedUser.username;
+  }
+
   const props = {
     logo: config.LOGO_URL,
     logoAltText: config.SITE_NAME,
-    logoDestination: `${config.LMS_BASE_URL}/dashboard`,
+    logoDestination: config.DASHBOARD_URL ? config.DASHBOARD_URL : `${config.LMS_BASE_URL}/dashboard`,
     loggedIn: authenticatedUser !== null,
-    username: authenticatedUser !== null ? authenticatedUser.username : null,
+    username: name,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
     mainMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : mainMenu,
     secondaryMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : secondaryMenu,

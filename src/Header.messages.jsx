@@ -31,9 +31,14 @@ const messages = defineMessages({
     defaultMessage: 'Profile',
     description: 'Link to the user profile',
   },
-  'header.user.menu.account.settings': {
-    id: 'header.user.menu.account.settings',
+  'header.user.menu.account': {
+    id: 'header.user.menu.account',
     defaultMessage: 'Account',
+    description: 'Link to account settings',
+  },
+  'header.user.menu.settings': {
+    id: 'header.user.menu.settings',
+    defaultMessage: 'Settings',
     description: 'Link to account settings',
   },
   'header.user.menu.order.history': {

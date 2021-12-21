@@ -33,7 +33,7 @@ const LearningHeader = ({
   const headerLogo = (
     <LinkedLogo
       className="logo"
-      href={`${getConfig().LMS_BASE_URL}/dashboard`}
+      href={getConfig().DASHBOARD_URL ? getConfig().DASHBOARD_URL : `${getConfig().LMS_BASE_URL}/dashboard`}
       src={getConfig().LOGO_URL}
       alt={getConfig().SITE_NAME}
     />
@@ -49,9 +49,10 @@ const LearningHeader = ({
           <span className="d-block m-0 font-weight-bold course-title">{courseTitle}</span>
         </div>
         {showUserDropdown && authenticatedUser && (
-        <AuthenticatedUserDropdown
-          username={authenticatedUser.username}
-        />
+          <AuthenticatedUserDropdown
+            username={authenticatedUser.username}
+            name={authenticatedUser.name}
+          />
         )}
         {showUserDropdown && !authenticatedUser && (
         <AnonymousUserMenu />

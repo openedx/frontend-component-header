@@ -51,7 +51,13 @@ Environment Variables
 * ``AUTHN_MINIMAL_HEADER`` - A boolean flag which hides the main menu, user menu, and logged-out
   menu items when truthy.  This is intended to be used in micro-frontends like
   frontend-app-authentication in which these menus are considered distractions from the user's task.
-
+* ``DASHBOARD_URL`` - The URL of the dashboard page. If not set the default ``<LMS_BASE_URL>/dashboard`` is used.
+* ``EXTERNAL_ACCOUNT_PROFILE_URL`` - An optional URL to the external profile page. If not set then default
+  internal profile page ``<ACCOUNT_PROFILE_URL>/u/<username>`` is used.
+* ``SHOW_FULLNAME`` - A boolean flag to display ``full name`` of the user in the header.
+  Defaults to ``false`` and ``username`` is displayed.
+* ``SHOW_SETTINGS_LABEL`` - A boolean flag to use `Settings` label instead of `Account` for the Account Settings page.
+  Defaults to ``false`` and uses the ``Account`` label.
 Installation
 ============
 
