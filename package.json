@@ -54,7 +54,7 @@
     "@testing-library/jest-dom": "5.16.1",
     "jest": "27.3.1",
     "jest-chain": "1.1.5",
-    "@testing-library/react": "10.3.0"
+    "@testing-library/react": "10.4.9"
   },
   "dependencies": {
     "babel-polyfill": "6.26.0",
