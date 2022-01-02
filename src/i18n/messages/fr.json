@@ -14,7 +14,7 @@
   "header.user.menu.register": "S'inscrire",
   "header.label.account.nav": "Compte",
   "header.label.account.menu": "Menu du compte",
-  "header.label.account.menu.for": "Account menu for {username}",
+  "header.label.account.menu.for": "Menu du compte pour {username}",
   "header.label.main.nav": "Principal",
   "header.label.main.menu": "Menu Principal",
   "header.label.main.header": "Principal",
