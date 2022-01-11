@@ -8,11 +8,15 @@ import AnonymousUserMenu from "./AnonymousUserMenu";
 import AuthenticatedUserDropdown from "./AuthenticatedUserDropdown";
 import messages from "./messages";
 
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+
 function LinkedLogo({ href, src, alt, ...attributes }) {
   return (
-    <a href={href} {...attributes}>
+    <Navbar.Brand href={href} {...attributes}>
       <img className="d-block" src={src} alt={alt} />
-    </a>
+    </Navbar.Brand>
   );
 }
 
@@ -41,46 +45,49 @@ function LearningHeader({
   );
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light learning-header">
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          {headerLogo}
-          <a className="sr-only sr-only-focusable" href="#main-content">
-            {intl.formatMessage(messages.skipNavLink)}
-          </a>
-          <div className="container-xl py-2 d-flex align-items-center">
-            <div
-              className="flex-grow-1 course-title-lockup"
-              style={{ lineHeight: 1 }}
-            >
-              <span className="d-block small m-0">
-                {courseOrg} {courseNumber}
-              </span>
-              <span className="d-block m-0 font-weight-bold course-title">
-                {courseTitle}
-              </span>
-            </div>
-          </div>
-        </ul>
-        <ul className="navbar-nav">
-          {showUserDropdown && authenticatedUser && (
-            <AuthenticatedUserDropdown username={authenticatedUser.username} />
-          )}
-          {showUserDropdown && !authenticatedUser && <AnonymousUserMenu />}
-        </ul>
-      </div>
-    </nav>
+    <Navbar className="learning-header">
+      <Container>
+        {headerLogo}
+        <Navbar.Toggle />
+
+        <Navbar.Collapse
+          className="collapse navbar-collapse"
+          id="navbarSupportedContent"
+        >
+          <Nav className="navbar-nav mr-auto">
+            <Nav.Item>
+              <Nav.Link
+                className="sr-only sr-only-focusable"
+                href="#main-content"
+              >
+                {intl.formatMessage(messages.skipNavLink)}
+              </Nav.Link>
+            </Nav.Item>
+            <Navbar.Text>
+              <div
+                className="flex-grow-1 course-title-lockup"
+                style={{ lineHeight: 1 }}
+              >
+                <span className="d-block small m-0">
+                  {courseOrg} {courseNumber}
+                </span>
+                <span className="d-block m-0 font-weight-bold course-title">
+                  {courseTitle}
+                </span>
+              </div>
+            </Navbar.Text>
+          </Nav>
+          <Nav>
+            {showUserDropdown && authenticatedUser && (
+              <AuthenticatedUserDropdown
+                username={authenticatedUser.username}
+              />
+            )}
+            {showUserDropdown && !authenticatedUser && <AnonymousUserMenu />}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 
