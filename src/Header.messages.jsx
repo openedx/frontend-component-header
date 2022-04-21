@@ -56,6 +56,16 @@ const messages = defineMessages({
     defaultMessage: 'Sign Up',
     description: 'Link to registration',
   },
+  'header.user.menu.studio.home': {
+    id: 'header.user.menu.studio.home',
+    defaultMessage: 'Studio Home',
+    description: 'Link to the Studio Home',
+  },
+  'header.user.menu.studio.maintenance': {
+    id: 'header.user.menu.studio.maintenance',
+    defaultMessage: 'Maintenance',
+    description: 'Link to the Studio Maintenance',
+  },
   'header.label.account.nav': {
     id: 'header.label.account.nav',
     defaultMessage: 'Account',
@@ -95,6 +105,11 @@ const messages = defineMessages({
     id: 'header.label.skip.nav',
     defaultMessage: 'Skip to main content',
     description: 'A link used by screen readers to allow users to skip to the main content of the page.',
+  },
+  'header.label.app.nav': {
+    id: 'header.label.app.nav',
+    defaultMessage: 'App',
+    description: 'The aria label for the app Nav',
   },
 });
 

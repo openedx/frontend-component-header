@@ -54,6 +54,24 @@ class DesktopHeader extends React.Component {
     });
   }
 
+  // Renders an optional App Menu for
+  renderAppMenu() {
+    const { appMenu } = this.props;
+    const { content: appMenuContent, menuItems } = appMenu;
+    return (
+      <Menu transitionClassName="menu-dropdown" transitionTimeout={250}>
+        <MenuTrigger tag="a" className="nav-link d-inline-flex align-items-center">
+          {appMenuContent} <CaretIcon role="img" aria-hidden focusable="false" />
+        </MenuTrigger>
+        <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
+          {menuItems.map(({ type, href, content }) => (
+            <a className={`dropdown-${type}`} key={`${type}-${content}`} href={href}>{content}</a>
+          ))}
+        </MenuContent>
+      </Menu>
+    );
+  }
+
   renderUserMenu() {
     const {
       userMenu,
@@ -102,6 +120,7 @@ class DesktopHeader extends React.Component {
       logoDestination,
       loggedIn,
       intl,
+      appMenu,
     } = this.props;
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
     const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'mw-100' : null;
@@ -118,6 +137,14 @@ class DesktopHeader extends React.Component {
             >
               {this.renderMainMenu()}
             </nav>
+            {appMenu ? (
+              <nav
+                aria-label={intl.formatMessage(messages['header.label.app.nav'])}
+                className="nav app-nav"
+              >
+                {this.renderAppMenu()}
+              </nav>
+            ) : null}
             <nav
               aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
               className="nav secondary-menu-container align-items-center ml-auto"
@@ -155,6 +182,20 @@ DesktopHeader.propTypes = {
 
   // i18n
   intl: intlShape.isRequired,
+
+  // appMenu
+  appMenu: PropTypes.shape(
+    {
+      content: PropTypes.string,
+      menuItems: PropTypes.arrayOf(
+        PropTypes.shape({
+          type: PropTypes.string,
+          href: PropTypes.string,
+          content: PropTypes.string,
+        }),
+      ),
+    },
+  ),
 };
 
 DesktopHeader.defaultProps = {
@@ -167,6 +208,7 @@ DesktopHeader.defaultProps = {
   avatar: null,
   username: null,
   loggedIn: false,
+  appMenu: null,
 };
 
 export default injectIntl(DesktopHeader);
