@@ -2,16 +2,16 @@ name: Default CI
 on:
   push:
     branches:
-      - 'master'
+    - master
   pull_request:
     branches:
-      - '**'
+    - '**'
 jobs:
   tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [12, 14, 16]
+        node: [16]
     steps:
     - name: Checkout
       uses: actions/checkout@v2
