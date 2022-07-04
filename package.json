@@ -64,7 +64,7 @@
     "@fortawesome/free-brands-svg-icons": "5.15.4",
     "@fortawesome/free-regular-svg-icons": "5.15.4",
     "@fortawesome/free-solid-svg-icons": "5.15.4",
-    "@fortawesome/react-fontawesome": "^0.1.14"
+    "@fortawesome/react-fontawesome": "^0.2.0"
   },
   "peerDependencies": {
     "@edx/frontend-platform": "^2.0.0",
