@@ -28,7 +28,7 @@ subscribe(APP_CONFIG_INITIALIZED, () => {
   }, 'StudioHeader additional config');
 });
 
-function StudioHeader({ intl, mainMenu, appMenu }) {
+function StudioHeader({ intl, contentTitle, contentSubtitle, actionRowContent }) {
   const { authenticatedUser, config } = useContext(AppContext);
 
   const userMenu = authenticatedUser === null ? [] : [
@@ -56,9 +56,10 @@ function StudioHeader({ intl, mainMenu, appMenu }) {
     loggedIn: authenticatedUser !== null,
     username: authenticatedUser !== null ? authenticatedUser.username : null,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
-    mainMenu,
+    contentTitle,
+    contentSubtitle,
+    actionRowContent,
     userMenu,
-    appMenu,
     loggedOutItems: [],
   };
 
@@ -67,33 +68,11 @@ function StudioHeader({ intl, mainMenu, appMenu }) {
 
 StudioHeader.propTypes = {
   intl: intlShape.isRequired,
-  appMenu: PropTypes.shape(
-    {
-      content: PropTypes.string,
-      href: PropTypes.string,
-      menuItems: PropTypes.arrayOf(
-        PropTypes.shape({
-          type: PropTypes.string,
-          href: PropTypes.string,
-          content: PropTypes.string,
-        }),
-      ),
-    },
-  ),
-  mainMenu: PropTypes.arrayOf(
-    PropTypes.shape(
-      {
-        type: PropTypes.string,
-        href: PropTypes.string,
-        content: PropTypes.string,
-      },
-    ),
-  ),
+  actionRowContent: PropTypes.element,
 };
 
 StudioHeader.defaultProps = {
-  appMenu: null,
-  mainMenu: [],
+  actionRowContent: null
 };
 
 export default injectIntl(StudioHeader);

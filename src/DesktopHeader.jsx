@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { getConfig } from '@edx/frontend-platform';
+import { ActionRow } from '@edx/paragon';
 
 // Local Components
 import { Menu, MenuTrigger, MenuContent } from './Menu';
@@ -120,7 +121,9 @@ class DesktopHeader extends React.Component {
       logoDestination,
       loggedIn,
       intl,
-      appMenu,
+      contentTitle,
+      contentSubtitle,
+      actionRowContent,
     } = this.props;
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
     const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'mw-100' : null;
@@ -131,26 +134,17 @@ class DesktopHeader extends React.Component {
         <div className={`container-fluid ${logoClasses}`}>
           <div className="nav-container position-relative d-flex align-items-center">
             {logoDestination === null ? <Logo className="logo" src={logo} alt={logoAltText} /> : <LinkedLogo className="logo" {...logoProps} />}
-            <nav
-              aria-label={intl.formatMessage(messages['header.label.main.nav'])}
-              className="nav main-nav"
-            >
-              {this.renderMainMenu()}
-            </nav>
-            {appMenu ? (
+            {contentTitle ? <div>CONTENT TITLE</div> : <></>}
+            {contentSubtitle ? <div>CONTENT SUBTITLE</div> : <></>}
+            <ActionRow>
+              {actionRowContent}
               <nav
-                aria-label={intl.formatMessage(messages['header.label.app.nav'])}
-                className="nav app-nav"
+                aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
+                className="nav secondary-menu-container align-items-center ml-auto"
               >
-                {this.renderAppMenu()}
+                {loggedIn ? this.renderUserMenu() : this.renderLoggedOutItems()}
               </nav>
-            ) : null}
-            <nav
-              aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
-              className="nav secondary-menu-container align-items-center ml-auto"
-            >
-              {loggedIn ? this.renderUserMenu() : this.renderLoggedOutItems()}
-            </nav>
+            </ActionRow>
           </div>
         </div>
       </header>
@@ -159,10 +153,6 @@ class DesktopHeader extends React.Component {
 }
 
 DesktopHeader.propTypes = {
-  mainMenu: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.array,
-  ]),
   userMenu: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.oneOf(['item', 'menu']),
     href: PropTypes.string,
@@ -179,23 +169,12 @@ DesktopHeader.propTypes = {
   avatar: PropTypes.string,
   username: PropTypes.string,
   loggedIn: PropTypes.bool,
+  contentTitle: PropTypes.string,
+  contentSubtitle: PropTypes.string,
+  actionRowContent: PropTypes.element,
 
   // i18n
   intl: intlShape.isRequired,
-
-  // appMenu
-  appMenu: PropTypes.shape(
-    {
-      content: PropTypes.string,
-      menuItems: PropTypes.arrayOf(
-        PropTypes.shape({
-          type: PropTypes.string,
-          href: PropTypes.string,
-          content: PropTypes.string,
-        }),
-      ),
-    },
-  ),
 };
 
 DesktopHeader.defaultProps = {
@@ -208,7 +187,9 @@ DesktopHeader.defaultProps = {
   avatar: null,
   username: null,
   loggedIn: false,
-  appMenu: null,
+  contentTitle: null,
+  contentSubtitle: null,
+  actionRowContent: null,
 };
 
 export default injectIntl(DesktopHeader);
