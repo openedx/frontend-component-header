@@ -123,6 +123,8 @@ class DesktopHeader extends React.Component {
       intl,
       contentTitle,
       contentSubtitle,
+      contentTitleDestination,
+      contentTitleAriaLabel,
       actionRowContent,
     } = this.props;
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };

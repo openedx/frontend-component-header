@@ -56,8 +56,6 @@ function StudioHeader({ intl, contentTitle, contentSubtitle, actionRowContent })
     loggedIn: authenticatedUser !== null,
     username: authenticatedUser !== null ? authenticatedUser.username : null,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
-    contentTitle,
-    contentSubtitle,
     actionRowContent,
     userMenu,
     loggedOutItems: [],
