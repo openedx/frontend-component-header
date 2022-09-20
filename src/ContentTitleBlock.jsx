@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function ContentTitleBlock({ title, subtitle, destination, ariaLabel }) {
   return (
-    <a
+    <Link
       className='content-title-block'
       href={destination}
       aria-label={ariaLabel}
     >
       <span className="d-block small m-0">{subtitle}</span>
       <span className="d-block m-0 font-weight-bold">{title}</span>
-    </a>
+    </Link>
   );
 }
 
