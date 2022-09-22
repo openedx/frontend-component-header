@@ -119,6 +119,10 @@ $white: #fff;
   }
 }
 
+.secondary-menu-container {
+  padding-left: 0.3rem;
+}
+
 .content-title-block {
   span {
     color: #333;
@@ -126,5 +130,8 @@ $white: #fff;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.375rem;
+    width: 10rem;
+    border-right: 1px solid grey;
   }
+  margin-right: 0.5rem;
 }
