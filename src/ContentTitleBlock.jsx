@@ -9,7 +9,7 @@ function ContentTitleBlock({ title, subtitle, destination, ariaLabel }) {
   return (
     <Link
       className='content-title-block'
-      href={destination}
+      to={destination}
       aria-label={ariaLabel}
     >
       <span className="d-block small m-0">{subtitle}</span>
