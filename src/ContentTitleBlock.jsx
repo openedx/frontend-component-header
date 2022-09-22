@@ -1,3 +1,6 @@
+// todo: figure out why importing this from here is causing
+// "You should not use <Link> outside a <Router>" errors
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
