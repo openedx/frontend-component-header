@@ -8,7 +8,7 @@
   "header.user.menu.dashboard": "لوحة المعلومات",
   "header.user.menu.profile": "الملف الشخصي",
   "header.user.menu.account.settings": "الحساب",
-  "header.user.menu.order.history": "سجل الطلبات",
+  "header.user.menu.order.history": "سجل الطلبيات",
   "header.user.menu.logout": "تسجيل الخروج",
   "header.user.menu.login": "تسجيل الدخول",
   "header.user.menu.register": "التسجيل",
@@ -27,7 +27,7 @@
   "header.help.label": "المساعدة",
   "header.menu.profile.label": "الملف الشخصي",
   "header.menu.account.label": "الحساب",
-  "header.menu.orderHistory.label": "سجل الطلبات",
+  "header.menu.orderHistory.label": "سجل الطلبيات",
   "header.navigation.skipNavLink": "التخطي إلى المحتوى الرئيسي",
   "header.menu.signOut.label": "تسجيل الخروج"
 }
