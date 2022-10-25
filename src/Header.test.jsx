@@ -7,19 +7,17 @@ import { Context as ResponsiveContext } from 'react-responsive';
 
 import Header from './index';
 
-function HeaderComponent({ width, contextValue }) {
-  return (
-    <ResponsiveContext.Provider value={width}>
-      <IntlProvider locale="en" messages={{}}>
-        <AppContext.Provider
-          value={contextValue}
-        >
-          <Header />
-        </AppContext.Provider>
-      </IntlProvider>
-    </ResponsiveContext.Provider>
-  );
-}
+const HeaderComponent = ({ width, contextValue }) => (
+  <ResponsiveContext.Provider value={width}>
+    <IntlProvider locale="en" messages={{}}>
+      <AppContext.Provider
+        value={contextValue}
+      >
+        <Header />
+      </AppContext.Provider>
+    </IntlProvider>
+  </ResponsiveContext.Provider>
+);
 
 describe('<Header />', () => {
   it('renders correctly for anonymous desktop', () => {
