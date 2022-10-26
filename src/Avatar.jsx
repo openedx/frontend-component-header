@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import { AvatarIcon } from './Icons';
 
-function Avatar({
+const Avatar = ({
   size,
   src,
   alt,
   className,
-}) {
+}) => {
   const avatar = src ? (
     <img className="d-block w-100 h-100" src={src} alt={alt} />
   ) : (
@@ -23,7 +23,7 @@ function Avatar({
       {avatar}
     </span>
   );
-}
+};
 
 Avatar.propTypes = {
   src: PropTypes.string,

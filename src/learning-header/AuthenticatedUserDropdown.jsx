@@ -10,7 +10,7 @@ import { Dropdown } from '@edx/paragon';
 
 import messages from './messages';
 
-function AuthenticatedUserDropdown({ intl, username }) {
+const AuthenticatedUserDropdown = ({ intl, username }) => {
   const dashboardMenuItem = (
     <Dropdown.Item href={`${getConfig().LMS_BASE_URL}/dashboard`}>
       {intl.formatMessage(messages.dashboard)}
@@ -47,7 +47,7 @@ function AuthenticatedUserDropdown({ intl, username }) {
       </Dropdown>
     </>
   );
-}
+};
 
 AuthenticatedUserDropdown.propTypes = {
   intl: intlShape.isRequired,

@@ -151,7 +151,7 @@ StudioDesktopHeaderBase.defaultProps = {
 
 const StudioDesktopHeader = injectIntl(StudioDesktopHeaderBase);
 
-function StudioHeader({ intl, actionRowContent }) {
+const StudioHeader = ({ intl, actionRowContent }) => {
   const { authenticatedUser, config } = useContext(AppContext);
 
   const userMenu = authenticatedUser === null ? [] : [
@@ -185,7 +185,7 @@ function StudioHeader({ intl, actionRowContent }) {
   };
 
   return <StudioDesktopHeader {...props} />;
-}
+};
 
 StudioHeader.propTypes = {
   intl: intlShape.isRequired,
@@ -193,6 +193,7 @@ StudioHeader.propTypes = {
 };
 
 StudioHeader.defaultProps = {
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   actionRowContent: <></>,
 };
 

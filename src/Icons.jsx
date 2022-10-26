@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const MenuIcon = props => (
+export const MenuIcon = (props) => (
   <svg
     width="24px"
     height="24px"
@@ -14,7 +14,7 @@ export const MenuIcon = props => (
   </svg>
 );
 
-export const AvatarIcon = props => (
+export const AvatarIcon = (props) => (
   <svg
     width="24px"
     height="24px"
@@ -29,7 +29,7 @@ export const AvatarIcon = props => (
   </svg>
 );
 
-export const CaretIcon = props => (
+export const CaretIcon = (props) => (
   <svg
     width="16px"
     height="16px"
