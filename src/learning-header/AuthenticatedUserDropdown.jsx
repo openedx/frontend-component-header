@@ -21,9 +21,7 @@ const AuthenticatedUserDropdown = ({ intl, username }) => {
   ) 
   return (
     <>
-      {getConfig().SUPPORT_URL && 
-        SupportUrl
-      }           
+      {getConfig().SUPPORT_URL &&  SupportUrl }           
       <Dropdown className="user-dropdown">
         <Dropdown.Toggle variant="outline-primary">
           <FontAwesomeIcon icon={faUserCircle} className="d-md-none" size="lg" />
