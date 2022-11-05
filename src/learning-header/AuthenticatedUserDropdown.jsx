@@ -16,10 +16,12 @@ const AuthenticatedUserDropdown = ({ intl, username }) => {
       {intl.formatMessage(messages.dashboard)}
     </Dropdown.Item>
   );
-
+  const SupportUrl = (
+    <a className="text-gray-700 mr-3" href={`${getConfig().SUPPORT_URL}`}>{intl.formatMessage(messages.help)}</a>
+  ) 
   return (
     <>
-      <a className="text-gray-700 mr-3" href={`${getConfig().SUPPORT_URL}`}>{intl.formatMessage(messages.help)}</a>
+      {SupportUrl}     
       <Dropdown className="user-dropdown">
         <Dropdown.Toggle variant="outline-primary">
           <FontAwesomeIcon icon={faUserCircle} className="d-md-none" size="lg" />
