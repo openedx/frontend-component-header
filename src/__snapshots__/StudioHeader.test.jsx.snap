@@ -122,7 +122,7 @@ exports[`<StudioHeader /> renders correctly with optional action row content 1`]
         className="pgn__action-row"
       >
         <div
-          className="dropdown"
+          className="pgn__dropdown pgn__dropdown-light dropdown"
           data-testid="dropdown"
         >
           <button

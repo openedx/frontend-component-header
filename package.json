@@ -34,9 +34,9 @@
   "homepage": "https://github.com/openedx/frontend-component-header#readme",
   "devDependencies": {
     "@edx/brand": "npm:@edx/brand-openedx@1.1.0",
-    "@edx/frontend-build": "12.3.0",
+    "@edx/browserslist-config": "^1.1.1",
+    "@edx/frontend-build": "12.4.0",
     "@edx/frontend-platform": "^3.0.1",
-    "@edx/paragon": "19.25.3",
     "@testing-library/dom": "8.19.0",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "10.4.9",
@@ -57,6 +57,7 @@
     "redux-saga": "1.2.1"
   },
   "dependencies": {
+    "@edx/paragon": "20.20.0",
     "@fortawesome/fontawesome-svg-core": "1.2.36",
     "@fortawesome/free-brands-svg-icons": "5.15.4",
     "@fortawesome/free-regular-svg-icons": "5.15.4",
