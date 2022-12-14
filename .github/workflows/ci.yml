@@ -44,7 +44,7 @@ jobs:
         id: semantic
         with:
           semantic_version: 16
-          branch: ${{ steps.extract_branch.outputs.branch}}
+          branch: semantic-release-preview-workflow
           dry_run: true
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
