@@ -41,6 +41,7 @@ jobs:
         id: extract_branch
       - name: Release Preview
         uses: cycjimmy/semantic-release-action@v2
+        id: semantic
         with:
           semantic_version: 16
           branches: ${{ steps.extract_branch.outputs.branch}}
