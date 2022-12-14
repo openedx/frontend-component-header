@@ -43,7 +43,7 @@ jobs:
         uses: cycjimmy/semantic-release-action@v2
         id: semantic
         with:
-          semantic_version: 16
+          semantic_version: 15.13.28
           branch: semantic-release-preview-workflow
           dry_run: true
         env:
