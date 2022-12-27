@@ -56,7 +56,7 @@
     "redux-saga": "1.2.1"
   },
   "dependencies": {
-    "@edx/paragon": "^20.20.0",
+    "@edx/paragon": "20.20.0",
     "@fortawesome/fontawesome-svg-core": "1.2.36",
     "@fortawesome/free-brands-svg-icons": "5.15.4",
     "@fortawesome/free-regular-svg-icons": "5.15.4",
