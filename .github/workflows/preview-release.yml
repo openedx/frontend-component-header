@@ -30,8 +30,8 @@ jobs:
     - name: Update pull request comment
       uses: peter-evans/create-or-update-comment@v2
       id: couc
-      token: ${{ secrets.requirements_bot_github_token }}
       with:
+        token: ${{ secrets.requirements_bot_github_token }}
         issue-number: ${{ github.event.pull_request.number }}
         body: |
           This pull request would release version `$(npx semantic-release --dry-run --no-ci)` upon merge.
