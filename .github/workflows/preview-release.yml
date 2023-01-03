@@ -32,9 +32,9 @@ jobs:
       id: couc
       with:
         issue-number: ${{ github.event.pull_request.number }}
+        token: ${{ secrets.requirements_bot_github_token }}
         body: |
           This pull request would release version `$(npx semantic-release --dry-run --no-ci)` upon merge.
-        token: ${{ secrets.requirements_bot_github_token }}
     - name: Check outputs
       run: |
         echo "Comment ID - ${{ steps.couc.outputs.comment-id }}"
