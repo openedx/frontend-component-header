@@ -52,7 +52,7 @@
     "react-router-dom": "5.3.4",
     "react-test-renderer": "16.14.0",
     "reactifex": "1.1.1",
-    "redux": "4.2.0",
+    "redux": "4.2.1",
     "redux-saga": "1.2.1"
   },
   "dependencies": {
