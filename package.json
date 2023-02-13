@@ -39,7 +39,7 @@
     "@edx/frontend-platform": "^3.0.1",
     "@testing-library/dom": "8.20.0",
     "@testing-library/jest-dom": "5.16.5",
-    "@testing-library/react": "10.4.9",
+    "@testing-library/react": "13.4.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.7",
     "husky": "8.0.3",
