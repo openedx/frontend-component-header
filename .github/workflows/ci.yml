@@ -13,14 +13,6 @@ jobs:
       matrix:
         node: [16, 18]
     steps:
-      name: Release Preview
-      - run: npx semantic-release --dry-run
-        id: get-next-version
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    outputs:
-      new-release-published: ${{ steps.get-next-version.outputs.new-release-published }}
-      new-release-version: ${{ steps.get-next-version.outputs.new-release-version }}
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -43,3 +35,10 @@ jobs:
       run: npm run i18n_extract
     - name: Coverage
       uses: codecov/codecov-action@v3
+      run: npx semantic-release --dry-run
+        id: get-next-version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    outputs:
+      new-release-published: ${{ steps.get-next-version.outputs.new-release-published }}
+      new-release-version: ${{ steps.get-next-version.outputs.new-release-version }}
