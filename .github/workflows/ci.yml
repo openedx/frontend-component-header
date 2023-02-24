@@ -7,14 +7,13 @@ on:
     branches:
     - '**'
 jobs:
-    name: Release Preview
+    tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [16, 18]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - run: npm ci
+      name: Release Preview
       - run: npx semantic-release --dry-run
         id: get-next-version
         env:
@@ -22,12 +21,6 @@ jobs:
     outputs:
       new-release-published: ${{ steps.get-next-version.outputs.new-release-published }}
       new-release-version: ${{ steps.get-next-version.outputs.new-release-version }}
-    tests:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [16]
-    steps:
     - name: Checkout
       uses: actions/checkout@v3
       with:
