@@ -1,9 +1,6 @@
 name: Default CI
 on:
   push
-  pull_request:
-    branches:
-    - '**'
 jobs:
   get-next-version:
     runs-on: ubuntu-latest
