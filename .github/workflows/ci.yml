@@ -1,7 +1,5 @@
 name: Default CI
-on:
-  push:
-     branches: [master]
+on: [push]
   pull_request:
     branches:
     - '**'
