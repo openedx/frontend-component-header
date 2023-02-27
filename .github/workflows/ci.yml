@@ -52,7 +52,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: get-next-version
-    if: needs.get-next-version.outputs.new-release-published == 'true'
     steps:
       - uses: actions/checkout@v3
       - run: echo "The new release version is ${{ needs.get-next-version.outputs.new-release-version }}"
