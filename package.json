@@ -37,6 +37,7 @@
     "@edx/browserslist-config": "^1.1.1",
     "@edx/frontend-build": "^12.4.19",
     "@edx/frontend-platform": "^3.0.1",
+    "@edx/reactifex": "^2.1.1",
     "@testing-library/dom": "9.0.0",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "10.4.9",
@@ -51,7 +52,6 @@
     "react-redux": "7.2.9",
     "react-router-dom": "5.3.4",
     "react-test-renderer": "16.14.0",
-    "reactifex": "1.1.1",
     "redux": "4.2.1",
     "redux-saga": "1.2.2"
   },
