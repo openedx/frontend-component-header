@@ -1,5 +1,5 @@
 {
-  "branch": "master",
+  "branches": ["master", "next"],
   "tagFormat": "v${version}",
   "verifyConditions": [
     "@semantic-release/npm",
@@ -12,7 +12,13 @@
   ],
   "analyzeCommits": "@semantic-release/commit-analyzer",
   "generateNotes": "@semantic-release/release-notes-generator",
-  "prepare": "@semantic-release/npm",
+  "prepare": [
+    "@semantic-release/npm",
+    {
+      "path": "semantic-release-export-data",
+      "output": "release.json"
+    }
+  ],
   "publish": [
     "@semantic-release/npm",
     {
