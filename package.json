@@ -38,7 +38,7 @@
     "@edx/frontend-build": "^12.4.19",
     "@edx/frontend-platform": "^3.0.1",
     "@edx/reactifex": "^2.1.1",
-    "@testing-library/dom": "9.0.0",
+    "@testing-library/dom": "9.0.1",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "10.4.9",
     "enzyme": "3.11.0",
