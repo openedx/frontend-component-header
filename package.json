@@ -36,7 +36,7 @@
     "@edx/brand": "npm:@edx/brand-openedx@1.2.0",
     "@edx/browserslist-config": "^1.1.1",
     "@edx/frontend-build": "^12.4.19",
-    "@edx/frontend-platform": "^3.0.1",
+    "@edx/frontend-platform": "^3.6.0",
     "@edx/reactifex": "^2.1.1",
     "@testing-library/dom": "9.0.1",
     "@testing-library/jest-dom": "5.16.5",
@@ -50,7 +50,7 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-redux": "7.2.9",
-    "react-router-dom": "5.3.4",
+    "react-router-dom": "^6.0.0",
     "react-test-renderer": "16.14.0",
     "redux": "4.2.1",
     "redux-saga": "1.2.2"
