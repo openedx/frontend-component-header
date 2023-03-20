@@ -53,7 +53,7 @@
     "react-router-dom": "5.3.4",
     "react-test-renderer": "16.14.0",
     "redux": "4.2.1",
-    "redux-saga": "1.2.2"
+    "redux-saga": "1.2.3"
   },
   "dependencies": {
     "@edx/paragon": "20.28.4",
