@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';

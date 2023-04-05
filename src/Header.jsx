@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useContext } from 'react';
 import Responsive from 'react-responsive';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';

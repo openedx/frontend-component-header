@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
 
 import { getConfig } from '@edx/frontend-platform';
