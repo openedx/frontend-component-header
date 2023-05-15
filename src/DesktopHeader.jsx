@@ -13,6 +13,7 @@ import messages from './Header.messages';
 
 // Assets
 import { CaretIcon } from './Icons';
+import NotificationIcon from './Notifications/NotificationIcon';
 
 class DesktopHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
@@ -121,6 +122,7 @@ class DesktopHeader extends React.Component {
       loggedIn,
       intl,
       appMenu,
+      notificationCounts,
     } = this.props;
     const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
     const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'mw-100' : null;
@@ -149,6 +151,7 @@ class DesktopHeader extends React.Component {
               aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
               className="nav secondary-menu-container align-items-center ml-auto"
             >
+              {loggedIn && <NotificationIcon notificationCounts={notificationCounts} />}
               {loggedIn ? this.renderUserMenu() : this.renderLoggedOutItems()}
             </nav>
           </div>
@@ -179,6 +182,10 @@ DesktopHeader.propTypes = {
   avatar: PropTypes.string,
   username: PropTypes.string,
   loggedIn: PropTypes.bool,
+  notificationCounts: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.string,
+    count: PropTypes.string,
+  })),
 
   // i18n
   intl: intlShape.isRequired,
@@ -209,6 +216,7 @@ DesktopHeader.defaultProps = {
   username: null,
   loggedIn: false,
   appMenu: null,
+  notificationCounts: [],
 };
 
 export default injectIntl(DesktopHeader);

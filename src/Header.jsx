@@ -88,6 +88,29 @@ const Header = ({ intl }) => {
     },
   ];
 
+  const notificationCounts = [
+    {
+      type: 'total',
+      count: 25,
+    },
+    {
+      type: 'reminders',
+      count: 1,
+    },
+    {
+      type: 'discussions',
+      count: 0,
+    },
+    {
+      type: 'grades',
+      count: 0,
+    },
+    {
+      type: 'authoring',
+      count: 24,
+    },
+  ];
+
   const props = {
     logo: config.LOGO_URL,
     logoAltText: config.SITE_NAME,
@@ -98,6 +121,7 @@ const Header = ({ intl }) => {
     mainMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : mainMenu,
     userMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : userMenu,
     loggedOutItems: getConfig().AUTHN_MINIMAL_HEADER ? [] : loggedOutItems,
+    notificationCounts,
   };
 
   return (

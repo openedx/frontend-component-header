@@ -27,7 +27,7 @@ $white: #fff;
 
 .learning-header {
   min-width: 0;
-  
+
   .course-title-lockup {
     min-width: 0;
 
@@ -116,5 +116,131 @@ $white: #fff;
   }
   .search-input {
     border-radius: $rounded-pill;
+  }
+}
+
+.popover .arrow{
+      display: none !important;
+    }
+.notification-title{
+  line-height: 24px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.setting-icon-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 100%;
+  position: absolute;
+  margin-left: -40px;
+  margin-top: -7px;
+  span{
+    height:20px;
+    width: 20px;
+  }
+}
+
+.notification-content{
+    padding-left: 0px;
+    width: 549px;
+  }
+.notification-tabs{
+  height: 38px;
+  width:549px;
+  padding-left: 12px;
+  button{
+    font-size: 14px;
+  }
+  .dropdown-toggle{
+    height: 36px;
+    padding-top: 0px !important;
+    padding-left: 12px !important;
+    padding-right: 26px !important;
+
+    div{
+      margin-top: 4px;
+      height: 20px;
+      width: 20px;
+    }
+  }
+  .dropdown{
+    height: 36px;
+  }
+  .notification-tab, .dropdown-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 12px 12px !important;
+  height: 36px;
+  font-size:14px;
+  font-weight: 500;
+  line-height: 24px;
+
+}
+.expandable{
+    height: 20px;
+    width: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 7px;
+    gap: 8px;
+    position: relative;
+    margin-left: 4px;
+  }
+}
+
+.bell-container{
+
+  button{
+    position: relative;
+    background: transparent;
+    color: black;
+    border: none;
+    &:hover, &:active, &:focus{
+      background: transparent !important;
+      color: black !important;
+      border: none;
+    }
+    &::before{
+      border: none !important
+    }
+  }
+  .bell-icon-container{
+    width: 36px;
+    height: 36px;
+    border-radius: 1e+16px;
+    color: black !important;
+    &:hover{
+    background: #EAE6E5;
+    }
+    .bell-icon{
+      margin-left: -4px !important;
+      &:focus{
+        box-shadow: none !important
+      }
+    }
+
+  }
+  .badge{
+    z-index: 1;
+    border-radius: 54px;
+    border: 2px solid #FFFFFF;
+    padding: 4px 5px;
+    width: 23px;
+    height: 16px;
+    margin-top: 3px;
+    margin-left: 20px;
+    .count{
+      font-size: 9px;
+      line-height: 20px;
+      width: 13px;
+      height: 8px;
+      font-weight: 600;
+      margin-top: -3px;
+    }
   }
 }
