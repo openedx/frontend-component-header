@@ -64,10 +64,11 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@reduxjs/toolkit": "^1.9.5",
     "babel-polyfill": "6.26.0",
+    "lodash": "^4.17.21",
+    "react-redux": "7.2.9",
     "react-responsive": "8.2.0",
     "react-transition-group": "4.4.5",
-    "timeago.js": "^4.0.2",
-    "react-redux": "7.2.9"
+    "timeago.js": "^4.0.2"
   },
   "peerDependencies": {
     "@edx/frontend-platform": "^4.0.0",

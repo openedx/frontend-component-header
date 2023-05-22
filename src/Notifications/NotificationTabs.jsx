@@ -11,18 +11,20 @@ import { notificationTabsOptions } from '../constants';
 const NotificationTabs = () => {
   const notificationUnseenCounts = useSelector(getNotificationTotalUnseenCounts());
   const [activeTab, setActiveTab] = useState(notificationTabsOptions[0].key);
+  const [loadMoreCount, setLoadMoreCount] = useState(10);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchNotificationList({ notificationType: activeTab || 'reminders' }));
-  }, [dispatch, activeTab]);
-
-  useEffect(() => {
-    setActiveTab(activeTab || 'reminders');
-  }, [activeTab]);
+    dispatch(fetchNotificationList({ notificationType: activeTab || 'reminders', notificationCount: loadMoreCount }));
+  }, [dispatch, activeTab, loadMoreCount]);
 
   const handleActiveTab = useCallback((tab) => {
     setActiveTab(tab);
+  }, []);
+
+  const handleLoadMoreNotification = useCallback((count) => {
+    setLoadMoreCount(count);
   }, []);
 
   const tabArray = useMemo(() => notificationTabsOptions.map((option) => (
@@ -32,9 +34,9 @@ const NotificationTabs = () => {
       notification={notificationUnseenCounts[option.title]}
       tabClassName="notification-tab"
     >
-      <NotificationSections />
+      <NotificationSections handleLoadMoreNotification={handleLoadMoreNotification} loadMoreCount={loadMoreCount} />
     </Tab>
-  )), [notificationUnseenCounts]);
+  )), [notificationUnseenCounts, handleLoadMoreNotification, loadMoreCount]);
 
   return (
     activeTab && (

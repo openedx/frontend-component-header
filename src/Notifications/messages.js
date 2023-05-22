@@ -9,7 +9,7 @@ export const messages = defineMessages({
   },
   notificationTodayHeading: {
     id: 'notification.today.heading',
-    defaultMessage: 'Today',
+    defaultMessage: 'Last 24 hours',
     description: 'Today Notifications',
   },
   notificationEarlierHeading: {
@@ -96,5 +96,10 @@ export const messages = defineMessages({
     id: 'notification.fullStop',
     defaultMessage: '•',
     description: 'Fullstop shown to users to indicate who edited a post.',
+  },
+  loadMoreNotifications: {
+    id: 'notification.load.more.notifications',
+    defaultMessage: 'Load more notifications',
+    description: 'Load more button to load more notifications',
   },
 });

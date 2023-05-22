@@ -11,11 +11,11 @@ import {
   getNotificationCounts,
 } from './api';
 
-export const fetchNotificationList = ({ notificationType }) => (
+export const fetchNotificationList = ({ notificationType, notificationCount }) => (
   async (dispatch) => {
     try {
       dispatch(fetchNotificationRequest({ notificationType }));
-      const data = await getNotifications(notificationType);
+      const data = await getNotifications(notificationType, notificationCount);
       dispatch(fetchNotificationSuccess(data));
     } catch (errors) {
       dispatch(fetchNotificationFailure({ notificationType }));

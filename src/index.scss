@@ -141,7 +141,8 @@ $white: #fff;
       background: #EAE6E5;
     }
     .bell-icon{
-      margin-left: -3px !important;
+      margin-left: -4px !important;
+      margin-top: -1px;
       &:focus{
         box-shadow: none !important
       }
@@ -155,7 +156,7 @@ $white: #fff;
     width: 23px;
     height: 16px;
     margin-top: 3px;
-    margin-left: 20px;
+    margin-left: 18px;
     .count{
       font-size: 9px;
       line-height: 20px;
@@ -166,7 +167,6 @@ $white: #fff;
     }
   }
 }
-
 .notification-tray-container{
   width: 549px;
   height: 100vh;

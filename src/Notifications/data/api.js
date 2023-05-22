@@ -1,15 +1,8 @@
-/* eslint-disable import/prefer-default-export */
-// import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 import { getConfig } from '@edx/frontend-platform';
 
 export const getApiBaseUrl = () => getConfig().LMS_BASE_URL;
 
-export async function getNotifications(notificationType) {
-  // const url = `${getApiBaseUrl()}/api/discussion/v1/notifications/`;
-
-  // const { data } = await getAuthenticatedHttpClient()
-  //   .get(url);
-
+export async function getNotifications(notificationType, notificationCount) {
   const data = {
     discussions: {
       TODAY: [
@@ -185,7 +178,23 @@ export async function getNotifications(notificationType) {
       ],
     },
   };
-  return data[notificationType];
+  const notifications = data[notificationType];
+  const { TODAY = [], EARLIER = [] } = notifications || [];
+  let todayNotifications = TODAY;
+  let earlierNotifications = [];
+  let totalCount = 0;
+
+  if (TODAY && EARLIER) {
+    if (TODAY.length > notificationCount) {
+      todayNotifications = TODAY.slice(0, notificationCount);
+    } else {
+      todayNotifications = TODAY;
+      earlierNotifications = EARLIER.slice(0, notificationCount - TODAY.length);
+    }
+    totalCount = TODAY.length + EARLIER.length;
+  }
+
+  return { TODAY: todayNotifications, EARLIER: earlierNotifications, totalCount };
 }
 
 export async function getNotificationCounts() {
