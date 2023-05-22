@@ -16,7 +16,7 @@ const NotificationRowItem = ({ notification }) => {
   timeago.register('time-locale', timeLocale);
   const { authenticatedUser } = useContext(AppContext);
 
-  const handleIconByType = (type) => {
+  const getIconByType = (type) => {
     switch (type) {
       case 'post': return PostOutline;
       case 'help': return HelpOutline;
@@ -34,7 +34,7 @@ const NotificationRowItem = ({ notification }) => {
   };
 
   const getContentMessageByType = useCallback(() => {
-    const typeMap = {
+    const contentMessage = {
       post: messages.notificationPostedContent,
       help: messages.notificationHelpedContent,
       respond: authenticatedUser.username !== notification.author
@@ -49,14 +49,14 @@ const NotificationRowItem = ({ notification }) => {
       commentLiked: messages.notificationCommentLikedLabel,
       edited: messages.notificationEditedLabel,
     };
-    return typeMap[notification.type] ? intl.formatMessage(typeMap[notification.type]) : null;
+    return contentMessage[notification.type] ? intl.formatMessage(contentMessage[notification.type]) : null;
   }, [authenticatedUser, notification, intl]);
 
   return (
     <div className="d-flex notification-item mb-2 notification-item">
       <div className="mr-2 icon-container">
         <Icon
-          src={handleIconByType(notification.type)}
+          src={getIconByType(notification.type)}
           style={{ height: '28px', width: '28px' }}
         />
       </div>

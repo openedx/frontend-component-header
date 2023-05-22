@@ -16,7 +16,7 @@ const NotificationTabs = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchNotificationList({ notificationType: activeTab || 'reminders', notificationCount: loadMoreCount }));
+    dispatch(fetchNotificationList({ notificationType: activeTab, notificationCount: loadMoreCount }));
   }, [dispatch, activeTab, loadMoreCount]);
 
   const handleActiveTab = useCallback((tab) => {
@@ -42,7 +42,7 @@ const NotificationTabs = () => {
     activeTab && (
     <Tabs
       defaultActiveKey={activeTab}
-      id="uncontrolled-tab-example"
+      id="notification-tab"
       className="notification-tabs"
       onSelect={handleActiveTab}
     >
