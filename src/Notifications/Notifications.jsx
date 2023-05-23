@@ -1,4 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, {
+  useState, useCallback, useEffect, useRef,
+} from 'react';
 import { NotificationsNone, Settings } from '@edx/paragon/icons';
 import {
   Badge, Form, Icon, IconButton, OverlayTrigger, Popover,
@@ -12,11 +14,12 @@ import { messages } from './messages';
 
 const Notifications = () => {
   const [showNotificationTray, setShowNotificationTray] = useState(false);
-  const notificationCounts = useSelector(getNotificationTotalUnseenCounts());
   const intl = useIntl();
-
+  const popoverRef = useRef(null);
+  const buttonRef = useRef(null);
   const dispatch = useDispatch();
   const notificationStatus = useSelector(getNotificationStatus());
+  const notificationCounts = useSelector(getNotificationTotalUnseenCounts());
 
   useEffect(() => {
     if (notificationStatus === 'idle') {
@@ -26,6 +29,23 @@ const Notifications = () => {
 
   const handleNotificationTray = useCallback((value) => {
     setShowNotificationTray(value);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        popoverRef.current
+        && buttonRef.current
+        && !popoverRef.current.contains(event.target)
+        && !buttonRef.current.contains(event.target)
+      ) {
+        setShowNotificationTray(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   return (
@@ -40,17 +60,19 @@ const Notifications = () => {
             id="popover-positioned-bottom"
             className="notification-tray-container"
           >
-            <Popover.Title as="h3" style={{ padding: '0px 26px 16px 24px', border: 'none' }}>
-              <h2 className="text-primary-500 notification-title">
-                {intl.formatMessage(messages.notificationTitle)}
-              </h2>
-              <div className="setting-icon-container">
-                <Icon src={Settings} />
-              </div>
-            </Popover.Title>
-            <Popover.Content className="notification-content">
-              <NotificationTabs />
-            </Popover.Content>
+            <div ref={popoverRef}>
+              <Popover.Title as="h3" style={{ padding: '0px 26px 16px 24px', border: 'none' }}>
+                <h2 className="text-primary-500 notification-title">
+                  {intl.formatMessage(messages.notificationTitle)}
+                </h2>
+                <div className="setting-icon-container">
+                  <Icon src={Settings} />
+                </div>
+              </Popover.Title>
+              <Popover.Content className="notification-content">
+                <NotificationTabs />
+              </Popover.Content>
+            </div>
           </Popover>
       )}
       >
@@ -60,7 +82,7 @@ const Notifications = () => {
             <Form.Label className="count">{notificationCounts?.Total}</Form.Label>
           </Badge>
           )}
-          <div className="bell-icon-container">
+          <div className="bell-icon-container" ref={buttonRef}>
             <IconButton
               onClick={() => { handleNotificationTray(!showNotificationTray); }}
               src={NotificationsNone}
