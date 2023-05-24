@@ -5,11 +5,11 @@ import { Icon } from '@edx/paragon';
 import * as timeago from 'timeago.js';
 import PropTypes from 'prop-types';
 import { AppContext } from '@edx/frontend-platform/react';
-import { messages } from './messages';
 import {
-  PostOutline, HelpOutline, QuestionAnswerOutline, CheckCircleFilled, Verified, Report, ThumbsUpOutline, EditOutline,
-} from './icons';
-import timeLocale from '../time-locale';
+  CheckCircle, HelpOutline, QuestionAnswerOutline, Verified, Report, EditOutline, ThumbUpOutline, PostOutline,
+} from '@edx/paragon/icons';
+import { messages } from './messages';
+import timeLocale from '../common/time-locale';
 
 const NotificationRowItem = ({ notification }) => {
   const intl = useIntl();
@@ -17,20 +17,21 @@ const NotificationRowItem = ({ notification }) => {
   const { authenticatedUser } = useContext(AppContext);
 
   const getIconByType = (type) => {
-    switch (type) {
-      case 'post': return PostOutline;
-      case 'help': return HelpOutline;
-      case 'respond': return QuestionAnswerOutline;
-      case 'comment': return QuestionAnswerOutline;
-      case 'question': return QuestionAnswerOutline;
-      case 'answer': return CheckCircleFilled;
-      case 'endorsed': return Verified;
-      case 'reported': return Report;
-      case 'postLiked': return ThumbsUpOutline;
-      case 'commentLiked': return ThumbsUpOutline;
-      case 'edited': return EditOutline;
-      default: return null;
-    }
+    const iconMap = {
+      post: { icon: PostOutline, class: 'text-primary-500' },
+      help: { icon: HelpOutline, class: 'text-primary-500' },
+      respond: { icon: QuestionAnswerOutline, class: 'text-primary-500' },
+      comment: { icon: QuestionAnswerOutline, class: 'text-primary-500' },
+      question: { icon: QuestionAnswerOutline, class: 'text-primary-500' },
+      answer: { icon: CheckCircle, class: 'text-success' },
+      endorsed: { icon: Verified, class: 'text-primary-500' },
+      reported: { icon: Report, class: 'text-danger-500' },
+      postLiked: { icon: ThumbUpOutline, class: 'text-primary-500' },
+      commentLiked: { icon: ThumbUpOutline, class: 'text-primary-500' },
+      edited: { icon: EditOutline, class: 'text-primary-500' },
+    };
+
+    return iconMap[type] || null;
   };
 
   const getContentMessageByType = useCallback(() => {
@@ -52,17 +53,19 @@ const NotificationRowItem = ({ notification }) => {
     return contentMessage[notification.type] ? intl.formatMessage(contentMessage[notification.type]) : null;
   }, [authenticatedUser, notification, intl]);
 
+  const iconComponent = getIconByType(notification.type);
   return (
-    <div className="d-flex notification-item mb-2 notification-item">
-      <div className="mr-2 icon-container">
+    <div className="d-flex notification-section-padding mb-2">
+      <div className="mr-2 pt-2.5 pr-2.5 pb-2.5">
         <Icon
-          src={getIconByType(notification.type)}
+          src={iconComponent && iconComponent.icon}
           style={{ height: '28px', width: '28px' }}
+          className={iconComponent && iconComponent.class}
         />
       </div>
       <div className="row d-flex w-100 ml-0">
         <div style={{ display: 'contents' }} className="col-md-12 w-100">
-          <span className="col-md-11 px-0 text-primary-500 mb-2 w-100 notification-item-content">
+          <span className="col-md-11 px-0 text-primary-500 mb-2 w-100 notification-item-content overflow-hidden">
             {notification?.respondingUser} {' '}
             <span className="text-gray-500">{getContentMessageByType()} </span>
             {notification?.targetUser && (
@@ -80,8 +83,7 @@ const NotificationRowItem = ({ notification }) => {
             </a>
           </span>
           <div className="col-md-1 d-flex flex-column justify-content-end mb-2 unread">
-            {notification.status === 'unread'
-            && <div className="bg-brand-500" />}
+            {notification.status === 'unread' && <div className="bg-brand-500 rounded" />}
           </div>
           <div className="w-100 px-0">
             <span className="text-gray-500 mb-2 w-100 course-container">

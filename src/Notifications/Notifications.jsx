@@ -58,18 +58,20 @@ const Notifications = () => {
         overlay={(
           <Popover
             id="popover-positioned-bottom"
-            className="notification-tray-container"
+            className="notification-tray-container vh-100 pt-4.5 pb-4 overflow-auto"
           >
             <div ref={popoverRef}>
               <Popover.Title as="h3" style={{ padding: '0px 26px 16px 24px', border: 'none' }}>
                 <h2 className="text-primary-500 notification-title">
                   {intl.formatMessage(messages.notificationTitle)}
                 </h2>
-                <div className="setting-icon-container">
+                <div className="setting-icon-container d-flex flex-row justify-content-end align-items-end w-100
+                position-absolute"
+                >
                   <Icon src={Settings} />
                 </div>
               </Popover.Title>
-              <Popover.Content className="notification-content">
+              <Popover.Content className="notification-content p-0">
                 <NotificationTabs />
               </Popover.Content>
             </div>
@@ -78,16 +80,16 @@ const Notifications = () => {
       >
         <>
           {notificationCounts?.Total > 0 && (
-          <Badge variant="danger position-absolute d-flex flex-row justify-content-center align-items-center">
+          <Badge variant="danger position-absolute d-flex flex-row justify-content-center align-items-center zindex-1">
             <Form.Label className="count">{notificationCounts?.Total}</Form.Label>
           </Badge>
           )}
-          <div className="bell-icon-container" ref={buttonRef}>
+          <div className="bell-icon-container rounded-circle" ref={buttonRef}>
             <IconButton
               onClick={() => { handleNotificationTray(!showNotificationTray); }}
               src={NotificationsNone}
               iconAs={Icon}
-              className="d-inline-block align-bottom ml-1 bell-icon"
+              className="d-inline-block align-bottom ml-1 ml-n1 shadow-none bg-transparent text-primary-500"
             />
           </div>
         </>

@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import NotificationSections from './NotificationSections';
 import { getNotificationTotalUnseenCounts } from './data/selectors';
 import { fetchNotificationList } from './data/thunks';
-import { notificationTabsOptions } from '../constants';
+import { notificationTabsOptions } from './data/constants';
 
 const NotificationTabs = () => {
   const notificationUnseenCounts = useSelector(getNotificationTotalUnseenCounts());
@@ -32,7 +32,7 @@ const NotificationTabs = () => {
       eventKey={option.key}
       title={option.title}
       notification={notificationUnseenCounts[option.title]}
-      tabClassName="notification-tab"
+      tabClassName="notification-tab d-flex flex-row align-items-center"
     >
       <NotificationSections handleLoadMoreNotification={handleLoadMoreNotification} loadMoreCount={loadMoreCount} />
     </Tab>
@@ -42,8 +42,7 @@ const NotificationTabs = () => {
     activeTab && (
     <Tabs
       defaultActiveKey={activeTab}
-      id="notification-tab"
-      className="notification-tabs"
+      className="notification-tabs ml-2.5"
       onSelect={handleActiveTab}
     >
       {tabArray}

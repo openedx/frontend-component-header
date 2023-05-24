@@ -15,7 +15,7 @@ const NotificationSections = ({ handleLoadMoreNotification, loadMoreCount }) => 
   return (
     notifications && (
     <div className="pt-4">
-      <div className="d-flex pb-2 notification-section">
+      <div className="d-flex pb-2 notification-section-padding">
         <span className="w-100 px-0 text-gray-500">
           {TODAY && TODAY.length > 0 && intl.formatMessage(messages.notificationTodayHeading)}
         </span>
@@ -29,7 +29,7 @@ const NotificationSections = ({ handleLoadMoreNotification, loadMoreCount }) => 
         {TODAY && TODAY.map(
           (notification) => <NotificationRowItem notification={notification} />,
         )}
-        <div className="d-flex pb-2 notification-section">
+        <div className="d-flex pb-2 notification-section-padding">
           <span className="w-100 px-0 text-gray-500">
             {EARLIER && EARLIER.length > 0
             && intl.formatMessage(messages.notificationEarlierHeading)}

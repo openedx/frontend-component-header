@@ -241,10 +241,10 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
           className="d-flex mx-4 my-3 bell-container"
         >
           <div
-            className="bell-icon-container"
+            className="bell-icon-container rounded-circle"
           >
             <button
-              className="btn-icon btn-icon-primary btn-icon-md d-inline-block align-bottom ml-1 bell-icon"
+              className="btn-icon btn-icon-primary btn-icon-md d-inline-block align-bottom ml-1 ml-n1 shadow-none bg-transparent text-primary-500"
               onClick={[Function]}
               type="button"
             >
