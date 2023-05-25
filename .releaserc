@@ -15,14 +15,17 @@
   "prepare": "@semantic-release/npm",
   "publish": [
     "@semantic-release/npm",
-    "@semantic-release/exec",
     {
       "path": "@semantic-release/github",
       "assets": {
         "path": "dist/*"
-      },
+      }
+    },
+    ["@semantic-release/exec",
+    {
       "publishCmd": "echo ::set-output name=nextVer::${nextRelease.version}"
     }
+  ]
   ],
   "success": [],
   "fail": []
