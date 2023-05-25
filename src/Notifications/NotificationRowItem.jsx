@@ -55,15 +55,15 @@ const NotificationRowItem = ({ notification }) => {
 
   const iconComponent = getIconByType(notification.type);
   return (
-    <div className="d-flex notification-section-padding mb-2">
-      <div className="mr-2 pt-2.5 pr-2.5 pb-2.5">
+    <div className="d-flex mb-2">
+      <div className="mr-2 py-4 pr-2.5">
         <Icon
           src={iconComponent && iconComponent.icon}
-          style={{ height: '28px', width: '28px' }}
+          style={{ height: '23.33px', width: '23.33px' }}
           className={iconComponent && iconComponent.class}
         />
       </div>
-      <div className="row d-flex w-100 ml-0">
+      <div className="row d-flex w-100 py-0 px-0 py-2.5">
         <div style={{ display: 'contents' }} className="col-md-12 w-100">
           <span className="col-md-11 px-0 text-primary-500 mb-2 w-100 notification-item-content overflow-hidden">
             {notification?.respondingUser} {' '}
@@ -82,13 +82,13 @@ const NotificationRowItem = ({ notification }) => {
               {' '}{notification?.notificationContent}
             </a>
           </span>
-          <div className="col-md-1 d-flex flex-column justify-content-end mb-2 unread">
-            {notification.status === 'unread' && <div className="bg-brand-500 rounded" />}
+          <div className="col-md-1 d-flex flex-column justify-content-end mb-2">
+            {notification.status === 'unread' && <div className="bg-brand-500 rounded unread" />}
           </div>
-          <div className="w-100 px-0">
-            <span className="text-gray-500 mb-2 w-100 course-container">
+          <div className="w-100 px-0 py-0 d-flex flex-row align-items-center">
+            <span className="text-gray-500 mb-2 w-100 font-size-12">
               <span className="">{notification?.courseName}</span>
-              <span className="mr-1.5 font-size-8 font-style text-light-700" style={{ padding: '0px 6px' }}>
+              <span className="font-size-12 text-light-700 px-1.5">
                 {intl.formatMessage(messages.fullStop)}
               </span>
               <span>

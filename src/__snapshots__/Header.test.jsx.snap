@@ -238,7 +238,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
         className="nav secondary-menu-container align-items-center ml-auto"
       >
         <div
-          className="d-flex mx-4 my-3 bell-container"
+          className="mx-4 my-3 bell-container"
         >
           <div
             className="bell-icon-container rounded-circle"

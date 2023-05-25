@@ -49,7 +49,7 @@ const Notifications = () => {
   }, []);
 
   return (
-    <div className="d-flex mx-4 my-3 bell-container">
+    <div className="mx-4 my-3 bell-container">
       <OverlayTrigger
         trigger="click"
         key="bottom"
@@ -58,18 +58,19 @@ const Notifications = () => {
         overlay={(
           <Popover
             id="popover-positioned-bottom"
-            className="notification-tray-container vh-100 pt-4.5 pb-4 overflow-auto"
+            className="notification-tray-container pt-4.5 pb-4 px-4 overflow-auto d-flex flex-column
+            align-items-start position-absolute mt-2"
           >
             <div ref={popoverRef}>
-              <Popover.Title as="h3" style={{ padding: '0px 26px 16px 24px', border: 'none' }}>
-                <h2 className="text-primary-500 notification-title">
+              <Popover.Title
+                as="h3"
+                style={{ border: 'none' }}
+                className="d-flex flex-row justify-content-between py-0 px-0 mb-4"
+              >
+                <h2 className="text-primary-500 font-size-18 line-height-24">
                   {intl.formatMessage(messages.notificationTitle)}
                 </h2>
-                <div className="setting-icon-container d-flex flex-row justify-content-end align-items-end w-100
-                position-absolute"
-                >
-                  <Icon src={Settings} />
-                </div>
+                <Icon src={Settings} className="icon-size-20" />
               </Popover.Title>
               <Popover.Content className="notification-content p-0">
                 <NotificationTabs />
@@ -80,8 +81,10 @@ const Notifications = () => {
       >
         <>
           {notificationCounts?.Total > 0 && (
-          <Badge variant="danger position-absolute d-flex flex-row justify-content-center align-items-center zindex-1">
-            <Form.Label className="count">{notificationCounts?.Total}</Form.Label>
+          <Badge variant="danger position-absolute px-1.5 py-1.5 d-flex flex-row justify-content-center
+           align-items-center zindex-1"
+          >
+            <Form.Label className="count font-size-9 mt-2">{notificationCounts?.Total}</Form.Label>
           </Badge>
           )}
           <div className="bell-icon-container rounded-circle" ref={buttonRef}>
