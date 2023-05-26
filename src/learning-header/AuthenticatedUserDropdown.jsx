@@ -7,6 +7,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { getConfig } from '@edx/frontend-platform';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { Dropdown } from '@edx/paragon';
+import Notifications from '../Notifications/Notifications';
 
 import messages from './messages';
 
@@ -19,7 +20,8 @@ const AuthenticatedUserDropdown = ({ intl, username }) => {
 
   return (
     <>
-      <a className="text-gray-700 mr-3" href={`${getConfig().SUPPORT_URL}`}>{intl.formatMessage(messages.help)}</a>
+      <a className="text-gray-700" href={`${getConfig().SUPPORT_URL}`}>{intl.formatMessage(messages.help)}</a>
+      <Notifications />
       <Dropdown className="user-dropdown">
         <Dropdown.Toggle variant="outline-primary">
           <FontAwesomeIcon icon={faUserCircle} className="d-md-none" size="lg" />

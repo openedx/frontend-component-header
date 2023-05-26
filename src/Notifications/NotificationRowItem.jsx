@@ -30,7 +30,6 @@ const NotificationRowItem = ({ notification }) => {
       commentLiked: { icon: ThumbUpOutline, class: 'text-primary-500' },
       edited: { icon: EditOutline, class: 'text-primary-500' },
     };
-
     return iconMap[type] || null;
   };
 
@@ -38,7 +37,7 @@ const NotificationRowItem = ({ notification }) => {
     const contentMessage = {
       post: messages.notificationPostedContent,
       help: messages.notificationHelpedContent,
-      respond: authenticatedUser.username !== notification.author
+      respond: (authenticatedUser && authenticatedUser.username) !== notification.author
         ? messages.notificationResponseOnOtherPostLabel : null,
       comment: notification.targetUser
         ? messages.notificationCommentedOnLabel : messages.notificationCommentedOnYourPostLabel,
@@ -72,7 +71,7 @@ const NotificationRowItem = ({ notification }) => {
             <>
               {notification?.targetUser}
               <span className="text-gray-500">
-                {authenticatedUser.username !== notification.author
+                {(authenticatedUser && authenticatedUser.username) !== notification.author
                   ? intl.formatMessage(messages.notificationResponseOnOtherPostLabel)
                   : intl.formatMessage(messages.notificationResponseOnYourPostLabel)}
               </span>

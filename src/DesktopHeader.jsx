@@ -13,7 +13,6 @@ import messages from './Header.messages';
 
 // Assets
 import { CaretIcon } from './Icons';
-import Notifications from './Notifications/Notifications';
 
 class DesktopHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
@@ -150,7 +149,6 @@ class DesktopHeader extends React.Component {
               aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
               className="nav secondary-menu-container align-items-center ml-auto"
             >
-              {loggedIn && <Notifications />}
               {loggedIn ? this.renderUserMenu() : this.renderLoggedOutItems()}
             </nav>
           </div>
