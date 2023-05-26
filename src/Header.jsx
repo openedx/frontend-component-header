@@ -9,6 +9,7 @@ import {
   getConfig,
   subscribe,
 } from '@edx/frontend-platform';
+
 import DesktopHeader from './DesktopHeader';
 import MobileHeader from './MobileHeader';
 

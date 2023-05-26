@@ -49,55 +49,68 @@ const Notifications = () => {
   }, []);
 
   return (
-    <div className="mx-4 my-3 bell-container">
-      <OverlayTrigger
-        trigger="click"
-        key="bottom"
-        placement="bottom"
-        show={showNotificationTray}
-        overlay={(
-          <Popover
-            id="popover-positioned-bottom"
-            className="notification-tray-container pt-4.5 pb-4 px-4 overflow-auto d-flex flex-column
+    <OverlayTrigger
+      trigger="click"
+      key="bottom"
+      placement="bottom"
+      show={showNotificationTray}
+      overlay={(
+        <Popover
+          id="popover-positioned-bottom"
+          className="notification-tray-container pt-4.5 pb-4 px-4 overflow-auto d-flex flex-column
             align-items-start position-absolute mt-2"
-          >
-            <div ref={popoverRef}>
-              <Popover.Title
-                as="h3"
-                style={{ border: 'none' }}
-                className="d-flex flex-row justify-content-between py-0 px-0 mb-4"
-              >
-                <h2 className="text-primary-500 font-size-18 line-height-24">
-                  {intl.formatMessage(messages.notificationTitle)}
-                </h2>
-                <Icon src={Settings} className="icon-size-20" />
-              </Popover.Title>
-              <Popover.Content className="notification-content p-0">
-                <NotificationTabs />
-              </Popover.Content>
-            </div>
-          </Popover>
+        >
+          <div ref={popoverRef}>
+            <Popover.Title
+              as="h3"
+              style={{ border: 'none' }}
+              className="d-flex flex-row justify-content-between py-0 px-0 mb-4"
+            >
+              <h2 className="text-primary-500 font-size-18 line-height-24">
+                {intl.formatMessage(messages.notificationTitle)}
+              </h2>
+              <Icon src={Settings} className="icon-size-20" />
+            </Popover.Title>
+            <Popover.Content className="notification-content p-0">
+              <NotificationTabs />
+            </Popover.Content>
+          </div>
+        </Popover>
       )}
-      >
-        <>
-          {notificationCounts?.Total > 0 && (
+    >
+      <>
+        {/* {notificationCounts?.Total > 0 && (
           <Badge variant="danger position-absolute px-1.5 py-1.5 d-flex flex-row justify-content-center
            align-items-center zindex-1"
           >
             <Form.Label className="count font-size-9 mt-2">{notificationCounts?.Total}</Form.Label>
           </Badge>
-          )}
-          <div className="bell-icon-container rounded-circle" ref={buttonRef}>
-            <IconButton
-              onClick={() => { handleNotificationTray(!showNotificationTray); }}
-              src={NotificationsNone}
-              iconAs={Icon}
-              className="d-inline-block align-bottom ml-1 ml-n1 shadow-none bg-transparent text-primary-500"
-            />
-          </div>
-        </>
-      </OverlayTrigger>
-    </div>
+          )} */}
+        <div className="" ref={buttonRef}>
+          <IconButton
+            isActive={showNotificationTray}
+            alt="notification bell icon"
+            onClick={() => { handleNotificationTray(!showNotificationTray); }}
+            src={NotificationsNone}
+            iconAs={Icon}
+            variant="light"
+            iconClassNames="text-primary-500"
+            className="ml-4 mr-1 my-3"
+            style={{ width: '36px', height: '36px' }}
+          />
+          <Badge
+            variant="danger"
+            pill
+            className="font-weight-normal px-1"
+            style={{
+              fontSize: '9px', border: '2px solid white', right: '-3px', top: '18px', fontWeight: '600',
+            }}
+          >
+            { notificationCounts?.Total > 0 && notificationCounts?.Total}
+          </Badge>
+        </div>
+      </>
+    </OverlayTrigger>
   );
 };
 
