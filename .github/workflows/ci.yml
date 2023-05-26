@@ -51,4 +51,4 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Print version
-        run: echo ${{ needs.tests.outputs.output1 }}
+        run: echo ${{ needs.tests.steps.ver.outputs.nextVer }}
