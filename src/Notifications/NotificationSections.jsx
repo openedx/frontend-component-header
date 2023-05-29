@@ -14,40 +14,47 @@ const NotificationSections = ({ handleLoadMoreNotification, loadMoreCount }) => 
 
   return (
     notifications && (
-    <div className="pt-4 py-2.5">
-      <div className="d-flex flex-row align-items-center pb-2">
-        <span className="w-100 px-0 text-gray-500">
-          {TODAY && TODAY.length > 0 && intl.formatMessage(messages.notificationTodayHeading)}
-        </span>
-        {totalCount > 0 && (
-        <span className="w-100 px-0 text-right text-info-500">
-          {intl.formatMessage(messages.notificationMarkAsRead)}
-        </span>
+    <div className="mt-4 px-4">
+      <div className="d-flex flex-row justify-content-between pb-2">
+        {TODAY && TODAY.length > 0 && (
+        <>
+          <span className="text-gray-500">
+            { intl.formatMessage(messages.notificationTodayHeading)}
+          </span>
+          {totalCount > 0 && (
+          <span className="text-info-500 line-height-24">
+            {intl.formatMessage(messages.notificationMarkAsRead)}
+          </span>
+          )}
+        </>
         )}
       </div>
-      <div>
         {TODAY && TODAY.map(
           (notification) => <NotificationRowItem notification={notification} />,
         )}
-        <div className="d-flex pb-2 notification-section">
-          <span className="w-100 px-0 text-gray-500">
-            {EARLIER && EARLIER.length > 0
+      <div className="d-flex flex-row justify-content-between pb-2">
+        <span className="text-gray-500">
+          {EARLIER && EARLIER.length > 0
             && intl.formatMessage(messages.notificationEarlierHeading)}
+        </span>
+        {totalCount > 0 && TODAY && TODAY.length === 0 && (
+          <span className="text-info-500 line-height-24">
+            {intl.formatMessage(messages.notificationMarkAsRead)}
           </span>
-        </div>
+        )}
+      </div>
         {EARLIER && EARLIER.map(
           (notification) => <NotificationRowItem notification={notification} />,
         )}
         {loadMoreCount < totalCount && (
-        <Button
-          variant="primary"
-          className="mb-2 mb-sm-0 w-100 bg-primary-500"
-          onClick={() => handleLoadMoreNotification(loadMoreCount + 10)}
-        >
-          {intl.formatMessage(messages.loadMoreNotifications)}
-        </Button>
+          <Button
+            variant="primary"
+            className="w-100 bg-primary-500"
+            onClick={() => handleLoadMoreNotification(loadMoreCount + 10)}
+          >
+            {intl.formatMessage(messages.loadMoreNotifications)}
+          </Button>
         )}
-      </div>
     </div>
     )
   );

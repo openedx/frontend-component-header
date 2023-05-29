@@ -3,14 +3,16 @@ import React, {
 } from 'react';
 import { NotificationsNone, Settings } from '@edx/paragon/icons';
 import {
-  Badge, Form, Icon, IconButton, OverlayTrigger, Popover,
+  Badge, Icon, IconButton, OverlayTrigger, Popover,
 } from '@edx/paragon';
 import { useSelector, useDispatch } from 'react-redux';
 import { useIntl } from '@edx/frontend-platform/i18n';
+import classNames from 'classnames';
 import NotificationTabs from './NotificationTabs';
 import { getNotificationTotalUnseenCounts, getNotificationStatus } from './data/selectors';
 import { fetchNotificationsCountsList } from './data/thunks';
 import { messages } from './messages';
+import { useIsOnDesktop, useIsOnXLDesktop } from './data/hook';
 
 const Notifications = () => {
   const [showNotificationTray, setShowNotificationTray] = useState(false);
@@ -20,6 +22,8 @@ const Notifications = () => {
   const dispatch = useDispatch();
   const notificationStatus = useSelector(getNotificationStatus());
   const notificationCounts = useSelector(getNotificationTotalUnseenCounts());
+  const isOnDesktop = useIsOnDesktop();
+  const isOnXLDesktop = useIsOnXLDesktop();
 
   useEffect(() => {
     if (notificationStatus === 'idle') {
@@ -57,14 +61,18 @@ const Notifications = () => {
       overlay={(
         <Popover
           id="popover-positioned-bottom"
-          className="notification-tray-container pt-4.5 pb-4 px-4 overflow-auto d-flex flex-column
-            align-items-start position-absolute mt-2"
+          style={{ maxHeight: 'calc(100% - 68px)', minHeight: '1220px', minWidth: '549px' }}
+          className={classNames('notification-tray-container pt-4.5 pb-4.5 overflow-auto rounded-0 border-0', {
+            'w-100': !isOnDesktop,
+            'notificationbar-desktop-width': isOnDesktop && !isOnXLDesktop,
+            'w-25 notificationbar-XL-width': isOnXLDesktop,
+          })}
+          data-testid="notificationbar"
         >
           <div ref={popoverRef}>
             <Popover.Title
               as="h3"
-              style={{ border: 'none' }}
-              className="d-flex flex-row justify-content-between py-0 px-0 mb-4"
+              className="d-flex flex-row justify-content-between py-0 mb-4 border-0 px-4"
             >
               <h2 className="text-primary-500 font-size-18 line-height-24">
                 {intl.formatMessage(messages.notificationTitle)}
@@ -78,38 +86,26 @@ const Notifications = () => {
         </Popover>
       )}
     >
-      <>
-        {/* {notificationCounts?.Total > 0 && (
-          <Badge variant="danger position-absolute px-1.5 py-1.5 d-flex flex-row justify-content-center
-           align-items-center zindex-1"
-          >
-            <Form.Label className="count font-size-9 mt-2">{notificationCounts?.Total}</Form.Label>
-          </Badge>
-          )} */}
-        <div className="" ref={buttonRef}>
-          <IconButton
-            isActive={showNotificationTray}
-            alt="notification bell icon"
-            onClick={() => { handleNotificationTray(!showNotificationTray); }}
-            src={NotificationsNone}
-            iconAs={Icon}
-            variant="light"
-            iconClassNames="text-primary-500"
-            className="ml-4 mr-1 my-3"
-            style={{ width: '36px', height: '36px' }}
-          />
-          <Badge
-            variant="danger"
-            pill
-            className="font-weight-normal px-1"
-            style={{
-              fontSize: '9px', border: '2px solid white', right: '-3px', top: '18px', fontWeight: '600',
-            }}
-          >
-            { notificationCounts?.Total > 0 && notificationCounts?.Total}
-          </Badge>
-        </div>
-      </>
+      <div ref={buttonRef}>
+        <IconButton
+          isActive={showNotificationTray}
+          alt="notification bell icon"
+          onClick={() => { handleNotificationTray(!showNotificationTray); }}
+          src={NotificationsNone}
+          iconAs={Icon}
+          variant="light"
+          iconClassNames="text-primary-500"
+          className="ml-4 mr-1 my-3"
+          style={{ width: '36px', height: '36px' }}
+        />
+        <Badge
+          variant="danger"
+          pill
+          className="font-weight-normal px-1 font-size-9 notification-badge"
+        >
+          { notificationCounts?.count > 0 && notificationCounts?.count}
+        </Badge>
+      </div>
     </OverlayTrigger>
   );
 };

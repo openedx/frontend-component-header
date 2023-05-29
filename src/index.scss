@@ -122,30 +122,9 @@ $white: #fff;
   }
 }
 
-.bell-container{
-  .bell-icon-container{
-    width: 36px;
-    height: 36px;
-    &:hover{
-      background: $light-400;
-    }
-  }
-  .badge{
-    border-radius: 54px;
-    border: 2px solid #FFFFFF;
-    width: 23px;
-    height: 16px;
-    margin-left: 18px;
-    .count{
-      font-weight: 600;
-    }
-  }
-}
-
 .font-size-18{
   font-size: 18px;
 }
-
 .font-size-12{
   font-size: 12px;
 }
@@ -156,46 +135,44 @@ $white: #fff;
 .line-height-24{
   line-height: 24px;
 }
+.line-height-20{
+  line-height: 20px;
+}
 .icon-size-20{
   width: 20px !important;
   height: 20px !important;
 }
+.notification-badge{
+  position: absolute;
+  margin-top: 18px;
+  margin-left: -21px;
+  border: 2px solid #FFFFFF;
+}
 .notification-tray-container{
-  min-width: 549px;
-  min-height:'1253px';
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 2px 8px rgba(0, 0, 0, 0.15);
-  border-radius: 0px 0px 4px 4px;
-
   .dropdown-toggle::after {
     display: none;
   }
+  .expandable{
+    position: relative !important;
+    margin-left: 4px;
+    padding: 2px 6px;
+    border-radius: 10rem;
+    font-size: 9px;
+  }
+  .dropdown-toggle{
+    font-size: 14px;
+    padding-top: 0px !important;
+    padding-bottom: 12px !important;
+    div{
+      min-height: 6px !important;
+      min-width: 6px !important;
+    }
+  }
+  .dropdown-item{
+    font-size: 14px;
+    font-weight: 500;
+  }
   .notification-content{
-    .notification-tabs{
-      width: 501px;
-      button{
-        font-size: 14px;
-      }
-    .dropdown-toggle{
-      padding-top: 0px !important;
-      padding-left: 12px !important;
-      div{
-        min-height: 6px;
-        min-width: 6px;
-      }
-    }
-     .dropdown-item{
-      font-size:14px;
-      color: $primary-500;
-      font-weight: 500;
-    }
-    .expandable{
-        height: 20px;
-        width: 20px;
-        padding: 6px 7px;
-        position: relative;
-        margin-left: 4px;
-      }
-    }
     .notification-item-content{
       display: -webkit-box;
       -webkit-line-clamp: 2;

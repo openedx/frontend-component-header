@@ -32,8 +32,8 @@ const NotificationTabs = () => {
     <Tab
       eventKey={option.key}
       title={option.title}
-      notification={notificationUnseenCounts[option.title]}
-      tabClassName="d-flex flex-row align-items-center pt-0 pb-2.5 line-height-24 px-0 mr-4"
+      notification={notificationUnseenCounts.countByAppName[option.key]}
+      tabClassName="pt-0 pb-2.5 px-2.5 d-flex flex-row align-items-center line-height-24"
     >
       {option.key === selectedNotificationType
       && <NotificationSections handleLoadMoreNotification={handleLoadMoreNotification} loadMoreCount={loadMoreCount} />}
@@ -47,15 +47,14 @@ const NotificationTabs = () => {
   }
 
   return (
-    activeTab && (
     <Tabs
+      variant="tabs"
       defaultActiveKey={activeTab}
-      className="notification-tabs"
       onSelect={handleActiveTab}
+      className="px-2.5"
     >
       {tabArray}
     </Tabs>
-    )
   );
 };
 

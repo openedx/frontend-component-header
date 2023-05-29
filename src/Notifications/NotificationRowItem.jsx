@@ -54,47 +54,45 @@ const NotificationRowItem = ({ notification }) => {
 
   const iconComponent = getIconByType(notification.type);
   return (
-    <div className="d-flex mb-2">
-      <div className="mr-2 py-4 pr-2.5">
-        <Icon
-          src={iconComponent && iconComponent.icon}
-          style={{ height: '23.33px', width: '23.33px' }}
-          className={iconComponent && iconComponent.class}
-        />
-      </div>
-      <div className="row d-flex w-100 py-0 px-0 py-2.5">
-        <div style={{ display: 'contents' }} className="col-md-12 w-100">
-          <span className="col-md-11 px-0 text-primary-500 mb-2 w-100 notification-item-content overflow-hidden">
-            {notification?.respondingUser} {' '}
-            <span className="text-gray-500">{getContentMessageByType()} </span>
-            {notification?.targetUser && (
-            <>
-              {notification?.targetUser}
-              <span className="text-gray-500">
-                {(authenticatedUser && authenticatedUser.username) !== notification.author
-                  ? intl.formatMessage(messages.notificationResponseOnOtherPostLabel)
-                  : intl.formatMessage(messages.notificationResponseOnYourPostLabel)}
-              </span>
-            </>
-            )}
-            <a className="text-primary-500" href={notification.URL}>
-              {' '}{notification?.notificationContent}
-            </a>
-          </span>
-          <div className="col-md-1 d-flex flex-column justify-content-end mb-2">
-            {notification.status === 'unread' && <div className="bg-brand-500 rounded unread" />}
-          </div>
-          <div className="w-100 px-0 py-0 d-flex flex-row align-items-center">
-            <span className="text-gray-500 mb-2 w-100 font-size-12">
-              <span className="">{notification?.courseName}</span>
-              <span className="font-size-12 text-light-700 px-1.5">
-                {intl.formatMessage(messages.fullStop)}
-              </span>
-              <span>
-                {timeago.format(notification?.time, 'time-locale')}
-              </span>
+    <div className="d-flex mb-2 align-items-center">
+      <Icon
+        src={iconComponent && iconComponent.icon}
+        style={{ height: '23.33px', width: '23.33px' }}
+        className={iconComponent && `${iconComponent.class} mr-4`}
+      />
+      <div className="d-flex w-100" style={{ borderRadius: '100%' }}>
+        <div className="d-flex align-items-center w-100">
+          <div className="py-2 w-100">
+            <span className="line-height-24 px-0 text-primary-500 mb-2 w-100 notification-item-content overflow-hidden">
+              {notification?.respondingUser } {' '}
+              <span className="text-gray-500">{getContentMessageByType()} </span>
+              {notification?.targetUser && (
+              <>
+                {notification.targetUser}
+                <span className="text-gray-500">
+                  {(authenticatedUser && authenticatedUser.username) !== notification.author
+                    ? intl.formatMessage(messages.notificationResponseOnOtherPostLabel)
+                    : intl.formatMessage(messages.notificationResponseOnYourPostLabel)}
+                </span>
+              </>
+              )}
+              <a className="text-primary-500" href={notification.URL}>
+                {' '}{notification?.notificationContent}
+              </a>
             </span>
+            <div className="w-100 px-0 py-0 d-flex flex-row align-items-center">
+              <span className="font-size-12 text-gray-500 line-height-20">
+                <span>{notification?.courseName}</span>
+                <span className="text-light-700 px-1.5">{intl.formatMessage(messages.fullStop)}</span>
+                <span>{timeago.format(notification?.time, 'time-locale')}</span>
+              </span>
+            </div>
           </div>
+          {!notification.isRead && (
+            <div className="d-flex py-1.5 px-1.5 ml-2">
+              <span className="bg-brand-500 rounded unread" />
+            </div>
+          )}
         </div>
       </div>
     </div>
