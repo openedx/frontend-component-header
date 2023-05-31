@@ -1,4 +1,9 @@
-import { camelCaseObject } from '@edx/frontend-platform';
+import { camelCaseObject, getConfig, snakeCaseObject } from '@edx/frontend-platform';
+import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
+
+export const getNotificationsCountApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/count/`;
+export const getNotificationsApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/`;
+export const markNotificationsSeenApiUrl = (appName) => `${getConfig().LMS_BASE_URL}/api/notifications/mark-notifications-unseen/${appName}/`;
 
 const parseNotificationList = (notificationList) => {
   const currentTime = Date.now();
@@ -11,7 +16,12 @@ const parseNotificationList = (notificationList) => {
   });
   return { today, earlier };
 };
-export async function getNotifications(notificationType, notificationCount) {
+
+export async function getNotifications(appName, notificationCount, page, pageSize) {
+  const params = snakeCaseObject({ page, pageSize });
+
+  let { data } = await getAuthenticatedHttpClient().get(getNotificationsApiUrl(), { params });
+
   const notificationData = [
     {
       type: 'post',
@@ -194,8 +204,7 @@ export async function getNotifications(notificationType, notificationCount) {
   ];
 
   const { today, earlier } = parseNotificationList(camelCaseObject(notificationData));
-
-  const data = {
+  data = {
     discussions: {
       TODAY: today,
       EARLIER: earlier,
@@ -205,7 +214,8 @@ export async function getNotifications(notificationType, notificationCount) {
       EARLIER: earlier,
     },
   };
-  const notifications = data[notificationType];
+
+  const notifications = data[appName];
   const { TODAY = [], EARLIER = [] } = notifications || [];
   let todayNotifications = TODAY;
   let earlierNotifications = [];
@@ -225,7 +235,8 @@ export async function getNotifications(notificationType, notificationCount) {
 }
 
 export async function getNotificationCounts() {
-  const data = {
+  let { data } = await getAuthenticatedHttpClient().get(getNotificationsCountApiUrl());
+  data = {
     count: 25,
     count_by_app_name: {
       reminders: 10,
@@ -234,5 +245,11 @@ export async function getNotificationCounts() {
       authoring: 6,
     },
   };
+  return camelCaseObject(data);
+}
+
+export async function markNotificationSeen(appName) {
+  const { data } = await getAuthenticatedHttpClient()
+    .put(`${markNotificationsSeenApiUrl(appName)}`);
   return camelCaseObject(data);
 }

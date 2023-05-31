@@ -5,20 +5,26 @@ import {
   fetchNotificationsCountFailure,
   fetchNotificationsCountRequest,
   fetchNotificationsCountSuccess,
+  markNotificationsAsSeenRequest,
+  markNotificationsAsSeenSuccess,
+  markNotificationsAsSeenFailure,
 } from './slice';
 import {
   getNotifications,
   getNotificationCounts,
+  markNotificationSeen,
 } from './api';
 
-export const fetchNotificationList = ({ notificationType, notificationCount }) => (
+export const fetchNotificationList = ({
+  appName, notificationCount, page, pageSize,
+}) => (
   async (dispatch) => {
     try {
-      dispatch(fetchNotificationRequest({ notificationType }));
-      const data = await getNotifications(notificationType, notificationCount);
+      dispatch(fetchNotificationRequest({ appName }));
+      const data = await getNotifications(appName, notificationCount, page, pageSize);
       dispatch(fetchNotificationSuccess(data));
     } catch (errors) {
-      dispatch(fetchNotificationFailure({ notificationType }));
+      dispatch(fetchNotificationFailure({ appName }));
     }
   }
 );
@@ -31,6 +37,18 @@ export const fetchNotificationsCountsList = () => (
       dispatch(fetchNotificationsCountSuccess(data));
     } catch (errors) {
       dispatch(fetchNotificationsCountFailure());
+    }
+  }
+);
+
+export const markNotificationsAsSeen = (appName) => (
+  async (dispatch) => {
+    try {
+      dispatch(markNotificationsAsSeenRequest({ appName }));
+      const data = await markNotificationSeen(appName);
+      dispatch(markNotificationsAsSeenSuccess(data));
+    } catch (errors) {
+      dispatch(markNotificationsAsSeenFailure({ appName }));
     }
   }
 );

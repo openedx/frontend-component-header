@@ -4,21 +4,25 @@ import React, {
 import { Tabs, Tab } from '@edx/paragon';
 import { useSelector, useDispatch } from 'react-redux';
 import NotificationSections from './NotificationSections';
-import { getNotificationTotalUnseenCounts, getSelectedNotificationType } from './data/selectors';
-import { fetchNotificationList } from './data/thunks';
+import { getNotificationTotalUnseenCounts, getSelectedAppName } from './data/selectors';
+import { fetchNotificationList, markNotificationsAsSeen } from './data/thunks';
 import { notificationTabsOptions } from './data/constants';
 
 const NotificationTabs = () => {
   const notificationUnseenCounts = useSelector(getNotificationTotalUnseenCounts());
-  const selectedNotificationType = useSelector(getSelectedNotificationType());
+  const selectedappName = useSelector(getSelectedAppName());
   const [activeTab, setActiveTab] = useState(notificationTabsOptions[0].key);
   const [loadMoreCount, setLoadMoreCount] = useState(10);
+  const [page, setPage] = useState(1);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchNotificationList({ notificationType: activeTab, notificationCount: loadMoreCount }));
-  }, [dispatch, activeTab, loadMoreCount]);
+    dispatch(fetchNotificationList({
+      appName: activeTab, notificationCount: loadMoreCount, page, pageSize: 10,
+    }));
+    dispatch(markNotificationsAsSeen(activeTab));
+  }, [dispatch, activeTab, loadMoreCount, page]);
 
   const handleActiveTab = useCallback((tab) => {
     setActiveTab(tab);
@@ -26,7 +30,8 @@ const NotificationTabs = () => {
 
   const handleLoadMoreNotification = useCallback((count) => {
     setLoadMoreCount(count);
-  }, []);
+    setPage(page + 1);
+  }, [page]);
 
   const tabArray = useMemo(() => notificationTabsOptions.map((option) => (
     <Tab
@@ -35,10 +40,10 @@ const NotificationTabs = () => {
       notification={notificationUnseenCounts.countByAppName[option.key]}
       tabClassName="pt-0 pb-2.5 px-2.5 d-flex flex-row align-items-center line-height-24"
     >
-      {option.key === selectedNotificationType
+      {option.key === selectedappName
       && <NotificationSections handleLoadMoreNotification={handleLoadMoreNotification} loadMoreCount={loadMoreCount} />}
     </Tab>
-  )), [notificationUnseenCounts, handleLoadMoreNotification, loadMoreCount, selectedNotificationType]);
+  )), [notificationUnseenCounts, handleLoadMoreNotification, loadMoreCount, selectedappName]);
 
   // This code is used to replace More... text to More to match the UI
   const buttons = document.getElementsByClassName('dropdown-toggle');

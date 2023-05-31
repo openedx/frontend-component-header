@@ -12,19 +12,19 @@ const slice = createSlice({
     notificationStatus: 'idle',
     notifications: {},
     totalUnseenCounts: {},
-    notificationType: '',
+    appName: '',
   },
   reducers: {
     fetchNotificationDenied: (state, { payload }) => {
-      state.notificationType = payload.notificationType;
+      state.appName = payload.appName;
       state.notificationStatus = DENIED;
     },
     fetchNotificationFailure: (state, { payload }) => {
-      state.notificationType = payload.notificationType;
+      state.appName = payload.appName;
       state.notificationStatus = FAILED;
     },
     fetchNotificationRequest: (state, { payload }) => {
-      state.notificationType = payload.notificationType;
+      state.appName = payload.appName;
       state.notificationStatus = LOADING;
     },
     fetchNotificationSuccess: (state, { payload }) => {
@@ -45,6 +45,18 @@ const slice = createSlice({
       state.notificationStatus = LOADED;
       state.totalUnseenCounts = payload;
     },
+    markNotificationsAsSeenRequest: (state) => {
+      state.notificationStatus = LOADING;
+    },
+    markNotificationsAsSeenSuccess: (state) => {
+      state.notificationStatus = LOADED;
+    },
+    markNotificationsAsSeenDenied: (state) => {
+      state.notificationStatus = DENIED;
+    },
+    markNotificationsAsSeenFailure: (state) => {
+      state.notificationStatus = FAILED;
+    },
   },
 });
 
@@ -57,6 +69,10 @@ export const {
   fetchNotificationsCountFailure,
   fetchNotificationsCountRequest,
   fetchNotificationsCountSuccess,
+  markNotificationsAsSeenRequest,
+  markNotificationsAsSeenSuccess,
+  markNotificationsAsSeenFailure,
+  markNotificationsAsSeenDenied,
 } = slice.actions;
 
 export const notificationsReducer = slice.reducer;
