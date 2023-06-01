@@ -33,7 +33,7 @@ const NotificationTabs = () => {
     setPage(page + 1);
   }, [page]);
 
-  const tabArray = useMemo(() => notificationTabsOptions.map((option) => (
+  const tabArray = useMemo(() => notificationTabsOptions?.map((option) => (
     <Tab
       eventKey={option.key}
       title={option.title}

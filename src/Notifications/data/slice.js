@@ -1,18 +1,44 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
+export const IDLE = 'idle';
 export const LOADING = 'loading';
 export const LOADED = 'loaded';
 export const FAILED = 'failed';
 export const DENIED = 'denied';
-
+// today or earlier logic will shift on component level
 const slice = createSlice({
   name: 'notifications',
   initialState: {
     notificationStatus: 'idle',
-    notifications: {},
-    totalUnseenCounts: {},
-    appName: '',
+    appName: 'discussions',
+    appsId: ['reminders', 'discussions', 'grades', 'authoring'],
+    apps: {
+      reminders: ['notification_1', 'notification_2'],
+      discussions: ['notification_3'],
+      grades: ['notification_4', 'notification_5'],
+      authoring: ['notification_6'],
+    },
+    notifications: {
+      notification_1: {},
+      notification_2: {},
+      notification_3: {},
+      notification_4: {},
+      notification_5: {},
+      notification_6: {},
+    },
+    tabsCount: {
+      reminders: 0,
+      discussions: 0,
+      grades: 0,
+      authoring: 0,
+      totalCount: 0,
+    },
+    pagination: {
+      count: 90,
+      numPages: 9,
+      currentPage: 1,
+    },
   },
   reducers: {
     fetchNotificationDenied: (state, { payload }) => {
@@ -43,7 +69,6 @@ const slice = createSlice({
     fetchNotificationsCountSuccess: (state, { payload }) => {
       state.tabsCount = payload;
       state.notificationStatus = LOADED;
-      state.totalUnseenCounts = payload;
     },
     markNotificationsAsSeenRequest: (state) => {
       state.notificationStatus = LOADING;

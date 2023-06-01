@@ -1,209 +1,19 @@
 import { camelCaseObject, getConfig, snakeCaseObject } from '@edx/frontend-platform';
 import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
+import { splitNotificationsByTime } from '../utils';
+
+import notificationsList from './notifications.json';
 
 export const getNotificationsCountApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/count/`;
 export const getNotificationsApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/`;
 export const markNotificationsSeenApiUrl = (appName) => `${getConfig().LMS_BASE_URL}/api/notifications/mark-notifications-unseen/${appName}/`;
 
-const parseNotificationList = (notificationList) => {
-  const currentTime = Date.now();
-  const twentyFourHoursAgo = currentTime - (24 * 60 * 60 * 1000);
-  const today = [];
-  const earlier = [];
-  notificationList.forEach(obj => {
-    const objectTime = obj.time;
-    if (objectTime >= twentyFourHoursAgo && objectTime <= currentTime) { today.push(obj); } else { earlier.push(obj); }
-  });
-  return { today, earlier };
-};
-
 export async function getNotifications(appName, notificationCount, page, pageSize) {
-  const params = snakeCaseObject({ page, pageSize });
+  // const params = snakeCaseObject({ page, pageSize });
+  // const { data } = await getAuthenticatedHttpClient().get(getNotificationsApiUrl(), { params });
+  const data = notificationsList.notifications;
 
-  let { data } = await getAuthenticatedHttpClient().get(getNotificationsApiUrl(), { params });
-
-  const notificationData = [
-    {
-      type: 'post',
-      responding_user: 'SCM_Lead',
-      notification_content: 'Hello and welcome to SC0x!',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1685361282018',
-    },
-    {
-      type: 'help',
-      responding_user: 'MITx_Learner',
-      notification_content: 'What grade does a student need to get in order to pass the course and earn a certificate?',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1685361282018',
-    },
-    {
-      type: 'post',
-      responding_user: 'SCM_Lead',
-      notification_content: 'Hello and welcome to SC0x!',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1684253634808',
-      author: '',
-    },
-    {
-      type: 'help',
-      responding_user: 'MITx_Learner',
-      notification_content: 'What grade does a student need to get in order to pass the course and earn a certificate?',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1684253736371',
-      author: '',
-    },
-    {
-      type: 'respond',
-      responding_user: 'MITx_Learner',
-      notification_content: 'Can’t find linear regression in section 3 review',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1684253736371',
-      author: '',
-    },
-    {
-      type: 'comment',
-      responding_user: 'MITx_Learner',
-      notification_content: 'Can’t find linear regression in section 3 review',
-      target_user: 'MITx_Expert’s ',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1684253736371',
-      author: '',
-    },
-    {
-      type: 'question',
-      responding_user: 'MITx_Learner',
-      notification_content: 'Examples of quadratic equations in supply chains',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1684253736371',
-      author: '',
-    },
-    {
-      type: 'comment',
-      responding_user: 'MITx_Learner',
-      notification_content: 'What grade does a student need to get in order to pass the course and earn a certificate?',
-      target_user: 'MITx_Expert’s ',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      time: '1684253736371',
-      is_seen: false,
-      author: 'testuser',
-    },
-    {
-      type: 'comment',
-      responding_user: 'MITx_Learner',
-      notification_content: 'Convexity of f(x)=1/x , x>1',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      time: '1684253736371',
-      is_seen: false,
-      author: 'testuser',
-    },
-    {
-      type: 'answer',
-      responding_user: 'SCM_Lead',
-      notification_content: 'Quiz in section 3 - Please explain the F-Significance value',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      time: '1685096268835',
-      is_seen: false,
-      author: 'testuser',
-    },
-    {
-      type: 'endorsed',
-      responding_user: '',
-      notification_content: 'Quiz in section 3 - Please explain the F-Significance value',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1685096268835',
-      author: 'testuser',
-    },
-    {
-      type: 'reported',
-      responding_user: 'MITx Learner’s',
-      notification_content: '“Here are the exam answers. Question 1 - CSA stands for Compliance Safety Ac...”',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1685212056931',
-      author: '',
-    },
-    {
-      type: 'postLiked',
-      responding_user: 'SCM_Lead',
-      notification_content: 'Retaking the course',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1685212056931',
-      author: '',
-    },
-    {
-      type: 'commentLiked',
-      responding_user: 'MITx_Expert ',
-      notification_content: 'Final exam answers',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1685212056931',
-      author: '',
-    },
-    {
-      type: 'edited',
-      responding_user: 'MITx_Expert ',
-      notification_content: 'Question 1',
-      target_user: '',
-      course_name: 'Supply Chain Analytics',
-      content_url: '',
-      is_read: false,
-      is_seen: false,
-      time: '1685212056931',
-      author: '',
-    },
-  ];
-
-  const { today, earlier } = parseNotificationList(camelCaseObject(notificationData));
+  const { today, earlier } = splitNotificationsByTime(camelCaseObject(data));
   data = {
     discussions: {
       TODAY: today,
@@ -235,21 +45,21 @@ export async function getNotifications(appName, notificationCount, page, pageSiz
 }
 
 export async function getNotificationCounts() {
-  let { data } = await getAuthenticatedHttpClient().get(getNotificationsCountApiUrl());
-  data = {
-    count: 25,
+  // const { data } = await getAuthenticatedHttpClient().get(getNotificationsCountApiUrl());
+  const data = {
+    count: 40,
     count_by_app_name: {
       reminders: 10,
-      discussions: 5,
-      grades: 4,
-      authoring: 6,
+      discussions: 20,
+      grades: 5,
+      authoring: 5,
     },
   };
-  return camelCaseObject(data);
+
+  return data;
 }
 
 export async function markNotificationSeen(appName) {
-  const { data } = await getAuthenticatedHttpClient()
-    .put(`${markNotificationsSeenApiUrl(appName)}`);
+  const { data } = await getAuthenticatedHttpClient().put(`${markNotificationsSeenApiUrl(appName)}`);
   return camelCaseObject(data);
 }

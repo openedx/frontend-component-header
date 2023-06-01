@@ -1,3 +1,4 @@
+import { camelCaseObject } from '@edx/frontend-platform';
 import {
   fetchNotificationSuccess,
   fetchNotificationRequest,
@@ -9,11 +10,7 @@ import {
   markNotificationsAsSeenSuccess,
   markNotificationsAsSeenFailure,
 } from './slice';
-import {
-  getNotifications,
-  getNotificationCounts,
-  markNotificationSeen,
-} from './api';
+import { getNotifications, getNotificationCounts, markNotificationSeen } from './api';
 
 export const fetchNotificationList = ({
   appName, notificationCount, page, pageSize,
@@ -29,12 +26,12 @@ export const fetchNotificationList = ({
   }
 );
 
-export const fetchNotificationsCountsList = () => (
+export const fetchAppsNotificationCount = () => (
   async (dispatch) => {
     try {
       dispatch(fetchNotificationsCountRequest());
       const data = await getNotificationCounts();
-      dispatch(fetchNotificationsCountSuccess(data));
+      dispatch(fetchNotificationsCountSuccess(camelCaseObject(data)));
     } catch (errors) {
       dispatch(fetchNotificationsCountFailure());
     }
