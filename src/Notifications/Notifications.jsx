@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {
   useState, useCallback, useEffect, useRef,
 } from 'react';
@@ -9,8 +10,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import classNames from 'classnames';
 import NotificationTabs from './NotificationTabs';
-import { getNotificationTotalUnseenCounts, getNotificationStatus } from './data/selectors';
-import { fetchNotificationsCountsList } from './data/thunks';
+import { getNotificationTabsCount } from './data/selectors';
+import { resetNotificationState } from './data/thunks';
 import { messages } from './messages';
 import { useIsOnDesktop, useIsOnXLDesktop } from './data/hook';
 
@@ -20,32 +21,23 @@ const Notifications = () => {
   const popoverRef = useRef(null);
   const buttonRef = useRef(null);
   const dispatch = useDispatch();
-  const notificationStatus = useSelector(getNotificationStatus());
-  const notificationCounts = useSelector(getNotificationTotalUnseenCounts());
+  const notificationCounts = useSelector(getNotificationTabsCount());
   const isOnDesktop = useIsOnDesktop();
   const isOnXLDesktop = useIsOnXLDesktop();
 
-  useEffect(() => {
-    if (notificationStatus === 'idle') {
-      dispatch(fetchNotificationsCountsList());
-    }
-  }, [dispatch, notificationStatus]);
-
   const handleNotificationTray = useCallback((value) => {
     setShowNotificationTray(value);
+    if (!value) { dispatch(resetNotificationState()); }
+  }, []);
+
+  const handleClickOutside = useCallback((event) => {
+    if (popoverRef.current?.contains(event.target) !== true && buttonRef.current?.contains(event.target) !== true) {
+      setShowNotificationTray(false);
+      dispatch(resetNotificationState());
+    }
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        popoverRef.current
-        && buttonRef.current
-        && !popoverRef.current.contains(event.target)
-        && !buttonRef.current.contains(event.target)
-      ) {
-        setShowNotificationTray(false);
-      }
-    };
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -61,7 +53,6 @@ const Notifications = () => {
       overlay={(
         <Popover
           id="popover-positioned-bottom"
-          style={{ maxHeight: 'calc(100% - 68px)', minHeight: '1220px', minWidth: '549px' }}
           className={classNames('notification-tray-container pt-4.5 pb-4.5 overflow-auto rounded-0 border-0', {
             'w-100': !isOnDesktop,
             'notificationbar-desktop-width': isOnDesktop && !isOnXLDesktop,
@@ -70,10 +61,7 @@ const Notifications = () => {
           data-testid="notificationbar"
         >
           <div ref={popoverRef}>
-            <Popover.Title
-              as="h3"
-              className="d-flex flex-row justify-content-between py-0 mb-4 border-0 px-4"
-            >
+            <Popover.Title as="h3" className="d-flex flex-row justify-content-between py-0 mb-4 border-0 px-4">
               <h2 className="text-primary-500 font-size-18 line-height-24">
                 {intl.formatMessage(messages.notificationTitle)}
               </h2>
@@ -95,8 +83,7 @@ const Notifications = () => {
           iconAs={Icon}
           variant="light"
           iconClassNames="text-primary-500"
-          className="ml-4 mr-1 my-3"
-          style={{ width: '36px', height: '36px' }}
+          className="ml-4 mr-1 my-3 notification-button"
         />
         <Badge
           variant="danger"

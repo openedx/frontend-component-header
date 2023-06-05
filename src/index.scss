@@ -141,6 +141,18 @@ $white: #fff;
   width: 20px !important;
   height: 20px !important;
 }
+.cursor-pointer{
+  cursor: pointer;
+}
+#popover-positioned-bottom{
+  max-height: calc(100% - 68px);
+  min-height: 1220px;
+  min-width: 549px;
+}
+.notification-button{
+  width: 36px;
+  height: 36px;
+}
 .notification-badge{
   position: absolute;
   margin-top: 18px;
@@ -173,6 +185,12 @@ $white: #fff;
   }
   .notification-content{
     .notification-item-content{
+      p{
+        margin-bottom: 0px;
+      }
+      b{
+        color: #00262B;
+      }
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;

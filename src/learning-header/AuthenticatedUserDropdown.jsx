@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,11 +7,25 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { getConfig } from '@edx/frontend-platform';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { Dropdown } from '@edx/paragon';
+import { useSelector, useDispatch } from 'react-redux';
 import Notifications from '../Notifications/Notifications';
+import { getNotificationTrayStatus, getNotificationStatus } from '../Notifications/data/selectors';
+import { fetchAppsNotificationCount } from '../Notifications/data/thunks';
 
 import messages from './messages';
 
 const AuthenticatedUserDropdown = ({ intl, username }) => {
+  const showNotificationTray = useSelector(getNotificationTrayStatus());
+  const notificationStatus = useSelector(getNotificationStatus());
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (notificationStatus === 'idle') {
+      dispatch(fetchAppsNotificationCount());
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [notificationStatus]);
+
   const dashboardMenuItem = (
     <Dropdown.Item href={`${getConfig().LMS_BASE_URL}/dashboard`}>
       {intl.formatMessage(messages.dashboard)}
@@ -21,7 +35,7 @@ const AuthenticatedUserDropdown = ({ intl, username }) => {
   return (
     <>
       <a className="text-gray-700" href={`${getConfig().SUPPORT_URL}`}>{intl.formatMessage(messages.help)}</a>
-      <Notifications />
+      {showNotificationTray && <Notifications />}
       <Dropdown className="user-dropdown ml-3">
         <Dropdown.Toggle variant="outline-primary">
           <FontAwesomeIcon icon={faUserCircle} className="d-md-none" size="lg" />

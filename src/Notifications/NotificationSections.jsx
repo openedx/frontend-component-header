@@ -1,60 +1,76 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useCallback } from 'react';
 import { useIntl } from '@edx/frontend-platform/i18n';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@edx/paragon';
 import PropTypes from 'prop-types';
 import { messages } from './messages';
 import NotificationRowItem from './NotificationRowItem';
-import { getNotifications } from './data/selectors';
+import {
+  getSelectedAppNotificationIds, getSelectedAppName, getNotificationsByIds, getPaginationData,
+} from './data/selectors';
+import { splitNotificationsByTime } from './utils';
+import { markAllNotificationsAsRead } from './data/thunks';
 
-const NotificationSections = ({ handleLoadMoreNotification, loadMoreCount }) => {
+const NotificationSections = ({ handleLoadMoreNotification }) => {
   const intl = useIntl();
-  const notifications = useSelector(getNotifications());
-  const { TODAY, EARLIER, totalCount } = notifications || {};
+  const selectedAppName = useSelector(getSelectedAppName());
+  const notificationIds = useSelector(getSelectedAppNotificationIds(selectedAppName));
+  const notifications = useSelector(getNotificationsByIds(notificationIds));
+  const paginationData = useSelector(getPaginationData());
+  const { today = [], earlier = [] } = splitNotificationsByTime(notifications);
+  const dispatch = useDispatch();
+
+  const handleMarkAllAsRead = useCallback(() => {
+    dispatch(markAllNotificationsAsRead(selectedAppName));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedAppName]);
 
   return (
     notifications && (
     <div className="mt-4 px-4">
       <div className="d-flex flex-row justify-content-between pb-2">
-        {TODAY && TODAY.length > 0 && (
+        {today.length > 0 && (
         <>
           <span className="text-gray-500">
             { intl.formatMessage(messages.notificationTodayHeading)}
           </span>
-          {totalCount > 0 && (
-          <span className="text-info-500 line-height-24">
+          {today.length + earlier.length > 0 && (
+          <span className="text-info-500 line-height-24 cursor-pointer" onClick={handleMarkAllAsRead}>
             {intl.formatMessage(messages.notificationMarkAsRead)}
           </span>
           )}
         </>
         )}
       </div>
-        {TODAY && TODAY.map(
+        {today.map(
           (notification) => <NotificationRowItem notification={notification} />,
         )}
+
       <div className="d-flex flex-row justify-content-between pb-2">
         <span className="text-gray-500">
-          {EARLIER && EARLIER.length > 0
+          {earlier.length > 0
             && intl.formatMessage(messages.notificationEarlierHeading)}
         </span>
-        {totalCount > 0 && TODAY && TODAY.length === 0 && (
-          <span className="text-info-500 line-height-24">
-            {intl.formatMessage(messages.notificationMarkAsRead)}
-          </span>
+        {today.length + earlier.length > 0 && today.length === 0 && (
+        <span className="text-info-500 line-height-24 cursor-pointer" onClick={handleMarkAllAsRead}>
+          {intl.formatMessage(messages.notificationMarkAsRead)}
+        </span>
         )}
       </div>
-        {EARLIER && EARLIER.map(
-          (notification) => <NotificationRowItem notification={notification} />,
-        )}
-        {loadMoreCount < totalCount && (
-          <Button
-            variant="primary"
-            className="w-100 bg-primary-500"
-            onClick={() => handleLoadMoreNotification(loadMoreCount + 10)}
-          >
-            {intl.formatMessage(messages.loadMoreNotifications)}
-          </Button>
-        )}
+      {earlier.map(
+        (notification) => <NotificationRowItem notification={notification} />,
+      )}
+      {paginationData.currentPage < paginationData.numPages && (
+      <Button
+        variant="primary"
+        className="w-100 bg-primary-500"
+        onClick={handleLoadMoreNotification}
+      >
+        {intl.formatMessage(messages.loadMoreNotifications)}
+      </Button>
+      )}
     </div>
     )
   );
@@ -62,7 +78,6 @@ const NotificationSections = ({ handleLoadMoreNotification, loadMoreCount }) => 
 
 NotificationSections.propTypes = {
   handleLoadMoreNotification: PropTypes.func.isRequired,
-  loadMoreCount: PropTypes.number.isRequired,
 };
 
 export default React.memo(NotificationSections);

@@ -6,40 +6,24 @@ export const LOADING = 'loading';
 export const LOADED = 'loaded';
 export const FAILED = 'failed';
 export const DENIED = 'denied';
-// today or earlier logic will shift on component level
+
+const initialState = {
+  notificationStatus: 'idle',
+  appName: 'reminders',
+  appsId: [],
+  apps: {},
+  notifications: {},
+  tabsCount: {},
+  showNotificationTray: false,
+  pagination: {
+    count: 10,
+    numPages: 1,
+    currentPage: 1,
+  },
+};
 const slice = createSlice({
   name: 'notifications',
-  initialState: {
-    notificationStatus: 'idle',
-    appName: 'discussions',
-    appsId: ['reminders', 'discussions', 'grades', 'authoring'],
-    apps: {
-      reminders: ['notification_1', 'notification_2'],
-      discussions: ['notification_3'],
-      grades: ['notification_4', 'notification_5'],
-      authoring: ['notification_6'],
-    },
-    notifications: {
-      notification_1: {},
-      notification_2: {},
-      notification_3: {},
-      notification_4: {},
-      notification_5: {},
-      notification_6: {},
-    },
-    tabsCount: {
-      reminders: 0,
-      discussions: 0,
-      grades: 0,
-      authoring: 0,
-      totalCount: 0,
-    },
-    pagination: {
-      count: 90,
-      numPages: 9,
-      currentPage: 1,
-    },
-  },
+  initialState,
   reducers: {
     fetchNotificationDenied: (state, { payload }) => {
       state.appName = payload.appName;
@@ -50,12 +34,24 @@ const slice = createSlice({
       state.notificationStatus = FAILED;
     },
     fetchNotificationRequest: (state, { payload }) => {
+      if (state.appName !== payload.appName) { state.apps[payload.appName] = []; }
       state.appName = payload.appName;
       state.notificationStatus = LOADING;
     },
     fetchNotificationSuccess: (state, { payload }) => {
-      state.notifications = payload;
+      const { notifications, numPages, currentPage } = payload;
+      const newNotificationIds = notifications.map(notification => notification.id.toString());
+      const existingNotificationIds = state.apps[state.appName];
+      const notificationsKeyValuePair = notifications.reduce((acc, obj) => { acc[obj.id] = obj; return acc; }, {});
+      const currentAppCount = state.tabsCount[state.appName];
+
+      state.apps[state.appName] = Array.from(new Set([...existingNotificationIds, ...newNotificationIds]));
+      state.notifications = { ...state.notifications, ...notificationsKeyValuePair };
+      state.tabsCount.count -= currentAppCount;
+      state.tabsCount[state.appName] = 0;
       state.notificationStatus = LOADED;
+      state.pagination.numPages = numPages;
+      state.pagination.currentPage = currentPage;
     },
     fetchNotificationsCountDenied: (state) => {
       state.notificationStatus = DENIED;
@@ -67,7 +63,11 @@ const slice = createSlice({
       state.notificationStatus = LOADING;
     },
     fetchNotificationsCountSuccess: (state, { payload }) => {
-      state.tabsCount = payload;
+      const { countByAppName, count, showNotificationTray } = payload;
+      state.tabsCount = { count, ...countByAppName };
+      state.appsId = Object.keys(countByAppName);
+      state.apps = Object.fromEntries(Object.keys(countByAppName).map(key => [key, []]));
+      state.showNotificationTray = showNotificationTray;
       state.notificationStatus = LOADED;
     },
     markNotificationsAsSeenRequest: (state) => {
@@ -82,6 +82,39 @@ const slice = createSlice({
     markNotificationsAsSeenFailure: (state) => {
       state.notificationStatus = FAILED;
     },
+    markAllNotificationsAsReadRequest: (state) => {
+      state.notificationStatus = LOADING;
+    },
+    markAllNotificationsAsReadSuccess: (state) => {
+      const date = new Date().toISOString();
+      const updatedNotifications = Object.entries(state.notifications)
+        .filter(([key]) => state.apps[state.appName].includes(key))
+        .map(([, value]) => ({ ...value, lastRead: date }));
+
+      state.notifications = updatedNotifications;
+      state.notificationStatus = LOADED;
+    },
+    markAllNotificationsAsReadDenied: (state) => {
+      state.notificationStatus = DENIED;
+    },
+    markAllNotificationsAsReadFailure: (state) => {
+      state.notificationStatus = FAILED;
+    },
+    markNotificationsAsReadRequest: (state) => {
+      state.notificationStatus = LOADING;
+    },
+    markNotificationsAsReadSuccess: (state, { payload }) => {
+      const date = new Date().toISOString();
+      state.notifications[payload.id] = { ...state.notifications[payload.id], lastRead: date };
+      state.notificationStatus = LOADED;
+    },
+    markNotificationsAsReadDenied: (state) => {
+      state.notificationStatus = DENIED;
+    },
+    markNotificationsAsReadFailure: (state) => {
+      state.notificationStatus = FAILED;
+    },
+    resetNotificationStateRequest: () => initialState,
   },
 });
 
@@ -98,6 +131,15 @@ export const {
   markNotificationsAsSeenSuccess,
   markNotificationsAsSeenFailure,
   markNotificationsAsSeenDenied,
+  markAllNotificationsAsReadDenied,
+  markAllNotificationsAsReadRequest,
+  markAllNotificationsAsReadSuccess,
+  markAllNotificationsAsReadFailure,
+  markNotificationsAsReadDenied,
+  markNotificationsAsReadRequest,
+  markNotificationsAsReadSuccess,
+  markNotificationsAsReadFailure,
+  resetNotificationStateRequest,
 } = slice.actions;
 
 export const notificationsReducer = slice.reducer;
