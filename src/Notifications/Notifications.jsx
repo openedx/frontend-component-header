@@ -25,25 +25,22 @@ const Notifications = () => {
   const isOnMediumScreen = useIsOnMediumScreen();
   const isOnLargeScreen = useIsOnLargeScreen();
 
-  console.log('isOnMediumScreen', isOnMediumScreen);
-  console.log('isOnLargeScreen', isOnLargeScreen);
-
-  const handleNotificationTray = useCallback((value) => {
-    setShowNotificationTray(value);
-    if (!value) { dispatch(resetNotificationState()); }
+  const hideNotificationTray = useCallback(() => {
+    setShowNotificationTray(prevState => !prevState);
   }, []);
 
   const handleClickOutside = useCallback((event) => {
-    if (popoverRef.current?.contains(event.target) !== true && buttonRef.current?.contains(event.target) !== true) {
+    if (!popoverRef.current?.contains(event.target) && !buttonRef.current?.contains(event.target)) {
       setShowNotificationTray(false);
-      dispatch(resetNotificationState());
     }
   }, []);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      dispatch(resetNotificationState());
     };
   }, []);
 
@@ -80,20 +77,22 @@ const Notifications = () => {
         <IconButton
           isActive={showNotificationTray}
           alt="notification bell icon"
-          onClick={() => { handleNotificationTray(!showNotificationTray); }}
+          onClick={hideNotificationTray}
           src={NotificationsNone}
           iconAs={Icon}
           variant="light"
           iconClassNames="text-primary-500"
           className="ml-4 mr-1 my-3 notification-button"
         />
-        <Badge
-          variant="danger"
-          pill
-          className="font-weight-normal px-1 font-size-9 notification-badge"
-        >
-          { notificationCounts?.count > 0 && notificationCounts?.count}
-        </Badge>
+        {notificationCounts?.count > 0 && (
+          <Badge
+            pill
+            variant="danger"
+            className="font-weight-normal px-1 font-size-9 notification-badge"
+          >
+            {notificationCounts.count}
+          </Badge>
+        )}
       </div>
     </OverlayTrigger>
   );

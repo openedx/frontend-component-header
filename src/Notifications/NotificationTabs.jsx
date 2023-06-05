@@ -8,53 +8,37 @@ import { getNotificationTabsCount, getSelectedAppName, getNotificationTabs } fro
 import { fetchNotificationList, markNotificationsAsSeen } from './data/thunks';
 
 const NotificationTabs = () => {
+  const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
+  const selectedAppName = useSelector(getSelectedAppName());
   const notificationUnseenCounts = useSelector(getNotificationTabsCount());
   const notificationTabs = useSelector(getNotificationTabs());
-  const selectedAppName = useSelector(getSelectedAppName());
-  const [activeTab, setActiveTab] = useState(selectedAppName);
-  const [page, setPage] = useState(1);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchNotificationList({ appName: activeTab, page, pageSize: 10 }));
+    dispatch(fetchNotificationList({ appName: selectedAppName, page, pageSize: 10 }));
     if (selectedAppName) { dispatch(markNotificationsAsSeen(selectedAppName)); }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab, page, selectedAppName]);
+  }, [dispatch, page, selectedAppName]);
 
-  const handleActiveTab = useCallback((tab) => {
-    setActiveTab(tab);
-    setPage(1);
+  const handleActiveTab = useCallback((appName) => {
+    // dispatch(setSelectedAppName(appName));
   }, []);
 
-  const handleLoadMoreNotification = useCallback(() => {
-    setPage(page + 1);
-  }, [page]);
-
-  const tabArray = useMemo(() => notificationTabs?.map((option) => (
+  const tabArray = useMemo(() => notificationTabs?.map((appName) => (
     <Tab
-      eventKey={option}
-      title={option}
-      notification={notificationUnseenCounts[option]}
+      key={appName}
+      eventKey={appName}
+      title={appName}
+      notification={notificationUnseenCounts[appName]}
       tabClassName="pt-0 pb-2.5 px-2.5 d-flex flex-row align-items-center line-height-24 text-capitalize"
     >
-      {option === selectedAppName && (
-      <NotificationSections
-        handleLoadMoreNotification={handleLoadMoreNotification}
-      />
-      )}
+      {appName === selectedAppName && (<NotificationSections />)}
     </Tab>
-  )), [notificationUnseenCounts, handleLoadMoreNotification, selectedAppName, notificationTabs]);
-
-  // This code is used to replace More... text to More to match the UI
-  const buttons = document.getElementsByClassName('dropdown-toggle');
-  for (let i = 0; i < buttons.length; i++) {
-    buttons[i].firstChild.nodeValue = 'More';
-  }
+  )), [notificationUnseenCounts, selectedAppName, notificationTabs]);
 
   return (
     <Tabs
       variant="tabs"
-      defaultActiveKey={activeTab}
+      defaultActiveKey={selectedAppName}
       onSelect={handleActiveTab}
       className="px-2.5"
     >
