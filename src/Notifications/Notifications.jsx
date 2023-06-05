@@ -13,17 +13,20 @@ import NotificationTabs from './NotificationTabs';
 import { getNotificationTabsCount } from './data/selectors';
 import { resetNotificationState } from './data/thunks';
 import { messages } from './messages';
-import { useIsOnDesktop, useIsOnXLDesktop } from './data/hook';
+import { useIsOnMediumScreen, useIsOnLargeScreen } from './data/hook';
 
 const Notifications = () => {
-  const [showNotificationTray, setShowNotificationTray] = useState(false);
   const intl = useIntl();
+  const dispatch = useDispatch();
   const popoverRef = useRef(null);
   const buttonRef = useRef(null);
-  const dispatch = useDispatch();
+  const [showNotificationTray, setShowNotificationTray] = useState(false);
   const notificationCounts = useSelector(getNotificationTabsCount());
-  const isOnDesktop = useIsOnDesktop();
-  const isOnXLDesktop = useIsOnXLDesktop();
+  const isOnMediumScreen = useIsOnMediumScreen();
+  const isOnLargeScreen = useIsOnLargeScreen();
+
+  console.log('isOnMediumScreen', isOnMediumScreen);
+  console.log('isOnLargeScreen', isOnLargeScreen);
 
   const handleNotificationTray = useCallback((value) => {
     setShowNotificationTray(value);
@@ -49,22 +52,21 @@ const Notifications = () => {
       trigger="click"
       key="bottom"
       placement="bottom"
+      id="notificationTray"
       show={showNotificationTray}
       overlay={(
         <Popover
-          id="popover-positioned-bottom"
-          className={classNames('notification-tray-container pt-4.5 pb-4.5 overflow-auto rounded-0 border-0', {
-            'w-100': !isOnDesktop,
-            'notificationbar-desktop-width': isOnDesktop && !isOnXLDesktop,
-            'w-25 notificationbar-XL-width': isOnXLDesktop,
+          id="notificationTray"
+          data-testid="notificationTray"
+          className={classNames('notification-tray-container overflow-auto rounded-0 border-0', {
+            'w-100': !isOnMediumScreen && !isOnLargeScreen,
+            'medium-screen': isOnMediumScreen,
+            'large-screen': isOnLargeScreen,
           })}
-          data-testid="notificationbar"
         >
           <div ref={popoverRef}>
-            <Popover.Title as="h3" className="d-flex flex-row justify-content-between py-0 mb-4 border-0 px-4">
-              <h2 className="text-primary-500 font-size-18 line-height-24">
-                {intl.formatMessage(messages.notificationTitle)}
-              </h2>
+            <Popover.Title as="h2" className="d-flex justify-content-between p-0 m-4 border-0 text-primary-500 font-size-18 line-height-24">
+              {intl.formatMessage(messages.notificationTitle)}
               <Icon src={Settings} className="icon-size-20" />
             </Popover.Title>
             <Popover.Content className="notification-content p-0">

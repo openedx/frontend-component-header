@@ -1,10 +1,11 @@
 import { breakpoints, useWindowSize } from '@edx/paragon';
 
-export function useIsOnDesktop() {
+export function useIsOnMediumScreen() {
   const windowSize = useWindowSize();
-  return windowSize.width >= breakpoints.medium.minWidth;
+  return breakpoints.large.maxWidth > windowSize.width && windowSize.width >= breakpoints.medium.minWidth;
 }
-export function useIsOnXLDesktop() {
+
+export function useIsOnLargeScreen() {
   const windowSize = useWindowSize();
   return windowSize.width >= breakpoints.extraLarge.minWidth;
 }
