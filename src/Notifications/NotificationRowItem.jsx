@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
-import { useIntl } from '@edx/frontend-platform/i18n';
-import { Icon } from '@edx/paragon';
-import * as timeago from 'timeago.js';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { useIntl } from '@edx/frontend-platform/i18n';
+import PropTypes from 'prop-types';
+import { Icon } from '@edx/paragon';
 import { Link } from 'react-router-dom';
+import * as timeago from 'timeago.js';
+import { getIconByType } from './utils';
+import { markNotificationsAsRead } from './data/thunks';
 import { messages } from './messages';
 import timeLocale from '../common/time-locale';
-import { markNotificationsAsRead } from './data/thunks';
-import { getIconByType } from './utils';
 
 const NotificationRowItem = ({
   id, type, contentUrl, content, courseName, createdAt, lastRead,
@@ -38,7 +38,7 @@ const NotificationRowItem = ({
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: content }}
             />
-            <div className="py-0 d-flex flex-row align-items-center">
+            <div className="py-0 d-flex align-items-center">
               <span className="font-size-12 text-gray-500 line-height-20">
                 <span>{courseName}</span>
                 <span className="text-light-700 px-1.5">{intl.formatMessage(messages.fullStop)}</span>

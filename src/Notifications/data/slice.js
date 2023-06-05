@@ -19,6 +19,7 @@ const initialState = {
     count: 10,
     numPages: 1,
     currentPage: 1,
+    nextPage: null,
   },
 };
 const slice = createSlice({
@@ -115,6 +116,15 @@ const slice = createSlice({
       state.notificationStatus = FAILED;
     },
     resetNotificationStateRequest: () => initialState,
+
+    updateAppNameRequest: (state, { payload }) => {
+      state.appName = payload.appName;
+      state.pagination.currentPage = 1;
+    },
+
+    updatePaginationRequest: (state) => {
+      state.pagination.currentPage += 1;
+    },
   },
 });
 
@@ -140,6 +150,8 @@ export const {
   markNotificationsAsReadSuccess,
   markNotificationsAsReadFailure,
   resetNotificationStateRequest,
+  updateAppNameRequest,
+  updatePaginationRequest,
 } = slice.actions;
 
 export const notificationsReducer = slice.reducer;

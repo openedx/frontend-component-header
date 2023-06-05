@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {
-  useState, useCallback, useEffect, useRef,
+  useCallback, useEffect, useRef, useState,
 } from 'react';
-import { NotificationsNone, Settings } from '@edx/paragon/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { useIntl } from '@edx/frontend-platform/i18n';
+import classNames from 'classnames';
 import {
   Badge, Icon, IconButton, OverlayTrigger, Popover,
 } from '@edx/paragon';
-import { useSelector, useDispatch } from 'react-redux';
-import { useIntl } from '@edx/frontend-platform/i18n';
-import classNames from 'classnames';
-import NotificationTabs from './NotificationTabs';
-import { getNotificationTabsCount } from './data/selectors';
+import { NotificationsNone, Settings } from '@edx/paragon/icons';
+import { selectNotificationTabsCount } from './data/selectors';
 import { resetNotificationState } from './data/thunks';
+import { useIsOnLargeScreen, useIsOnMediumScreen } from './data/hook';
+import NotificationTabs from './NotificationTabs';
 import { messages } from './messages';
-import { useIsOnMediumScreen, useIsOnLargeScreen } from './data/hook';
 
 const Notifications = () => {
   const intl = useIntl();
@@ -21,7 +21,7 @@ const Notifications = () => {
   const popoverRef = useRef(null);
   const buttonRef = useRef(null);
   const [showNotificationTray, setShowNotificationTray] = useState(false);
-  const notificationCounts = useSelector(getNotificationTabsCount());
+  const notificationCounts = useSelector(selectNotificationTabsCount());
   const isOnMediumScreen = useIsOnMediumScreen();
   const isOnLargeScreen = useIsOnLargeScreen();
 
@@ -55,7 +55,7 @@ const Notifications = () => {
         <Popover
           id="notificationTray"
           data-testid="notificationTray"
-          className={classNames('notification-tray-container overflow-auto rounded-0 border-0', {
+          className={classNames('overflow-auto rounded-0 border-0', {
             'w-100': !isOnMediumScreen && !isOnLargeScreen,
             'medium-screen': isOnMediumScreen,
             'large-screen': isOnLargeScreen,
@@ -88,7 +88,7 @@ const Notifications = () => {
           <Badge
             pill
             variant="danger"
-            className="font-weight-normal px-1 font-size-9 notification-badge"
+            className="font-weight-normal px-1 notification-badge"
           >
             {notificationCounts.count}
           </Badge>

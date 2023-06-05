@@ -1,27 +1,28 @@
-import React, {
-  useState, useCallback, useMemo, useEffect,
-} from 'react';
-import { Tabs, Tab } from '@edx/paragon';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Tab, Tabs } from '@edx/paragon';
 import NotificationSections from './NotificationSections';
-import { getNotificationTabsCount, getSelectedAppName, getNotificationTabs } from './data/selectors';
 import { fetchNotificationList, markNotificationsAsSeen } from './data/thunks';
+import {
+  selectNotificationTabs, selectNotificationTabsCount, selectPaginationData, selectSelectedAppName,
+} from './data/selectors';
+import { updateAppNameRequest } from './data/slice';
 
 const NotificationTabs = () => {
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
-  const selectedAppName = useSelector(getSelectedAppName());
-  const notificationUnseenCounts = useSelector(getNotificationTabsCount());
-  const notificationTabs = useSelector(getNotificationTabs());
+  const selectedAppName = useSelector(selectSelectedAppName());
+  const notificationUnseenCounts = useSelector(selectNotificationTabsCount());
+  const notificationTabs = useSelector(selectNotificationTabs());
+  const paginationData = useSelector(selectPaginationData());
 
   useEffect(() => {
-    dispatch(fetchNotificationList({ appName: selectedAppName, page, pageSize: 10 }));
+    dispatch(fetchNotificationList({ appName: selectedAppName, page: paginationData.currentPage, pageSize: 10 }));
     if (selectedAppName) { dispatch(markNotificationsAsSeen(selectedAppName)); }
-  }, [dispatch, page, selectedAppName]);
+  }, [dispatch, paginationData.currentPage, selectedAppName]);
 
   const handleActiveTab = useCallback((appName) => {
-    // dispatch(setSelectedAppName(appName));
-  }, []);
+    dispatch(updateAppNameRequest({ appName }));
+  }, [dispatch]);
 
   const tabArray = useMemo(() => notificationTabs?.map((appName) => (
     <Tab
@@ -47,4 +48,4 @@ const NotificationTabs = () => {
   );
 };
 
-export default NotificationTabs;
+export default React.memo(NotificationTabs);

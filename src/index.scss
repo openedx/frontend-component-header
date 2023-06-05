@@ -130,8 +130,8 @@ $white: #fff;
   font-size: 12px;
 }
 
-.font-size-9{
-  font-size: 9px;
+.font-size-14{
+  font-size: 14px;
 }
 
 .line-height-24{
@@ -161,15 +161,14 @@ $white: #fff;
   margin-top: 18px;
   margin-left: -21px;
   border: 2px solid #FFFFFF;
+  font-size: 9px !important;
 }
 
-.notification-tray-container {
+.popover{
   max-height: calc(100% - 68px);
   min-height: 1220px;
-
-  .popover {
-
-  }
+  filter: none;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 2px 8px rgba(0, 0, 0, 0.15);
 
   &.medium-screen {
     min-width: 24.313rem;
