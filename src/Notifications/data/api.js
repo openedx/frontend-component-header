@@ -6,7 +6,7 @@ export const getNotificationsCountApiUrl = () => `${getConfig().LMS_BASE_URL}/ap
 export const getNotificationsApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/`;
 export const markNotificationsSeenApiUrl = (appName) => `${getConfig().LMS_BASE_URL}/api/notifications/mark-notifications-unseen/${appName}/`;
 
-export async function getNotifications(page, pageSize) {
+export async function getNotifications(appName, page, pageSize) {
   const { data } = notificationsList;
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
