@@ -32,13 +32,13 @@ const NotificationRowItem = ({
       />
       <div className="d-flex w-100">
         <div className="d-flex align-items-center w-100">
-          <div className="py-2 w-100 px-0 cursor-pointer">
+          <div className="py-10px w-100 px-0 cursor-pointer">
             <span
-              className="line-height-24 text-gray-700 mb-2 notification-item-content overflow-hidden"
+              className="line-height-24 text-gray-700 mb-2 notification-item-content overflow-hidden content"
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: content }}
             />
-            <div className="py-0 d-flex align-items-center">
+            <div className="py-0 d-flex">
               <span className="font-size-12 text-gray-500 line-height-20">
                 <span>{courseName}</span>
                 <span className="text-light-700 px-1.5">{intl.formatMessage(messages.fullStop)}</span>

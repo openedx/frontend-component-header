@@ -122,6 +122,13 @@ $white: #fff;
   }
 }
 
+.content{
+  b{
+    color: #00262B;
+    font-weight: 500;
+  }
+}
+
 .font-size-18{
   font-size: 18px !important;
 }
@@ -134,12 +141,21 @@ $white: #fff;
   font-size: 14px;
 }
 
+.py-10px{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .line-height-24{
   line-height: 24px;
 }
 
 .line-height-20{
   line-height: 20px;
+}
+
+.line-height-10{
+  line-height: 10px !important;
 }
 
 .icon-size-20{

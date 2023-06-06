@@ -34,15 +34,15 @@ const NotificationSections = () => {
 
     return (
       <div className="pb-2">
-        <div className="d-flex justify-content-between align-items-center">
-          <span className="text-gray-500">
+        <div className="d-flex justify-content-between align-items-center py-10px mb-2">
+          <span className="text-gray-500 line-height-10">
             {section === 'today' && intl.formatMessage(messages.notificationTodayHeading)}
             {section === 'earlier' && intl.formatMessage(messages.notificationEarlierHeading)}
           </span>
           {notifications?.length > 0 && (section === 'earlier' ? today.length === 0 : true) && (
             <Button
               variant="link"
-              className="text-info-500 line-height-24 font-size-14 text-decoration-none"
+              className="text-info-500 font-size-14 line-height-10 text-decoration-none p-0 border-0"
               onClick={handleMarkAllAsRead}
             >
               {intl.formatMessage(messages.notificationMarkAsRead)}
