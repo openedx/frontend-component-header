@@ -1,5 +1,4 @@
 import { camelCaseObject, getConfig } from '@edx/frontend-platform';
-import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 
 import notificationsList from './notifications.json';
 
@@ -7,9 +6,7 @@ export const getNotificationsCountApiUrl = () => `${getConfig().LMS_BASE_URL}/ap
 export const getNotificationsApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/`;
 export const markNotificationsSeenApiUrl = (appName) => `${getConfig().LMS_BASE_URL}/api/notifications/mark-notifications-unseen/${appName}/`;
 
-export async function getNotifications(appName, page, pageSize) {
-  // const params = snakeCaseObject({ page, pageSize });
-  // const { data } = await getAuthenticatedHttpClient().get(getNotificationsApiUrl(), { params });
+export async function getNotifications(page, pageSize) {
   const { data } = notificationsList;
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
@@ -19,7 +16,6 @@ export async function getNotifications(appName, page, pageSize) {
 }
 
 export async function getNotificationCounts() {
-  // const { data } = await getAuthenticatedHttpClient().get(getNotificationsCountApiUrl());
   const data = {
     count: 45,
     count_by_app_name: {
@@ -33,8 +29,7 @@ export async function getNotificationCounts() {
   return camelCaseObject(data);
 }
 
-export async function markNotificationSeen(appName) {
-  // const { data } = await getAuthenticatedHttpClient().put(`${markNotificationsSeenApiUrl(appName)}`);
+export async function markNotificationSeen() {
   const data = [];
   return camelCaseObject(data);
 }
