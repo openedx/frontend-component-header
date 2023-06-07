@@ -1,0 +1,86 @@
+// ====================
+// Header
+// ====================
+@import 'mixins';
+
+$base-font-color:           #000;
+$theme-blue:                #36c;
+
+
+header.learning-header {
+
+    .nav-links {
+        display: flex;
+        flex-grow: 1;
+
+        .nav-item {
+            margin: 0 16px;
+        }
+
+        .main {
+            margin: 13px 0 0;
+            float: none;
+            flex-grow: 1;
+            text-align: center;
+
+            .nav-item {
+
+                @include media-up(md) {
+                    float: none;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
+
+            a,
+            .nav-tab a {
+                font-size: 14px;
+                font-weight: 700;
+                padding: 7px 16px 12px;
+                display: block;
+                color: $base-font-color;
+
+                &:focus,
+                &:hover {
+                    color: $theme-blue;
+                    border-bottom: 4px solid $theme-blue;
+                    text-decoration: none;
+                }
+            }
+            a.active{
+                border-bottom: 4px solid $theme-blue;
+            }
+        }
+    }
+}
+
+.mobile-menu {
+
+    .mobile-nav-link {
+
+        a {
+            color: $base-font-color;
+            font-size: 14px;
+            font-weight: bold;
+
+            &:after {
+                display: none;
+            }
+
+            &.btn {
+                padding: 8px 15px;
+                border-radius: 2px;
+                font-weight: bold;
+                display: block;
+                margin: 6px;
+                width: auto;
+            }
+
+            &.register-btn {
+                background: $theme-blue;
+                color: white;
+                margin-right: 5px;
+            }
+        }
+    }
+}
