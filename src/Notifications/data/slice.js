@@ -87,11 +87,11 @@ const slice = createSlice({
       state.notificationStatus = LOADING;
     },
     markAllNotificationsAsReadSuccess: (state) => {
-      const date = new Date().toISOString();
-      const updatedNotifications = Object.entries(state.notifications)
-        .filter(([key]) => state.apps[state.appName].includes(key))
-        .map(([, value]) => ({ ...value, lastRead: date }));
-
+      const updatedNotifications = Object.fromEntries(
+        Object.entries(state.notifications).map(([key, notification]) => [
+          key, { ...notification, lastRead: new Date().toISOString() },
+        ]),
+      );
       state.notifications = updatedNotifications;
       state.notificationStatus = LOADED;
     },
@@ -116,12 +116,10 @@ const slice = createSlice({
       state.notificationStatus = FAILED;
     },
     resetNotificationStateRequest: () => initialState,
-
     updateAppNameRequest: (state, { payload }) => {
       state.appName = payload.appName;
       state.pagination.currentPage = 1;
     },
-
     updatePaginationRequest: (state) => {
       state.pagination.currentPage += 1;
     },

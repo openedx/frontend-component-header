@@ -1,10 +1,5 @@
-import { camelCaseObject, getConfig } from '@edx/frontend-platform';
-
+import { camelCaseObject } from '@edx/frontend-platform';
 import notificationsList from './notifications.json';
-
-export const getNotificationsCountApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/count/`;
-export const getNotificationsApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/`;
-export const markNotificationsSeenApiUrl = (appName) => `${getConfig().LMS_BASE_URL}/api/notifications/mark-notifications-unseen/${appName}/`;
 
 export async function getNotifications(appName, page, pageSize) {
   const { data } = notificationsList;
@@ -24,7 +19,7 @@ export async function getNotificationCounts() {
       grades: 10,
       authoring: 5,
     },
-    show_notification_tray: true,
+    show_notification_tray: false,
   };
   return camelCaseObject(data);
 }

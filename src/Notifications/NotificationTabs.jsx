@@ -30,7 +30,7 @@ const NotificationTabs = () => {
       eventKey={appName}
       title={appName}
       notification={notificationUnseenCounts[appName]}
-      tabClassName="pt-0 pb-2.5 px-2.5 d-flex border-top-0 mb-0 align-items-center line-height-24 text-capitalize"
+      tabClassName="pt-0 pb-10px px-2.5 d-flex border-top-0 mb-0 align-items-center line-height-24 text-capitalize"
     >
       {appName === selectedAppName && (<NotificationSections />)}
     </Tab>
@@ -41,7 +41,7 @@ const NotificationTabs = () => {
       variant="tabs"
       defaultActiveKey={selectedAppName}
       onSelect={handleActiveTab}
-      className="px-2.5 border-0 text-primary-500"
+      className="px-2.5 text-primary-500"
     >
       {tabArray}
     </Tabs>
