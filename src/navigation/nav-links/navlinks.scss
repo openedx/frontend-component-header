@@ -1,0 +1,50 @@
+// ====================
+// Header
+// ====================
+
+header.learning-header {
+  border-bottom: 1px solid $theme-blue;
+  .nav-links {
+    display: flex;
+    flex-grow: 1;
+
+    .main {
+      float: none;
+      flex-grow: 1;
+      text-align: center;
+
+      .nav-item {
+        @include media-up(md) {
+          float: none;
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+
+      a,
+      .nav-tab a {
+        font-size: 14px;
+        font-weight: 700;
+        padding: 7px 16px 12px;
+        display: block;
+        color: $base-font-color;
+        text-decoration: none;
+        margin: 0 2px;
+
+        &:focus,
+        &:hover {
+          color: $theme-blue;
+          border-bottom: 4px solid $theme-blue;
+        }
+      }
+      a.active {
+        border-bottom: 4px solid $theme-blue;
+      }
+      @include media-down(lg) {
+        &:not(.mobile-nav-link) {
+          display: none;
+        }
+      }
+    }
+  }
+}

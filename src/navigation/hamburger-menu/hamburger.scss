@@ -1,0 +1,118 @@
+.hamburger-menu {
+  .hamburger-btn {
+    position: absolute;
+    top: $baseline * 0.75;
+    margin-left: 10px;
+    width: $baseline * 1.5;
+    height: $baseline * 1.5;
+    min-width: $baseline * 1.5;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+
+    .line {
+      display: block;
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: $gray-500;
+      opacity: 1;
+      left: 0;
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+      -webkit-transition: 0.25s ease-in-out;
+      transition: 0.25s ease-in-out;
+
+      &:nth-child(1) {
+        top: 0;
+      }
+
+      &:nth-child(2),
+      &:nth-child(3) {
+        top: $baseline/2;
+      }
+
+      &:nth-child(4) {
+        top: $baseline;
+      }
+    }
+
+    &.open .line {
+      &:nth-child(1) {
+        top: 18px;
+        width: 0%;
+        left: 50%;
+      }
+
+      &:nth-child(2) {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      &:nth-child(3) {
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+      }
+
+      &:nth-child(4) {
+        top: 18px;
+        width: 0%;
+        left: 50%;
+      }
+    }
+    @include media-up(lg) {
+      display: none;
+    }
+  }
+
+  .mobile-menu {
+    border-top: 1px solid $primary;
+    display: none;
+
+    &.open {
+      display: block;
+    }
+
+    @include media-up(lg) {
+      display: none !important;
+    }
+
+    @include media-down(lg) {
+      // Override standard styling for the mobile menu links
+      .mobile-nav-link {
+        position: static;
+        transform: none;
+        overflow: hidden;
+        padding: 0;
+
+        a {
+          color: $base-font-color;
+          font-size: 14px;
+          font-weight: bold;
+          text-decoration: none;
+          outline: none;
+          display: block;
+          background-color: $white;
+          border-radius: 0;
+          width: 100%;
+          padding: $baseline * 0.6 $baseline;
+          border-bottom: 1px solid $light;
+          text-align: left;
+          cursor: pointer;
+
+          &:hover,
+          &:focus {
+            background-color: $gray-600;
+            color: $white;
+          }
+
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+.logo{
+    @include media-down(lg) {
+        margin-left: $baseline * 2;
+    }
+}
