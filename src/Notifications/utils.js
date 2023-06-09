@@ -48,5 +48,5 @@ export const getIconByType = (type) => {
     commentLiked: { icon: ThumbUpOutline, class: 'text-primary-500' },
     edited: { icon: EditOutline, class: 'text-primary-500' },
   };
-  return iconMap[type] || null;
+  return iconMap[type] || { icon: PostOutline, class: 'text-primary-500' };
 };

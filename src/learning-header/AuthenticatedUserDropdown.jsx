@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Notifications from '../Notifications';
 import { selectShowNotificationTray, selectNotificationStatus } from '../Notifications/data/selectors';
 import { fetchAppsNotificationCount } from '../Notifications/data/thunks';
-import { IDLE } from '../Notifications/data/slice';
+import { RequestStatus } from '../Notifications/data/slice';
 
 import messages from './messages';
 
@@ -20,7 +20,7 @@ const AuthenticatedUserDropdown = ({ intl, username }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (notificationStatus === IDLE) {
+    if (notificationStatus === RequestStatus.IDLE) {
       dispatch(fetchAppsNotificationCount());
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

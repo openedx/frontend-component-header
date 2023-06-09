@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-export default function timeLocale(number, index, totalSec) {
+export default function timeLocale(number, index) {
   return [
     ['just now', 'right now'],
     ['%ss', 'in %s seconds'],

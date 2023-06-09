@@ -10,12 +10,12 @@ export const selectSelectedAppNotificationIds = (appName) => state => state.noti
 
 export const selectShowNotificationTray = () => state => state.notifications.showNotificationTray;
 
-export const selectNotifications = () => state => state.notifications.notification;
+export const selectNotifications = () => state => state.notifications.notifications;
 
-export const selectNotificationsByIds = createSelector(
-  state => state.notifications.notifications,
-  state => state.notifications.apps[state.notifications.appName] || [],
-  (notifications, notificationIds) => notificationIds.map(notificationId => notifications[notificationId]),
+export const selectNotificationsByIds = (appName) => createSelector(
+  selectNotifications(),
+  selectSelectedAppNotificationIds(appName),
+  (notifications, notificationIds) => notificationIds.map((notificationId) => notifications[notificationId]) || [],
 );
 
 export const selectSelectedAppName = () => state => state.notifications.appName;

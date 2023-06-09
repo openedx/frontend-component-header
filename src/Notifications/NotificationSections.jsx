@@ -3,7 +3,7 @@ import { Button } from '@edx/paragon';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import isEmpty from 'lodash/isEmpty';
-import { messages } from './messages';
+import messages from './messages';
 import NotificationRowItem from './NotificationRowItem';
 import { markAllNotificationsAsRead } from './data/thunks';
 import { selectNotificationsByIds, selectPaginationData, selectSelectedAppName } from './data/selectors';
@@ -14,8 +14,8 @@ const NotificationSections = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
   const selectedAppName = useSelector(selectSelectedAppName());
-  const notifications = useSelector(selectNotificationsByIds);
-  const paginationData = useSelector(selectPaginationData());
+  const notifications = useSelector(selectNotificationsByIds(selectedAppName));
+  const { currentPage, numPages } = useSelector(selectPaginationData());
   const { today = [], earlier = [] } = useMemo(
     () => splitNotificationsByTime(notifications),
     [notifications],
@@ -69,7 +69,7 @@ const NotificationSections = () => {
     <div className="mt-4 px-4">
       {renderNotificationSection('today', today)}
       {renderNotificationSection('earlier', earlier)}
-      {paginationData.currentPage < paginationData.numPages && (
+      {currentPage < numPages && (
         <Button variant="primary" className="w-100 bg-primary-500" onClick={updatePagination}>
           {intl.formatMessage(messages.loadMoreNotifications)}
         </Button>

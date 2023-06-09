@@ -1,7 +1,6 @@
 import { defineMessages } from '@edx/frontend-platform/i18n';
 
-// eslint-disable-next-line import/prefer-default-export
-export const messages = defineMessages({
+const messages = defineMessages({
   notificationTitle: {
     id: 'notification.title',
     defaultMessage: 'Notifications',
@@ -33,3 +32,5 @@ export const messages = defineMessages({
     description: 'Load more button to load more notifications',
   },
 });
+
+export default messages;

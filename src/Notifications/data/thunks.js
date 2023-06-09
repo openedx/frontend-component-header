@@ -1,4 +1,3 @@
-import { camelCaseObject } from '@edx/frontend-platform';
 import {
   fetchNotificationSuccess,
   fetchNotificationRequest,
@@ -27,14 +26,29 @@ import {
 } from './api';
 import { getHttpErrorStatus } from '../utils';
 
-export const fetchNotificationList = ({
-  appName, page, pageSize,
-}) => (
+const normalizeNotificationCounts = ({ countByAppName, count, showNotificationTray }) => {
+  const appIds = Object.keys(countByAppName);
+  const apps = appIds.reduce((acc, appId) => { acc[appId] = []; return acc; }, {});
+  return {
+    countByAppName, appIds, apps, count, showNotificationTray,
+  };
+};
+
+const normalizeNotifications = ({ notifications }) => {
+  const newNotificationIds = notifications.map(notification => notification.id.toString());
+  const notificationsKeyValuePair = notifications.reduce((acc, obj) => { acc[obj.id] = obj; return acc; }, {});
+  return {
+    newNotificationIds, notificationsKeyValuePair,
+  };
+};
+
+export const fetchNotificationList = ({ appName, page, pageSize }) => (
   async (dispatch) => {
     try {
       dispatch(fetchNotificationRequest({ appName }));
       const data = await getNotifications(appName, page, pageSize);
-      dispatch(fetchNotificationSuccess(data));
+      const normalisedData = normalizeNotifications((data));
+      dispatch(fetchNotificationSuccess({ ...normalisedData, numPages: data.numPages, currentPage: data.currentPage }));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
         dispatch(fetchNotificationDenied(appName));
@@ -50,7 +64,13 @@ export const fetchAppsNotificationCount = () => (
     try {
       dispatch(fetchNotificationsCountRequest());
       const data = await getNotificationCounts();
-      dispatch(fetchNotificationsCountSuccess(camelCaseObject(data)));
+      const normalisedData = normalizeNotificationCounts((data));
+      dispatch(fetchNotificationsCountSuccess({
+        ...normalisedData,
+        countByAppName: data.countByAppName,
+        count: data.count,
+        showNotificationTray: data.showNotificationTray,
+      }));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
         dispatch(fetchNotificationsCountDenied());

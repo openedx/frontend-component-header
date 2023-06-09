@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import * as timeago from 'timeago.js';
 import { getIconByType } from './utils';
 import { markNotificationsAsRead } from './data/thunks';
-import { messages } from './messages';
+import messages from './messages';
 import timeLocale from '../common/time-locale';
 
 const NotificationRowItem = ({
@@ -21,15 +21,16 @@ const NotificationRowItem = ({
     dispatch(markNotificationsAsRead(id));
   }, [dispatch, id]);
 
-  const iconComponent = getIconByType(type);
+  const { icon: iconComponent, class: iconClass } = getIconByType(type);
 
   return (
-    <Link className="d-flex mb-2 align-items-center text-decoration-none" to={contentUrl} onClick={handleMarkAsRead}>
-      <Icon
-        src={iconComponent && iconComponent.icon}
-        style={{ height: '23.33px', width: '23.33px' }}
-        className={iconComponent && `${iconComponent.class} mr-4`}
-      />
+    <Link
+      target="_blank"
+      className="d-flex mb-2 align-items-center text-decoration-none"
+      to={contentUrl}
+      onClick={handleMarkAsRead}
+    >
+      <Icon src={iconComponent} className={`${iconClass} mr-4 notification-icon`} />
       <div className="d-flex w-100">
         <div className="d-flex align-items-center w-100">
           <div className="py-10px w-100 px-0 cursor-pointer">

@@ -13,33 +13,33 @@ import { selectNotificationTabsCount } from './data/selectors';
 import { resetNotificationState } from './data/thunks';
 import { useIsOnLargeScreen, useIsOnMediumScreen } from './data/hook';
 import NotificationTabs from './NotificationTabs';
-import { messages } from './messages';
+import messages from './messages';
 
 const Notifications = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
   const popoverRef = useRef(null);
   const buttonRef = useRef(null);
-  const [showNotificationTray, setShowNotificationTray] = useState(false);
+  const [enableNotificationTray, setEnableNotificationTray] = useState(false);
   const notificationCounts = useSelector(selectNotificationTabsCount());
   const isOnMediumScreen = useIsOnMediumScreen();
   const isOnLargeScreen = useIsOnLargeScreen();
 
   const hideNotificationTray = useCallback(() => {
-    setShowNotificationTray(prevState => !prevState);
+    setEnableNotificationTray(prevState => !prevState);
   }, []);
 
-  const handleClickOutside = useCallback((event) => {
+  const handleClickOutsideNotificationTray = useCallback((event) => {
     if (!popoverRef.current?.contains(event.target) && !buttonRef.current?.contains(event.target)) {
-      setShowNotificationTray(false);
+      setEnableNotificationTray(false);
     }
   }, []);
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutsideNotificationTray);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutsideNotificationTray);
       dispatch(resetNotificationState());
     };
   }, []);
@@ -50,7 +50,7 @@ const Notifications = () => {
       key="bottom"
       placement="bottom"
       id="notificationTray"
-      show={showNotificationTray}
+      show={enableNotificationTray}
       overlay={(
         <Popover
           id="notificationTray"
@@ -75,7 +75,7 @@ const Notifications = () => {
     >
       <div ref={buttonRef}>
         <IconButton
-          isActive={showNotificationTray}
+          isActive={enableNotificationTray}
           alt="notification bell icon"
           onClick={hideNotificationTray}
           src={NotificationsNone}

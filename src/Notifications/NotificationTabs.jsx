@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tab, Tabs } from '@edx/paragon';
@@ -13,16 +14,16 @@ const NotificationTabs = () => {
   const selectedAppName = useSelector(selectSelectedAppName());
   const notificationUnseenCounts = useSelector(selectNotificationTabsCount());
   const notificationTabs = useSelector(selectNotificationTabs());
-  const paginationData = useSelector(selectPaginationData());
+  const { currentPage } = useSelector(selectPaginationData());
 
   useEffect(() => {
-    dispatch(fetchNotificationList({ appName: selectedAppName, page: paginationData.currentPage, pageSize: 10 }));
+    dispatch(fetchNotificationList({ appName: selectedAppName, page: currentPage, pageSize: 10 }));
     if (selectedAppName) { dispatch(markNotificationsAsSeen(selectedAppName)); }
-  }, [dispatch, paginationData.currentPage, selectedAppName]);
+  }, [currentPage, selectedAppName]);
 
   const handleActiveTab = useCallback((appName) => {
     dispatch(updateAppNameRequest({ appName }));
-  }, [dispatch]);
+  }, []);
 
   const tabArray = useMemo(() => notificationTabs?.map((appName) => (
     <Tab
