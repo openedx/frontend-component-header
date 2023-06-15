@@ -4,7 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { initialize, getConfig, subscribe, APP_READY } from '@edx/frontend-platform';
 import { AppContext, AppProvider } from '@edx/frontend-platform/react';
-import Header from '@edx/frontend-component-header';
+// import Header from '@edx/frontend-component-header';
+import { LearningHeader as Header } from '@edx/frontend-component-header';
 
 import './index.scss';
 
