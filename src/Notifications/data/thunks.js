@@ -97,11 +97,11 @@ export const markAllNotificationsAsRead = (appName) => (
   }
 );
 
-export const markNotificationsAsRead = (notificationId) => (
+export const markNotificationsAsRead = (appName, notificationId) => (
   async (dispatch) => {
     try {
       dispatch(markNotificationsAsReadRequest({ notificationId }));
-      const data = await markNotificationRead(notificationId);
+      const data = await markNotificationRead(appName, notificationId);
       dispatch(markNotificationsAsReadSuccess(data));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {

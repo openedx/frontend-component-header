@@ -43,7 +43,10 @@ describe('Notification Selectors', () => {
     store = initializeStore();
 
     axiosMock.onGet(notificationCountsApiUrl).reply(200, (Factory.build('notificationsCount')));
-    axiosMock.onGet(notificationsApiUrl).reply(200, (Factory.buildList('notification', 2, null)));
+    axiosMock.onGet(notificationsApiUrl).reply(
+      200,
+      (Factory.buildList('notification', 2, null, { createdDate: new Date().toISOString() })),
+    );
     await executeThunk(fetchAppsNotificationCount(), store.dispatch, store.getState);
     await executeThunk(fetchNotificationList({ page: 1, pageSize: 10 }), store.dispatch, store.getState);
   });

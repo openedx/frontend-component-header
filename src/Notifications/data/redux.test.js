@@ -40,7 +40,10 @@ describe('Notification Redux', () => {
     store = initializeStore();
 
     axiosMock.onGet(notificationCountsApiUrl).reply(200, (Factory.build('notificationsCount')));
-    axiosMock.onGet(notificationsApiUrl).reply(200, (Factory.buildList('notification', 2, null)));
+    axiosMock.onGet(notificationsApiUrl).reply(
+      200,
+      (Factory.buildList('notification', 2, null, { createdDate: new Date().toISOString() })),
+    );
     await executeThunk(fetchAppsNotificationCount(), store.dispatch, store.getState);
     await executeThunk(fetchNotificationList({ page: 1, pageSize: 10 }), store.dispatch, store.getState);
   });
@@ -68,9 +71,9 @@ describe('Notification Redux', () => {
   });
 
   it('successfully loaded notifications list in the redux.', async () => {
-    const state = store.getState();
+    const { notifications: { notifications } } = store.getState();
 
-    expect(Object.keys(state.notifications.notifications)).toHaveLength(2);
+    expect(Object.keys(notifications)).toHaveLength(2);
   });
 
   it('successfully loaded notification counts in the redux.', async () => {
@@ -84,9 +87,9 @@ describe('Notification Redux', () => {
   });
 
   it('successfully loaded showNotificationTray status in the redux based on api.', async () => {
-    const state = store.getState();
+    const { notifications: { showNotificationTray } } = store.getState();
 
-    expect(state.notifications.showNotificationTray).toEqual(true);
+    expect(showNotificationTray).toEqual(true);
   });
 
   it('successfully store the count, numPages, currentPage, and nextPage data in redux.', async () => {
@@ -98,15 +101,15 @@ describe('Notification Redux', () => {
   });
 
   it('successfully updated the selected app name in redux.', async () => {
-    const state = store.getState();
+    const { notifications: { appName } } = store.getState();
 
-    expect(state.notifications.appName).toEqual('discussions');
+    expect(appName).toEqual('discussions');
   });
 
   it('successfully store notification ids in the selected app in apps.', async () => {
-    const state = store.getState();
+    const { notifications: { apps } } = store.getState();
 
-    expect(state.notifications.apps.discussions).toHaveLength(2);
+    expect(apps.discussions).toHaveLength(2);
   });
 
   it('successfully marked all notifications as seen for selected app.', async () => {
@@ -120,10 +123,10 @@ describe('Notification Redux', () => {
     axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(200);
     await executeThunk(markAllNotificationsAsRead('discussions'), store.dispatch, store.getState);
 
-    const { notifications } = store.getState();
-    const firstNotification = Object.values(notifications.notifications)[0];
+    const { notifications: { notificationStatus, notifications } } = store.getState();
+    const firstNotification = Object.values(notifications)[0];
 
-    expect(notifications.notificationStatus).toEqual('successful');
+    expect(notificationStatus).toEqual('successful');
     expect(firstNotification.lastRead).not.toBeNull();
   });
 
@@ -131,10 +134,10 @@ describe('Notification Redux', () => {
     axiosMock.onPut(markedNotificationAsReadApiUrl).reply(200);
     await executeThunk(markNotificationsAsRead('discussions', 1), store.dispatch, store.getState);
 
-    const { notifications } = store.getState();
-    const firstNotification = Object.values(notifications.notifications)[0];
+    const { notifications: { notificationStatus, notifications } } = store.getState();
+    const firstNotification = Object.values(notifications)[0];
 
-    expect(notifications.notificationStatus).toEqual('successful');
+    expect(notificationStatus).toEqual('successful');
     expect(firstNotification.lastRead).not.toBeNull();
   });
 });

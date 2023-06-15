@@ -1,8 +1,15 @@
-import { camelCaseObject } from '@edx/frontend-platform';
-import notificationsList from './notifications.json';
+import { camelCaseObject, getConfig, snakeCaseObject } from '@edx/frontend-platform';
+import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
+
+export const getNotificationsCountApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/count/`;
+export const getNotificationsApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/`;
+export const markNotificationsSeenApiUrl = (appName) => `${getConfig().LMS_BASE_URL}/api/notifications/mark-notifications-unseen/${appName}/`;
+export const markAllNotificationsAsReadpiUrl = (appName, id) => `${getConfig().LMS_BASE_URL}/api/notifications/mark-notifications-read/${appName}/${id}`;
 
 export async function getNotifications(appName, page, pageSize) {
-  const { data } = notificationsList;
+  const params = snakeCaseObject({ page, pageSize });
+  const { data } = await getAuthenticatedHttpClient().get(getNotificationsApiUrl(), { params });
+
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
 
@@ -11,30 +18,25 @@ export async function getNotifications(appName, page, pageSize) {
 }
 
 export async function getNotificationCounts() {
-  const data = {
-    count: 45,
-    count_by_app_name: {
-      reminders: 10,
-      discussions: 20,
-      grades: 10,
-      authoring: 5,
-    },
-    show_notification_tray: false,
-  };
+  const { data } = await getAuthenticatedHttpClient().get(getNotificationsCountApiUrl());
+
   return camelCaseObject(data);
 }
 
-export async function markNotificationSeen() {
-  const data = [];
+export async function markNotificationSeen(appName) {
+  const { data } = await getAuthenticatedHttpClient().put(`${markNotificationsSeenApiUrl(appName)}`);
+
   return camelCaseObject(data);
 }
 
-export async function markAllNotificationRead() {
-  const { data } = camelCaseObject(notificationsList);
-  return data;
+export async function markAllNotificationRead(appName) {
+  const { data } = await getAuthenticatedHttpClient().put(`${markAllNotificationsAsReadpiUrl(appName)}`);
+
+  return camelCaseObject(data);
 }
 
-export async function markNotificationRead(notificationId) {
-  const { data } = camelCaseObject(notificationsList);
-  return { data, id: notificationId };
+export async function markNotificationRead(appName, notificationId) {
+  const { data } = await getAuthenticatedHttpClient().put(`${markAllNotificationsAsReadpiUrl(appName, notificationId)}`);
+
+  return camelCaseObject({ data, id: notificationId });
 }
