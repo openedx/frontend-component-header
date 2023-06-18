@@ -29,5 +29,11 @@
   "header.menu.account.label": "الحساب",
   "header.menu.orderHistory.label": "سجل الطلبيات",
   "header.navigation.skipNavLink": "التخطي إلى المحتوى الرئيسي",
-  "header.menu.signOut.label": "تسجيل الخروج"
+  "header.menu.signOut.label": "تسجيل الخروج",
+  "notification.title": "Notifications",
+  "notification.today.heading": "Last 24 hours",
+  "notification.earlier.heading": "Earlier",
+  "notification.mark.as.read": "Mark all as read",
+  "notification.fullStop": "•",
+  "notification.load.more.notifications": "Load more notifications"
 }
