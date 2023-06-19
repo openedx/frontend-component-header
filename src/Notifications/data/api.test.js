@@ -5,7 +5,7 @@ import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 import { initializeMockApp } from '@edx/frontend-platform/testing';
 
 import {
-  getNotificationsApiUrl, getNotificationsCountApiUrl, markAllNotificationsAsReadpiUrl, markNotificationsSeenApiUrl,
+  getNotificationsApiUrl, getNotificationsCountApiUrl, markNotificationAsReadApiUrl, markNotificationsSeenApiUrl,
   getNotificationCounts, getNotifications, markNotificationSeen, markAllNotificationRead, markNotificationRead,
 } from './api';
 
@@ -14,7 +14,7 @@ import './__factories__';
 const notificationCountsApiUrl = getNotificationsCountApiUrl();
 const notificationsApiUrl = getNotificationsApiUrl();
 const markedAllNotificationsAsSeenApiUrl = markNotificationsSeenApiUrl('discussions');
-const markedAllNotificationsAsReadApiUrl = markAllNotificationsAsReadpiUrl();
+const markedAllNotificationsAsReadApiUrl = markNotificationAsReadApiUrl();
 
 let axiosMock = null;
 

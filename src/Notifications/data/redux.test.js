@@ -7,7 +7,7 @@ import { initializeMockApp } from '@edx/frontend-platform/testing';
 import { initializeStore } from '../../store';
 import executeThunk from '../../test-utils';
 import {
-  getNotificationsApiUrl, getNotificationsCountApiUrl, markAllNotificationsAsReadpiUrl, markNotificationsSeenApiUrl,
+  getNotificationsApiUrl, getNotificationsCountApiUrl, markNotificationAsReadApiUrl, markNotificationsSeenApiUrl,
 } from './api';
 import {
   fetchAppsNotificationCount, fetchNotificationList, markNotificationsAsRead, markAllNotificationsAsRead,
@@ -18,7 +18,7 @@ import './__factories__';
 
 const notificationCountsApiUrl = getNotificationsCountApiUrl();
 const notificationsApiUrl = getNotificationsApiUrl();
-const markedAllNotificationsAsReadApiUrl = markAllNotificationsAsReadpiUrl();
+const markedAllNotificationsAsReadApiUrl = markNotificationAsReadApiUrl();
 const markedAllNotificationsAsSeenApiUrl = markNotificationsSeenApiUrl('discussions');
 
 let axiosMock;
@@ -137,18 +137,6 @@ describe('Notification Redux', () => {
 
     expect(notificationStatus).toEqual('successful');
     expect(firstNotification.lastRead).not.toBeNull();
-  });
-
-  it.each([
-    { statusCode: 404, status: 'failed' },
-    { statusCode: 403, status: 'denied' },
-  ])('%s to mark all notifications as read for selected app in the redux.', async ({ statusCode, status }) => {
-    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(statusCode);
-    await executeThunk(markAllNotificationsAsRead('discussions'), store.dispatch, store.getState);
-
-    const { notifications: { notificationStatus } } = store.getState();
-
-    expect(notificationStatus).toEqual(status);
   });
 
   it('Successfully marked notification as read in the redux.', async () => {

@@ -4,7 +4,7 @@ import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 export const getNotificationsCountApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/count/`;
 export const getNotificationsApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/`;
 export const markNotificationsSeenApiUrl = (appName) => `${getConfig().LMS_BASE_URL}/api/notifications/mark-notifications-unseen/${appName}/`;
-export const markAllNotificationsAsReadpiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/read/`;
+export const markNotificationAsReadApiUrl = () => `${getConfig().LMS_BASE_URL}/api/notifications/read/`;
 
 export async function getNotifications(appName, page, pageSize) {
   const params = snakeCaseObject({ page, pageSize });
@@ -31,14 +31,14 @@ export async function markNotificationSeen(appName) {
 
 export async function markAllNotificationRead(appName) {
   const params = snakeCaseObject({ appName });
-  const { data } = await getAuthenticatedHttpClient().put(markAllNotificationsAsReadpiUrl(), { params });
+  const { data } = await getAuthenticatedHttpClient().put(markNotificationAsReadApiUrl(), { params });
 
   return data;
 }
 
 export async function markNotificationRead(notificationId) {
   const params = snakeCaseObject({ notificationId });
-  const { data } = await getAuthenticatedHttpClient().put(markAllNotificationsAsReadpiUrl(), { params });
+  const { data } = await getAuthenticatedHttpClient().put(markNotificationAsReadApiUrl(), { params });
 
   return { data, id: notificationId };
 }
