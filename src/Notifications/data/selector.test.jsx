@@ -55,14 +55,14 @@ describe('Notification Selectors', () => {
     axiosMock.reset();
   });
 
-  it('should return notification status.', async () => {
+  it('Should return notification status.', async () => {
     const state = store.getState();
     const status = selectNotificationStatus()(state);
 
     expect(status).toEqual('successful');
   });
 
-  it('should return notification tabs count.', async () => {
+  it('Should return notification tabs count.', async () => {
     const state = store.getState();
     const tabsCount = selectNotificationTabsCount()(state);
 
@@ -73,49 +73,49 @@ describe('Notification Selectors', () => {
     expect(tabsCount.authoring).toEqual(5);
   });
 
-  it('should return notification tabs.', async () => {
+  it('Should return notification tabs.', async () => {
     const state = store.getState();
     const tabs = selectNotificationTabs()(state);
 
     expect(tabs).toHaveLength(4);
   });
 
-  it('should return selected app notification ids.', async () => {
+  it('Should return selected app notification ids.', async () => {
     const state = store.getState();
     const notificationIds = selectSelectedAppNotificationIds('discussions')(state);
 
     expect(notificationIds).toHaveLength(2);
   });
 
-  it('should return show notification tray status.', async () => {
+  it('Should return show notification tray status.', async () => {
     const state = store.getState();
     const showNotificationTrayStatus = selectShowNotificationTray()(state);
 
     expect(showNotificationTrayStatus).toEqual(true);
   });
 
-  it('should return notifications.', async () => {
+  it('Should return notifications.', async () => {
     const state = store.getState();
     const notifications = selectNotifications()(state);
 
     expect(Object.keys(notifications)).toHaveLength(2);
   });
 
-  it('should return notifications from Ids.', async () => {
+  it('Should return notifications from Ids.', async () => {
     const state = store.getState();
     const notifications = selectNotificationsByIds('discussions')(state);
 
     expect(notifications).toHaveLength(2);
   });
 
-  it('should return selected app name.', async () => {
+  it('Should return selected app name.', async () => {
     const state = store.getState();
     const appName = selectSelectedAppName()(state);
 
     expect(appName).toEqual('discussions');
   });
 
-  it('should return pagination data.', async () => {
+  it('Should return pagination data.', async () => {
     const state = store.getState();
     const paginationData = selectPaginationData()(state);
 

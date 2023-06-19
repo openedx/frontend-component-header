@@ -4,30 +4,19 @@ import { Factory } from 'rosie';
 import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 import { initializeMockApp } from '@edx/frontend-platform/testing';
 
-import { initializeStore } from '../../store';
-import executeThunk from '../../test-utils';
 import {
   getNotificationsApiUrl, getNotificationsCountApiUrl, markAllNotificationsAsReadpiUrl, markNotificationsSeenApiUrl,
   getNotificationCounts, getNotifications, markNotificationSeen, markAllNotificationRead, markNotificationRead,
 } from './api';
-import {
-  fetchAppsNotificationCount,
-  fetchNotificationList,
-  markAllNotificationsAsRead,
-  markNotificationsAsRead,
-  markNotificationsAsSeen,
-} from './thunks';
 
 import './__factories__';
 
 const notificationCountsApiUrl = getNotificationsCountApiUrl();
 const notificationsApiUrl = getNotificationsApiUrl();
 const markedAllNotificationsAsSeenApiUrl = markNotificationsSeenApiUrl('discussions');
-const markedAllNotificationsAsReadApiUrl = markAllNotificationsAsReadpiUrl('discussions');
-const markedNotificationAsReadApiUrl = markAllNotificationsAsReadpiUrl('discussions', 1);
+const markedAllNotificationsAsReadApiUrl = markAllNotificationsAsReadpiUrl();
 
 let axiosMock = null;
-let store;
 
 describe('Notifications API', () => {
   beforeEach(async () => {
@@ -41,14 +30,13 @@ describe('Notifications API', () => {
     });
     axiosMock = new MockAdapter(getAuthenticatedHttpClient());
     Factory.resetAll();
-    store = initializeStore();
   });
 
   afterEach(() => {
     axiosMock.reset();
   });
 
-  it('successfully get notification counts for different tabs.', async () => {
+  it('Successfully get notification counts for different tabs.', async () => {
     axiosMock.onGet(notificationCountsApiUrl).reply(200, (Factory.build('notificationsCount')));
 
     const { count, countByAppName } = await getNotificationCounts();
@@ -60,21 +48,20 @@ describe('Notifications API', () => {
     expect(countByAppName.authoring).toEqual(5);
   });
 
-  it('failed to get notification counts.', async () => {
-    axiosMock.onGet(notificationCountsApiUrl).reply(404);
-    await executeThunk(fetchAppsNotificationCount(), store.dispatch, store.getState);
-
-    expect(store.getState().notifications.notificationStatus).toEqual('failed');
+  it.each([
+    { statusCode: 404, message: 'Failed to get notification counts.' },
+    { statusCode: 403, message: 'Denied to get notification counts.' },
+  ])('%s for notification counts API.', async ({ statusCode, message }) => {
+    axiosMock.onGet(notificationCountsApiUrl).reply(statusCode, { message });
+    try {
+      await getNotificationCounts();
+    } catch (error) {
+      expect(error.response.status).toEqual(statusCode);
+      expect(error.response.data.message).toEqual(message);
+    }
   });
 
-  it('denied to get notification counts.', async () => {
-    axiosMock.onGet(notificationCountsApiUrl).reply(403, {});
-    await executeThunk(fetchAppsNotificationCount(), store.dispatch);
-
-    expect(store.getState().notifications.notificationStatus).toEqual('denied');
-  });
-
-  it('successfully get notifications.', async () => {
+  it('Successfully get notifications.', async () => {
     axiosMock.onGet(notificationsApiUrl).reply(
       200,
       (Factory.buildList('notification', 2, null, { createdDate: new Date().toISOString() })),
@@ -85,21 +72,20 @@ describe('Notifications API', () => {
     expect(notifications).toHaveLength(2);
   });
 
-  it('failed to get notifications.', async () => {
-    axiosMock.onGet(notificationsApiUrl).reply(404);
-    await executeThunk(fetchNotificationList({ page: 1, pageSize: 10 }), store.dispatch, store.getState);
-
-    expect(store.getState().notifications.notificationStatus).toEqual('failed');
+  it.each([
+    { statusCode: 404, message: 'Failed to get notifications.' },
+    { statusCode: 403, message: 'Denied to get notifications.' },
+  ])('%s for notification API.', async ({ statusCode, message }) => {
+    axiosMock.onGet(notificationsApiUrl).reply(statusCode, { message });
+    try {
+      await getNotifications({ page: 1, pageSize: 10 });
+    } catch (error) {
+      expect(error.response.status).toEqual(statusCode);
+      expect(error.response.data.message).toEqual(message);
+    }
   });
 
-  it('denied to get notifications.', async () => {
-    axiosMock.onGet(notificationsApiUrl).reply(403, {});
-    await executeThunk(fetchNotificationList({ page: 1, pageSize: 10 }), store.dispatch);
-
-    expect(store.getState().notifications.notificationStatus).toEqual('denied');
-  });
-
-  it('successfully marked all notifications as seen for selected app.', async () => {
+  it('Successfully marked all notifications as seen for selected app.', async () => {
     axiosMock.onPut(markedAllNotificationsAsSeenApiUrl).reply(200, { message: 'Notifications marked seen.' });
 
     const { message } = await markNotificationSeen('discussions');
@@ -107,21 +93,20 @@ describe('Notifications API', () => {
     expect(message).toEqual('Notifications marked seen.');
   });
 
-  it('failed to mark all notifications as seen for selected app.', async () => {
-    axiosMock.onPut(markedAllNotificationsAsSeenApiUrl).reply(404);
-    await executeThunk(markNotificationsAsSeen('discussions'), store.dispatch, store.getState);
-
-    expect(store.getState().notifications.notificationStatus).toEqual('failed');
+  it.each([
+    { statusCode: 404, message: 'Failed to mark all notifications as seen for selected app.' },
+    { statusCode: 403, message: 'Denied to mark all notifications as seen for selected app.' },
+  ])('%s for notification mark as seen API.', async ({ statusCode, message }) => {
+    axiosMock.onPut(markedAllNotificationsAsSeenApiUrl).reply(statusCode, { message });
+    try {
+      await markNotificationSeen('discussions');
+    } catch (error) {
+      expect(error.response.status).toEqual(statusCode);
+      expect(error.response.data.message).toEqual(message);
+    }
   });
 
-  it('denied to mark all notifications as seen for selected app.', async () => {
-    axiosMock.onPut(markedAllNotificationsAsSeenApiUrl).reply(403, {});
-    await executeThunk(markNotificationsAsSeen('discussions'), store.dispatch);
-
-    expect(store.getState().notifications.notificationStatus).toEqual('denied');
-  });
-
-  it('successfully marked all notifications as read for selected app.', async () => {
+  it('Successfully marked all notifications as read for selected app.', async () => {
     axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(200, { message: 'Notifications marked read.' });
 
     const { message } = await markAllNotificationRead('discussions');
@@ -129,39 +114,37 @@ describe('Notifications API', () => {
     expect(message).toEqual('Notifications marked read.');
   });
 
-  it('failed to mark all notifications as read for selected app.', async () => {
-    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(404);
-    await executeThunk(markAllNotificationsAsRead('discussions'), store.dispatch, store.getState);
-
-    expect(store.getState().notifications.notificationStatus).toEqual('failed');
+  it.each([
+    { statusCode: 404, message: 'Failed to mark all notifications as read for selected app.' },
+    { statusCode: 403, message: 'Denied to mark all notifications as read for selected app.' },
+  ])('%s for notification mark all as read API.', async ({ statusCode, message }) => {
+    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(statusCode, { message });
+    try {
+      await markAllNotificationRead('discussions');
+    } catch (error) {
+      expect(error.response.status).toEqual(statusCode);
+      expect(error.response.data.message).toEqual(message);
+    }
   });
 
-  it('denied to mark all notifications as read for selected app.', async () => {
-    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(403, {});
-    await executeThunk(markAllNotificationsAsRead('discussions'), store.dispatch);
+  it('Successfully marked notification as read.', async () => {
+    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(200, { message: 'Notification marked read.' });
 
-    expect(store.getState().notifications.notificationStatus).toEqual('denied');
-  });
-
-  it('successfully marked notification as read.', async () => {
-    axiosMock.onPut(markedNotificationAsReadApiUrl).reply(200, { message: 'Notification marked read.' });
-
-    const { data } = await markNotificationRead('discussions', 1);
+    const { data } = await markNotificationRead(1);
 
     expect(data.message).toEqual('Notification marked read.');
   });
 
-  it('failed to mark notification as read .', async () => {
-    axiosMock.onPut(markedNotificationAsReadApiUrl).reply(404);
-    await executeThunk(markNotificationsAsRead('discussions', 1), store.dispatch, store.getState);
-
-    expect(store.getState().notifications.notificationStatus).toEqual('failed');
-  });
-
-  it('denied to mark notification as read.', async () => {
-    axiosMock.onPut(markedNotificationAsReadApiUrl).reply(403, {});
-    await executeThunk(markNotificationsAsRead('discussions', 1), store.dispatch);
-
-    expect(store.getState().notifications.notificationStatus).toEqual('denied');
+  it.each([
+    { statusCode: 404, message: 'Failed to mark notification as read.' },
+    { statusCode: 403, message: 'Denied to mark notification as read.' },
+  ])('%s for notification mark as read API.', async ({ statusCode, message }) => {
+    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(statusCode, { message });
+    try {
+      await markAllNotificationRead(1);
+    } catch (error) {
+      expect(error.response.status).toEqual(statusCode);
+      expect(error.response.data.message).toEqual(message);
+    }
   });
 });

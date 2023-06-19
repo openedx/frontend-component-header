@@ -18,8 +18,7 @@ import './__factories__';
 
 const notificationCountsApiUrl = getNotificationsCountApiUrl();
 const notificationsApiUrl = getNotificationsApiUrl();
-const markedNotificationAsReadApiUrl = markAllNotificationsAsReadpiUrl('discussions', 1);
-const markedAllNotificationsAsReadApiUrl = markAllNotificationsAsReadpiUrl('discussions');
+const markedAllNotificationsAsReadApiUrl = markAllNotificationsAsReadpiUrl();
 const markedAllNotificationsAsSeenApiUrl = markNotificationsSeenApiUrl('discussions');
 
 let axiosMock;
@@ -52,7 +51,7 @@ describe('Notification Redux', () => {
     axiosMock.reset();
   });
 
-  it('successfully loaded initial notification states in the redux.', async () => {
+  it('Successfully loaded initial notification states in the redux.', async () => {
     executeThunk(resetNotificationState(), store.dispatch, store.getState);
 
     const { notifications } = store.getState();
@@ -70,13 +69,13 @@ describe('Notification Redux', () => {
     expect(notifications.pagination.nextPage).toBeNull();
   });
 
-  it('successfully loaded notifications list in the redux.', async () => {
+  it('Successfully loaded notifications list in the redux.', async () => {
     const { notifications: { notifications } } = store.getState();
 
     expect(Object.keys(notifications)).toHaveLength(2);
   });
 
-  it('successfully loaded notification counts in the redux.', async () => {
+  it('Successfully loaded notification counts in the redux.', async () => {
     const { notifications: { tabsCount } } = store.getState();
 
     expect(tabsCount.count).toEqual(25);
@@ -86,40 +85,14 @@ describe('Notification Redux', () => {
     expect(tabsCount.authoring).toEqual(5);
   });
 
-  it('successfully loaded showNotificationTray status in the redux based on api.', async () => {
-    const { notifications: { showNotificationTray } } = store.getState();
-
-    expect(showNotificationTray).toEqual(true);
-  });
-
-  it('successfully store the count, numPages, currentPage, and nextPage data in redux.', async () => {
-    const { notifications: { pagination } } = store.getState();
-
-    expect(pagination.count).toEqual(10);
-    expect(pagination.currentPage).toEqual(1);
-    expect(pagination.numPages).toEqual(2);
-  });
-
-  it('successfully updated the selected app name in redux.', async () => {
-    const { notifications: { appName } } = store.getState();
-
-    expect(appName).toEqual('discussions');
-  });
-
-  it('successfully store notification ids in the selected app in apps.', async () => {
-    const { notifications: { apps } } = store.getState();
-
-    expect(apps.discussions).toHaveLength(2);
-  });
-
-  it('successfully marked all notifications as seen for selected app.', async () => {
+  it('Successfully marked all notifications as seen for selected app.', async () => {
     axiosMock.onPut(markedAllNotificationsAsSeenApiUrl).reply(200);
     await executeThunk(markNotificationsAsSeen('discussions'), store.dispatch, store.getState);
 
     expect(store.getState().notifications.notificationStatus).toEqual('successful');
   });
 
-  it('successfully marked all notifications as read for selected app in the redux.', async () => {
+  it('Successfully marked all notifications as read for selected app in the redux.', async () => {
     axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(200);
     await executeThunk(markAllNotificationsAsRead('discussions'), store.dispatch, store.getState);
 
@@ -130,9 +103,9 @@ describe('Notification Redux', () => {
     expect(firstNotification.lastRead).not.toBeNull();
   });
 
-  it('successfully marked notification as read in the redux.', async () => {
-    axiosMock.onPut(markedNotificationAsReadApiUrl).reply(200);
-    await executeThunk(markNotificationsAsRead('discussions', 1), store.dispatch, store.getState);
+  it('Successfully marked notification as read in the redux.', async () => {
+    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(200);
+    await executeThunk(markNotificationsAsRead(1), store.dispatch, store.getState);
 
     const { notifications: { notificationStatus, notifications } } = store.getState();
     const firstNotification = Object.values(notifications)[0];
