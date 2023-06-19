@@ -1,3 +1,4 @@
+import { camelCaseObject } from '@edx/frontend-platform';
 import {
   fetchNotificationSuccess,
   fetchNotificationRequest,
@@ -47,7 +48,7 @@ export const fetchNotificationList = ({ appName, page, pageSize }) => (
     try {
       dispatch(fetchNotificationRequest({ appName }));
       const data = await getNotifications(appName, page, pageSize);
-      const normalisedData = normalizeNotifications((data));
+      const normalisedData = normalizeNotifications((camelCaseObject(data)));
       dispatch(fetchNotificationSuccess({ ...normalisedData, numPages: data.numPages, currentPage: data.currentPage }));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
@@ -64,7 +65,7 @@ export const fetchAppsNotificationCount = () => (
     try {
       dispatch(fetchNotificationsCountRequest());
       const data = await getNotificationCounts();
-      const normalisedData = normalizeNotificationCounts((data));
+      const normalisedData = normalizeNotificationCounts((camelCaseObject(data)));
       dispatch(fetchNotificationsCountSuccess({
         ...normalisedData,
         countByAppName: data.countByAppName,
@@ -86,7 +87,7 @@ export const markAllNotificationsAsRead = (appName) => (
     try {
       dispatch(markAllNotificationsAsReadRequest({ appName }));
       const data = await markAllNotificationRead(appName);
-      dispatch(markAllNotificationsAsReadSuccess(data));
+      dispatch(markAllNotificationsAsReadSuccess(camelCaseObject(data)));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
         dispatch(markAllNotificationsAsReadDenied());
@@ -102,7 +103,7 @@ export const markNotificationsAsRead = (notificationId) => (
     try {
       dispatch(markNotificationsAsReadRequest({ notificationId }));
       const data = await markNotificationRead(notificationId);
-      dispatch(markNotificationsAsReadSuccess(data));
+      dispatch(markNotificationsAsReadSuccess(camelCaseObject(data)));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
         dispatch(markNotificationsAsReadDenied());
@@ -118,7 +119,7 @@ export const markNotificationsAsSeen = (appName) => (
     try {
       dispatch(markNotificationsAsSeenRequest({ appName }));
       const data = await markNotificationSeen(appName);
-      dispatch(markNotificationsAsSeenSuccess(data));
+      dispatch(markNotificationsAsSeenSuccess(camelCaseObject(data)));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
         dispatch(markNotificationsAsSeenDenied());
