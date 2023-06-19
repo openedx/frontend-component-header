@@ -16,7 +16,7 @@ const initialState = {
   apps: {},
   notifications: {},
   tabsCount: {},
-  showNotificationTray: false,
+  showNotificationsTray: false,
   pagination: {
     count: 10,
     numPages: 1,
@@ -62,12 +62,12 @@ const slice = createSlice({
     },
     fetchNotificationsCountSuccess: (state, { payload }) => {
       const {
-        countByAppName, appIds, apps, count, showNotificationTray,
+        countByAppName, appIds, apps, count, showNotificationsTray,
       } = payload;
       state.tabsCount = { count, ...countByAppName };
       state.appsId = appIds;
       state.apps = apps;
-      state.showNotificationTray = showNotificationTray;
+      state.showNotificationsTray = showNotificationsTray;
       state.notificationStatus = RequestStatus.LOADED;
     },
     markNotificationsAsSeenRequest: (state) => {

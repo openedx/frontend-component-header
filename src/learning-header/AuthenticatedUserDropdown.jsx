@@ -15,7 +15,7 @@ import { RequestStatus } from '../Notifications/data/slice';
 import messages from './messages';
 
 const AuthenticatedUserDropdown = ({ intl, username }) => {
-  const showNotificationTray = useSelector(selectShowNotificationTray());
+  const showNotificationsTray = useSelector(selectShowNotificationTray());
   const notificationStatus = useSelector(selectNotificationStatus());
   const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ const AuthenticatedUserDropdown = ({ intl, username }) => {
   return (
     <>
       <a className="text-gray-700" href={`${getConfig().SUPPORT_URL}`}>{intl.formatMessage(messages.help)}</a>
-      {showNotificationTray && <Notifications />}
+      {showNotificationsTray && <Notifications />}
       <Dropdown className="user-dropdown ml-3">
         <Dropdown.Toggle variant="outline-primary">
           <FontAwesomeIcon icon={faUserCircle} className="d-md-none" size="lg" />

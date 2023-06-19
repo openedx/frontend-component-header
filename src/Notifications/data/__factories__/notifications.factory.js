@@ -8,7 +8,7 @@ Factory.define('notificationsCount')
     grades: 10,
     authoring: 5,
   })
-  .attr('showNotificationTray', true);
+  .attr('showNotificationsTray', true);
 
 Factory.define('notification')
   .sequence('id')
