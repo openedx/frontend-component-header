@@ -29,5 +29,11 @@
   "header.menu.account.label": "Cuenta",
   "header.menu.orderHistory.label": "Historial de órdenes",
   "header.navigation.skipNavLink": "Dirígete al contenido principal.",
-  "header.menu.signOut.label": "Cerrar sesión"
+  "header.menu.signOut.label": "Cerrar sesión",
+  "notification.title": "Notifications",
+  "notification.today.heading": "Last 24 hours",
+  "notification.earlier.heading": "Earlier",
+  "notification.mark.as.read": "Mark all as read",
+  "notification.fullStop": "•",
+  "notification.load.more.notifications": "Load more notifications"
 }
