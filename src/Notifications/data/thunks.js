@@ -66,12 +66,7 @@ export const fetchAppsNotificationCount = () => (
       dispatch(fetchNotificationsCountRequest());
       const data = await getNotificationCounts();
       const normalisedData = normalizeNotificationCounts((camelCaseObject(data)));
-      dispatch(fetchNotificationsCountSuccess({
-        ...normalisedData,
-        countByAppName: data.countByAppName,
-        count: data.count,
-        showNotificationsTray: data.showNotificationsTray,
-      }));
+      dispatch(fetchNotificationsCountSuccess({ ...normalisedData }));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
         dispatch(fetchNotificationsCountDenied());
