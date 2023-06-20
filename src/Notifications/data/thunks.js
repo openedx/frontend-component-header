@@ -27,11 +27,11 @@ import {
 } from './api';
 import { getHttpErrorStatus } from '../utils';
 
-const normalizeNotificationCounts = ({ countByAppName, count, showNotificationTray }) => {
+const normalizeNotificationCounts = ({ countByAppName, count, showNotificationsTray }) => {
   const appIds = Object.keys(countByAppName);
   const apps = appIds.reduce((acc, appId) => { acc[appId] = []; return acc; }, {});
   return {
-    countByAppName, appIds, apps, count, showNotificationTray,
+    countByAppName, appIds, apps, count, showNotificationsTray,
   };
 };
 
@@ -66,12 +66,7 @@ export const fetchAppsNotificationCount = () => (
       dispatch(fetchNotificationsCountRequest());
       const data = await getNotificationCounts();
       const normalisedData = normalizeNotificationCounts((camelCaseObject(data)));
-      dispatch(fetchNotificationsCountSuccess({
-        ...normalisedData,
-        countByAppName: data.countByAppName,
-        count: data.count,
-        showNotificationTray: data.showNotificationTray,
-      }));
+      dispatch(fetchNotificationsCountSuccess({ ...normalisedData }));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
         dispatch(fetchNotificationsCountDenied());

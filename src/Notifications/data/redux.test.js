@@ -62,7 +62,7 @@ describe('Notification Redux', () => {
     expect(notifications.apps).toEqual({});
     expect(notifications.notifications).toEqual({});
     expect(notifications.tabsCount).toEqual({});
-    expect(notifications.showNotificationTray).toEqual(false);
+    expect(notifications.showNotificationsTray).toEqual(false);
     expect(notifications.pagination.count).toEqual(10);
     expect(notifications.pagination.numPages).toEqual(1);
     expect(notifications.pagination.currentPage).toEqual(1);

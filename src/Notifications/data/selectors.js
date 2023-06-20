@@ -8,7 +8,7 @@ export const selectNotificationTabs = () => state => state.notifications.appsId;
 
 export const selectSelectedAppNotificationIds = (appName) => state => state.notifications.apps[appName] ?? [];
 
-export const selectShowNotificationTray = () => state => state.notifications.showNotificationTray;
+export const selectShowNotificationTray = () => state => state.notifications.showNotificationsTray;
 
 export const selectNotifications = () => state => state.notifications.notifications;
 
