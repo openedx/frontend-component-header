@@ -1,6 +1,6 @@
-@import "@edx/brand/paragon/fonts";
+@import url("https://cdn.jsdelivr.net/npm/@edx/brand-edx.org@alpha/dist/core.min.css");
+@import url("https://cdn.jsdelivr.net/npm/@edx/brand-edx.org@alpha/dist/light.min.css");
 @import "@edx/paragon/styles/scss/core/core";
 @import "@edx/paragon/styles/css/themes/light/index.css";
-@import "@edx/brand/paragon/overrides";
 
 @import "@edx/frontend-component-header/index";
