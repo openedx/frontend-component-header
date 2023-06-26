@@ -54,7 +54,7 @@ const Notifications = () => {
       overlay={(
         <Popover
           id="notificationTray"
-          data-testid="notificationTray"
+          data-testid="notification-tray"
           className={classNames('overflow-auto rounded-0 border-0', {
             'w-100': !isOnMediumScreen && !isOnLargeScreen,
             'medium-screen': isOnMediumScreen,
@@ -64,7 +64,7 @@ const Notifications = () => {
           <div ref={popoverRef}>
             <Popover.Title as="h2" className="d-flex justify-content-between p-0 m-4 border-0 text-primary-500 font-size-18 line-height-24">
               {intl.formatMessage(messages.notificationTitle)}
-              <Icon src={Settings} className="icon-size-20" />
+              <Icon src={Settings} className="icon-size-20" data-testid="setting-icon" />
             </Popover.Title>
             <Popover.Content className="notification-content p-0">
               <NotificationTabs />
@@ -83,12 +83,14 @@ const Notifications = () => {
           variant="light"
           iconClassNames="text-primary-500"
           className="ml-4 mr-1 my-3 notification-button"
+          data-testid="notification-bell-icon"
         />
         {notificationCounts?.count > 0 && (
           <Badge
             pill
             variant="danger"
             className="font-weight-normal px-1 notification-badge"
+            data-testid="notification-count"
           >
             {notificationCounts.count}
           </Badge>
