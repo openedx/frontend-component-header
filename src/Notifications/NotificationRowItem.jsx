@@ -57,7 +57,7 @@ const NotificationRowItem = ({
           </div>
           {!lastRead && (
             <div className="d-flex py-1.5 px-1.5 ml-2 cursor-pointer">
-              <span className="bg-brand-500 rounded unread" data-testid={`unread-${id}`} />
+              <span className="bg-brand-500 rounded unread" data-testid={`unread-notification-${id}`} />
             </div>
           )}
         </div>

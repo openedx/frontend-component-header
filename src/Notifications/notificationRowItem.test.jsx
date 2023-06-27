@@ -15,7 +15,7 @@ import { AppContext, AppProvider } from '@edx/frontend-platform/react';
 import AuthenticatedUserDropdown from '../learning-header/AuthenticatedUserDropdown';
 import { initializeStore } from '../store';
 import { markNotificationAsReadApiUrl } from './data/api';
-import setupLearnerMockResponse from './test-utils';
+import mockNotificationsResponse from './test-utils';
 
 import './data/__factories__';
 
@@ -24,8 +24,8 @@ const markedNotificationAsReadApiUrl = markNotificationAsReadApiUrl();
 let axiosMock;
 let store;
 
-async function renderComponent() {
-  await render(
+function renderComponent() {
+  render(
     <ResponsiveContext.Provider>
       <IntlProvider locale="en" messages={{}}>
         <AppProvider store={store}>
@@ -53,13 +53,13 @@ describe('Notification row item test cases.', () => {
     Factory.resetAll();
     store = initializeStore();
 
-    ({ store, axiosMock } = await setupLearnerMockResponse());
+    ({ store, axiosMock } = await mockNotificationsResponse());
   });
 
   it(
     'Successfully viewed notification icon, notification context, unread , course name and notification time.',
     async () => {
-      await renderComponent();
+      renderComponent();
 
       const bellIcon = screen.queryByTestId('notification-bell-icon');
       await act(async () => { fireEvent.click(bellIcon); });
@@ -68,13 +68,13 @@ describe('Notification row item test cases.', () => {
       expect(screen.queryByTestId('notification-content-1')).toBeInTheDocument();
       expect(screen.queryByTestId('notification-course-1')).toBeInTheDocument();
       expect(screen.queryByTestId('notification-created-date-1')).toBeInTheDocument();
-      expect(screen.queryByTestId('unread-1')).toBeInTheDocument();
+      expect(screen.queryByTestId('unread-notification-1')).toBeInTheDocument();
     },
   );
 
   it('Successfully marked notification as read.', async () => {
     axiosMock.onPut(markedNotificationAsReadApiUrl).reply(200, { message: 'Notification marked read.' });
-    await renderComponent();
+    renderComponent();
 
     const bellIcon = screen.queryByTestId('notification-bell-icon');
     await act(async () => { fireEvent.click(bellIcon); });
@@ -82,6 +82,6 @@ describe('Notification row item test cases.', () => {
     const notification = screen.queryByTestId('notification-1');
     await act(async () => { fireEvent.click(notification); });
 
-    expect(screen.queryByTestId('unread-1')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('unread-notification-1')).not.toBeInTheDocument();
   });
 });

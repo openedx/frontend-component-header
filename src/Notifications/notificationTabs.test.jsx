@@ -12,14 +12,14 @@ import { AppContext, AppProvider } from '@edx/frontend-platform/react';
 
 import AuthenticatedUserDropdown from '../learning-header/AuthenticatedUserDropdown';
 import { initializeStore } from '../store';
-import setupLearnerMockResponse from './test-utils';
+import mockNotificationsResponse from './test-utils';
 
 import './data/__factories__';
 
 let store;
 
-async function renderComponent() {
-  await render(
+function renderComponent() {
+  render(
     <ResponsiveContext.Provider>
       <IntlProvider locale="en" messages={{}}>
         <AppProvider store={store}>
@@ -46,28 +46,25 @@ describe('Notification Tabs test cases.', () => {
     Factory.resetAll();
     store = initializeStore();
 
-    ({ store } = await setupLearnerMockResponse());
+    ({ store } = await mockNotificationsResponse());
   });
 
-  it(
-    'Successfully showed list of notification tabs, discussion tab selected by default and no unseen counts for it.',
-    async () => {
-      await renderComponent();
+  it('Notification tabs displayed with default discussion tab selected and no unseen counts.', async () => {
+    renderComponent();
 
-      const bellIcon = screen.queryByTestId('notification-bell-icon');
-      await act(async () => { fireEvent.click(bellIcon); });
+    const bellIcon = screen.queryByTestId('notification-bell-icon');
+    await act(async () => { fireEvent.click(bellIcon); });
 
-      const tabs = screen.queryAllByRole('tab');
-      const selectedTab = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
+    const tabs = screen.queryAllByRole('tab');
+    const selectedTab = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
 
-      expect(tabs.length).toEqual(5);
-      expect(within(selectedTab).queryByText('discussions')).toBeInTheDocument();
-      expect(within(selectedTab).queryByRole('status')).not.toBeInTheDocument();
-    },
-  );
+    expect(tabs.length).toEqual(5);
+    expect(within(selectedTab).queryByText('discussions')).toBeInTheDocument();
+    expect(within(selectedTab).queryByRole('status')).not.toBeInTheDocument();
+  });
 
   it('Successfully showed unseen counts for unselected tabs.', async () => {
-    await renderComponent();
+    renderComponent();
     const bellIcon = screen.queryByTestId('notification-bell-icon');
     await act(async () => { fireEvent.click(bellIcon); });
 
@@ -77,7 +74,7 @@ describe('Notification Tabs test cases.', () => {
   });
 
   it('Successfully selected reminder tab.', async () => {
-    await renderComponent();
+    renderComponent();
 
     const bellIcon = screen.queryByTestId('notification-bell-icon');
     await act(async () => { fireEvent.click(bellIcon); });

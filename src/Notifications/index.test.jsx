@@ -25,8 +25,8 @@ const notificationCountsApiUrl = getNotificationsCountApiUrl();
 let axiosMock;
 let store;
 
-async function renderComponent() {
-  await render(
+function renderComponent() {
+  render(
     <ResponsiveContext.Provider>
       <IntlProvider locale="en" messages={{}}>
         <AppProvider store={store}>
@@ -58,8 +58,8 @@ describe('Notification test cases.', () => {
     await executeThunk(fetchAppsNotificationCount(), store.dispatch, store.getState);
   });
 
-  it('successfully showed bell icon and unseen count on it if unseen count is greater then 0.', async () => {
-    await renderComponent();
+  it('Successfully showed bell icon and unseen count on it if unseen count is greater then 0.', async () => {
+    renderComponent();
 
     const bellIcon = screen.queryByTestId('notification-bell-icon');
     const notificationCount = screen.queryByTestId('notification-count');
@@ -69,8 +69,35 @@ describe('Notification test cases.', () => {
     expect(screen.queryByText(45)).toBeInTheDocument();
   });
 
-  it('successfully show/hide notification tray by clicking on the bell icon and setting icon.', async () => {
-    await renderComponent();
+  it('Successfully showed bell icon and hide unseen count tag when unseen count is zero.', async () => {
+    axiosMock.onGet(notificationCountsApiUrl).reply(200, (Factory.build('notificationsCount', { count: 0 })));
+    await executeThunk(fetchAppsNotificationCount(), store.dispatch, store.getState);
+
+    renderComponent();
+
+    const bellIcon = screen.queryByTestId('notification-bell-icon');
+    const notificationCount = screen.queryByTestId('notification-count');
+
+    expect(bellIcon).toBeInTheDocument();
+    expect(notificationCount).not.toBeInTheDocument();
+  });
+
+  it('Successfully hides bell icon when showNotificationsTray is false.', async () => {
+    axiosMock.onGet(notificationCountsApiUrl).reply(
+      200,
+      (Factory.build('notificationsCount', { showNotificationsTray: false })),
+    );
+    await executeThunk(fetchAppsNotificationCount(), store.dispatch, store.getState);
+
+    renderComponent();
+
+    const bellIcon = screen.queryByTestId('notification-bell-icon');
+
+    expect(bellIcon).not.toBeInTheDocument();
+  });
+
+  it('Successfully viewed setting icon and show/hide notification tray by clicking on the bell icon .', async () => {
+    renderComponent();
 
     const bellIcon = screen.queryByTestId('notification-bell-icon');
 

@@ -15,7 +15,7 @@ import { AppContext, AppProvider } from '@edx/frontend-platform/react';
 import AuthenticatedUserDropdown from '../learning-header/AuthenticatedUserDropdown';
 import { initializeStore } from '../store';
 import { markNotificationAsReadApiUrl } from './data/api';
-import setupLearnerMockResponse from './test-utils';
+import mockNotificationsResponse from './test-utils';
 
 import './data/__factories__';
 
@@ -24,8 +24,8 @@ const markedAllNotificationsAsReadApiUrl = markNotificationAsReadApiUrl();
 let axiosMock;
 let store;
 
-async function renderComponent() {
-  await render(
+function renderComponent() {
+  render(
     <ResponsiveContext.Provider>
       <IntlProvider locale="en" messages={{}}>
         <AppProvider store={store}>
@@ -53,11 +53,11 @@ describe('Notification sections test cases.', () => {
     Factory.resetAll();
     store = initializeStore();
 
-    ({ store, axiosMock } = await setupLearnerMockResponse());
+    ({ store, axiosMock } = await mockNotificationsResponse());
   });
 
-  it('Successfully viewed last 24 hours and earlier section along with nark all as read label.', async () => {
-    await renderComponent();
+  it('Successfully viewed last 24 hours and earlier section along with mark all as read label.', async () => {
+    renderComponent();
 
     const bellIcon = screen.queryByTestId('notification-bell-icon');
     await act(async () => { fireEvent.click(bellIcon); });
@@ -68,30 +68,27 @@ describe('Notification sections test cases.', () => {
     expect(within(notificationTraySection).queryByText('Mark all as read')).toBeInTheDocument();
   });
 
-  it(
-    'Successfully clicks on the mark all as read, the unread status disappeared across all the notifications',
-    async () => {
-      axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(200, { message: 'Notifications marked read.' });
-      await renderComponent();
+  it('Successfully marked all notifications as read, removing the unread status.', async () => {
+    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(200, { message: 'Notifications marked read.' });
+    renderComponent();
 
-      const bellIcon = screen.queryByTestId('notification-bell-icon');
-      await act(async () => { fireEvent.click(bellIcon); });
-      const markAllReadButton = screen.queryByTestId('mark-all-read');
+    const bellIcon = screen.queryByTestId('notification-bell-icon');
+    await act(async () => { fireEvent.click(bellIcon); });
+    const markAllReadButton = screen.queryByTestId('mark-all-read');
 
-      expect(screen.queryByTestId('unread-1')).toBeInTheDocument();
-      await act(async () => { fireEvent.click(markAllReadButton); });
+    expect(screen.queryByTestId('unread-notification-1')).toBeInTheDocument();
+    await act(async () => { fireEvent.click(markAllReadButton); });
 
-      expect(screen.queryByTestId('unread-1')).not.toBeInTheDocument();
-    },
-  );
+    expect(screen.queryByTestId('unread-notification-1')).not.toBeInTheDocument();
+  });
 
   it('Successfully load more notifications by clicking on load more notification button.', async () => {
-    await renderComponent();
+    renderComponent();
 
     const bellIcon = screen.queryByTestId('notification-bell-icon');
     await act(async () => { fireEvent.click(bellIcon); });
 
-    const loadMoreButton = screen.queryByTestId('load-more');
+    const loadMoreButton = screen.queryByTestId('load-more-notifications');
 
     expect(screen.queryAllByTestId('notification-contents')).toHaveLength(10);
     await act(async () => { fireEvent.click(loadMoreButton); });

@@ -71,7 +71,12 @@ const NotificationSections = () => {
       {renderNotificationSection('today', today)}
       {renderNotificationSection('earlier', earlier)}
       {currentPage < numPages && (
-        <Button variant="primary" className="w-100 bg-primary-500" onClick={updatePagination} data-testid="load-more">
+        <Button
+          variant="primary"
+          className="w-100 bg-primary-500"
+          onClick={updatePagination}
+          data-testid="load-more-notifications"
+        >
           {intl.formatMessage(messages.loadMoreNotifications)}
         </Button>
       )}

@@ -13,7 +13,7 @@ import './data/__factories__';
 const notificationCountsApiUrl = getNotificationsCountApiUrl();
 const notificationsApiUrl = getNotificationsApiUrl();
 
-export default async function setupLearnerMockResponse() {
+export default async function mockNotificationsResponse() {
   const store = initializeStore();
   const axiosMock = new MockAdapter(getAuthenticatedHttpClient());
 
