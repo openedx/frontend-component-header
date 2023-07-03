@@ -23,7 +23,7 @@ import {
   markNotificationsAsReadFailure,
 } from './slice';
 import {
-  getNotifications, getNotificationCounts, markNotificationSeen, markAllNotificationRead, markNotificationRead,
+  getNotificationsList, getNotificationCounts, markNotificationSeen, markAllNotificationRead, markNotificationRead,
 } from './api';
 import { getHttpErrorStatus } from '../utils';
 
@@ -35,7 +35,7 @@ const normalizeNotificationCounts = ({ countByAppName, count, showNotificationsT
   };
 };
 
-const normalizeNotifications = ({ notifications }) => {
+const normalizeNotifications = (notifications) => {
   const newNotificationIds = notifications.map(notification => notification.id.toString());
   const notificationsKeyValuePair = notifications.reduce((acc, obj) => { acc[obj.id] = obj; return acc; }, {});
   return {
@@ -43,13 +43,15 @@ const normalizeNotifications = ({ notifications }) => {
   };
 };
 
-export const fetchNotificationList = ({ appName, page, pageSize }) => (
+export const fetchNotificationList = ({ appName, page }) => (
   async (dispatch) => {
     try {
       dispatch(fetchNotificationRequest({ appName }));
-      const data = await getNotifications(appName, page, pageSize);
-      const normalisedData = normalizeNotifications((camelCaseObject(data)));
-      dispatch(fetchNotificationSuccess({ ...normalisedData, numPages: data.numPages, currentPage: data.currentPage }));
+      const data = await getNotificationsList(appName, page);
+      const normalisedData = normalizeNotifications((camelCaseObject(data.results)));
+      dispatch(fetchNotificationSuccess({
+        ...normalisedData, totalPages: data.num_pages, currentPage: data.current_page, nextPage: data.next,
+      }));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
         dispatch(fetchNotificationDenied(appName));

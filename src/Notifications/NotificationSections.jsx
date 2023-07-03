@@ -6,16 +6,19 @@ import isEmpty from 'lodash/isEmpty';
 import messages from './messages';
 import NotificationRowItem from './NotificationRowItem';
 import { markAllNotificationsAsRead } from './data/thunks';
-import { selectNotificationsByIds, selectPaginationData, selectSelectedAppName } from './data/selectors';
+import {
+  selectNotificationsByIds, selectPaginationData, selectSelectedAppName, selectNotificationStatus,
+} from './data/selectors';
 import { splitNotificationsByTime } from './utils';
-import { updatePaginationRequest } from './data/slice';
+import { updatePaginationRequest, RequestStatus } from './data/slice';
 
 const NotificationSections = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
   const selectedAppName = useSelector(selectSelectedAppName());
+  const notificationRequestStatus = useSelector(selectNotificationStatus());
   const notifications = useSelector(selectNotificationsByIds(selectedAppName));
-  const { currentPage, numPages } = useSelector(selectPaginationData());
+  const { nextPage } = useSelector(selectPaginationData());
   const { today = [], earlier = [] } = useMemo(
     () => splitNotificationsByTime(notifications),
     [notifications],
@@ -70,13 +73,8 @@ const NotificationSections = () => {
     <div className="mt-4 px-4" data-testid="notification-tray-section">
       {renderNotificationSection('today', today)}
       {renderNotificationSection('earlier', earlier)}
-      {currentPage < numPages && (
-        <Button
-          variant="primary"
-          className="w-100 bg-primary-500"
-          onClick={updatePagination}
-          data-testid="load-more-notifications"
-        >
+      {nextPage && notificationRequestStatus === RequestStatus.LOADED && (
+        <Button variant="primary" className="w-100 bg-primary-500" onClick={updatePagination}>
           {intl.formatMessage(messages.loadMoreNotifications)}
         </Button>
       )}

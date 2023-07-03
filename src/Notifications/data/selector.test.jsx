@@ -121,6 +121,6 @@ describe('Notification Selectors', () => {
 
     expect(paginationData.count).toEqual(10);
     expect(paginationData.currentPage).toEqual(1);
-    expect(paginationData.numPages).toEqual(2);
+    expect(paginationData.totalPages).toEqual(2);
   });
 });

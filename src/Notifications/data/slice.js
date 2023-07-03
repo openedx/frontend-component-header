@@ -11,15 +11,14 @@ export const RequestStatus = {
 
 const initialState = {
   notificationStatus: 'idle',
-  appName: 'discussions',
+  appName: 'discussion',
   appsId: [],
   apps: {},
   notifications: {},
   tabsCount: {},
   showNotificationsTray: false,
   pagination: {
-    count: 10,
-    numPages: 1,
+    totalPages: 1,
     currentPage: 1,
     nextPage: null,
   },
@@ -39,7 +38,7 @@ const slice = createSlice({
     },
     fetchNotificationSuccess: (state, { payload }) => {
       const {
-        newNotificationIds, notificationsKeyValuePair, numPages, currentPage,
+        newNotificationIds, notificationsKeyValuePair, totalPages, currentPage, nextPage,
       } = payload;
       const existingNotificationIds = state.apps[state.appName];
 
@@ -48,8 +47,9 @@ const slice = createSlice({
       state.tabsCount.count -= state.tabsCount[state.appName];
       state.tabsCount[state.appName] = 0;
       state.notificationStatus = RequestStatus.LOADED;
-      state.pagination.numPages = numPages;
+      state.pagination.totalPages = totalPages;
       state.pagination.currentPage = currentPage;
+      state.pagination.nextPage = nextPage;
     },
     fetchNotificationsCountDenied: (state) => {
       state.notificationStatus = RequestStatus.DENIED;

@@ -7,7 +7,7 @@ import { initializeMockApp } from '@edx/frontend-platform/testing';
 import { initializeStore } from '../../store';
 import executeThunk from '../../test-utils';
 import {
-  getNotificationsApiUrl, getNotificationsCountApiUrl, markNotificationAsReadApiUrl, markNotificationsSeenApiUrl,
+  getNotificationsListApiUrl, getNotificationsCountApiUrl, markNotificationAsReadApiUrl, markNotificationsSeenApiUrl,
 } from './api';
 import {
   fetchAppsNotificationCount, fetchNotificationList, markNotificationsAsRead, markAllNotificationsAsRead,
@@ -17,7 +17,7 @@ import {
 import './__factories__';
 
 const notificationCountsApiUrl = getNotificationsCountApiUrl();
-const notificationsApiUrl = getNotificationsApiUrl();
+const notificationsListApiUrl = getNotificationsListApiUrl();
 const markedAllNotificationsAsReadApiUrl = markNotificationAsReadApiUrl();
 const markedAllNotificationsAsSeenApiUrl = markNotificationsSeenApiUrl('discussions');
 
@@ -39,7 +39,7 @@ describe('Notification Redux', () => {
     store = initializeStore();
 
     axiosMock.onGet(notificationCountsApiUrl).reply(200, (Factory.build('notificationsCount')));
-    axiosMock.onGet(notificationsApiUrl).reply(
+    axiosMock.onGet(notificationsListApiUrl).reply(
       200,
       (Factory.buildList('notification', 2, null, { createdDate: new Date().toISOString() })),
     );
@@ -64,7 +64,7 @@ describe('Notification Redux', () => {
     expect(notifications.tabsCount).toEqual({});
     expect(notifications.showNotificationsTray).toEqual(false);
     expect(notifications.pagination.count).toEqual(10);
-    expect(notifications.pagination.numPages).toEqual(1);
+    expect(notifications.pagination.totalPages).toEqual(1);
     expect(notifications.pagination.currentPage).toEqual(1);
     expect(notifications.pagination.nextPage).toBeNull();
   });
@@ -79,7 +79,7 @@ describe('Notification Redux', () => {
     { statusCode: 404, status: 'failed' },
     { statusCode: 403, status: 'denied' },
   ])('%s to load notifications list in the redux.', async ({ statusCode, status }) => {
-    axiosMock.onGet(notificationsApiUrl).reply(statusCode);
+    axiosMock.onGet(notificationsListApiUrl).reply(statusCode);
     await executeThunk(fetchNotificationList({ page: 1, pageSize: 10 }), store.dispatch, store.getState);
 
     const { notifications: { notificationStatus } } = store.getState();
