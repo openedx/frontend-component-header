@@ -44,6 +44,7 @@ const NotificationSections = () => {
               variant="link"
               className="text-info-500 font-size-14 line-height-10 text-decoration-none p-0 border-0"
               onClick={handleMarkAllAsRead}
+              data-testid="mark-all-read"
             >
               {intl.formatMessage(messages.notificationMarkAsRead)}
             </Button>
@@ -66,11 +67,16 @@ const NotificationSections = () => {
   };
 
   return (
-    <div className="mt-4 px-4">
+    <div className="mt-4 px-4" data-testid="notification-tray-section">
       {renderNotificationSection('today', today)}
       {renderNotificationSection('earlier', earlier)}
       {currentPage < numPages && (
-        <Button variant="primary" className="w-100 bg-primary-500" onClick={updatePagination}>
+        <Button
+          variant="primary"
+          className="w-100 bg-primary-500"
+          onClick={updatePagination}
+          data-testid="load-more-notifications"
+        >
           {intl.formatMessage(messages.loadMoreNotifications)}
         </Button>
       )}

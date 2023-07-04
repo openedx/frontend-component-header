@@ -29,27 +29,35 @@ const NotificationRowItem = ({
       className="d-flex mb-2 align-items-center text-decoration-none"
       to={contentUrl}
       onClick={handleMarkAsRead}
+      data-testid={`notification-${id}`}
     >
-      <Icon src={iconComponent} className={`${iconClass} mr-4 notification-icon`} />
-      <div className="d-flex w-100">
+      <Icon
+        src={iconComponent}
+        className={`${iconClass} mr-4 notification-icon`}
+        data-testid={`notification-icon-${id}`}
+      />
+      <div className="d-flex w-100" data-testid="notification-contents">
         <div className="d-flex align-items-center w-100">
           <div className="py-10px w-100 px-0 cursor-pointer">
             <span
               className="line-height-24 text-gray-700 mb-2 notification-item-content overflow-hidden content"
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: content }}
+              data-testid={`notification-content-${id}`}
             />
             <div className="py-0 d-flex">
               <span className="font-size-12 text-gray-500 line-height-20">
-                <span>{courseName}</span>
+                <span data-testid={`notification-course-${id}`}>{courseName}
+                </span>
                 <span className="text-light-700 px-1.5">{intl.formatMessage(messages.fullStop)}</span>
-                <span>{timeago.format(createdAt, 'time-locale')}</span>
+                <span data-testid={`notification-created-date-${id}`}> {timeago.format(createdAt, 'time-locale')}
+                </span>
               </span>
             </div>
           </div>
           {!lastRead && (
             <div className="d-flex py-1.5 px-1.5 ml-2 cursor-pointer">
-              <span className="bg-brand-500 rounded unread" />
+              <span className="bg-brand-500 rounded unread" data-testid={`unread-notification-${id}`} />
             </div>
           )}
         </div>
