@@ -32,6 +32,7 @@ const NotificationTabs = () => {
       title={appName}
       notification={notificationUnseenCounts[appName]}
       tabClassName="pt-0 pb-10px px-2.5 d-flex border-top-0 mb-0 align-items-center line-height-24 text-capitalize"
+      data-testid={`notification-tab-${appName}`}
     >
       {appName === selectedAppName && (<NotificationSections />)}
     </Tab>
