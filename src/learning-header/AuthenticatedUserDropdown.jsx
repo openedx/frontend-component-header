@@ -24,7 +24,7 @@ const AuthenticatedUserDropdown = ({ intl, username }) => {
       dispatch(fetchAppsNotificationCount());
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [notificationStatus]);
+  }, []);
 
   const dashboardMenuItem = (
     <Dropdown.Item href={`${getConfig().LMS_BASE_URL}/dashboard`}>

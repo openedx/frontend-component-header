@@ -19,7 +19,7 @@ import './__factories__';
 const notificationCountsApiUrl = getNotificationsCountApiUrl();
 const notificationsListApiUrl = getNotificationsListApiUrl();
 const markedAllNotificationsAsReadApiUrl = markNotificationAsReadApiUrl();
-const markedAllNotificationsAsSeenApiUrl = markNotificationsSeenApiUrl('discussions');
+const markedAllNotificationsAsSeenApiUrl = markNotificationsSeenApiUrl('discussion');
 
 let axiosMock;
 let store;
@@ -39,12 +39,9 @@ describe('Notification Redux', () => {
     store = initializeStore();
 
     axiosMock.onGet(notificationCountsApiUrl).reply(200, (Factory.build('notificationsCount')));
-    axiosMock.onGet(notificationsListApiUrl).reply(
-      200,
-      (Factory.buildList('notification', 2, null, { createdDate: new Date().toISOString() })),
-    );
+    axiosMock.onGet(notificationsListApiUrl).reply(200, (Factory.build('notificationsList')));
     await executeThunk(fetchAppsNotificationCount(), store.dispatch, store.getState);
-    await executeThunk(fetchNotificationList({ page: 1, pageSize: 10 }), store.dispatch, store.getState);
+    await executeThunk(fetchNotificationList({ appName: 'discussion', page: 1 }), store.dispatch, store.getState);
   });
 
   afterEach(() => {
@@ -57,13 +54,12 @@ describe('Notification Redux', () => {
     const { notifications } = store.getState();
 
     expect(notifications.notificationStatus).toEqual('idle');
-    expect(notifications.appName).toEqual('discussions');
+    expect(notifications.appName).toEqual('discussion');
     expect(notifications.appsId).toHaveLength(0);
     expect(notifications.apps).toEqual({});
     expect(notifications.notifications).toEqual({});
     expect(notifications.tabsCount).toEqual({});
     expect(notifications.showNotificationsTray).toEqual(false);
-    expect(notifications.pagination.count).toEqual(10);
     expect(notifications.pagination.totalPages).toEqual(1);
     expect(notifications.pagination.currentPage).toEqual(1);
     expect(notifications.pagination.nextPage).toBeNull();
@@ -71,7 +67,6 @@ describe('Notification Redux', () => {
 
   it('Successfully loaded notifications list in the redux.', async () => {
     const { notifications: { notifications } } = store.getState();
-
     expect(Object.keys(notifications)).toHaveLength(2);
   });
 
@@ -80,7 +75,7 @@ describe('Notification Redux', () => {
     { statusCode: 403, status: 'denied' },
   ])('%s to load notifications list in the redux.', async ({ statusCode, status }) => {
     axiosMock.onGet(notificationsListApiUrl).reply(statusCode);
-    await executeThunk(fetchNotificationList({ page: 1, pageSize: 10 }), store.dispatch, store.getState);
+    await executeThunk(fetchNotificationList({ page: 1 }), store.dispatch, store.getState);
 
     const { notifications: { notificationStatus } } = store.getState();
 
@@ -92,7 +87,7 @@ describe('Notification Redux', () => {
 
     expect(tabsCount.count).toEqual(25);
     expect(tabsCount.reminders).toEqual(10);
-    expect(tabsCount.discussions).toEqual(0);
+    expect(tabsCount.discussion).toEqual(0);
     expect(tabsCount.grades).toEqual(10);
     expect(tabsCount.authoring).toEqual(5);
   });
@@ -111,7 +106,7 @@ describe('Notification Redux', () => {
 
   it('Successfully marked all notifications as seen for selected app.', async () => {
     axiosMock.onPut(markedAllNotificationsAsSeenApiUrl).reply(200);
-    await executeThunk(markNotificationsAsSeen('discussions'), store.dispatch, store.getState);
+    await executeThunk(markNotificationsAsSeen('discussion'), store.dispatch, store.getState);
 
     expect(store.getState().notifications.notificationStatus).toEqual('successful');
   });
@@ -121,7 +116,7 @@ describe('Notification Redux', () => {
     { statusCode: 403, status: 'denied' },
   ])('%s to mark all notifications as seen for selected app.', async ({ statusCode, status }) => {
     axiosMock.onPut(markedAllNotificationsAsSeenApiUrl).reply(statusCode);
-    await executeThunk(markNotificationsAsSeen('discussions'), store.dispatch, store.getState);
+    await executeThunk(markNotificationsAsSeen('discussion'), store.dispatch, store.getState);
 
     const { notifications: { notificationStatus } } = store.getState();
 
@@ -129,8 +124,8 @@ describe('Notification Redux', () => {
   });
 
   it('Successfully marked all notifications as read for selected app in the redux.', async () => {
-    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(200);
-    await executeThunk(markAllNotificationsAsRead('discussions'), store.dispatch, store.getState);
+    axiosMock.onPatch(markedAllNotificationsAsReadApiUrl).reply(200);
+    await executeThunk(markAllNotificationsAsRead('discussion'), store.dispatch, store.getState);
 
     const { notifications: { notificationStatus, notifications } } = store.getState();
     const firstNotification = Object.values(notifications)[0];
@@ -140,7 +135,7 @@ describe('Notification Redux', () => {
   });
 
   it('Successfully marked notification as read in the redux.', async () => {
-    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(200);
+    axiosMock.onPatch(markedAllNotificationsAsReadApiUrl).reply(200);
     await executeThunk(markNotificationsAsRead(1), store.dispatch, store.getState);
 
     const { notifications: { notificationStatus, notifications } } = store.getState();
@@ -154,7 +149,7 @@ describe('Notification Redux', () => {
     { statusCode: 404, status: 'failed' },
     { statusCode: 403, status: 'denied' },
   ])('%s to marked notification as read in the redux.', async ({ statusCode, status }) => {
-    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(statusCode);
+    axiosMock.onPatch(markedAllNotificationsAsReadApiUrl).reply(statusCode);
     await executeThunk(markNotificationsAsRead(1), store.dispatch, store.getState);
 
     const { notifications: { notificationStatus } } = store.getState();

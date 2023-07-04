@@ -73,7 +73,7 @@ describe('Notification row item test cases.', () => {
   );
 
   it('Successfully marked notification as read.', async () => {
-    axiosMock.onPut(markedNotificationAsReadApiUrl).reply(200, { message: 'Notification marked read.' });
+    axiosMock.onPatch(markedNotificationAsReadApiUrl).reply(200, { message: 'Notification marked read.' });
     renderComponent();
 
     const bellIcon = screen.queryByTestId('notification-bell-icon');

@@ -14,9 +14,10 @@ import { AppContext, AppProvider } from '@edx/frontend-platform/react';
 
 import AuthenticatedUserDropdown from '../learning-header/AuthenticatedUserDropdown';
 import { initializeStore } from '../store';
-import { markNotificationAsReadApiUrl } from './data/api';
+import { markNotificationAsReadApiUrl, markNotificationsSeenApiUrl, getNotificationsListApiUrl } from './data/api';
 import mockNotificationsResponse from './test-utils';
-
+import { markNotificationsAsSeen, fetchNotificationList } from './data/thunks';
+import executeThunk from '../test-utils';
 import './data/__factories__';
 
 const markedAllNotificationsAsReadApiUrl = markNotificationAsReadApiUrl();
@@ -69,7 +70,7 @@ describe('Notification sections test cases.', () => {
   });
 
   it('Successfully marked all notifications as read, removing the unread status.', async () => {
-    axiosMock.onPut(markedAllNotificationsAsReadApiUrl).reply(200, { message: 'Notifications marked read.' });
+    axiosMock.onPatch(markedAllNotificationsAsReadApiUrl).reply(200, { message: 'Notifications marked read.' });
     renderComponent();
 
     const bellIcon = screen.queryByTestId('notification-bell-icon');
@@ -83,16 +84,23 @@ describe('Notification sections test cases.', () => {
   });
 
   it('Successfully load more notifications by clicking on load more notification button.', async () => {
+    axiosMock.onPut(markNotificationsSeenApiUrl('discussion')).reply(200);
+    await executeThunk(markNotificationsAsSeen('discussions'), store.dispatch, store.getState);
     renderComponent();
 
     const bellIcon = screen.queryByTestId('notification-bell-icon');
     await act(async () => { fireEvent.click(bellIcon); });
 
+    expect(screen.queryAllByTestId('notification-contents')).toHaveLength(10);
     const loadMoreButton = screen.queryByTestId('load-more-notifications');
 
-    expect(screen.queryAllByTestId('notification-contents')).toHaveLength(10);
-    await act(async () => { fireEvent.click(loadMoreButton); });
+    axiosMock.onGet(getNotificationsListApiUrl()).reply(
+      200,
+      (Factory.build('notificationsList', { num_pages: 2, current_page: 2 })),
+    );
+    await executeThunk(fetchNotificationList({ appName: 'discussion', page: 2 }), store.dispatch, store.getState);
 
-    expect(screen.queryAllByTestId('notification-contents')).toHaveLength(16);
+    await act(async () => { fireEvent.click(loadMoreButton); });
+    expect(screen.queryAllByTestId('notification-contents')).toHaveLength(12);
   });
 });

@@ -73,8 +73,13 @@ const NotificationSections = () => {
     <div className="mt-4 px-4" data-testid="notification-tray-section">
       {renderNotificationSection('today', today)}
       {renderNotificationSection('earlier', earlier)}
-      {nextPage && notificationRequestStatus === RequestStatus.LOADED && (
-        <Button variant="primary" className="w-100 bg-primary-500" onClick={updatePagination}>
+      {nextPage && notificationRequestStatus === RequestStatus.SUCCESSFUL && (
+        <Button
+          variant="primary"
+          className="w-100 bg-primary-500"
+          onClick={updatePagination}
+          data-testid="load-more-notifications"
+        >
           {intl.formatMessage(messages.loadMoreNotifications)}
         </Button>
       )}
