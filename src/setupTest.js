@@ -3,7 +3,7 @@
 import Enzyme from 'enzyme';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import 'babel-polyfill';
