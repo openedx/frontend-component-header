@@ -66,7 +66,7 @@ describe('Notifications API', () => {
 
     const notifications = await getNotificationsList('discussion', 1);
 
-    expect(Object.keys(notifications.results)).toHaveLength(2);
+    expect(notifications.results).toHaveLength(2);
   });
 
   it.each([

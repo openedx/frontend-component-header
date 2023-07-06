@@ -5,8 +5,7 @@ import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 import { initializeMockApp } from '@edx/frontend-platform/testing';
 
 import { initializeStore } from '../../store';
-import executeThunk from '../../test-utils';
-import { getNotificationsListApiUrl, getNotificationsCountApiUrl } from './api';
+import mockNotificationsResponse from '../test-utils';
 import {
   selectNotifications,
   selectNotificationsByIds,
@@ -18,12 +17,8 @@ import {
   selectSelectedAppNotificationIds,
   selectShowNotificationTray,
 } from './selectors';
-import { fetchAppsNotificationCount, fetchNotificationList } from './thunks';
 
 import './__factories__';
-
-const notificationCountsApiUrl = getNotificationsCountApiUrl();
-const notificationsApiUrl = getNotificationsListApiUrl();
 
 let axiosMock;
 let store;
@@ -42,10 +37,7 @@ describe('Notification Selectors', () => {
     Factory.resetAll();
     store = initializeStore();
 
-    axiosMock.onGet(notificationCountsApiUrl).reply(200, (Factory.build('notificationsCount')));
-    axiosMock.onGet(notificationsApiUrl).reply(200, (Factory.build('notificationsList')));
-    await executeThunk(fetchAppsNotificationCount(), store.dispatch, store.getState);
-    await executeThunk(fetchNotificationList({ appName: 'discussion', page: 1 }), store.dispatch, store.getState);
+    ({ store, axiosMock } = await mockNotificationsResponse());
   });
 
   afterEach(() => {
@@ -81,7 +73,7 @@ describe('Notification Selectors', () => {
     const state = store.getState();
     const notificationIds = selectSelectedAppNotificationIds('discussion')(state);
 
-    expect(notificationIds).toHaveLength(2);
+    expect(notificationIds).toHaveLength(10);
   });
 
   it('Should return show notification tray status.', async () => {
@@ -95,14 +87,14 @@ describe('Notification Selectors', () => {
     const state = store.getState();
     const notifications = selectNotifications()(state);
 
-    expect(Object.keys(notifications)).toHaveLength(2);
+    expect(Object.keys(notifications)).toHaveLength(10);
   });
 
   it('Should return notifications from Ids.', async () => {
     const state = store.getState();
     const notifications = selectNotificationsByIds('discussion')(state);
 
-    expect(notifications).toHaveLength(2);
+    expect(notifications).toHaveLength(10);
   });
 
   it('Should return selected app name.', async () => {
@@ -117,7 +109,7 @@ describe('Notification Selectors', () => {
     const paginationData = selectPaginationData()(state);
 
     expect(paginationData.currentPage).toEqual(1);
-    expect(paginationData.totalPages).toEqual(1);
-    expect(paginationData.nextPage).toEqual(null);
+    expect(paginationData.numPages).toEqual(2);
+    expect(paginationData.hasMorePages).toEqual(true);
   });
 });

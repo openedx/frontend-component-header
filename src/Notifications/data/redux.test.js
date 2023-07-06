@@ -6,6 +6,7 @@ import { initializeMockApp } from '@edx/frontend-platform/testing';
 
 import { initializeStore } from '../../store';
 import executeThunk from '../../test-utils';
+import mockNotificationsResponse from '../test-utils';
 import {
   getNotificationsListApiUrl, getNotificationsCountApiUrl, markNotificationAsReadApiUrl, markNotificationsSeenApiUrl,
 } from './api';
@@ -38,10 +39,7 @@ describe('Notification Redux', () => {
     Factory.resetAll();
     store = initializeStore();
 
-    axiosMock.onGet(notificationCountsApiUrl).reply(200, (Factory.build('notificationsCount')));
-    axiosMock.onGet(notificationsListApiUrl).reply(200, (Factory.build('notificationsList')));
-    await executeThunk(fetchAppsNotificationCount(), store.dispatch, store.getState);
-    await executeThunk(fetchNotificationList({ appName: 'discussion', page: 1 }), store.dispatch, store.getState);
+    ({ store, axiosMock } = await mockNotificationsResponse());
   });
 
   afterEach(() => {
@@ -60,14 +58,12 @@ describe('Notification Redux', () => {
     expect(notifications.notifications).toEqual({});
     expect(notifications.tabsCount).toEqual({});
     expect(notifications.showNotificationsTray).toEqual(false);
-    expect(notifications.pagination.totalPages).toEqual(1);
-    expect(notifications.pagination.currentPage).toEqual(1);
-    expect(notifications.pagination.nextPage).toBeNull();
+    expect(notifications.pagination).toEqual({});
   });
 
   it('Successfully loaded notifications list in the redux.', async () => {
     const { notifications: { notifications } } = store.getState();
-    expect(Object.keys(notifications)).toHaveLength(2);
+    expect(Object.keys(notifications)).toHaveLength(10);
   });
 
   it.each([
