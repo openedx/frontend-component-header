@@ -49,9 +49,12 @@ export const fetchNotificationList = ({ appName, page }) => (
       dispatch(fetchNotificationRequest({ appName }));
       const data = await getNotificationsList(appName, page);
       const normalisedData = normalizeNotifications((camelCaseObject(data.results)));
-      dispatch(fetchNotificationSuccess({
-        ...normalisedData, totalPages: data.num_pages, currentPage: data.current_page, nextPage: data.next,
-      }));
+      const pagination = {
+        numPages: data.num_pages,
+        currentPage: data.current_page,
+        hasMorePages: !!data.next,
+      };
+      dispatch(fetchNotificationSuccess({ ...normalisedData, pagination }));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
         dispatch(fetchNotificationDenied(appName));

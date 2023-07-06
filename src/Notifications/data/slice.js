@@ -17,11 +17,7 @@ const initialState = {
   notifications: {},
   tabsCount: {},
   showNotificationsTray: false,
-  pagination: {
-    totalPages: 1,
-    currentPage: 1,
-    nextPage: null,
-  },
+  pagination: {},
 };
 const slice = createSlice({
   name: 'notifications',
@@ -38,7 +34,7 @@ const slice = createSlice({
     },
     fetchNotificationSuccess: (state, { payload }) => {
       const {
-        newNotificationIds, notificationsKeyValuePair, totalPages, currentPage, nextPage,
+        newNotificationIds, notificationsKeyValuePair, pagination,
       } = payload;
       const existingNotificationIds = state.apps[state.appName];
       state.apps[state.appName] = Array.from(new Set([...existingNotificationIds, ...newNotificationIds]));
@@ -46,9 +42,7 @@ const slice = createSlice({
       state.tabsCount.count -= state.tabsCount[state.appName];
       state.tabsCount[state.appName] = 0;
       state.notificationStatus = RequestStatus.SUCCESSFUL;
-      state.pagination.totalPages = totalPages;
-      state.pagination.currentPage = currentPage;
-      state.pagination.nextPage = nextPage;
+      state.pagination = pagination;
     },
     fetchNotificationsCountDenied: (state) => {
       state.notificationStatus = RequestStatus.DENIED;

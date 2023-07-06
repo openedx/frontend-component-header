@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { Button } from '@edx/paragon';
+import { Button, Spinner } from '@edx/paragon';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import isEmpty from 'lodash/isEmpty';
@@ -18,7 +18,7 @@ const NotificationSections = () => {
   const selectedAppName = useSelector(selectSelectedAppName());
   const notificationRequestStatus = useSelector(selectNotificationStatus());
   const notifications = useSelector(selectNotificationsByIds(selectedAppName));
-  const { nextPage } = useSelector(selectPaginationData());
+  const { hasMorePages } = useSelector(selectPaginationData());
   const { today = [], earlier = [] } = useMemo(
     () => splitNotificationsByTime(notifications),
     [notifications],
@@ -73,15 +73,21 @@ const NotificationSections = () => {
     <div className="mt-4 px-4" data-testid="notification-tray-section">
       {renderNotificationSection('today', today)}
       {renderNotificationSection('earlier', earlier)}
-      {nextPage && notificationRequestStatus === RequestStatus.SUCCESSFUL && (
-        <Button
-          variant="primary"
-          className="w-100 bg-primary-500"
-          onClick={updatePagination}
-          data-testid="load-more-notifications"
-        >
-          {intl.formatMessage(messages.loadMoreNotifications)}
-        </Button>
+      {hasMorePages && notificationRequestStatus === RequestStatus.IN_PROGRESS ? (
+        <div className="d-flex justify-content-center p-4">
+          <Spinner animation="border" variant="primary" size="lg" />
+        </div>
+      ) : (hasMorePages && notificationRequestStatus === RequestStatus.SUCCESSFUL
+        && (
+          <Button
+            variant="primary"
+            className="w-100 bg-primary-500"
+            onClick={updatePagination}
+            data-testid="load-more-notifications"
+          >
+            {intl.formatMessage(messages.loadMoreNotifications)}
+          </Button>
+        )
       )}
     </div>
   );
