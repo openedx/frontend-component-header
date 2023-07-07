@@ -35,11 +35,16 @@ const normalizeNotificationCounts = ({ countByAppName, count, showNotificationsT
   };
 };
 
-const normalizeNotifications = (notifications) => {
-  const newNotificationIds = notifications.map(notification => notification.id.toString());
-  const notificationsKeyValuePair = notifications.reduce((acc, obj) => { acc[obj.id] = obj; return acc; }, {});
+const normalizeNotifications = (data) => {
+  const newNotificationIds = data.results.map(notification => notification.id.toString());
+  const notificationsKeyValuePair = data.results.reduce((acc, obj) => { acc[obj.id] = obj; return acc; }, {});
+  const pagination = {
+    numPages: data.numPages,
+    currentPage: data.currentPage,
+    hasMorePages: !!data.next,
+  };
   return {
-    newNotificationIds, notificationsKeyValuePair,
+    newNotificationIds, notificationsKeyValuePair, pagination,
   };
 };
 
@@ -48,13 +53,8 @@ export const fetchNotificationList = ({ appName, page }) => (
     try {
       dispatch(fetchNotificationRequest({ appName }));
       const data = await getNotificationsList(appName, page);
-      const normalisedData = normalizeNotifications((camelCaseObject(data.results)));
-      const pagination = {
-        numPages: data.num_pages,
-        currentPage: data.current_page,
-        hasMorePages: !!data.next,
-      };
-      dispatch(fetchNotificationSuccess({ ...normalisedData, pagination }));
+      const normalisedData = normalizeNotifications((camelCaseObject(data)));
+      dispatch(fetchNotificationSuccess({ ...normalisedData }));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
         dispatch(fetchNotificationDenied(appName));
