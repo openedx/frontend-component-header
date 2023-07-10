@@ -3,26 +3,21 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const RequestStatus = {
   IDLE: 'idle',
-  LOADING: 'in-progress',
-  LOADED: 'successful',
+  IN_PROGRESS: 'in-progress',
+  SUCCESSFUL: 'successful',
   FAILED: 'failed',
   DENIED: 'denied',
 };
 
 const initialState = {
-  notificationStatus: 'idle',
-  appName: 'discussions',
+  notificationStatus: RequestStatus.IDLE,
+  appName: 'discussion',
   appsId: [],
   apps: {},
   notifications: {},
   tabsCount: {},
   showNotificationsTray: false,
-  pagination: {
-    count: 10,
-    numPages: 1,
-    currentPage: 1,
-    nextPage: null,
-  },
+  pagination: {},
 };
 const slice = createSlice({
   name: 'notifications',
@@ -35,21 +30,19 @@ const slice = createSlice({
       state.notificationStatus = RequestStatus.FAILED;
     },
     fetchNotificationRequest: (state) => {
-      state.notificationStatus = RequestStatus.LOADING;
+      state.notificationStatus = RequestStatus.IN_PROGRESS;
     },
     fetchNotificationSuccess: (state, { payload }) => {
       const {
-        newNotificationIds, notificationsKeyValuePair, numPages, currentPage,
+        newNotificationIds, notificationsKeyValuePair, pagination,
       } = payload;
       const existingNotificationIds = state.apps[state.appName];
-
       state.apps[state.appName] = Array.from(new Set([...existingNotificationIds, ...newNotificationIds]));
       state.notifications = { ...state.notifications, ...notificationsKeyValuePair };
       state.tabsCount.count -= state.tabsCount[state.appName];
       state.tabsCount[state.appName] = 0;
-      state.notificationStatus = RequestStatus.LOADED;
-      state.pagination.numPages = numPages;
-      state.pagination.currentPage = currentPage;
+      state.notificationStatus = RequestStatus.SUCCESSFUL;
+      state.pagination = pagination;
     },
     fetchNotificationsCountDenied: (state) => {
       state.notificationStatus = RequestStatus.DENIED;
@@ -58,7 +51,7 @@ const slice = createSlice({
       state.notificationStatus = RequestStatus.FAILED;
     },
     fetchNotificationsCountRequest: (state) => {
-      state.notificationStatus = RequestStatus.LOADING;
+      state.notificationStatus = RequestStatus.IN_PROGRESS;
     },
     fetchNotificationsCountSuccess: (state, { payload }) => {
       const {
@@ -68,13 +61,13 @@ const slice = createSlice({
       state.appsId = appIds;
       state.apps = apps;
       state.showNotificationsTray = showNotificationsTray;
-      state.notificationStatus = RequestStatus.LOADED;
+      state.notificationStatus = RequestStatus.SUCCESSFUL;
     },
     markNotificationsAsSeenRequest: (state) => {
-      state.notificationStatus = RequestStatus.LOADING;
+      state.notificationStatus = RequestStatus.IN_PROGRESS;
     },
     markNotificationsAsSeenSuccess: (state) => {
-      state.notificationStatus = RequestStatus.LOADED;
+      state.notificationStatus = RequestStatus.SUCCESSFUL;
     },
     markNotificationsAsSeenDenied: (state) => {
       state.notificationStatus = RequestStatus.DENIED;
@@ -83,7 +76,7 @@ const slice = createSlice({
       state.notificationStatus = RequestStatus.FAILED;
     },
     markAllNotificationsAsReadRequest: (state) => {
-      state.notificationStatus = RequestStatus.LOADING;
+      state.notificationStatus = RequestStatus.IN_PROGRESS;
     },
     markAllNotificationsAsReadSuccess: (state) => {
       const updatedNotifications = Object.fromEntries(
@@ -92,7 +85,7 @@ const slice = createSlice({
         ]),
       );
       state.notifications = updatedNotifications;
-      state.notificationStatus = RequestStatus.LOADED;
+      state.notificationStatus = RequestStatus.SUCCESSFUL;
     },
     markAllNotificationsAsReadDenied: (state) => {
       state.notificationStatus = RequestStatus.DENIED;
@@ -101,12 +94,12 @@ const slice = createSlice({
       state.notificationStatus = RequestStatus.FAILED;
     },
     markNotificationsAsReadRequest: (state) => {
-      state.notificationStatus = RequestStatus.LOADING;
+      state.notificationStatus = RequestStatus.IN_PROGRESS;
     },
     markNotificationsAsReadSuccess: (state, { payload }) => {
       const date = new Date().toISOString();
       state.notifications[payload.id] = { ...state.notifications[payload.id], lastRead: date };
-      state.notificationStatus = RequestStatus.LOADED;
+      state.notificationStatus = RequestStatus.SUCCESSFUL;
     },
     markNotificationsAsReadDenied: (state) => {
       state.notificationStatus = RequestStatus.DENIED;

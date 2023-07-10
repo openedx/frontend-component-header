@@ -59,7 +59,7 @@ describe('Notification Tabs test cases.', () => {
     const selectedTab = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
 
     expect(tabs.length).toEqual(5);
-    expect(within(selectedTab).queryByText('discussions')).toBeInTheDocument();
+    expect(within(selectedTab).queryByText('discussion')).toBeInTheDocument();
     expect(within(selectedTab).queryByRole('status')).not.toBeInTheDocument();
   });
 

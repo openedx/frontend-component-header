@@ -17,7 +17,7 @@ const NotificationTabs = () => {
   const { currentPage } = useSelector(selectPaginationData());
 
   useEffect(() => {
-    dispatch(fetchNotificationList({ appName: selectedAppName, page: currentPage, pageSize: 10 }));
+    dispatch(fetchNotificationList({ appName: selectedAppName, page: currentPage }));
     if (selectedAppName) { dispatch(markNotificationsAsSeen(selectedAppName)); }
   }, [currentPage, selectedAppName]);
 

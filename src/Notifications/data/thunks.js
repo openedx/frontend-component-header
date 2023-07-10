@@ -23,7 +23,7 @@ import {
   markNotificationsAsReadFailure,
 } from './slice';
 import {
-  getNotifications, getNotificationCounts, markNotificationSeen, markAllNotificationRead, markNotificationRead,
+  getNotificationsList, getNotificationCounts, markNotificationSeen, markAllNotificationRead, markNotificationRead,
 } from './api';
 import { getHttpErrorStatus } from '../utils';
 
@@ -35,21 +35,26 @@ const normalizeNotificationCounts = ({ countByAppName, count, showNotificationsT
   };
 };
 
-const normalizeNotifications = ({ notifications }) => {
-  const newNotificationIds = notifications.map(notification => notification.id.toString());
-  const notificationsKeyValuePair = notifications.reduce((acc, obj) => { acc[obj.id] = obj; return acc; }, {});
+const normalizeNotifications = (data) => {
+  const newNotificationIds = data.results.map(notification => notification.id.toString());
+  const notificationsKeyValuePair = data.results.reduce((acc, obj) => { acc[obj.id] = obj; return acc; }, {});
+  const pagination = {
+    numPages: data.numPages,
+    currentPage: data.currentPage,
+    hasMorePages: !!data.next,
+  };
   return {
-    newNotificationIds, notificationsKeyValuePair,
+    newNotificationIds, notificationsKeyValuePair, pagination,
   };
 };
 
-export const fetchNotificationList = ({ appName, page, pageSize }) => (
+export const fetchNotificationList = ({ appName, page }) => (
   async (dispatch) => {
     try {
       dispatch(fetchNotificationRequest({ appName }));
-      const data = await getNotifications(appName, page, pageSize);
+      const data = await getNotificationsList(appName, page);
       const normalisedData = normalizeNotifications((camelCaseObject(data)));
-      dispatch(fetchNotificationSuccess({ ...normalisedData, numPages: data.numPages, currentPage: data.currentPage }));
+      dispatch(fetchNotificationSuccess({ ...normalisedData }));
     } catch (error) {
       if (getHttpErrorStatus(error) === 403) {
         dispatch(fetchNotificationDenied(appName));
