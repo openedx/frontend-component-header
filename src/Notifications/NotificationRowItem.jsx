@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import PropTypes from 'prop-types';
 import { Icon } from '@edx/paragon';
-import { Link } from 'react-router-dom';
 import * as timeago from 'timeago.js';
 import { getIconByType } from './utils';
 import { markNotificationsAsRead } from './data/thunks';
@@ -24,12 +23,13 @@ const NotificationRowItem = ({
   const { icon: iconComponent, class: iconClass } = getIconByType(type);
 
   return (
-    <Link
+    <a
       target="_blank"
       className="d-flex mb-2 align-items-center text-decoration-none"
-      to={contentUrl}
+      href={contentUrl}
       onClick={handleMarkAsRead}
       data-testid={`notification-${id}`}
+      rel="noopener noreferrer"
     >
       <Icon
         src={iconComponent}
@@ -62,7 +62,7 @@ const NotificationRowItem = ({
           )}
         </div>
       </div>
-    </Link>
+    </a>
   );
 };
 
