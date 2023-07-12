@@ -44,7 +44,7 @@ exports[`<StudioHeader /> renders correctly 1`] = `
               <span
                 className="avatar overflow-hidden d-inline-flex rounded-circle mr-2"
                 style={
-                  Object {
+                  {
                     "height": "1.5em",
                     "width": "1.5em",
                   }
@@ -56,7 +56,7 @@ exports[`<StudioHeader /> renders correctly 1`] = `
                   height="24px"
                   role="img"
                   style={
-                    Object {
+                    {
                       "height": "1.5em",
                       "width": "1.5em",
                     }
@@ -172,7 +172,7 @@ exports[`<StudioHeader /> renders correctly with optional action row content 1`]
               <span
                 className="avatar overflow-hidden d-inline-flex rounded-circle mr-2"
                 style={
-                  Object {
+                  {
                     "height": "1.5em",
                     "width": "1.5em",
                   }
@@ -184,7 +184,7 @@ exports[`<StudioHeader /> renders correctly with optional action row content 1`]
                   height="24px"
                   role="img"
                   style={
-                    Object {
+                    {
                       "height": "1.5em",
                       "width": "1.5em",
                     }
