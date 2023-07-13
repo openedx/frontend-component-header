@@ -60,7 +60,7 @@ const NotificationSections = () => {
             type={notification.type}
             contentUrl={notification.contentUrl}
             content={notification.content}
-            courseName={notification.courseName}
+            courseName={notification.contentContext?.courseName || ''}
             createdAt={notification.createdAt}
             lastRead={notification.lastRead}
           />
