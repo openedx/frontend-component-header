@@ -44,6 +44,13 @@ const Notifications = () => {
     };
   }, []);
 
+  const viewPortHeight = window.innerHeight;
+  const headerHeight = document.getElementsByClassName('learning-header');
+  let notificationBarHeight = 0;
+  if (headerHeight.length > 0) {
+    notificationBarHeight = viewPortHeight - headerHeight[0].clientHeight;
+  }
+
   return (
     <OverlayTrigger
       trigger="click"
@@ -54,6 +61,7 @@ const Notifications = () => {
       overlay={(
         <Popover
           id="notificationTray"
+          style={{ height: `${notificationBarHeight}px` }}
           data-testid="notification-tray"
           className={classNames('overflow-auto rounded-0 border-0', {
             'w-100': !isOnMediumScreen && !isOnLargeScreen,
