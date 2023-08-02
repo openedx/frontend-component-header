@@ -2,38 +2,24 @@
 import React from 'react';
 import { IntlProvider } from '@edx/frontend-platform/i18n';
 import TestRenderer from 'react-test-renderer';
-import { AppContext, AppProvider } from '@edx/frontend-platform/react';
+import { AppContext } from '@edx/frontend-platform/react';
 import { Context as ResponsiveContext } from 'react-responsive';
-import { initializeMockApp } from '@edx/frontend-platform';
-import store from './store';
 
 import Header from './index';
 
 const HeaderComponent = ({ width, contextValue }) => (
   <ResponsiveContext.Provider value={width}>
     <IntlProvider locale="en" messages={{}}>
-      <AppProvider store={store}>
-        <AppContext.Provider
-          value={contextValue}
-        >
-          <Header />
-        </AppContext.Provider>
-      </AppProvider>
+      <AppContext.Provider
+        value={contextValue}
+      >
+        <Header />
+      </AppContext.Provider>
     </IntlProvider>
   </ResponsiveContext.Provider>
 );
 
 describe('<Header />', () => {
-  beforeEach(async () => {
-    initializeMockApp({
-      authenticatedUser: {
-        userId: '123abc',
-        username: 'testuser',
-        administrator: false,
-        roles: [],
-      },
-    });
-  });
   it('renders correctly for anonymous desktop', () => {
     const contextValue = {
       authenticatedUser: null,
