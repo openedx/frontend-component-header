@@ -2,19 +2,23 @@
 frontend-component-header
 #########################
 
-|Build Status| |Codecov| |npm_version| |npm_downloads| |license| |semantic-release|
+|license-badge||status-badge| |codecov-badge| |npm_version| |npm_downloads|  |semantic-release|
 
 ********
-Overview
+Purpose
 ********
 
 A generic header for Open edX micro-frontend applications.
 
 ************
-Requirements
+Getting Started
 ************
 
+Requirements
+============
+
 This component uses ``@edx/frontend-platform`` services such as i18n, analytics, configuration, and the ``AppContext`` React component, and expects that it has been loaded into a micro-frontend that has been properly initialized via ``@edx/frontend-platform``'s ``initialize`` function. `Please visit the frontend template application to see an example. <https://github.com/openedx/frontend-template-application/blob/master/src/index.jsx>`_
+
 
 Environment Variables
 =====================
@@ -32,9 +36,8 @@ Environment Variables
   menu items when truthy.  This is intended to be used in micro-frontends like
   frontend-app-authentication in which these menus are considered distractions from the user's task.
 
-************
 Installation
-************
+============
 
 To install this header into your Open edX micro-frontend, run the following command in your MFE:
 
@@ -42,9 +45,8 @@ To install this header into your Open edX micro-frontend, run the following comm
 
 This will make the component available to be imported into your application.
 
-*****
 Usage
-*****
+=====
 
 This library has the following exports:
 
@@ -59,9 +61,9 @@ Examples
 * `An example of SCSS file usage. <https://github.com/openedx/frontend-template-application/blob/3cd5485bf387b8c479baf6b02bf59e3061dc3465/src/index.scss#L8>`_
 
 
-***********
+
 Development
-***********
+===========
 
 Install dependencies::
 
@@ -87,3 +89,8 @@ Build a production distribution::
    :target: @edx/frontend-component-header
 .. |semantic-release| image:: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
    :target: https://github.com/semantic-release/semantic-release
+
+Reporting Security Issues
+*************************
+
+Please do not report security issues in public. Please email security@openedx.org.
