@@ -29,11 +29,5 @@
   "header.menu.account.label": "Compte",
   "header.menu.orderHistory.label": "Historique des commandes",
   "header.navigation.skipNavLink": "Passer au contenu principal.",
-  "header.menu.signOut.label": "Se déconnecter",
-  "notification.title": "Notifications",
-  "notification.today.heading": "Dernières 24 heures",
-  "notification.earlier.heading": "Plus tôt",
-  "notification.mark.as.read": "tout marquer comme lu",
-  "notification.fullStop": "•",
-  "notification.load.more.notifications": "Charger plus de notifications"
+  "header.menu.signOut.label": "Se déconnecter"
 }

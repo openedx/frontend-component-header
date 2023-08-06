@@ -29,11 +29,5 @@
   "header.menu.account.label": "Account",
   "header.menu.orderHistory.label": "Order History",
   "header.navigation.skipNavLink": "Перейти до головного змісту.",
-  "header.menu.signOut.label": "Sign Out",
-  "notification.title": "Notifications",
-  "notification.today.heading": "Last 24 hours",
-  "notification.earlier.heading": "Earlier",
-  "notification.mark.as.read": "Mark all as read",
-  "notification.fullStop": "•",
-  "notification.load.more.notifications": "Load more notifications"
+  "header.menu.signOut.label": "Sign Out"
 }
