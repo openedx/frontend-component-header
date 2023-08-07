@@ -45,6 +45,13 @@ To install this header into your Open edX micro-frontend, run the following comm
 
 This will make the component available to be imported into your application.
 
+Cloning and Startup
+===================
+
+ 1. Clone your new repo:
+
+   ``git clone https://github.com/openedx/frontend-component-header.git``
+
 Usage
 =====
 
