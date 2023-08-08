@@ -65,7 +65,7 @@ Development
 
 Install dependencies::
 
-  npm i
+  npm ci
 
 Start the development server::
 
