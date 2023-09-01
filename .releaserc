@@ -1,5 +1,22 @@
 {
-  "branch": "master",
+  "branches": [
+    "mashal-m/semantic-release-workaround",
+    "master",
+    {
+      "name": "beta",
+      "prerelease": true
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/github",
+    ["@semantic-release/exec",
+      {
+        "publishCmd": "echo ::set-output name=nextVer::${nextRelease.version}"
+      }
+    ]
+  ],
   "tagFormat": "v${version}",
   "verifyConditions": [
     "@semantic-release/npm",
@@ -20,7 +37,7 @@
       "assets": {
         "path": "dist/*"
       }
-    }
+    }   
   ],
   "success": [],
   "fail": []
