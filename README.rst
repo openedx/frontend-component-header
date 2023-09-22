@@ -21,8 +21,6 @@ This component uses ``@edx/frontend-platform`` services such as i18n, analytics,
 
 
 Environment Variables
-=====================
-
 * ``LMS_BASE_URL`` - The URL of the LMS of your Open edX instance.
 * ``LOGOUT_URL`` - The URL of the API endpoint which performs a user logout.
 * ``LOGIN_URL`` - The URL of the login page where a user can sign into their account.
