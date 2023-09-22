@@ -2,7 +2,7 @@
 frontend-component-header
 #########################
 
-|license_badge| |status_badge| |codecov_badge| |npm_version| |npm_downloads|  |semantic-release|
+|license| |Build Status| |Codecov| |npm_version| |npm_downloads|  |semantic-release|
 
 ********
 Purpose
