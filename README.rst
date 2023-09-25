@@ -2,7 +2,7 @@
 frontend-component-header
 #########################
 
-|license| |Build Status| |Codecov| |npm_version| |npm_downloads|  |semantic-release|
+|license| |Build Status| |Codecov| |npm_version| |npm_downloads| |semantic-release|
 
 ********
 Purpose
@@ -21,6 +21,8 @@ This component uses ``@edx/frontend-platform`` services such as i18n, analytics,
 
 
 Environment Variables
+====================
+
 * ``LMS_BASE_URL`` - The URL of the LMS of your Open edX instance.
 * ``LOGOUT_URL`` - The URL of the API endpoint which performs a user logout.
 * ``LOGIN_URL`` - The URL of the login page where a user can sign into their account.
@@ -39,7 +41,7 @@ Installation
 
 To install this header into your Open edX micro-frontend, run the following command in your MFE:
 
-``npm i --save @edx/frontend-component-header``
+    ``npm i --save @edx/frontend-component-header``
 
 This will make the component available to be imported into your application.
 
@@ -51,7 +53,7 @@ Cloning and Startup
 
   1. Clone your new repo:
 
-   ``git clone https://github.com/openedx/frontend-component-header.git``
+    ``git clone https://github.com/openedx/frontend-component-header.git``
 
   2. Use node v18.x.
 
