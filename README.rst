@@ -116,20 +116,6 @@ Build a production distribution::
 
   npm run build
 
-.. |Build Status| image:: https://api.travis-ci.com/edx/frontend-component-header.svg?branch=master
-   :target: https://travis-ci.com/edx/frontend-component-header
-.. |Codecov| image:: https://img.shields.io/codecov/c/github/edx/frontend-component-header
-   :target: @edx/frontend-component-header
-.. |npm_version| image:: https://img.shields.io/npm/v/@edx/frontend-component-header.svg
-   :target: @edx/frontend-component-header
-.. |npm_downloads| image:: https://img.shields.io/npm/dt/@edx/frontend-component-header.svg
-   :target: @edx/frontend-component-header
-.. |license| image:: https://img.shields.io/npm/l/@edx/frontend-component-header.svg
-   :target: @edx/frontend-component-header
-.. |semantic-release| image:: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-   :target: https://github.com/semantic-release/semantic-release
-
-
 License
 =======
 
@@ -186,3 +172,16 @@ Reporting Security Issues
 =========================
 
 Please do not report security issues in public. Please email security@openedx.org.
+
+.. |Build Status| image:: https://api.travis-ci.com/edx/frontend-component-header.svg?branch=master
+   :target: https://travis-ci.com/edx/frontend-component-header
+.. |Codecov| image:: https://img.shields.io/codecov/c/github/edx/frontend-component-header
+   :target: @edx/frontend-component-header
+.. |npm_version| image:: https://img.shields.io/npm/v/@edx/frontend-component-header.svg
+   :target: @edx/frontend-component-header
+.. |npm_downloads| image:: https://img.shields.io/npm/dt/@edx/frontend-component-header.svg
+   :target: @edx/frontend-component-header
+.. |license| image:: https://img.shields.io/npm/l/@edx/frontend-component-header.svg
+   :target: @edx/frontend-component-header
+.. |semantic-release| image:: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+   :target: https://github.com/semantic-release/semantic-release
