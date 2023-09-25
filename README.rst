@@ -14,6 +14,22 @@ A generic header for Open edX micro-frontend applications.
 Getting Started
 ************
 
+Prerequisites
+=============
+
+The `devstack`_ is currently recommended as a development environment for your
+new MFE.  If you start it with ``make dev.up.lms`` that should give you
+everything you need as a companion to this frontend.
+
+Note that it is also possible to use `Tutor`_ to develop an MFE.  You can refer
+to the `relevant tutor-mfe documentation`_ to get started using it.
+
+.. _Devstack: https://github.com/openedx/devstack
+
+.. _Tutor: https://github.com/overhangio/tutor
+
+.. _relevant tutor-mfe documentation: https://github.com/overhangio/tutor-mfe#mfe-development
+
 Requirements
 ============
 
