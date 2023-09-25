@@ -41,7 +41,7 @@ Installation
 
 To install this header into your Open edX micro-frontend, run the following command in your MFE:
 
- ``npm i --save @edx/frontend-component-header``
+``npm i --save @edx/frontend-component-header``
 
 This will make the component available to be imported into your application.
 
