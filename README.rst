@@ -51,7 +51,7 @@ Cloning and Startup
 
   1. Clone your new repo:
 
-  ``git clone https://github.com/openedx/frontend-component-header.git``
+   ``git clone https://github.com/openedx/frontend-component-header.git``
 
   2. Use node v18.x.
 
