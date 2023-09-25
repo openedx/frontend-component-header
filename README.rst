@@ -176,13 +176,13 @@ For more information about these options, see the `Getting Help`_ page.
 .. _Getting Help: https://openedx.org/community/connect
 
 The Open edX Code of Conduct
-****************************
+============================
 
 All community members are expected to follow the `Open edX Code of Conduct`_.
 
 .. _Open edX Code of Conduct: https://openedx.org/code-of-conduct/
 
 Reporting Security Issues
-*************************
+=========================
 
 Please do not report security issues in public. Please email security@openedx.org.
