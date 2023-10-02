@@ -3,6 +3,7 @@ $blue: #007db8;
 $white: #fff;
 
 @import './Menu/menu.scss';
+@import './studio-header/header.scss';
 
 .dropdown-item a {
   text-decoration: none;
