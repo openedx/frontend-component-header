@@ -1,7 +1,7 @@
 import Header from './Header';
 import LearningHeader from './learning-header/LearningHeader';
 import messages from './i18n/index';
-import StudioHeader from './StudioHeader';
+import StudioHeader from './studio-header';
 
 export { LearningHeader, messages, StudioHeader };
 
