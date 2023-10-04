@@ -80,7 +80,7 @@ Cloning and Startup
 
   3. Install npm dependencies:
 
-    ``cd frontend-component-header && npm install``
+    ``cd frontend-component-header && npm ci``
 
   4. Start the dev server:
 
