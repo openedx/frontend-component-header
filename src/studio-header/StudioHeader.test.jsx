@@ -5,6 +5,7 @@ import {
   fireEvent,
   waitFor,
 } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 import { AppContext } from '@edx/frontend-platform/react';
 import { IntlProvider } from '@edx/frontend-platform/i18n';
@@ -40,15 +41,17 @@ const RootWrapper = ({
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values, react/prop-types
-    <IntlProvider locale="en">
-      <AppContext.Provider value={appContextValue}>
-        <ResponsiveContext.Provider value={responsiveContextValue}>
-          <StudioHeader
-            {...props}
-          />
-        </ResponsiveContext.Provider>
-      </AppContext.Provider>
-    </IntlProvider>
+    <MemoryRouter>
+      <IntlProvider locale="en">
+        <AppContext.Provider value={appContextValue}>
+          <ResponsiveContext.Provider value={responsiveContextValue}>
+            <StudioHeader
+              {...props}
+            />
+          </ResponsiveContext.Provider>
+        </AppContext.Provider>
+      </IntlProvider>
+    </MemoryRouter>
   );
 };
 

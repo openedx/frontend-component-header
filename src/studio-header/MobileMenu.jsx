@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { Collapsible } from '@edx/paragon';
 
 const MobileMenu = ({
@@ -21,9 +22,14 @@ const MobileMenu = ({
             <ul className="p-0" style={{ listStyleType: 'none' }}>
               {items.map(item => (
                 <li className="mobile-menu-item">
-                  <a href={item.href}>
-                    {item.title}
-                  </a>
+                  {(
+                    /^(?:\w+:)?\/\//.test(item.href)
+                      ? (
+                        <a href={item.href}>
+                          {item.title}
+                        </a>
+                      ) : <NavLink to={item.href}>{item.title}</NavLink>
+                  )}
                 </li>
               ))}
             </ul>
