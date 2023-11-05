@@ -1,6 +1,4 @@
 {
-  "general.register.sentenceCase": "التسجيل",
-  "general.signIn.sentenceCase": "تسجيل الدخول",
   "header.links.courses": "المساقات",
   "header.links.programs": "البرامج",
   "header.links.content.search": "اكتشف الجديد",
@@ -23,6 +21,8 @@
   "header.label.secondary.nav": "القائمة الثانوية",
   "header.label.skip.nav": "التخطي إلى المحتوى الرئيسي",
   "header.label.app.nav": "تطبيق",
+  "general.register.sentenceCase": "التسجيل",
+  "general.signIn.sentenceCase": "تسجيل الدخول",
   "header.menu.dashboard.label": "لوحة المعلومات",
   "header.help.label": "المساعدة",
   "header.menu.profile.label": "الملف الشخصي",
