@@ -1,6 +1,4 @@
 {
-  "general.register.sentenceCase": "Registrarse",
-  "general.signIn.sentenceCase": "Iniciar sesión",
   "header.links.courses": "Cursos",
   "header.links.programs": "Programas",
   "header.links.content.search": "Encontrar nuevo",
@@ -23,6 +21,8 @@
   "header.label.secondary.nav": "Secondary",
   "header.label.skip.nav": "Ir al contenido principal",
   "header.label.app.nav": "Aplicación",
+  "general.register.sentenceCase": "Registrarse",
+  "general.signIn.sentenceCase": "Iniciar sesión",
   "header.menu.dashboard.label": "Panel de Control",
   "header.help.label": "Ayuda",
   "header.menu.profile.label": "Perfil",
