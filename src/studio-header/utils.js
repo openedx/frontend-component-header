@@ -18,7 +18,7 @@ const getUserMenuItems = ({
   if (isAdmin) {
     items = [
       {
-        href: `${studioBaseUrl}}`,
+        href: `${studioBaseUrl}`,
         title: intl.formatMessage(messages['header.user.menu.studio']),
       }, {
         href: `${studioBaseUrl}/maintenance`,
