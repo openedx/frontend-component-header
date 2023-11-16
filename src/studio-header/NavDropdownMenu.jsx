@@ -13,10 +13,12 @@ const NavDropdownMenu = ({
   <DropdownButton
     id={id}
     title={buttonTitle}
-    variant="tertiary"
+    variant="outline-primary"
+    className="mr-2"
   >
     {items.map(item => (
       <Dropdown.Item
+        key={`${item.title}-dropdown-item`}
         href={item.href}
         className="small"
       >

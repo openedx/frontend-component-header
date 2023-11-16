@@ -38,9 +38,6 @@ const MobileHeader = ({
 MobileHeader.propTypes = {
   studioBaseUrl: PropTypes.string.isRequired,
   logoutUrl: PropTypes.string.isRequired,
-  setModalPopupTarget: PropTypes.func.isRequired,
-  toggleModalPopup: PropTypes.func.isRequired,
-  isModalPopupOpen: PropTypes.bool.isRequired,
   number: PropTypes.string,
   org: PropTypes.string,
   title: PropTypes.string,
