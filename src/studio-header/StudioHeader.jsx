@@ -36,17 +36,15 @@ const StudioHeader = ({
   };
 
   return (
-    <>
+    <div className="studio-header">
       <a className="nav-skip sr-only sr-only-focusable" href="#main">Skip to content</a>
-      <div className="studio-header">
-        <Responsive maxWidth={841}>
-          <MobileHeader {...props} />
-        </Responsive>
-        <Responsive minWidth={842}>
-          <HeaderBody {...props} />
-        </Responsive>
-      </div>
-    </>
+      <Responsive maxWidth={841}>
+        <MobileHeader {...props} />
+      </Responsive>
+      <Responsive minWidth={842}>
+        <HeaderBody {...props} />
+      </Responsive>
+    </div>
   );
 };
 
