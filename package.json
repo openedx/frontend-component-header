@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "make build",
-    "i18n_extract": "BABEL_ENV=i18n fedx-scripts babel src --quiet > /dev/null",
+    "i18n_extract": "fedx-scripts formatjs extract",
     "lint": "fedx-scripts eslint --ext .js --ext .jsx .",
     "snapshot": "fedx-scripts jest --updateSnapshot",
     "start": "fedx-scripts webpack-dev-server --progress",
@@ -33,10 +33,10 @@
   },
   "homepage": "https://github.com/openedx/frontend-component-header#readme",
   "devDependencies": {
-    "@edx/brand": "npm:@edx/brand-openedx@1.2.0",
+    "@edx/brand": "npm:@openedx/brand-openedx@^1.2.2",
     "@edx/browserslist-config": "^1.1.1",
-    "@edx/frontend-build": "12.9.17",
-    "@edx/frontend-platform": "5.4.0",
+    "@edx/frontend-build": "13.0.8",
+    "@edx/frontend-platform": "6.1.0",
     "@edx/reactifex": "^2.1.1",
     "@testing-library/dom": "9.3.3",
     "@testing-library/jest-dom": "5.17.0",
@@ -50,25 +50,25 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "7.2.9",
-    "react-router-dom": "6.16.0",
+    "react-router-dom": "6.20.0",
     "react-test-renderer": "17.0.2",
     "redux": "4.2.1",
     "redux-saga": "1.2.3"
   },
   "dependencies": {
-    "@edx/paragon": "21.1.10",
+    "@edx/paragon": "21.5.6",
     "@fortawesome/fontawesome-svg-core": "6.4.2",
     "@fortawesome/free-brands-svg-icons": "6.4.2",
     "@fortawesome/free-regular-svg-icons": "6.4.2",
     "@fortawesome/free-solid-svg-icons": "6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "axios-mock-adapter": "1.21.5",
+    "axios-mock-adapter": "1.22.0",
     "babel-polyfill": "6.26.0",
     "react-responsive": "8.2.0",
     "react-transition-group": "4.4.5"
   },
   "peerDependencies": {
-    "@edx/frontend-platform": "^4.0.0 || ^5.0.0",
+    "@edx/frontend-platform": "^4.0.0 || ^5.0.0 || ^6.0.0",
     "prop-types": "^15.5.10",
     "react": "^16.9.0 || ^17.0.0",
     "react-dom": "^16.9.0 || ^17.0.0"

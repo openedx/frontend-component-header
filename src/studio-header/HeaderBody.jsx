@@ -44,7 +44,7 @@ const HeaderBody = ({
   );
 
   return (
-    <Container size="xl" className="px-4">
+    <Container size="xl" className="px-2.5">
       <ActionRow as="header">
         {isHiddenMainMenu ? (
           <Row className="flex-nowrap ml-4">
@@ -64,17 +64,19 @@ const HeaderBody = ({
                 Menu
               </Button>
             ) : (
-              <Row className="flex-nowrap m-0">
-                {renderBrandNav}
-                <CourseLockUp
-                  {...{
-                    outlineLink,
-                    number,
-                    org,
-                    title,
-                  }}
-                />
-              </Row>
+              <div className="w-25">
+                <Row className="m-0 flex-nowrap">
+                  {renderBrandNav}
+                  <CourseLockUp
+                    {...{
+                      outlineLink,
+                      number,
+                      org,
+                      title,
+                    }}
+                  />
+                </Row>
+              </div>
             )}
             {isMobile ? (
               <>
@@ -82,11 +84,11 @@ const HeaderBody = ({
                 {renderBrandNav}
               </>
             ) : (
-              <Nav data-testid="desktop-menu" className="ml-4">
+              <Nav data-testid="desktop-menu" className="ml-2">
                 {mainMenuDropdowns.map(dropdown => {
                   const { id, buttonTitle, items } = dropdown;
                   return (
-                    <NavDropdownMenu {...{ id, buttonTitle, items }} />
+                    <NavDropdownMenu key={id} {...{ id, buttonTitle, items }} />
                   );
                 })}
               </Nav>
@@ -113,9 +115,9 @@ const HeaderBody = ({
 HeaderBody.propTypes = {
   studioBaseUrl: PropTypes.string.isRequired,
   logoutUrl: PropTypes.string.isRequired,
-  setModalPopupTarget: PropTypes.func.isRequired,
-  toggleModalPopup: PropTypes.func.isRequired,
-  isModalPopupOpen: PropTypes.bool.isRequired,
+  setModalPopupTarget: PropTypes.func,
+  toggleModalPopup: PropTypes.func,
+  isModalPopupOpen: PropTypes.bool,
   number: PropTypes.string,
   org: PropTypes.string,
   title: PropTypes.string,
@@ -138,6 +140,9 @@ HeaderBody.propTypes = {
 };
 
 HeaderBody.defaultProps = {
+  setModalPopupTarget: null,
+  toggleModalPopup: null,
+  isModalPopupOpen: false,
   logo: null,
   logoAltText: null,
   number: '',

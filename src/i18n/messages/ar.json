@@ -1,6 +1,4 @@
 {
-  "general.register.sentenceCase": "التسجيل",
-  "general.signIn.sentenceCase": "تسجيل الدخول",
   "header.links.courses": "المساقات",
   "header.links.programs": "البرامج",
   "header.links.content.search": "اكتشف الجديد",
@@ -23,11 +21,16 @@
   "header.label.secondary.nav": "القائمة الثانوية",
   "header.label.skip.nav": "التخطي إلى المحتوى الرئيسي",
   "header.label.app.nav": "تطبيق",
+  "general.register.sentenceCase": "التسجيل",
+  "general.signIn.sentenceCase": "تسجيل الدخول",
   "header.menu.dashboard.label": "لوحة المعلومات",
   "header.help.label": "المساعدة",
   "header.menu.profile.label": "الملف الشخصي",
   "header.menu.account.label": "الحساب",
   "header.menu.orderHistory.label": "سجل الطلبيات",
   "header.navigation.skipNavLink": "التخطي إلى المحتوى الرئيسي",
-  "header.menu.signOut.label": "تسجيل الخروج"
+  "header.menu.signOut.label": "تسجيل الخروج",
+  "header.user.menu.studio": "Studio Home",
+  "header.user.menu.maintenance": "Maintenance",
+  "header.label.courseOutline": "Back to course outline in Studio"
 }

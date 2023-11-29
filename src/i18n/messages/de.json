@@ -1,6 +1,4 @@
 {
-  "general.register.sentenceCase": "Register",
-  "general.signIn.sentenceCase": "Sign in",
   "header.links.courses": "Courses",
   "header.links.programs": "Programs",
   "header.links.content.search": "Discover New",
@@ -23,11 +21,16 @@
   "header.label.secondary.nav": "Secondary",
   "header.label.skip.nav": "Skip to main content",
   "header.label.app.nav": "App",
+  "general.register.sentenceCase": "Register",
+  "general.signIn.sentenceCase": "Sign in",
   "header.menu.dashboard.label": "Dashboard",
   "header.help.label": "Help",
   "header.menu.profile.label": "Profile",
   "header.menu.account.label": "Account",
   "header.menu.orderHistory.label": "Order History",
   "header.navigation.skipNavLink": "Skip to main content.",
-  "header.menu.signOut.label": "Sign Out"
+  "header.menu.signOut.label": "Sign Out",
+  "header.user.menu.studio": "Studio Home",
+  "header.user.menu.maintenance": "Maintenance",
+  "header.label.courseOutline": "Back to course outline in Studio"
 }

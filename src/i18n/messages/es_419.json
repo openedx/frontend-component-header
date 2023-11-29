@@ -1,6 +1,4 @@
 {
-  "general.register.sentenceCase": "Registrarse",
-  "general.signIn.sentenceCase": "Iniciar sesión",
   "header.links.courses": "Cursos",
   "header.links.programs": "Programas",
   "header.links.content.search": "Encontrar nuevo",
@@ -23,11 +21,16 @@
   "header.label.secondary.nav": "Secondary",
   "header.label.skip.nav": "Ir al contenido principal",
   "header.label.app.nav": "Aplicación",
+  "general.register.sentenceCase": "Registrarse",
+  "general.signIn.sentenceCase": "Iniciar sesión",
   "header.menu.dashboard.label": "Panel de Control",
   "header.help.label": "Ayuda",
   "header.menu.profile.label": "Perfil",
   "header.menu.account.label": "Cuenta",
   "header.menu.orderHistory.label": "Historial de órdenes",
   "header.navigation.skipNavLink": "Dirígete al contenido principal.",
-  "header.menu.signOut.label": "Cerrar sesión"
+  "header.menu.signOut.label": "Cerrar sesión",
+  "header.user.menu.studio": "Inicio Studio",
+  "header.user.menu.maintenance": "Mantenimiento",
+  "header.label.courseOutline": "Volver al esquema del curso en Studio"
 }

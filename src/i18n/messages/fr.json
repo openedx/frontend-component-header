@@ -1,6 +1,4 @@
 {
-  "general.register.sentenceCase": "S'inscrire",
-  "general.signIn.sentenceCase": "Connectez-vous",
   "header.links.courses": "Cours",
   "header.links.programs": "Programmes",
   "header.links.content.search": "Explorer les cours",
@@ -23,11 +21,16 @@
   "header.label.secondary.nav": "Secondaire",
   "header.label.skip.nav": "Passer au contenu principal",
   "header.label.app.nav": "Application",
+  "general.register.sentenceCase": "S'inscrire",
+  "general.signIn.sentenceCase": "Connectez-vous",
   "header.menu.dashboard.label": "Tableau de bord",
   "header.help.label": "Aide",
   "header.menu.profile.label": "Profil",
   "header.menu.account.label": "Compte",
   "header.menu.orderHistory.label": "Historique des commandes",
   "header.navigation.skipNavLink": "Passer au contenu principal",
-  "header.menu.signOut.label": "Se déconnecter"
+  "header.menu.signOut.label": "Se déconnecter",
+  "header.user.menu.studio": "Studio Home",
+  "header.user.menu.maintenance": "Maintenance",
+  "header.label.courseOutline": "Back to course outline in Studio"
 }
