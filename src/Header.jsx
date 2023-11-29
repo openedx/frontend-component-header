@@ -22,6 +22,7 @@ ensureConfig([
   'SITE_NAME',
   'LOGO_URL',
   'ORDER_HISTORY_URL',
+  'ACCOUNT_PROFILE_URL',
 ], 'Header component');
 
 subscribe(APP_CONFIG_INITIALIZED, () => {
