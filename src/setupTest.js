@@ -1,9 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import Enzyme from 'enzyme';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import 'babel-polyfill';
@@ -16,8 +14,6 @@ import { render as rtlRender } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import AppProvider from '@edx/frontend-platform/react/AppProvider';
 import appMessages from './i18n';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 // These configuration values are usually set in webpack's EnvironmentPlugin however
 // Jest does not use webpack so we need to set these so for testing
