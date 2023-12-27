@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useToggle, ModalPopup } from '@edx/paragon';
+import { useToggle, ModalPopup } from '@openedx/paragon';
 import HeaderBody from './HeaderBody';
 import MobileMenu from './MobileMenu';
 

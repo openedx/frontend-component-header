@@ -4,7 +4,7 @@ import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import {
   OverlayTrigger,
   Tooltip,
-} from '@edx/paragon';
+} from '@openedx/paragon';
 import messages from './messages';
 
 const CourseLockUp = ({

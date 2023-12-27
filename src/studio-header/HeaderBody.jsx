@@ -6,8 +6,8 @@ import {
   Container,
   Nav,
   Row,
-} from '@edx/paragon';
-import { Close, MenuIcon } from '@edx/paragon/icons';
+} from '@openedx/paragon';
+import { Close, MenuIcon } from '@openedx/paragon/icons';
 
 import CourseLockUp from './CourseLockUp';
 import UserMenu from './UserMenu';

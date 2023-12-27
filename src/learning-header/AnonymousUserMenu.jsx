@@ -3,7 +3,7 @@ import React from 'react';
 import { getConfig } from '@edx/frontend-platform';
 import { getLoginRedirectUrl } from '@edx/frontend-platform/auth';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
-import { Button } from '@edx/paragon';
+import { Button } from '@openedx/paragon';
 
 import genericMessages from '../generic/messages';
 

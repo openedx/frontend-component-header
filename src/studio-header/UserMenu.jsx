@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import {
   Avatar,
-} from '@edx/paragon';
+} from '@openedx/paragon';
 import NavDropdownMenu from './NavDropdownMenu';
 import getUserMenuItems from './utils';
 
