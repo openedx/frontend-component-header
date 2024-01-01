@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Dropdown,
   DropdownButton,
-} from '@edx/paragon';
+} from '@openedx/paragon';
 
 const NavDropdownMenu = ({
   id,

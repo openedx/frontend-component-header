@@ -35,9 +35,9 @@
   "devDependencies": {
     "@edx/brand": "npm:@openedx/brand-openedx@^1.2.2",
     "@edx/browserslist-config": "^1.1.1",
-    "@edx/frontend-build": "13.0.14",
     "@edx/frontend-platform": "6.1.2",
     "@edx/reactifex": "^2.1.1",
+    "@openedx/frontend-build": "13.0.19",
     "@testing-library/dom": "9.3.3",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "10.4.9",
@@ -54,12 +54,12 @@
     "redux-saga": "1.2.3"
   },
   "dependencies": {
-    "@edx/paragon": "21.5.6",
     "@fortawesome/fontawesome-svg-core": "6.5.1",
     "@fortawesome/free-brands-svg-icons": "6.5.1",
     "@fortawesome/free-regular-svg-icons": "6.5.1",
     "@fortawesome/free-solid-svg-icons": "6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@openedx/paragon": "^21.5.7",
     "axios-mock-adapter": "1.22.0",
     "babel-polyfill": "6.26.0",
     "react-responsive": "8.2.0",
