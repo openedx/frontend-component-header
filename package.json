@@ -38,6 +38,7 @@
     "@edx/frontend-platform": "6.2.0",
     "@edx/reactifex": "^2.1.1",
     "@openedx/frontend-build": "13.0.27",
+    "@openedx/paragon": "21.13.1",
     "@testing-library/dom": "9.3.4",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "10.4.9",
@@ -59,7 +60,6 @@
     "@fortawesome/free-regular-svg-icons": "6.5.1",
     "@fortawesome/free-solid-svg-icons": "6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@openedx/paragon": "^21.5.7",
     "axios-mock-adapter": "1.22.0",
     "babel-polyfill": "6.26.0",
     "react-responsive": "8.2.0",
@@ -69,6 +69,7 @@
     "@edx/frontend-platform": "^4.0.0 || ^5.0.0 || ^6.0.0",
     "prop-types": "^15.5.10",
     "react": "^16.9.0 || ^17.0.0",
-    "react-dom": "^16.9.0 || ^17.0.0"
+    "react-dom": "^16.9.0 || ^17.0.0",
+    "@openedx/paragon": ">= 21.5.7 < 22.0.0"
   }
 }
