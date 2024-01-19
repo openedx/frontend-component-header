@@ -38,7 +38,7 @@
     "@edx/frontend-platform": "6.2.0",
     "@edx/reactifex": "^2.1.1",
     "@openedx/frontend-build": "13.0.27",
-    "@openedx/paragon": "21.13.1",
+    "@openedx/paragon": "22.0.0",
     "@testing-library/dom": "9.3.4",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "10.4.9",
@@ -70,6 +70,6 @@
     "prop-types": "^15.5.10",
     "react": "^16.9.0 || ^17.0.0",
     "react-dom": "^16.9.0 || ^17.0.0",
-    "@openedx/paragon": ">= 21.5.7 < 22.0.0"
+    "@openedx/paragon": ">= 21.5.7 < 23.0.0"
   }
 }
