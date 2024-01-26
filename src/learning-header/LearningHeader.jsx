@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getConfig } from '@edx/frontend-platform';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
@@ -10,12 +10,36 @@ import LogoSlot from '../plugin-slots/LogoSlot';
 import CourseInfoSlot from '../plugin-slots/CourseInfoSlot';
 import { courseInfoDataShape } from './LearningHeaderCourseInfo';
 import messages from './messages';
-import LearningHelpSlot from '../plugin-slots/LearningHelpSlot';
+import getCourseLogoOrg from './data/api';
+
+const LinkedLogo = ({
+  href,
+  src,
+  alt,
+  ...attributes
+}) => (
+  <a href={href} {...attributes}>
+    <img className="d-block" src={src} alt={alt} />
+  </a>
+);
+
+LinkedLogo.propTypes = {
+  href: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};
 
 const LearningHeader = ({
-  courseOrg, courseNumber, courseTitle, intl, showUserDropdown,
+  courseOrg, courseTitle, intl, showUserDropdown,
 }) => {
   const { authenticatedUser } = useContext(AppContext);
+  const [logoOrg, setLogoOrg] = useState(null);
+
+  useEffect(() => {
+    if (courseOrg) {
+      getCourseLogoOrg().then((logoOrgUrl) => { setLogoOrg(logoOrgUrl); });
+    }
+  }, []);
 
   const headerLogo = (
     <LogoSlot
@@ -30,19 +54,25 @@ const LearningHeader = ({
       <a className="sr-only sr-only-focusable" href="#main-content">{intl.formatMessage(messages.skipNavLink)}</a>
       <div className="container-xl py-2 d-flex align-items-center">
         {headerLogo}
-        <div className="flex-grow-1 course-title-lockup d-flex" style={{ lineHeight: 1 }}>
-          <CourseInfoSlot courseOrg={courseOrg} courseNumber={courseNumber} courseTitle={courseTitle} />
+        <div className="flex-grow-1 course-title-lockup text-center" style={{ lineHeight: 1 }}>
+          {
+            (courseOrg && logoOrg)
+            && <img src={logoOrg} alt={`${courseOrg} logo`} style={{ maxHeight: '50px' }} />
+          }
+          <span
+            className="d-inline-block course-title font-weight-bold ml-3 overflow-hidden text-nowrap text-left w-25"
+            style={{ textOverflow: 'ellipsis' }}
+          >
+            {courseTitle}
+          </span>
         </div>
         {showUserDropdown && authenticatedUser && (
-        <>
-          <LearningHelpSlot />
           <AuthenticatedUserDropdown
             username={authenticatedUser.username}
           />
-        </>
         )}
         {showUserDropdown && !authenticatedUser && (
-        <AnonymousUserMenu />
+          <AnonymousUserMenu />
         )}
       </div>
     </header>
@@ -50,16 +80,14 @@ const LearningHeader = ({
 };
 
 LearningHeader.propTypes = {
-  courseOrg: courseInfoDataShape.courseOrg,
-  courseNumber: courseInfoDataShape.courseNumber,
-  courseTitle: courseInfoDataShape.courseTitle,
+  courseOrg: PropTypes.string,
+  courseTitle: PropTypes.string,
   intl: intlShape.isRequired,
   showUserDropdown: PropTypes.bool,
 };
 
 LearningHeader.defaultProps = {
   courseOrg: null,
-  courseNumber: null,
   courseTitle: null,
   showUserDropdown: true,
 };
