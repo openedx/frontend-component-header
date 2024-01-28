@@ -30,7 +30,7 @@
   "header.menu.orderHistory.label": "سجل الطلبيات",
   "header.navigation.skipNavLink": "التخطي إلى المحتوى الرئيسي",
   "header.menu.signOut.label": "تسجيل الخروج",
-  "header.user.menu.studio": "Studio Home",
-  "header.user.menu.maintenance": "Maintenance",
-  "header.label.courseOutline": "Back to course outline in Studio"
+  "header.user.menu.studio": "صفحة الاستوديو الرئيسية",
+  "header.user.menu.maintenance": "الصيانة",
+  "header.label.courseOutline": "الرجوع إلى مخطط المساق الكلّي في الاستوديو"
 }
