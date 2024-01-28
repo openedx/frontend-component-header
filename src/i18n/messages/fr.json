@@ -30,7 +30,7 @@
   "header.menu.orderHistory.label": "Historique des commandes",
   "header.navigation.skipNavLink": "Passer au contenu principal",
   "header.menu.signOut.label": "Se déconnecter",
-  "header.user.menu.studio": "Studio Home",
+  "header.user.menu.studio": "Accueil Studio",
   "header.user.menu.maintenance": "Maintenance",
-  "header.label.courseOutline": "Back to course outline in Studio"
+  "header.label.courseOutline": "Retour au plan de cours dans Studio"
 }
