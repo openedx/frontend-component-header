@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo } from 'react';
+import { getConfig, mergeConfig } from '@edx/frontend-platform';
 import {
   render,
   fireEvent,
@@ -126,6 +127,17 @@ describe('Header', () => {
       const avatarIcon = getByTestId('avatar-icon');
 
       expect(avatarIcon).toBeVisible();
+    });
+
+    it('user menu should not contain username', async () => {
+      const config = getConfig();
+      mergeConfig({
+        ...config,
+        HIDE_USERNAME_FROM_HEADER: true,
+      });
+      const { container } = render(<RootWrapper {...props} />);
+      const userMenue = container.querySelector('#user-dropdown-menu');
+      expect(userMenue.textContent).toContain('');
     });
 
     it('should hide nav items if prop isHiddenMainMenu true', async () => {

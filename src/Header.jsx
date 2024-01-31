@@ -27,6 +27,7 @@ ensureConfig([
 subscribe(APP_CONFIG_INITIALIZED, () => {
   mergeConfig({
     AUTHN_MINIMAL_HEADER: !!process.env.AUTHN_MINIMAL_HEADER,
+    HIDE_USERNAME_FROM_HEADER: !!process.env.HIDE_USERNAME_FROM_HEADER,
   }, 'Header additional config');
 });
 
@@ -94,6 +95,7 @@ const Header = ({ intl }) => {
     logoDestination: `${config.LMS_BASE_URL}/dashboard`,
     loggedIn: authenticatedUser !== null,
     username: authenticatedUser !== null ? authenticatedUser.username : null,
+    name: authenticatedUser !== null ? authenticatedUser.name : null,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
     mainMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : mainMenu,
     userMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : userMenu,
