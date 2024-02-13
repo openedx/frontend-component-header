@@ -20,6 +20,7 @@ const HeaderBody = ({
   number,
   org,
   title,
+  name,
   username,
   isAdmin,
   studioBaseUrl,
@@ -99,6 +100,7 @@ const HeaderBody = ({
         <Nav>
           <UserMenu
             {...{
+              name,
               username,
               studioBaseUrl,
               logoutUrl,
@@ -124,6 +126,7 @@ HeaderBody.propTypes = {
   logo: PropTypes.string,
   logoAltText: PropTypes.string,
   authenticatedUserAvatar: PropTypes.string,
+  name: PropTypes.string,
   username: PropTypes.string,
   isAdmin: PropTypes.bool,
   isMobile: PropTypes.bool,
@@ -149,6 +152,7 @@ HeaderBody.defaultProps = {
   org: '',
   title: '',
   authenticatedUserAvatar: null,
+  name: null,
   username: null,
   isAdmin: false,
   isMobile: false,

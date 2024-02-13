@@ -1,4 +1,5 @@
 import React from 'react';
+import { getConfig, mergeConfig } from '@edx/frontend-platform';
 import {
   authenticatedUser, initializeMockApp, render, screen,
 } from '../setupTest';
@@ -13,6 +14,17 @@ describe('Header', () => {
   it('displays user button', () => {
     render(<Header />);
     expect(screen.getByText(authenticatedUser.username)).toBeInTheDocument();
+  });
+
+  it('displays user button without username', () => {
+    const config = getConfig();
+    mergeConfig({
+      ...config,
+      HIDE_USERNAME_FROM_HEADER: true,
+    });
+    const { queryByTestId } = render(<Header />);
+    const userName = queryByTestId('username');
+    expect(userName).not.toBeInTheDocument();
   });
 
   it('displays course data', () => {

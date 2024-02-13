@@ -49,6 +49,7 @@ Environment Variables
 * ``ACCOUNT_PROFILE_URL`` - The URL of the account profile page.
 * ``ACCOUNT_SETTINGS_URL`` - The URL of the account settings page.
 * ``AUTHN_MINIMAL_HEADER`` - A boolean flag which hides the main menu, user menu, and logged-out
+* ``HIDE_USERNAME_FROM_HEADER`` - A boolean flag which hides the username from the header
   menu items when truthy.  This is intended to be used in micro-frontends like
   frontend-app-authentication in which these menus are considered distractions from the user's task.
 
