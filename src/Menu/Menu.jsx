@@ -14,7 +14,8 @@ MenuTrigger.defaultProps = {
   tag: 'div',
   className: null,
 };
-const MenuTriggerType = <MenuTrigger />.type;
+const MenuTriggerComp = <MenuTrigger />;
+const MenuTriggerType = MenuTriggerComp.type;
 
 const MenuContent = ({ tag, className, ...attributes }) => React.createElement(tag, {
   className: ['menu-content', className].join(' '),
