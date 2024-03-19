@@ -1,0 +1,10 @@
+@import "../../node_modules/bootstrap/scss/bootstrap-grid";
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+.logo {
+    img {
+        @include media-breakpoint-down(sm) {
+            max-width: 85% !important;
+        }
+    }
+}

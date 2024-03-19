@@ -29,6 +29,10 @@ LinkedLogo.propTypes = {
   alt: PropTypes.string.isRequired,
 };
 
+// this feature flag is not included on the frontend-platform, we have to get it directly from ENV
+const enabledOrgLogo = process.env.ENABLED_ORG_LOGO || false;
+
+
 const LearningHeader = ({
   courseOrg, courseTitle, intl, showUserDropdown,
 }) => {
@@ -54,17 +58,19 @@ const LearningHeader = ({
       <a className="sr-only sr-only-focusable" href="#main-content">{intl.formatMessage(messages.skipNavLink)}</a>
       <div className="container-xl py-2 d-flex align-items-center">
         {headerLogo}
-        <div className="flex-grow-1 course-title-lockup text-center" style={{ lineHeight: 1 }}>
-          {
-            (courseOrg && logoOrg)
-            && <img src={logoOrg} alt={`${courseOrg} logo`} style={{ maxHeight: '50px' }} />
-          }
-          <span
-            className="d-inline-block course-title font-weight-bold ml-3 overflow-hidden text-nowrap text-left w-25"
-            style={{ textOverflow: 'ellipsis' }}
-          >
-            {courseTitle}
-          </span>
+        <div className="d-none d-md-block flex-grow-1 course-title-lockup">
+          <div className={`d-md-flex ${enabledOrgLogo && 'align-items-center justify-content-center'} w-100`}>
+            {enabledOrgLogo ? (
+              (courseOrg && logoOrg)
+              && <img src={logoOrg} alt={`${courseOrg} logo`} style={{ maxHeight: '45px' }} />
+            ) : null}
+            <span
+              className="d-inline-block course-title font-weight-semibold ml-3 text-truncate text-left w-25"
+              style={{ fontSize: '0.85rem' }}
+            >
+              {courseTitle}
+            </span>
+          </div>
         </div>
         {showUserDropdown && authenticatedUser && (
           <AuthenticatedUserDropdown
