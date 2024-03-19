@@ -33,19 +33,18 @@ subscribe(APP_CONFIG_INITIALIZED, () => {
 
 /**
  * Header component for the application.
- * Displays a header with the provided logo, main menu, secondary menu, and user menu when the user is authenticated.
- * If any of the props (logo, mainMenuItems, secondaryMenuItems, userMenuItems) are not provided, default
+ * Displays a header with the provided main menu, secondary menu, and user menu when the user is authenticated.
+ * If any of the props (mainMenuItems, secondaryMenuItems, userMenuItems) are not provided, default
  * items are displayed.
  * For more details on how to use this component, please refer to this document:
  * https://github.com/openedx/frontend-component-header/blob/master/docs/using_custom_header.rst
  *
- * @param logo
  * @param mainMenuItems
  * @param secondaryMenuItems
  * @param userMenuItems
  */
 const Header = ({
-  intl, logo, mainMenuItems, secondaryMenuItems, userMenuItems,
+  intl, mainMenuItems, secondaryMenuItems, userMenuItems,
 }) => {
   const { authenticatedUser, config } = useContext(AppContext);
 
@@ -106,9 +105,9 @@ const Header = ({
   ];
 
   const props = {
-    logo: logo?.src || config.LOGO_URL,
-    logoAltText: logo?.alt || config.SITE_NAME,
-    logoDestination: logo?.href || `${config.LMS_BASE_URL}/dashboard`,
+    logo: config.LOGO_URL,
+    logoAltText: config.SITE_NAME,
+    logoDestination: `${config.LMS_BASE_URL}/dashboard`,
     loggedIn: authenticatedUser !== null,
     username: authenticatedUser !== null ? authenticatedUser.username : null,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
@@ -131,7 +130,6 @@ const Header = ({
 };
 
 Header.defaultProps = {
-  logo: null,
   mainMenuItems: null,
   secondaryMenuItems: null,
   userMenuItems: null,
@@ -139,11 +137,6 @@ Header.defaultProps = {
 
 Header.propTypes = {
   intl: intlShape.isRequired,
-  logo: PropTypes.shape({
-    src: PropTypes.string,
-    alt: PropTypes.string,
-    href: PropTypes.string,
-  }),
   mainMenuItems: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.array,

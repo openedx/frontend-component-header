@@ -6,9 +6,9 @@ Custom Header Component
 Overview
 --------
 
-The ``Header`` component is used to display a header with a provided ``logo``, ``mainMenuItems``,
+The ``Header`` component is used to display a header with a provided ``mainMenuItems``,
 ``secondaryMenuItems``, and ``userMenuItems`` props. If props are provided, the component will use them; otherwise,
-If any of the props ``(logo, mainMenuItems, secondaryMenuItems, userMenuItems)`` are not provided, default
+If any of the props ``(mainMenuItems, secondaryMenuItems, userMenuItems)`` are not provided, default
 items are displayed. This component provides flexibility in customization, making it suitable for a wide
 range of applications.
 
@@ -16,21 +16,6 @@ Props Details
 -------------
 
 The `Header` component accepts the following **optional** props for customization:
-
-``logo``
-*******
-
-The logo prop is an object containing `src`, `alt`, and `href` properties. If not passed, LOGO_URL from config will be used.
-It is displayed on the left of the header in the desktop screen and in the center of the header on the mobile screen.
-
-Example:
-::
-
-   {
-       src: 'path/to/logo.png',
-       alt: 'Logo Alt Text',
-       href: '/home'
-   }
 
 ``mainMenuItems``
 *****************
@@ -66,7 +51,7 @@ Example:
 secondaryMenuItems
 ******************
 
-The secondary menu items has same structure as ``mainMenuItems``. On desktop screen, These items are displayed on the right of header just before the userMenu avatar and on mobile screen,
+The secondary menu items has same structure as ``mainMenuItems``. On desktop screen, these items are displayed on the right of header just before the userMenu avatar and on mobile screen,
 these items are displayed below the mainMenu items in dropdown.
 
 Example:
