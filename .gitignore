@@ -9,3 +9,4 @@ module.config.js
 .idea/
 
 .vscode
+src/i18n/messages
