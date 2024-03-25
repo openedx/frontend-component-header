@@ -8,8 +8,8 @@ Overview
 
 The ``Header`` component is used to display a header with a provided ``mainMenuItems``,
 ``secondaryMenuItems``, and ``userMenuItems`` props. If props are provided, the component will use them; otherwise,
-If any of the props ``(mainMenuItems, secondaryMenuItems, userMenuItems)`` are not provided, default
-items are displayed. This component provides flexibility in customization, making it suitable for a wide
+if any of the props ``(mainMenuItems, secondaryMenuItems, userMenuItems)`` are not provided, default
+items will be displayed. This component provides flexibility in customization, making it suitable for a wide
 range of applications.
 
 Props Details
@@ -20,7 +20,7 @@ The `Header` component accepts the following **optional** props for customizatio
 ``mainMenuItems``
 *****************
 
-The main menu items is a list of menu items objects. On desktop screens, these items are displayed on the left, to the right of the logo icon and to the left of the secondary menu.
+The main menu items is a list of menu items objects. On desktop screens, these items are displayed on the left side next to the logo icon.
 On mobile screens, the main menu is displayed as a dropdown menu triggered by a hamburger icon. The main menu dropdown appears below the logo when opened.
 
 Example:
@@ -33,12 +33,19 @@ Example:
        {
            type: 'submenu',
            content: 'Sub Menu Item',
-           submenuContent: [
-               '<div className="mb-1"><a rel="noopener" href="#">Submenu item 1</a></div>',
-               '<div className="mb-1"><a rel="noopener" href="#">Submenu item 2</a></div>'
-           ],
+           submenuContent: (
+             <>
+                <div className="mb-1"><a rel="noopener" href="#">Submenu item 1</a></div>
+                <div className="mb-1"><a rel="noopener" href="#">Submenu item 2</a></div>
+             </>
+           ),
        },
    ]
+
+**Submenu Implementation**
+
+To implement a submenu, set the type to ``submenu`` and provide a ``submenuContent`` property.
+The submenuContent should be a React component (as shown in above example) that can be rendered.
 
 **Note:**
 
@@ -67,9 +74,9 @@ userMenuItems
 The user menu items is list of objects. On desktop screens, these items are displayed as a dropdown menu on the most right side of the header. The dropdown is opened by clicking on the avatar icon, which is typically located at the far right of the header.
 On mobile screens, the user menu is also displayed as a dropdown menu, appearing under the avatar icon.
 
-User Menu is list of objects. Each object represent a group in user menu. Each object contains the ``heading`` and
+Each object represents a group in the user menu. Each object contains the ``heading`` and
 list of menu items to be displayed in that group. Heading is optional and will be displayed only if passed. There can
-be multiple groups. For a normal user menu, we can pass single group with empty heading.
+be multiple groups. For a normal user menu, a single group can be passed with empty heading.
 
 Example:
 ::

@@ -39,9 +39,12 @@ subscribe(APP_CONFIG_INITIALIZED, () => {
  * For more details on how to use this component, please refer to this document:
  * https://github.com/openedx/frontend-component-header/blob/master/docs/using_custom_header.rst
  *
- * @param mainMenuItems
- * @param secondaryMenuItems
- * @param userMenuItems
+ * @param {list} mainMenuItems - The list of main menu items to display.
+ * See the documentation for the structure of main menu item.
+ * @param {list} secondaryMenuItems - The list of secondary menu items to display.
+ * See the documentation for the structure of secondary menu item.
+ * @param {list} userMenuItems - The list of user menu items to display.
+ * See the documentation for the structure of user menu item.
  */
 const Header = ({
   intl, mainMenuItems, secondaryMenuItems, userMenuItems,
