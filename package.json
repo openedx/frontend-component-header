@@ -37,7 +37,7 @@
     "@edx/browserslist-config": "^1.1.1",
     "@edx/frontend-platform": "7.1.2",
     "@edx/reactifex": "^2.1.1",
-    "@openedx/frontend-build": "^14.0.0-alpha.1",
+    "@openedx/frontend-build": "https://github.com/openedx/frontend-build/tarball/bilalqamar95/alpha-eslint-update",
     "@openedx/paragon": "22.0.0",
     "@testing-library/dom": "9.3.4",
     "@testing-library/jest-dom": "5.17.0",
@@ -64,8 +64,7 @@
     "babel-polyfill": "6.26.0",
     "jest-environment-jsdom": "^29.7.0",
     "react-responsive": "8.2.0",
-    "react-transition-group": "4.4.5",
-    "ts-jest": "^29.1.2"
+    "react-transition-group": "4.4.5"
   },
   "peerDependencies": {
     "@edx/frontend-platform": "^7.0.0",
@@ -73,5 +72,10 @@
     "prop-types": "^15.5.10",
     "react": "^16.9.0 || ^17.0.0",
     "react-dom": "^16.9.0 || ^17.0.0"
+  },
+  "overrides": {
+    "@edx/frontend-platform": {
+      "@openedx/frontend-build": "https://github.com/openedx/frontend-build/tarball/bilalqamar95/alpha-eslint-update"
+    }
   }
 }
