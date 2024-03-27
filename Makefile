@@ -1,6 +1,3 @@
-export TRANSIFEX_RESOURCE = frontend-component-header
-transifex_langs = "ar,fr,es_419,zh_CN,pt,it,de,uk,ru,hi,fr_CA"
-
 transifex_utils = ./node_modules/.bin/transifex-utils.js
 i18n = ./src/i18n
 transifex_input = $(i18n)/transifex_input.json
@@ -34,21 +31,6 @@ extract_translations: | requirements i18n.extract i18n.concat
 detect_changed_source_translations:
 	# Checking for changed translations...
 	git diff --exit-code $(i18n)
-
-# Pushes translations to Transifex.  You must run make extract_translations first.
-push_translations:
-	# Pushing strings to Transifex...
-	tx push -s
-	# Fetching hashes from Transifex...
-	./node_modules/@edx/reactifex/bash_scripts/get_hashed_strings_v3.sh
-	# Writing out comments to file...
-	$(transifex_utils) $(transifex_temp) --comments --v3-scripts-path
-	# Pushing comments to Transifex...
-	./node_modules/@edx/reactifex/bash_scripts/put_comments_v3.sh
-
-# Pulls translations from Transifex.
-pull_translations:
-	tx pull -t -f --mode reviewed --languages=$(transifex_langs)
 
 # This target is used by Travis.
 validate-no-uncommitted-package-lock-changes:
