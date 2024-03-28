@@ -21,8 +21,7 @@ jobs:
       with:
         node-version: ${{ env.NODE_VER }}
     - name: Install dependencies
-    # todo: remove --peer-legacy-deps once frontend-build alpha is merged 
-      run: npm ci --peer-legacy-deps
+      run: npm ci
     - name: Validate package-lock.json changes
       run: make validate-no-uncommitted-package-lock-changes
     - name: Lint
