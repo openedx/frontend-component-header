@@ -45,6 +45,7 @@ Environment Variables
 * ``SITE_NAME`` - The user-facing name of the site, used as `alt` text on the logo in the header.
   Defaults to "localhost" in development.
 * ``LOGO_URL`` - The URL of the site's logo.  This logo is displayed in the header.
+* ``LOGO_DESTINATION`` - The URL of where the site's logo should point to.
 * ``ORDER_HISTORY_URL`` - The URL of the order history page.
 * ``ACCOUNT_PROFILE_URL`` - The URL of the account profile page.
 * ``ACCOUNT_SETTINGS_URL`` - The URL of the account settings page.

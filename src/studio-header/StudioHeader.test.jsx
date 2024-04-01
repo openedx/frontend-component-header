@@ -31,6 +31,7 @@ const RootWrapper = ({
     config: {
       LOGOUT_URL: process.env.LOGOUT_URL,
       LOGO_URL: process.env.LOGO_URL,
+      LOGO_DESTINATION: process.env.LOGO_DESTINATION,
       SITE_NAME: process.env.SITE_NAME,
       STUDIO_BASE_URL: process.env.STUDIO_BASE_URL,
       LOGIN_URL: process.env.LOGIN_URL,

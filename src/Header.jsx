@@ -21,6 +21,7 @@ ensureConfig([
   'LOGIN_URL',
   'SITE_NAME',
   'LOGO_URL',
+  'LOGO_DESTINATION',
   'ORDER_HISTORY_URL',
 ], 'Header component');
 
@@ -91,7 +92,7 @@ const Header = ({ intl }) => {
   const props = {
     logo: config.LOGO_URL,
     logoAltText: config.SITE_NAME,
-    logoDestination: `${config.LMS_BASE_URL}/dashboard`,
+    logoDestination: config.LOGO_DESTINATION || `${config.LMS_BASE_URL}/dashboard`,
     loggedIn: authenticatedUser !== null,
     username: authenticatedUser !== null ? authenticatedUser.username : null,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
