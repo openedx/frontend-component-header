@@ -16,7 +16,7 @@ ensureConfig([
 ], 'Studio Header component');
 
 const StudioHeader = ({
-  number, org, title, isHiddenMainMenu, mainMenuDropdowns, outlineLink,
+  number, org, title, isHiddenMainMenu, mainMenuDropdowns, outlineLink, searchButtonAction,
 }) => {
   const { authenticatedUser, config } = useContext(AppContext);
   const props = {
@@ -33,6 +33,7 @@ const StudioHeader = ({
     isHiddenMainMenu,
     mainMenuDropdowns,
     outlineLink,
+    searchButtonAction,
   };
 
   return (
@@ -62,6 +63,7 @@ StudioHeader.propTypes = {
     })),
   })),
   outlineLink: PropTypes.string,
+  searchButtonAction: PropTypes.func,
 };
 
 StudioHeader.defaultProps = {
@@ -70,6 +72,7 @@ StudioHeader.defaultProps = {
   isHiddenMainMenu: false,
   mainMenuDropdowns: [],
   outlineLink: null,
+  searchButtonAction: null,
 };
 
 export default StudioHeader;
