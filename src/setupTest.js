@@ -35,7 +35,7 @@ process.env.SEGMENT_KEY = 'segment_whoa';
 process.env.SITE_NAME = 'edX';
 process.env.USER_INFO_COOKIE_NAME = 'edx-user-info';
 process.env.LOGO_URL = 'https://edx-cdn.org/v3/default/logo.svg';
-process.env.LOGO_DESTINATION = `${process.env.LMS_BASE_URL}/dashboard`,
+process.env.LOGO_DESTINATION = `${process.env.LMS_BASE_URL}/dashboard`;
 process.env.LOGO_TRADEMARK_URL = 'https://edx-cdn.org/v3/default/logo-trademark.svg';
 process.env.LOGO_WHITE_URL = 'https://edx-cdn.org/v3/default/logo-white.svg';
 process.env.FAVICON_URL = 'https://edx-cdn.org/v3/default/favicon.ico';
@@ -66,7 +66,7 @@ export function initializeMockApp() {
     ACCESS_TOKEN_COOKIE_NAME: process.env.ACCESS_TOKEN_COOKIE_NAME || null,
     CSRF_TOKEN_API_PATH: process.env.CSRF_TOKEN_API_PATH || null,
     LOGO_URL: process.env.LOGO_URL || null,
-    LOGO_DESTINATION: process.env.LOGO_DESTINATION || `${config.LMS_BASE_URL}/dashboard`,
+    LOGO_DESTINATION: process.env.LOGO_DESTINATION || `${process.env.LMS_BASE_URL}/dashboard`,
     SITE_NAME: process.env.SITE_NAME || null,
 
     authenticatedUser: {
