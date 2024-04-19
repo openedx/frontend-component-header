@@ -88,6 +88,15 @@ $white: #fff;
       height: 100%;
     }
   }
+  .secondary-menu-container {
+    .nav-link:hover,
+    .nav-link:focus,
+    .nav-link.active,
+    .expanded .nav-link {
+      background: $component-active-bg;
+      color: $component-active-color;
+    }
+  }
   .main-nav {
     .nav-link {
       padding: 1.125rem 1rem;
