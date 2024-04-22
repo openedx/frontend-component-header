@@ -37,7 +37,7 @@
     "@edx/browserslist-config": "^1.1.1",
     "@edx/frontend-platform": "7.1.4",
     "@edx/reactifex": "^2.1.1",
-    "@openedx/frontend-build": "13.1.4",
+    "@openedx/frontend-build": "14.0.3",
     "@openedx/paragon": "22.2.2",
     "@testing-library/dom": "10.0.0",
     "@testing-library/jest-dom": "5.17.0",
