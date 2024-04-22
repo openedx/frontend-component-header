@@ -69,6 +69,7 @@ const props = {
     },
   ],
   outlineLink: 'tEsTLInK',
+  searchButtonAction: null,
 };
 
 describe('Header', () => {
@@ -137,6 +138,20 @@ describe('Header', () => {
       expect(mobileMenuButton).toBeNull();
 
       expect(desktopMenu).toBeNull();
+    });
+
+    it('should show search button', async () => {
+      const testProps = { ...props, searchButtonAction: () => undefined };
+      const { getByRole } = render(<RootWrapper {...testProps} />);
+      const searchButton = getByRole('button', { name: 'Search content' });
+
+      expect(searchButton).toBeVisible();
+    });
+
+    it('should not show search button', async () => {
+      const testProps = { ...props, searchButtonAction: null };
+      const { queryByRole } = render(<RootWrapper {...testProps} />);
+      expect(queryByRole('button', { name: 'Search content' })).not.toBeInTheDocument();
     });
   });
 
