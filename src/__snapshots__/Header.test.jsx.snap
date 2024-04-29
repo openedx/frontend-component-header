@@ -33,6 +33,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
         <a
           className="nav-link"
           href="http://localhost:18000/dashboard"
+          onClick={null}
         >
           Courses
         </a>
@@ -229,6 +230,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
         <a
           className="nav-link"
           href="http://localhost:18000/dashboard"
+          onClick={null}
         >
           Courses
         </a>
