@@ -26,6 +26,7 @@ subscribe(APP_READY, () => {
         authenticatedUser: {
           userId: '123abc',
           username: 'testuser',
+          username: 'Test user',
           roles: [],
           administrator: false,
         },
@@ -38,6 +39,7 @@ subscribe(APP_READY, () => {
         authenticatedUser: {
           userId: '123abc',
           username: 'testuser',
+          username: 'Test user',
           roles: [],
           administrator: false,
         },
