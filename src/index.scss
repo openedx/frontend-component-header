@@ -93,8 +93,8 @@
     .nav-link:focus,
     .nav-link.active,
     .expanded .nav-link {
-      background: $component-active-bg;
-      color: $component-active-color;
+      background: var(--pgn-color-bg-active);
+      color: var(--pgn-color-active);
     }
   }
   .main-nav {
@@ -130,135 +130,5 @@
 
   .search-input {
     border-radius: var(--pgn-size-rounded-pill);
-  }
-}
-
-.content b {
-  color: var(--pgn-color-primary-500) !important;
-  font-weight: 500 !important;
-}
-
-.font-size-18 {
-  font-size: 18px !important;
-}
-
-.font-size-12 {
-  font-size: 12px;
-}
-
-.font-size-14 {
-  font-size: 14px;
-}
-
-.py-10px {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.pb-10px {
-  padding-bottom: 10px;
-}
-
-.line-height-24 {
-  line-height: 24px;
-}
-
-.line-height-20 {
-  line-height: 20px;
-}
-
-.line-height-10 {
-  line-height: 10px !important;
-}
-
-.icon-size-20 {
-  width: 20px !important;
-  height: 20px !important;
-}
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.notification-button {
-  width: 36px;
-  height: 36px;
-}
-
-.notification-icon{
-  height: 23.33px !important;
-  width: 23.33px !important;
-}
-
-.notification-badge {
-  position: absolute;
-  margin-top: 18px;
-  margin-left: -21px;
-  border: 2px solid var(--pgn-color-white);
-  font-size: 9px !important;
-}
-
-.popover {
-  max-height: calc(100% - 68px);
-  min-height: 1220px;
-  filter: none;
-  box-shadow: var(--pgn-elevation-box-shadow-down-2);
-
-  &.medium-screen {
-    min-width: 24.313rem;
-  }
-
-  &.large-screen {
-    min-width: 34.313rem;
-  }
-
-  .dropdown-toggle::after {
-    display: none;
-  }
-
-  .expandable {
-    position: relative !important;
-    margin-left: 4px;
-    padding: 2px 5px;
-    border-radius: 10rem;
-    font-size: 9px;
-  }
-
-  .dropdown-toggle {
-    font-size: 14px;
-    padding-top: 0 !important;
-    padding-bottom: 12px !important;
-
-    div {
-      min-height: 6px !important;
-      min-width: 6px !important;
-    }
-  }
-
-  .dropdown-item {
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  .notification-content {
-    .notification-item-content {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      text-overflow: ellipsis;
-
-      p {
-        margin-bottom: 0;
-      }
-
-      b {
-        color: var(--pgn-color-primary-500);
-      }
-    }
-
-    .unread {
-      height: 10px;
-      width: 10px;
-    }
   }
 }
