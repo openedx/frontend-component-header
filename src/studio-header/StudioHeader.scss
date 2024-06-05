@@ -1,16 +1,13 @@
-$spacer: 1rem;
-$white: #FFFFFF;
-
 .studio-header {
   position: relative;
   z-index: 1000;
 
   height: 3.75rem;
   box-shadow: 0 1px 0 0 rgb(0 0 0 / .1);
-  background: $white;
+  background: var(--pgn-color-white);
 
   .btn-outline-primary {
-    border-color: $white;
+    border-color: var(--pgn-color-white);
   }
 
   .logo {
@@ -19,8 +16,8 @@ $white: #FFFFFF;
     position: relative;
     top: -.05em;
     height: 1.75rem;
-    padding: $spacer 0;
-    margin-right: $spacer;
+    padding: var(--pgn-spacing-spacer-base) 0;
+    margin-right: var(--pgn-spacing-spacer-base);
 
     img {
       display: block;
@@ -33,13 +30,13 @@ $white: #FFFFFF;
 
     @media only screen and (min-width: 769px) {
       padding: .5rem;
-      padding-right: $spacer;
+      padding-right: var(--pgn-spacing-spacer-base);
       border-right: 1px solid #E5E5E5;
       width: 70%;
     }
   
     span {
-      color: #333333;
+      color: var(--pgn-color-gray-800);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
