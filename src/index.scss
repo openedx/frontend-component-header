@@ -33,7 +33,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      padding-bottom: var(--pgn-spacing-spacer-base);
+      padding-bottom: calc(var(--pgn-spacing-spacer-base)* 0.1);
     }
   }
 
