@@ -32,6 +32,7 @@ process.env.MARKETING_SITE_BASE_URL = 'http://localhost:18000';
 process.env.ORDER_HISTORY_URL = 'localhost:1996/orders';
 process.env.REFRESH_ACCESS_TOKEN_ENDPOINT = 'http://localhost:18000/login_refresh';
 process.env.SEGMENT_KEY = 'segment_whoa';
+process.env.SHOW_FULLNAME = false;
 process.env.SITE_NAME = 'edX';
 process.env.USER_INFO_COOKIE_NAME = 'edx-user-info';
 process.env.LOGO_URL = 'https://edx-cdn.org/v3/default/logo.svg';
@@ -48,6 +49,7 @@ class MockLoggingService {
 export const authenticatedUser = {
   userId: 'abc123',
   username: 'Mock User',
+  name: 'Mock User Name',
   roles: [],
   administrator: false,
 };
@@ -66,10 +68,12 @@ export function initializeMockApp() {
     CSRF_TOKEN_API_PATH: process.env.CSRF_TOKEN_API_PATH || null,
     LOGO_URL: process.env.LOGO_URL || null,
     SITE_NAME: process.env.SITE_NAME || null,
+    SHOW_FULLNAME: process.env.SHOW_FULLNAME || null,
 
     authenticatedUser: {
       userId: 'abc123',
       username: 'Mock User',
+      name: 'Mock User Name',
       roles: [],
       administrator: false,
     },
