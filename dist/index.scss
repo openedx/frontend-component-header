@@ -1,0 +1,134 @@
+@import './Menu/menu.scss';
+@import './studio-header/StudioHeader.scss';
+
+.dropdown-item a {
+  text-decoration: none;
+}
+
+.icon-button {
+  display: inline-flex;
+  line-height: 3rem;
+  background: transparent;
+  vertical-align: middle;
+  text-align: center;
+  border: none;
+  height: 3rem;
+  width: 3rem;
+  padding: .75rem;
+  justify-content: center;
+  align-items:center;
+
+  &:hover, &:focus {
+    background: rgba(0, 0, 0, .1);
+  }
+}
+
+.learning-header {
+  min-width: 0;
+
+  .course-title-lockup {
+    min-width: 0;
+
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-bottom: calc(var(--pgn-spacing-spacer-base)* 0.1);
+    }
+  }
+
+  .user-dropdown .btn {
+    height: 3rem;
+
+    @media (--max-pgn-size-breakpoint-xs) {
+      padding: 0 .5rem;
+    }
+  }
+}
+
+.site-header-mobile,
+.site-header-desktop {
+  position: relative;
+  z-index: 1000;
+}
+
+.site-header-mobile {
+  height: 3rem;
+
+  .nav-link {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  img {
+    height: 1.5rem;
+  }
+}
+
+
+.site-header-desktop {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, .1);
+  background: var(--pgn-color-white);
+
+  .nav-link {
+    text-decoration: none;
+  }
+
+  .logo {
+    display: block;
+    box-sizing: content-box;
+    position: relative;
+    top: -.05em;
+    height: 1.75rem;
+    padding: var(--pgn-spacing-spacer-base) 0;
+    margin-right: var(--pgn-spacing-spacer-base);
+
+    img {
+      display: block;
+      height: 100%;
+    }
+  }
+  .secondary-menu-container {
+    .nav-link:hover,
+    .nav-link:focus,
+    .nav-link.active,
+    .expanded .nav-link {
+      background: var(--pgn-color-bg-active);
+      color: var(--pgn-color-active);
+    }
+  }
+  .main-nav {
+    .nav-link {
+      padding: 1.125rem var(--pgn-spacing-spacer-base);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: .01em;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus,
+    .nav-link.active,
+    .expanded .nav-link {
+      background: var(--pgn-color-bg-active);
+      color: var(--pgn-color-active);
+    }
+
+    .menu {
+      position: static;
+
+      .menu-content {
+        border-top: solid 2px var(--pgn-color-bg-active);
+        left: 0;
+        right: 0;
+        box-shadow: var(--pgn-elevation-box-shadow-down-1);
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+        padding: var(--pgn-spacing-spacer-base);
+      }
+    }
+  }
+
+  .search-input {
+    border-radius: var(--pgn-size-rounded-pill);
+  }
+}
