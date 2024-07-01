@@ -28,15 +28,12 @@ LinkedLogo.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
 };
-
-// this feature flag is not included on the frontend-platform, we have to get it directly from ENV
-const enabledOrgLogo = process.env.ENABLED_ORG_LOGO || false;
-
 const LearningHeader = ({
   courseOrg, courseTitle, intl, showUserDropdown,
 }) => {
   const { authenticatedUser } = useContext(AppContext);
   const [logoOrg, setLogoOrg] = useState(null);
+  const enabledOrgLogo = getConfig().ENABLED_ORG_LOGO || false;
 
   useEffect(() => {
     if (courseOrg) {

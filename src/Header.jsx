@@ -28,6 +28,7 @@ ensureConfig([
 subscribe(APP_CONFIG_INITIALIZED, () => {
   mergeConfig({
     AUTHN_MINIMAL_HEADER: !!process.env.AUTHN_MINIMAL_HEADER,
+    ENABLED_ORG_LOGO: !!process.env.ENABLED_ORG_LOGO,
   }, 'Header additional config');
 });
 
