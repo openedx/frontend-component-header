@@ -29,6 +29,7 @@ describe('<Header />', () => {
         LOGIN_URL: process.env.LOGIN_URL,
         LOGOUT_URL: process.env.LOGOUT_URL,
         LOGO_URL: process.env.LOGO_URL,
+        LOGO_DESTINATION: process.env.LOGO_DESTINATION,
       },
     };
     const component = <HeaderComponent width={{ width: 1280 }} contextValue={contextValue} />;
@@ -52,6 +53,7 @@ describe('<Header />', () => {
         LOGIN_URL: process.env.LOGIN_URL,
         LOGOUT_URL: process.env.LOGOUT_URL,
         LOGO_URL: process.env.LOGO_URL,
+        LOGO_DESTINATION: process.env.LOGO_DESTINATION,
       },
     };
     const component = <HeaderComponent width={{ width: 1280 }} contextValue={contextValue} />;
@@ -70,6 +72,7 @@ describe('<Header />', () => {
         LOGIN_URL: process.env.LOGIN_URL,
         LOGOUT_URL: process.env.LOGOUT_URL,
         LOGO_URL: process.env.LOGO_URL,
+        LOGO_DESTINATION: process.env.LOGO_DESTINATION,
       },
     };
     const component = <HeaderComponent width={{ width: 500 }} contextValue={contextValue} />;
@@ -93,6 +96,7 @@ describe('<Header />', () => {
         LOGIN_URL: process.env.LOGIN_URL,
         LOGOUT_URL: process.env.LOGOUT_URL,
         LOGO_URL: process.env.LOGO_URL,
+        LOGO_DESTINATION: process.env.LOGO_DESTINATION,
       },
     };
     const component = <HeaderComponent width={{ width: 500 }} contextValue={contextValue} />;
