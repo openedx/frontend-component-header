@@ -21,6 +21,11 @@ const messages = defineMessages({
     defaultMessage: 'Account',
     description: 'The text for the user menu Account navigation link.',
   },
+  settings: {
+    id: 'header.menu.settings.label',
+    defaultMessage: 'Settings',
+    description: 'The text for the user menu Settings navigation link.',
+  },
   orderHistory: {
     id: 'header.menu.orderHistory.label',
     defaultMessage: 'Order History',
