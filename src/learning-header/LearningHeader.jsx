@@ -33,7 +33,7 @@ const LearningHeader = ({
 }) => {
   const { authenticatedUser } = useContext(AppContext);
   const [logoOrg, setLogoOrg] = useState(null);
-  const enabledOrgLogo = getConfig().ENABLED_ORG_LOGO || false;
+  const enableOrgLogo = getConfig().ENABLE_ORG_LOGO || false;
 
   useEffect(() => {
     if (courseOrg) {
@@ -55,8 +55,8 @@ const LearningHeader = ({
       <div className="container-xl py-2 d-flex align-items-center">
         {headerLogo}
         <div className="d-none d-md-block flex-grow-1 course-title-lockup">
-          <div className={`d-md-flex ${enabledOrgLogo && 'align-items-center justify-content-center'} w-100`}>
-            {enabledOrgLogo ? (
+          <div className={`d-md-flex ${enableOrgLogo && 'align-items-center justify-content-center'} w-100`}>
+            {enableOrgLogo ? (
               (courseOrg && logoOrg)
               && <img src={logoOrg} alt={`${courseOrg} logo`} style={{ maxHeight: '45px' }} />
             ) : null}
