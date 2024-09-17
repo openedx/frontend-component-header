@@ -2,8 +2,8 @@ name: Release CI
 on:
   push:
     branches:
-    - master
-    - alpha
+    - nau/*.master
+
 jobs:
   release:
     name: Release
@@ -38,10 +38,7 @@ jobs:
         fail_ci_if_error: false
     - name: Build
       run: npm run build
-    - name: Release
-      uses: cycjimmy/semantic-release-action@v3
+    - name: Release to npmjs
+      uses: JS-DevTools/npm-publish@v3
       with:
-        semantic_version: 16
-      env:
-        GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
-        NPM_TOKEN: ${{ secrets.SEMANTIC_RELEASE_NPM_TOKEN }}
+        token: ${{ secrets.NPM_AUTH_TOKEN }}

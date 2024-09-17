@@ -1,7 +1,7 @@
 {
-  "name": "@edx/frontend-component-header",
-  "version": "1.0.0-semantically-released",
-  "description": "The standard header for Open edX",
+  "name": "@nauedu/frontend-component-header",
+  "version": "18.0.0",
+  "description": "NAU header component for Open edX",
   "main": "dist/index.js",
   "publishConfig": {
     "access": "public"
@@ -22,14 +22,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openedx/frontend-component-header.git"
+    "url": "git+https://github.com/fccn/frontend-component-header-nau.git"
   },
   "author": "edX",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/openedx/frontend-component-header/issues"
+    "url": "https://github.com/fccn/frontend-component-header-nau/issues"
   },
-  "homepage": "https://github.com/openedx/frontend-component-header#readme",
+  "homepage": "https://github.com/fccn/frontend-component-header-nau#readme",
   "devDependencies": {
     "@edx/brand": "npm:@openedx/brand-openedx@^1.2.2",
     "@edx/browserslist-config": "^1.1.1",
