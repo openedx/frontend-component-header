@@ -38,7 +38,7 @@
     "@edx/frontend-platform": "8.1.1",
     "@edx/reactifex": "^2.1.1",
     "@openedx/frontend-build": "14.1.2",
-    "@openedx/paragon": "22.7.0",
+    "@openedx/paragon": "22.8.0",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "10.4.9",
@@ -68,7 +68,8 @@
   },
   "peerDependencies": {
     "@edx/frontend-platform": "^7.0.0 || ^8.0.0",
-    "@openedx/paragon": ">= 21.5.7 < 23.0.0",
+    "@openedx/paragon": "^22.8.0",
+    "classnames": "^2.5.1",
     "prop-types": "^15.5.10",
     "react": "^16.9.0 || ^17.0.0",
     "react-dom": "^16.9.0 || ^17.0.0"

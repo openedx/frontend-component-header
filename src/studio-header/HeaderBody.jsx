@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from '@edx/frontend-platform/i18n';
+import classNames from 'classnames';
 import {
   ActionRow,
   Button,
@@ -37,6 +38,7 @@ const HeaderBody = ({
   mainMenuDropdowns,
   outlineLink,
   searchButtonAction,
+  containerProps,
 }) => {
   const intl = useIntl();
 
@@ -50,8 +52,14 @@ const HeaderBody = ({
     />
   );
 
+  const { className: containerClassName, ...restContainerProps } = containerProps || {};
+
   return (
-    <Container size="xl" className="px-2.5">
+    <Container
+      size="xl"
+      className={classNames('px-2.5', containerClassName)}
+      {...restContainerProps}
+    >
       <ActionRow as="header">
         {isHiddenMainMenu ? (
           <Row className="flex-nowrap ml-4">
@@ -110,6 +118,7 @@ const HeaderBody = ({
               iconAs={Icon}
               onClick={searchButtonAction}
               aria-label={intl.formatMessage(messages['header.label.search.nav'])}
+              alt={intl.formatMessage(messages['header.label.search.nav'])}
             />
           </Nav>
         )}
@@ -155,6 +164,7 @@ HeaderBody.propTypes = {
   })),
   outlineLink: PropTypes.string,
   searchButtonAction: PropTypes.func,
+  containerProps: Container.propTypes,
 };
 
 HeaderBody.defaultProps = {

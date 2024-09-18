@@ -30,7 +30,7 @@ const NavDropdownMenu = ({
 
 NavDropdownMenu.propTypes = {
   id: PropTypes.string.isRequired,
-  buttonTitle: PropTypes.string.isRequired,
+  buttonTitle: PropTypes.node.isRequired,
   items: PropTypes.arrayOf(PropTypes.shape({
     href: PropTypes.string,
     title: PropTypes.string,
