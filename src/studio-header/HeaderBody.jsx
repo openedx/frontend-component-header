@@ -164,7 +164,7 @@ HeaderBody.propTypes = {
   })),
   outlineLink: PropTypes.string,
   searchButtonAction: PropTypes.func,
-  containerProps: Container.propTypes,
+  containerProps: PropTypes.shape(Container.propTypes),
 };
 
 HeaderBody.defaultProps = {
@@ -184,6 +184,7 @@ HeaderBody.defaultProps = {
   mainMenuDropdowns: [],
   outlineLink: null,
   searchButtonAction: null,
+  containerProps: {},
 };
 
 export default HeaderBody;

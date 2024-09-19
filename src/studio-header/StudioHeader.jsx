@@ -71,6 +71,7 @@ StudioHeader.propTypes = {
 StudioHeader.defaultProps = {
   number: '',
   org: '',
+  containerProps: {},
   isHiddenMainMenu: false,
   mainMenuDropdowns: [],
   outlineLink: null,
