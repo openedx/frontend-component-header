@@ -95,6 +95,12 @@ This library has the following exports:
 * ``messages``: Internationalization messages suitable for use with `@edx/frontend-platform/i18n <https://edx.github.io/frontend-platform/module-Internationalization.html>`_
 * ``dist/index.scss``: A SASS file which contains style information for the component.  It should be imported into the micro-frontend's own SCSS file.
 
+Plugins
+-------
+This can be customized using `Frontend Plugin Framework <https://github.com/openedx/frontend-plugin-framework>`_.
+
+The parts of this that can be customized in that manner are documented `here </src/plugin-slots>`_.
+
 Examples
 ========
 
