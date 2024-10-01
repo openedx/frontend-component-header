@@ -16,7 +16,7 @@ ensureConfig([
 ], 'Studio Header component');
 
 const StudioHeader = ({
-  number, org, title, isHiddenMainMenu, mainMenuDropdowns, outlineLink, searchButtonAction,
+  number, org, title, containerProps, isHiddenMainMenu, mainMenuDropdowns, outlineLink, searchButtonAction,
 }) => {
   const { authenticatedUser, config } = useContext(AppContext);
   const props = {
@@ -25,6 +25,7 @@ const StudioHeader = ({
     number,
     org,
     title,
+    containerProps,
     username: authenticatedUser?.username,
     isAdmin: authenticatedUser?.administrator,
     authenticatedUserAvatar: authenticatedUser?.avatar,
@@ -53,13 +54,14 @@ StudioHeader.propTypes = {
   number: PropTypes.string,
   org: PropTypes.string,
   title: PropTypes.string.isRequired,
+  containerProps: HeaderBody.propTypes.containerProps,
   isHiddenMainMenu: PropTypes.bool,
   mainMenuDropdowns: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
-    buttonTitle: PropTypes.string,
+    buttonTitle: PropTypes.node,
     items: PropTypes.arrayOf(PropTypes.shape({
       href: PropTypes.string,
-      title: PropTypes.string,
+      title: PropTypes.node,
     })),
   })),
   outlineLink: PropTypes.string,
@@ -69,6 +71,7 @@ StudioHeader.propTypes = {
 StudioHeader.defaultProps = {
   number: '',
   org: '',
+  containerProps: {},
   isHiddenMainMenu: false,
   mainMenuDropdowns: [],
   outlineLink: null,

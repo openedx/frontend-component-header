@@ -48,10 +48,10 @@ MobileHeader.propTypes = {
   isAdmin: PropTypes.bool,
   mainMenuDropdowns: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
-    buttonTitle: PropTypes.string,
+    buttonTitle: PropTypes.node,
     items: PropTypes.arrayOf(PropTypes.shape({
       href: PropTypes.string,
-      title: PropTypes.string,
+      title: PropTypes.node,
     })),
   })),
   outlineLink: PropTypes.string,
