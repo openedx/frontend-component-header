@@ -33,7 +33,7 @@ NavDropdownMenu.propTypes = {
   buttonTitle: PropTypes.node.isRequired,
   items: PropTypes.arrayOf(PropTypes.shape({
     href: PropTypes.string,
-    title: PropTypes.string,
+    title: PropTypes.node,
   })).isRequired,
 };
 
