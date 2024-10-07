@@ -4,6 +4,7 @@ import {
   Dropdown,
   DropdownButton,
 } from '@openedx/paragon';
+import { Link } from 'react-router-dom';
 
 const NavDropdownMenu = ({
   id,
@@ -18,8 +19,9 @@ const NavDropdownMenu = ({
   >
     {items.map(item => (
       <Dropdown.Item
+        as={Link}
         key={`${item.title}-dropdown-item`}
-        href={item.href}
+        to={item.href}
         className="small"
       >
         {item.title}
@@ -32,8 +34,8 @@ NavDropdownMenu.propTypes = {
   id: PropTypes.string.isRequired,
   buttonTitle: PropTypes.node.isRequired,
   items: PropTypes.arrayOf(PropTypes.shape({
-    href: PropTypes.string,
-    title: PropTypes.node,
+    href: PropTypes.string.isRequired,
+    title: PropTypes.node.isRequired,
   })).isRequired,
 };
 

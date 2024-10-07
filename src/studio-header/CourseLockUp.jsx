@@ -5,6 +5,8 @@ import {
   OverlayTrigger,
   Tooltip,
 } from '@openedx/paragon';
+import { Link } from 'react-router-dom';
+
 import messages from './messages';
 
 const CourseLockUp = ({
@@ -23,15 +25,15 @@ const CourseLockUp = ({
       </Tooltip>
     )}
   >
-    <a
+    <Link
       className="course-title-lockup mr-2"
-      href={outlineLink}
+      to={outlineLink}
       aria-label={intl.formatMessage(messages['header.label.courseOutline'])}
       data-testid="course-lock-up-block"
     >
       <span className="d-block small m-0 text-gray-800" data-testid="course-org-number">{org} {number}</span>
       <span className="d-block m-0 font-weight-bold text-gray-800" data-testid="course-title">{title}</span>
-    </a>
+    </Link>
   </OverlayTrigger>
 );
 
