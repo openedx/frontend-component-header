@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Collapsible } from '@openedx/paragon';
+import { Link } from 'react-router-dom';
 
-const MobileMenu = ({
-  mainMenuDropdowns,
-}) => (
+const MobileMenu = ({ mainMenuDropdowns }) => (
   <div
     className="ml-4 p-2 bg-light-100 border border-gray-200 small rounded"
     data-testid="mobile-menu"
@@ -21,9 +20,9 @@ const MobileMenu = ({
             <ul className="p-0" style={{ listStyleType: 'none' }}>
               {items.map(item => (
                 <li className="mobile-menu-item">
-                  <a href={item.href}>
+                  <Link to={item.href}>
                     {item.title}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

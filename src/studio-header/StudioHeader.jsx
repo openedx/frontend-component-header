@@ -16,7 +16,8 @@ ensureConfig([
 ], 'Studio Header component');
 
 const StudioHeader = ({
-  number, org, title, containerProps, isHiddenMainMenu, mainMenuDropdowns, outlineLink, searchButtonAction,
+  number, org, title, containerProps, isHiddenMainMenu, mainMenuDropdowns,
+  outlineLink, searchButtonAction, isNewHomePage,
 }) => {
   const { authenticatedUser, config } = useContext(AppContext);
   const props = {
@@ -29,7 +30,7 @@ const StudioHeader = ({
     username: authenticatedUser?.username,
     isAdmin: authenticatedUser?.administrator,
     authenticatedUserAvatar: authenticatedUser?.avatar,
-    studioBaseUrl: config.STUDIO_BASE_URL,
+    studioBaseUrl: isNewHomePage ? '/home' : config.STUDIO_BASE_URL,
     logoutUrl: config.LOGOUT_URL,
     isHiddenMainMenu,
     mainMenuDropdowns,
@@ -66,6 +67,7 @@ StudioHeader.propTypes = {
   })),
   outlineLink: PropTypes.string,
   searchButtonAction: PropTypes.func,
+  isNewHomePage: PropTypes.bool.isRequired,
 };
 
 StudioHeader.defaultProps = {

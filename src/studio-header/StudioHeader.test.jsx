@@ -9,6 +9,7 @@ import {
 import { AppContext } from '@edx/frontend-platform/react';
 import { IntlProvider } from '@edx/frontend-platform/i18n';
 import { Context as ResponsiveContext } from 'react-responsive';
+import { MemoryRouter } from 'react-router-dom';
 
 import StudioHeader from './StudioHeader';
 import messages from './messages';
@@ -40,15 +41,17 @@ const RootWrapper = ({
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values, react/prop-types
-    <IntlProvider locale="en">
-      <AppContext.Provider value={appContextValue}>
-        <ResponsiveContext.Provider value={responsiveContextValue}>
-          <StudioHeader
-            {...props}
-          />
-        </ResponsiveContext.Provider>
-      </AppContext.Provider>
-    </IntlProvider>
+    <MemoryRouter>
+      <IntlProvider locale="en">
+        <AppContext.Provider value={appContextValue}>
+          <ResponsiveContext.Provider value={responsiveContextValue}>
+            <StudioHeader
+              {...props}
+            />
+          </ResponsiveContext.Provider>
+        </AppContext.Provider>
+      </IntlProvider>
+    </MemoryRouter>
   );
 };
 
@@ -70,6 +73,7 @@ const props = {
   ],
   outlineLink: 'tEsTLInK',
   searchButtonAction: null,
+  isNewHomePage: true,
 };
 
 describe('Header', () => {

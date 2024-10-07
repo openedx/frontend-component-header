@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const BrandNav = ({
   studioBaseUrl,
   logo,
   logoAltText,
 }) => (
-  <a href={studioBaseUrl}>
+  <Link to={studioBaseUrl}>
     <img
       src={logo}
       alt={logoAltText}
       className="d-block logo"
     />
-  </a>
+  </Link>
 );
 
 BrandNav.propTypes = {

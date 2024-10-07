@@ -103,7 +103,12 @@ const HeaderBody = ({
                 {mainMenuDropdowns.map(dropdown => {
                   const { id, buttonTitle, items } = dropdown;
                   return (
-                    <NavDropdownMenu key={id} {...{ id, buttonTitle, items }} />
+                    <NavDropdownMenu
+                      key={id}
+                      {...{
+                        id, buttonTitle, items,
+                      }}
+                    />
                   );
                 })}
               </Nav>
