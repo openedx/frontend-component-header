@@ -14,6 +14,7 @@ const UserMenu = ({
   authenticatedUserAvatar,
   isMobile,
   isAdmin,
+  onNavigate,
   // injected
   intl,
 }) => {
@@ -38,6 +39,7 @@ const UserMenu = ({
     <NavDropdownMenu
       buttonTitle={title}
       id="user-dropdown-menu"
+      onNavigate={onNavigate}
       items={getUserMenuItems({
         studioBaseUrl,
         logoutUrl,
@@ -55,6 +57,7 @@ UserMenu.propTypes = {
   authenticatedUserAvatar: PropTypes.string,
   isMobile: PropTypes.bool,
   isAdmin: PropTypes.bool,
+  onNavigate: PropTypes.func.isRequired,
   // injected
   intl: intlShape.isRequired,
 };

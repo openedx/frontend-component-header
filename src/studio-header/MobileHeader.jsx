@@ -6,6 +6,7 @@ import MobileMenu from './MobileMenu';
 
 const MobileHeader = ({
   mainMenuDropdowns,
+  onNavigate,
   ...props
 }) => {
   const [isOpen, , close, toggle] = useToggle(false);
@@ -19,6 +20,7 @@ const MobileHeader = ({
         setModalPopupTarget={setTarget}
         toggleModalPopup={toggle}
         isModalPopupOpen={isOpen}
+        onNavigate={onNavigate}
       />
       <ModalPopup
         hasArrow
@@ -29,7 +31,7 @@ const MobileHeader = ({
         onEscapeKey={close}
         className="mobile-menu-container"
       >
-        <MobileMenu {...{ mainMenuDropdowns }} />
+        <MobileMenu onNavigate={onNavigate} {...{ mainMenuDropdowns }} />
       </ModalPopup>
     </>
   );
@@ -55,6 +57,7 @@ MobileHeader.propTypes = {
     })),
   })),
   outlineLink: PropTypes.string,
+  onNavigate: PropTypes.func.isRequired,
 };
 
 MobileHeader.defaultProps = {
