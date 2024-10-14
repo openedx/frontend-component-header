@@ -12,34 +12,50 @@ const CourseLockUp = ({
   org,
   number,
   title,
+  onNavigate,
   // injected
   intl,
-}) => (
-  <OverlayTrigger
-    placement="bottom"
-    overlay={(
-      <Tooltip id="course-lock-up">
-        {title}
-      </Tooltip>
+}) => {
+  const handleClick = (e, url) => {
+    e.preventDefault();
+    const isAbsoluteUrl = /^https?:\/\//i.test(url);
+
+    if (isAbsoluteUrl) {
+      window.location.href = url;
+    } else if (onNavigate) {
+      onNavigate(`${url}`);
+    }
+  };
+
+  return (
+    <OverlayTrigger
+      placement="bottom"
+      overlay={(
+        <Tooltip id="course-lock-up">
+          {title}
+        </Tooltip>
     )}
-  >
-    <a
-      className="course-title-lockup mr-2"
-      href={outlineLink}
-      aria-label={intl.formatMessage(messages['header.label.courseOutline'])}
-      data-testid="course-lock-up-block"
     >
-      <span className="d-block small m-0 text-gray-800" data-testid="course-org-number">{org} {number}</span>
-      <span className="d-block m-0 font-weight-bold text-gray-800" data-testid="course-title">{title}</span>
-    </a>
-  </OverlayTrigger>
-);
+      <a
+        className="course-title-lockup mr-2"
+        href={outlineLink}
+        onClick={(e) => handleClick(e, outlineLink)}
+        aria-label={intl.formatMessage(messages['header.label.courseOutline'])}
+        data-testid="course-lock-up-block"
+      >
+        <span className="d-block small m-0 text-gray-800" data-testid="course-org-number">{org} {number}</span>
+        <span className="d-block m-0 font-weight-bold text-gray-800" data-testid="course-title">{title}</span>
+      </a>
+    </OverlayTrigger>
+  );
+};
 
 CourseLockUp.propTypes = {
   number: PropTypes.string,
   org: PropTypes.string,
   title: PropTypes.string,
   outlineLink: PropTypes.string,
+  onNavigate: PropTypes.func.isRequired,
   // injected
   intl: intlShape.isRequired,
 };
