@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { PluginSlot } from '@openedx/frontend-plugin-framework';
-import Logo from '../../Logo';
+import Logo, { logoDataShape } from '../../Logo';
 
 const LogoSlot = ({
   href, src, alt, ...attributes
@@ -16,10 +15,6 @@ const LogoSlot = ({
   </PluginSlot>
 );
 
-LogoSlot.propTypes = {
-  href: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-};
+LogoSlot.propTypes = logoDataShape;
 
 export default LogoSlot;
