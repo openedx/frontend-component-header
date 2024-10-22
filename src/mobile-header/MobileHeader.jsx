@@ -4,107 +4,40 @@ import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { getConfig } from '@edx/frontend-platform';
 
 // Local Components
-import { Menu, MenuTrigger, MenuContent } from './Menu';
-import Avatar from './Avatar';
-import LogoSlot from './plugin-slots/LogoSlot';
+import { Menu, MenuTrigger, MenuContent } from '../Menu';
+import Avatar from '../Avatar';
+import LogoSlot from '../plugin-slots/LogoSlot';
+import MobileLoggedOutItemsSlot from '../plugin-slots/MobileLoggedOutItemsSlot';
+import { mobileHeaderLoggedOutItemsDataShape } from './MobileLoggedOutItems';
+import MobileMainMenuSlot from '../plugin-slots/MobileMainMenuSlot';
+import { mobileHeaderMainMenuDataShape } from './MobileHeaderMainMenu';
+import MobileUserMenuSlot from '../plugin-slots/MobileUserMenuSlot';
+import { mobileHeaderUserMenuDataShape } from './MobileHeaderUserMenu';
 
 // i18n
-import messages from './Header.messages';
+import messages from '../Header.messages';
 
 // Assets
-import { MenuIcon } from './Icons';
+import { MenuIcon } from '../Icons';
 
 class MobileHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
     super(props);
   }
 
-  renderMenu(menu) {
-    // Nodes are accepted as a prop
-    if (!Array.isArray(menu)) {
-      return menu;
-    }
-
-    return menu.map((menuItem) => {
-      const {
-        type,
-        href,
-        content,
-        submenuContent,
-        disabled,
-        isActive,
-        onClick,
-      } = menuItem;
-
-      if (type === 'item') {
-        return (
-          <a
-            key={`${type}-${content}`}
-            className={`nav-link${disabled ? ' disabled' : ''}${isActive ? ' active' : ''}`}
-            href={href}
-            onClick={onClick || null}
-          >
-            {content}
-          </a>
-        );
-      }
-
-      return (
-        <Menu key={`${type}-${content}`} tag="div" className="nav-item">
-          <MenuTrigger onClick={onClick || null} tag="a" role="button" tabIndex="0" className="nav-link">
-            {content}
-          </MenuTrigger>
-          <MenuContent className="position-static pin-left pin-right py-2">
-            {submenuContent}
-          </MenuContent>
-        </Menu>
-      );
-    });
-  }
-
   renderMainMenu() {
-    const { mainMenu } = this.props;
-    return this.renderMenu(mainMenu);
-  }
-
-  renderSecondaryMenu() {
-    const { secondaryMenu } = this.props;
-    return this.renderMenu(secondaryMenu);
+    const { mainMenu, secondaryMenu } = this.props;
+    return <MobileMainMenuSlot menu={[...mainMenu, ...secondaryMenu]} />;
   }
 
   renderUserMenuItems() {
     const { userMenu } = this.props;
-
-    return userMenu.map((group) => (
-      group.items.map(({
-        type, content, href, disabled, isActive, onClick,
-      }) => (
-        <li className="nav-item" key={`${type}-${content}`}>
-          <a
-            className={`nav-link${isActive ? ' active' : ''}${disabled ? ' disabled' : ''}`}
-            href={href}
-            onClick={onClick || null}
-          >
-            {content}
-          </a>
-        </li>
-      ))
-    ));
+    return <MobileUserMenuSlot menu={userMenu} />;
   }
 
   renderLoggedOutItems() {
     const { loggedOutItems } = this.props;
-
-    return loggedOutItems.map(({ type, href, content }, i, arr) => (
-      <li className="nav-item px-3 my-2" key={`${type}-${content}`}>
-        <a
-          className={i < arr.length - 1 ? 'btn btn-block btn-outline-primary' : 'btn btn-block btn-primary'}
-          href={href}
-        >
-          {content}
-        </a>
-      </li>
-    ));
+    return <MobileLoggedOutItemsSlot items={loggedOutItems} />;
   }
 
   render() {
@@ -149,7 +82,6 @@ class MobileHeader extends React.Component {
                 className="nav flex-column pin-left pin-right border-top shadow py-2"
               >
                 {this.renderMainMenu()}
-                {this.renderSecondaryMenu()}
               </MenuContent>
             </Menu>
           </div>
@@ -179,30 +111,11 @@ class MobileHeader extends React.Component {
   }
 }
 
-MobileHeader.propTypes = {
-  mainMenu: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.array,
-  ]),
-  secondaryMenu: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.array,
-  ]),
-  userMenu: PropTypes.arrayOf(PropTypes.shape({
-    heading: PropTypes.string,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      type: PropTypes.oneOf(['item', 'menu']),
-      href: PropTypes.string,
-      content: PropTypes.string,
-      isActive: PropTypes.bool,
-      onClick: PropTypes.func,
-    })),
-  })),
-  loggedOutItems: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.oneOf(['item', 'menu']),
-    href: PropTypes.string,
-    content: PropTypes.string,
-  })),
+export const mobileHeaderDataShape = {
+  mainMenu: mobileHeaderMainMenuDataShape,
+  secondaryMenu: mobileHeaderMainMenuDataShape,
+  userMenu: mobileHeaderUserMenuDataShape,
+  loggedOutItems: mobileHeaderLoggedOutItemsDataShape,
   logo: PropTypes.string,
   logoAltText: PropTypes.string,
   logoDestination: PropTypes.string,
@@ -210,6 +123,20 @@ MobileHeader.propTypes = {
   username: PropTypes.string,
   loggedIn: PropTypes.bool,
   stickyOnMobile: PropTypes.bool,
+};
+
+MobileHeader.propTypes = {
+  mainMenu: mobileHeaderDataShape.mainMenu,
+  secondaryMenu: mobileHeaderDataShape.secondaryMenu,
+  userMenu: mobileHeaderDataShape.userMenu,
+  loggedOutItems: mobileHeaderDataShape.loggedOutItems,
+  logo: mobileHeaderDataShape.logo,
+  logoAltText: mobileHeaderDataShape.logoAltText,
+  logoDestination: mobileHeaderDataShape.logoDestination,
+  avatar: mobileHeaderDataShape.avatar,
+  username: mobileHeaderDataShape.username,
+  loggedIn: mobileHeaderDataShape.loggedIn,
+  stickyOnMobile: mobileHeaderDataShape.stickyOnMobile,
 
   // i18n
   intl: intlShape.isRequired,

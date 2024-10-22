@@ -12,10 +12,12 @@ const Logo = ({
   </a>
 );
 
-Logo.propTypes = {
+export const logoDataShape = {
   href: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
 };
+
+Logo.propTypes = logoDataShape;
 
 export default Logo;
