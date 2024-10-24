@@ -5,10 +5,13 @@ import {
   DropdownButton,
 } from '@openedx/paragon';
 
+import { navigateToUrl } from './utils';
+
 const NavDropdownMenu = ({
   id,
   buttonTitle,
   items,
+  onNavigate,
 }) => (
   <DropdownButton
     id={id}
@@ -19,8 +22,9 @@ const NavDropdownMenu = ({
     {items.map(item => (
       <Dropdown.Item
         key={`${item.title}-dropdown-item`}
-        href={item.href}
+        onClick={(e) => navigateToUrl(e, item.href, onNavigate)}
         className="small"
+        href={item.href.startsWith('#') ? item.href : null}
       >
         {item.title}
       </Dropdown.Item>
@@ -32,9 +36,10 @@ NavDropdownMenu.propTypes = {
   id: PropTypes.string.isRequired,
   buttonTitle: PropTypes.node.isRequired,
   items: PropTypes.arrayOf(PropTypes.shape({
-    href: PropTypes.string,
-    title: PropTypes.node,
+    href: PropTypes.string.isRequired,
+    title: PropTypes.node.isRequired,
   })).isRequired,
+  onNavigate: PropTypes.func.isRequired,
 };
 
 export default NavDropdownMenu;

@@ -5,6 +5,8 @@ import {
   OverlayTrigger,
   Tooltip,
 } from '@openedx/paragon';
+
+import { navigateToUrl } from './utils';
 import messages from './messages';
 
 const CourseLockUp = ({
@@ -12,6 +14,7 @@ const CourseLockUp = ({
   org,
   number,
   title,
+  onNavigate,
   // injected
   intl,
 }) => (
@@ -26,6 +29,7 @@ const CourseLockUp = ({
     <a
       className="course-title-lockup mr-2"
       href={outlineLink}
+      onClick={(e) => navigateToUrl(e, outlineLink, onNavigate)}
       aria-label={intl.formatMessage(messages['header.label.courseOutline'])}
       data-testid="course-lock-up-block"
     >
@@ -40,6 +44,7 @@ CourseLockUp.propTypes = {
   org: PropTypes.string,
   title: PropTypes.string,
   outlineLink: PropTypes.string,
+  onNavigate: PropTypes.func.isRequired,
   // injected
   intl: intlShape.isRequired,
 };

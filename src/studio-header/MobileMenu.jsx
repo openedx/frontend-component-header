@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Collapsible } from '@openedx/paragon';
+import { Collapsible, Hyperlink } from '@openedx/paragon';
+
+import { navigateToUrl } from './utils';
 
 const MobileMenu = ({
   mainMenuDropdowns,
+  onNavigate,
 }) => (
   <div
     className="ml-4 p-2 bg-light-100 border border-gray-200 small rounded"
@@ -21,9 +24,12 @@ const MobileMenu = ({
             <ul className="p-0" style={{ listStyleType: 'none' }}>
               {items.map(item => (
                 <li className="mobile-menu-item">
-                  <a href={item.href}>
+                  <Hyperlink
+                    onClick={(e) => navigateToUrl(e, item.href, onNavigate)}
+                    destination={item.href.startsWith('#') ? item.href : null}
+                  >
                     {item.title}
-                  </a>
+                  </Hyperlink>
                 </li>
               ))}
             </ul>
@@ -43,6 +49,7 @@ MobileMenu.propTypes = {
       title: PropTypes.node,
     })),
   })),
+  onNavigate: PropTypes.func.isRequired,
 };
 MobileMenu.defaultProps = {
   mainMenuDropdowns: [],

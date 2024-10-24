@@ -39,6 +39,7 @@ const HeaderBody = ({
   outlineLink,
   searchButtonAction,
   containerProps,
+  onNavigate,
 }) => {
   const intl = useIntl();
 
@@ -48,6 +49,7 @@ const HeaderBody = ({
         studioBaseUrl,
         logo,
         logoAltText,
+        onNavigate,
       }}
     />
   );
@@ -88,6 +90,7 @@ const HeaderBody = ({
                       number,
                       org,
                       title,
+                      onNavigate,
                     }}
                   />
                 </Row>
@@ -103,7 +106,12 @@ const HeaderBody = ({
                 {mainMenuDropdowns.map(dropdown => {
                   const { id, buttonTitle, items } = dropdown;
                   return (
-                    <NavDropdownMenu key={id} {...{ id, buttonTitle, items }} />
+                    <NavDropdownMenu
+                      key={id}
+                      {...{
+                        id, buttonTitle, items, onNavigate,
+                      }}
+                    />
                   );
                 })}
               </Nav>
@@ -130,6 +138,7 @@ const HeaderBody = ({
               logoutUrl,
               authenticatedUserAvatar,
               isAdmin,
+              onNavigate,
             }}
           />
         </Nav>
@@ -165,6 +174,8 @@ HeaderBody.propTypes = {
   outlineLink: PropTypes.string,
   searchButtonAction: PropTypes.func,
   containerProps: PropTypes.shape(Container.propTypes),
+  onNavigate: PropTypes.func.isRequired,
+  onLogoNavigate: PropTypes.func.isRequired,
 };
 
 HeaderBody.defaultProps = {
