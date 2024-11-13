@@ -13,6 +13,11 @@ const CourseInfoSlot = ({
     slotOptions={{
       mergeProps: true,
     }}
+    pluginProps={{
+      courseOrg,
+      courseNumber,
+      courseTitle,
+    }}
   >
     <LearningHeaderCourseInfo
       courseOrg={courseOrg}
