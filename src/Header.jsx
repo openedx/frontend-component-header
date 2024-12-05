@@ -3,7 +3,7 @@ import Responsive from 'react-responsive';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { AppContext } from '@edx/frontend-platform/react';
 import {
-  APP_CONFIG_INITIALIZED,
+  APP_PUBSUB_INITIALIZED,
   ensureConfig,
   mergeConfig,
   getConfig,
@@ -25,7 +25,7 @@ ensureConfig([
   'ORDER_HISTORY_URL',
 ], 'Header component');
 
-subscribe(APP_CONFIG_INITIALIZED, () => {
+subscribe(APP_PUBSUB_INITIALIZED, () => {
   mergeConfig({
     AUTHN_MINIMAL_HEADER: !!process.env.AUTHN_MINIMAL_HEADER,
     ENABLE_ORG_LOGO: !!process.env.ENABLE_ORG_LOGO,

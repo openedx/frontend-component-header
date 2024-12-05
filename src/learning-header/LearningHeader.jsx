@@ -35,13 +35,13 @@ const LearningHeader = ({
 }) => {
   const { authenticatedUser } = useContext(AppContext);
   const [logoOrg, setLogoOrg] = useState(null);
-  const enableOrgLogo = getConfig().ENABLE_ORG_LOGO || false;
+  const enableOrgLogo = getConfig().ENABLE_ORG_LOGO;
 
   useEffect(() => {
-    if (courseOrg) {
+    if (courseOrg && enableOrgLogo) {
       getCourseLogoOrg().then((logoOrgUrl) => { setLogoOrg(logoOrgUrl); });
     }
-  });
+  }, [courseOrg, enableOrgLogo]);
 
   const headerLogo = (
     <>
