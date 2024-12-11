@@ -51,6 +51,9 @@ Environment Variables
 * ``AUTHN_MINIMAL_HEADER`` - A boolean flag which hides the main menu, user menu, and logged-out
   menu items when truthy.  This is intended to be used in micro-frontends like
   frontend-app-authentication in which these menus are considered distractions from the user's task.
+* ``ENABLE_HEADER_LANG_SELECTOR`` - A boolean to enable the language selector in the header component.
+* ``SITE_SUPPORTED_LANGUAGES`` - A list with all the languages to display in the selector.
+
 
 Installation
 ============
