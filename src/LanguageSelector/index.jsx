@@ -25,58 +25,57 @@ const onLanguageSelected = async (username, selectedLanguageCode) => {
 };
 
 const LanguageSelector = ({
-  intl, options, authenticatedUser, compact, ...props
+  intl, options, authenticatedUser, compact,
 }) => {
-
   const languageLabel = (languageCode) => {
-    const option = options.find( ({ value, label }) => value === languageCode )
-    return option ? option.label : null
-  }
+    const option = options.find(({ value }) => value === languageCode);
+    return option ? option.label : null;
+  };
 
   const handleChange = (languageCode, event) => {
     const previousSiteLanguage = getLocale();
+    /* eslint-disable no-console */
     console.debug(previousSiteLanguage, languageCode, authenticatedUser);
 
     if (previousSiteLanguage !== languageCode) {
       onLanguageSelected(authenticatedUser?.username, languageCode);
     }
 
-    event.target.parentElement.parentElement.querySelector(".languageLabel").innerHTML = languageLabel(languageCode);
+    const languageLabelElement = event.target.parentElement.parentElement.querySelector('.languageLabel');
+    languageLabelElement.innerHTML = languageLabel(languageCode);
   };
 
-  const currentLangLabel = languageLabel(intl.locale)
-  const showLabel = !Boolean(compact || false);
+  const currentLangLabel = languageLabel(intl.locale);
+  const showLabel = !(compact || false);
 
   return (
-    <>
-      <Dropdown className="language-selector">
-        <Dropdown.Toggle variant="outline-primary">
-          <FontAwesomeIcon icon={faGlobe} />
-          {showLabel && (
-            currentLangLabel ? (
-              <span class="pl-1 languageLabel">
-                {currentLangLabel}
-              </span>
-            ) : (
-              <span class="pl-1">
-                <FormattedMessage
-                  id="footer.languageForm.select.label"
-                  defaultMessage="Choose Language"
-                  description="The label for the laguage select part of the language selection form."
-                />
-              </span>
-            )
-          )}
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
+    <Dropdown className="language-selector">
+      <Dropdown.Toggle variant="outline-primary">
+        <FontAwesomeIcon icon={faGlobe} />
+        {showLabel && (
+          currentLangLabel ? (
+            <span className="pl-1 languageLabel">
+              {currentLangLabel}
+            </span>
+          ) : (
+            <span className="pl-1">
+              <FormattedMessage
+                id="footer.languageForm.select.label"
+                defaultMessage="Choose Language"
+                description="The label for the laguage select part of the language selection form."
+              />
+            </span>
+          )
+        )}
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
         {options.map(({ value, label }) => (
           <Dropdown.Item key={value} eventKey={value} onSelect={handleChange}>
             {label}
           </Dropdown.Item>
         ))}
-        </Dropdown.Menu>
-      </Dropdown>
-    </>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 };
 
@@ -90,6 +89,10 @@ LanguageSelector.propTypes = {
     value: PropTypes.string,
     label: PropTypes.string,
   })).isRequired,
+};
+
+LanguageSelector.defaultProps = {
+  compact: false,
 };
 
 export default injectIntl(LanguageSelector);

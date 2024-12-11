@@ -86,7 +86,7 @@ const LearningHeader = ({
             <Responsive maxWidth={1000}>
               <LanguageSelector
                 options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
-                compact={true}
+                compact
                 authenticatedUser={authenticatedUser}
               />
             </Responsive>
