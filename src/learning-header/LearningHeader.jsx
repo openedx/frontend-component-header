@@ -72,7 +72,7 @@ const LearningHeader = ({
         {getConfig().ENABLE_HEADER_LANG_SELECTOR && (
           <div className="mx-2 d-none d-md-inline-flex">
             <LanguageSelector
-              options={JSON.parse(getConfig().SITE_SUPPORTED_LENGUAGES)}
+              options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
               authenticatedUser={authenticatedUser}
             />
           </div>

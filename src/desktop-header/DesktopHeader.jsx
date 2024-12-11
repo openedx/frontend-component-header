@@ -93,7 +93,7 @@ class DesktopHeader extends React.Component {
 			{getConfig().ENABLE_HEADER_LANG_SELECTOR && (
               <div className="mx-2">
                 <LanguageSelector
-                  options={getConfig().SITE_SUPPORTED_LENGUAGES}
+                  options={getConfig().SITE_SUPPORTED_LANGUAGES}
                   authenticatedUser={getAuthenticatedUser()}
                 />
               </div>
