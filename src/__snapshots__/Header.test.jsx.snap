@@ -28,7 +28,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
       </a>
       <nav
         aria-label="Main"
-        className="nav main-nav"
+        className="nav main-nav mr-auto"
       >
         <a
           className="nav-link"
@@ -40,7 +40,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
       </nav>
       <nav
         aria-label="Secondary"
-        className="nav secondary-menu-container align-items-center ml-auto"
+        className="nav secondary-menu-container align-items-center"
       >
         <a
           className="btn mr-2 btn-link"
@@ -225,7 +225,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
       </a>
       <nav
         aria-label="Main"
-        className="nav main-nav"
+        className="nav main-nav mr-auto"
       >
         <a
           className="nav-link"
@@ -237,7 +237,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
       </nav>
       <nav
         aria-label="Secondary"
-        className="nav secondary-menu-container align-items-center ml-auto"
+        className="nav secondary-menu-container align-items-center"
       >
         <div
           className="menu null"

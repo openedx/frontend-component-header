@@ -11,6 +11,7 @@ import CourseInfoSlot from '../plugin-slots/CourseInfoSlot';
 import { courseInfoDataShape } from './LearningHeaderCourseInfo';
 import messages from './messages';
 import getCourseLogoOrg from './data/api';
+import LanguageSelector from '../LanguageSelector';
 
 const LinkedLogo = ({
   href,
@@ -68,6 +69,14 @@ const LearningHeader = ({
             </span>
           </div>
         </div>
+        {getConfig().ENABLE_HEADER_LANG_SELECTOR && (
+          <div className="mx-2 d-none d-md-inline-flex">
+            <LanguageSelector
+              options={getConfig().SITE_SUPPORTED_LENGUAGES}
+              authenticatedUser={authenticatedUser}
+            />
+          </div>
+        )}
         {showUserDropdown && authenticatedUser && (
           <AuthenticatedUserDropdown
             username={authenticatedUser.username}
