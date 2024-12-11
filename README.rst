@@ -53,6 +53,7 @@ Environment Variables
   frontend-app-authentication in which these menus are considered distractions from the user's task.
 * ``ENABLE_HEADER_LANG_SELECTOR`` - A boolean to enable the language selector in the header component.
 * ``SITE_SUPPORTED_LANGUAGES`` - A list with all the languages to display in the selector.
+* ``LOGO_URL_MOBILE`` - The URL of the site's logo for mobile. This logo is displayed in the header.
 
 
 Installation

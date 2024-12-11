@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import Responsive from 'react-responsive';
 import PropTypes from 'prop-types';
 import { getConfig } from '@edx/frontend-platform';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
@@ -43,11 +44,22 @@ const LearningHeader = ({
   });
 
   const headerLogo = (
-    <LogoSlot
-      href={`${getConfig().LMS_BASE_URL}/dashboard`}
-      src={getConfig().LOGO_URL}
-      alt={getConfig().SITE_NAME}
-    />
+    <>
+      <Responsive maxWidth={769}>
+        <LogoSlot
+          href={`${getConfig().LMS_BASE_URL}/dashboard`}
+          src={getConfig().LOGO_URL_MOBILE || getConfig().LOGO_URL}
+          alt={getConfig().SITE_NAME}
+        />
+      </Responsive>
+      <Responsive minWidth={769}>
+        <LogoSlot
+          href={`${getConfig().LMS_BASE_URL}/dashboard`}
+          src={getConfig().LOGO_URL}
+          alt={getConfig().SITE_NAME}
+        />
+      </Responsive>
+    </>
   );
 
   return (
