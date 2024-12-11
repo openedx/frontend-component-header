@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { publish } from '@edx/frontend-platform';
 import {
   getLocale, injectIntl, intlShape, FormattedMessage, LOCALE_CHANGED, handleRtl,
 } from '@edx/frontend-platform/i18n';
+import { Dropdown } from '@openedx/paragon';
 import { logError } from '@edx/frontend-platform/logging';
 
 import { patchPreferences, postSetLang } from './data/api';
@@ -24,10 +27,8 @@ const onLanguageSelected = async (username, selectedLanguageCode) => {
 const LanguageSelector = ({
   intl, options, authenticatedUser, ...props
 }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleChange = (languageCode, event) => {
     const previousSiteLanguage = getLocale();
-    const languageCode = e.target.elements['site-header-language-select'].value;
     console.debug(previousSiteLanguage, languageCode, authenticatedUser);
 
     if (previousSiteLanguage !== languageCode) {
@@ -36,37 +37,18 @@ const LanguageSelector = ({
   };
 
   return (
-    <form
-      className="form-inline"
-      onSubmit={handleSubmit}
-      {...props}
-    >
-      <div className="form-group d-wrap">
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="site-header-language-select" className="d-inline-block m-0 small">
-          <FormattedMessage
-            id="footer.languageForm.select.label"
-            defaultMessage="Choose Language"
-            description="The label for the laguage select part of the language selection form."
-          />
-        </label>
-        <select
-          id="site-header-language-select"
-          className="form-control-sm mx-2"
-          name="site-header-language-select"
-          defaultValue={intl.locale}
-        >
-          {options.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
-        </select>
-        <button data-testid="site-header-submit-btn" className="btn btn-outline-primary btn-sm" type="submit">
-          <FormattedMessage
-            id="footer.languageForm.submit.label"
-            defaultMessage="Apply"
-            description="The label for button to submit the language selection form."
-          />
-        </button>
-      </div>
-    </form>
+    <Dropdown className="language-selector" >
+      <Dropdown.Toggle variant="outline-primary">
+        <FontAwesomeIcon icon={faGlobe} />
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+      {options.map(({ value, label }) => (
+        <Dropdown.Item key={value} eventKey={value} onSelect={handleChange}>
+          {label}
+        </Dropdown.Item>
+      ))}
+      </Dropdown.Menu>
+    </Dropdown>
   );
 };
 
