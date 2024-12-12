@@ -69,13 +69,12 @@ const LearningHeader = ({
         {headerLogo}
         <div className="d-none d-md-block flex-grow-1 course-title-lockup">
           <div className={`d-md-flex ${enableOrgLogo && 'align-items-center justify-content-center'} w-100`}>
-            {enableOrgLogo ? (
-              (courseOrg && logoOrg)
-              && <img src={logoOrg} alt={`${courseOrg} logo`} style={{ maxHeight: '45px' }} />
-            ) : null}
+            {enableOrgLogo && courseOrg && logoOrg && (
+              <img src={logoOrg} alt={`${courseOrg} logo`} style={{ maxHeight: '3rem', maxWidth: '15rem' }} />
+            )}
             <span
-              className="d-inline-block course-title font-weight-semibold ml-3 text-truncate text-left w-25"
-              style={{ fontSize: '0.85rem' }}
+              className="d-inline-block course-title font-weight-semibold ml-3 text-truncate text-left"
+              style={{ fontSize: '1rem' }}
             >
               {courseTitle}
             </span>
@@ -83,14 +82,14 @@ const LearningHeader = ({
         </div>
         {getConfig().ENABLE_HEADER_LANG_SELECTOR && (
           <div className="mx-2 d-md-inline-flex">
-            <Responsive maxWidth={1000}>
+            <Responsive maxWidth={1200}>
               <LanguageSelector
                 options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
                 compact
                 authenticatedUser={authenticatedUser}
               />
             </Responsive>
-            <Responsive minWidth={1000}>
+            <Responsive minWidth={1200}>
               <LanguageSelector
                 options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
                 compact={false}
