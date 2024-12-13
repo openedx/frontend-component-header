@@ -9,6 +9,7 @@
 * [`desktop_logged_out_items_slot`](./DesktopLoggedOutItemsSlot/)
 * [`mobile_logged_out_items_slot`](./MobileLoggedOutItemsSlot/)
 * [`mobile_user_menu_slot`](./MobileUserMenuSlot/)
+* [`desktop_username_slot`](./DesktopUsernameSlot/)
 * [`desktop_user_menu_slot`](./DesktopUserMenuSlot/)
 * [`learning_username_slot`](./LearningUsernameSlot/)
 * [`learning_user_menu_slot`](./LearningUserMenuSlot/)
