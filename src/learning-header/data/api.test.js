@@ -1,5 +1,5 @@
 import { getConfig } from '@edx/frontend-platform';
-import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
+import { getAuthenticatedHttpClient, getAuthenticatedUser } from '@edx/frontend-platform/auth';
 import getCourseLogoOrg from './api';
 import { initializeMockApp } from '../../setupTest';
 
@@ -20,10 +20,12 @@ describe('getCourseLogoOrg', () => {
     await initializeMockApp();
     delete window.location;
     getAuthenticatedHttpClient.mockReset();
+    getAuthenticatedUser.mockReset();
   });
 
   it('should return the organization logo when the URL is valid', async () => {
     window.location = new URL(`${getConfig().BASE_URL}/learning/course/course-v1:edX+DemoX+Demo_Course/home`);
+    getAuthenticatedUser.mockImplementation(() => ({ username: 'someone' }));
     getAuthenticatedHttpClient.mockReturnValue({
       get: async () => Promise.resolve({
         data: {
@@ -37,6 +39,7 @@ describe('getCourseLogoOrg', () => {
 
   it('should return null when the organization logo is not found', async () => {
     window.location = new URL(`${getConfig().BASE_URL}/learning/course/course-v1:edX+DemoX+Nonexistent_Course/home`);
+    getAuthenticatedUser.mockImplementation(() => ({ username: 'someone' }));
     getAuthenticatedHttpClient.mockReturnValue({
       get: async () => {
         throw new CustomError(404);
@@ -46,7 +49,23 @@ describe('getCourseLogoOrg', () => {
     expect(logoOrg).toBeNull();
   });
 
+  it('should return null if the user is not authenticated', async () => {
+    window.location = new URL(`${getConfig().BASE_URL}/learning/course/course-v1:edX+DemoX+Demo_Course/home`);
+    getAuthenticatedUser.mockImplementation(() => ({}));
+    getAuthenticatedHttpClient.mockReturnValue({
+      get: async () => Promise.resolve({
+        data: {
+          logo: 'https://example.com/logo.svg',
+        },
+      }),
+    });
+    const logoOrg = await getCourseLogoOrg();
+    expect(getAuthenticatedHttpClient).not.toHaveBeenCalled();
+    expect(logoOrg).toBeNull();
+  });
+
   it('should throw an error when an unexpected error occurs', async () => {
+    getAuthenticatedUser.mockImplementation(() => ({ username: 'someone' }));
     const customError = new CustomError(500);
     window.location = new URL(`${getConfig().BASE_URL}/learning/course/course-v1:edX+DemoX+Demo_Course/home`);
     getAuthenticatedHttpClient.mockReturnValue({
