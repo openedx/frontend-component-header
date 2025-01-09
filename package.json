@@ -1,6 +1,6 @@
 {
   "name": "@nauedu/frontend-component-header",
-  "version": "18.1.1",
+  "version": "18.1.2",
   "description": "NAU header component for Open edX",
   "main": "dist/index.js",
   "publishConfig": {
