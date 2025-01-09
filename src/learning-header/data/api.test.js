@@ -1,9 +1,13 @@
+import { logError } from '@edx/frontend-platform/logging';
 import { getConfig } from '@edx/frontend-platform';
 import { getAuthenticatedHttpClient, getAuthenticatedUser } from '@edx/frontend-platform/auth';
 import getCourseLogoOrg from './api';
 import { initializeMockApp } from '../../setupTest';
 
 jest.mock('@edx/frontend-platform/auth');
+jest.mock('@edx/frontend-platform/logging', () => ({
+  logError: jest.fn(),
+}));
 
 class CustomError extends Error {
   constructor(httpErrorStatus) {
@@ -73,6 +77,8 @@ describe('getCourseLogoOrg', () => {
         throw customError;
       },
     });
-    await expect(getCourseLogoOrg()).rejects.toThrow(customError);
+    const logoOrg = await getCourseLogoOrg();
+    expect(logoOrg).toBeNull();
+    expect(logError).toHaveBeenCalledWith(customError);
   });
 });

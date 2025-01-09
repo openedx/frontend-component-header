@@ -1,5 +1,6 @@
 import { getConfig } from '@edx/frontend-platform';
 import { getAuthenticatedHttpClient, getAuthenticatedUser } from '@edx/frontend-platform/auth';
+import { logError } from '@edx/frontend-platform/logging';
 
 const getCourseLogoOrg = async () => {
   try {
@@ -14,7 +15,8 @@ const getCourseLogoOrg = async () => {
       return data.logo;
     }
   } catch (error) {
-    console.warn('Error fetching course org logo:', error);
+    // do not throw the error, just log it, the Course Org Logo is not critical
+    logError(error);
   }
   return null;
 };
