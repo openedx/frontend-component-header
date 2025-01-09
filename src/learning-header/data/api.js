@@ -4,7 +4,7 @@ import { getAuthenticatedHttpClient, getAuthenticatedUser } from '@edx/frontend-
 const getCourseLogoOrg = async () => {
   try {
     const orgId = window.location.pathname.match(/course-(.*?):([^+]+)/)[2];
-    const { username } = getAuthenticatedUser();
+    const { username } = getAuthenticatedUser() ?? {};
     if (username) {
       const { data } = await getAuthenticatedHttpClient()
         .get(
@@ -13,14 +13,10 @@ const getCourseLogoOrg = async () => {
         );
       return data.logo;
     }
-    return null;
   } catch (error) {
-    const { httpErrorStatus } = error && error.customAttributes;
-    if (httpErrorStatus === 404) {
-      return null;
-    }
-    throw error;
+    console.warn('Error fetching course org logo:', error);
   }
+  return null;
 };
 
 export default getCourseLogoOrg;
