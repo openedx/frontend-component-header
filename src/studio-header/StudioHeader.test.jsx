@@ -12,6 +12,7 @@ import { Context as ResponsiveContext } from 'react-responsive';
 import { MemoryRouter } from 'react-router-dom';
 
 import StudioHeader from './StudioHeader';
+import messages from './messages';
 
 const authenticatedUser = {
   userId: 3,
@@ -114,6 +115,16 @@ describe('Header', () => {
       expect(dropdownOption).toBeVisible();
     });
 
+    it('maintenance should not be in user menu', async () => {
+      currentUser = { ...authenticatedUser, administrator: false };
+      const { getAllByRole, queryByText } = render(<RootWrapper {...props} />);
+      const userMenu = getAllByRole('button')[1];
+      await waitFor(() => fireEvent.click(userMenu));
+      const maintenanceButton = queryByText(messages['header.user.menu.maintenance'].defaultMessage);
+
+      expect(maintenanceButton).toBeNull();
+    });
+
     it('user menu should use avatar icon', async () => {
       currentUser = { ...authenticatedUser, avatar: null };
       const { getByTestId } = render(<RootWrapper {...props} />);
@@ -173,6 +184,15 @@ describe('Header', () => {
       const desktopMenu = queryByTestId('desktop-menu');
 
       expect(desktopMenu).toBeNull();
+    });
+
+    it('maintenance should be in user menu', async () => {
+      const { getAllByRole, getByText } = render(<RootWrapper {...props} />);
+      const userMenu = getAllByRole('button')[1];
+      await waitFor(() => fireEvent.click(userMenu));
+      const maintenanceButton = getByText(messages['header.user.menu.maintenance'].defaultMessage);
+
+      expect(maintenanceButton).toBeVisible();
     });
 
     it('user menu should use avatar image', async () => {
