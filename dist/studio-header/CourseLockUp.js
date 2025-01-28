@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { OverlayTrigger, Tooltip } from '@openedx/paragon';
+import { Link } from 'react-router-dom';
 import messages from './messages';
 var CourseLockUp = function CourseLockUp(_ref) {
   var outlineLink = _ref.outlineLink,
@@ -14,9 +15,9 @@ var CourseLockUp = function CourseLockUp(_ref) {
     overlay: /*#__PURE__*/React.createElement(Tooltip, {
       id: "course-lock-up"
     }, title)
-  }, /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement(Link, {
     className: "course-title-lockup mr-2",
-    href: outlineLink,
+    to: outlineLink,
     "aria-label": intl.formatMessage(messages['header.label.courseOutline']),
     "data-testid": "course-lock-up-block"
   }, /*#__PURE__*/React.createElement("span", {

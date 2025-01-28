@@ -10,10 +10,12 @@ var StudioHeader = function StudioHeader(_ref) {
   var number = _ref.number,
     org = _ref.org,
     title = _ref.title,
+    containerProps = _ref.containerProps,
     isHiddenMainMenu = _ref.isHiddenMainMenu,
     mainMenuDropdowns = _ref.mainMenuDropdowns,
     outlineLink = _ref.outlineLink,
-    searchButtonAction = _ref.searchButtonAction;
+    searchButtonAction = _ref.searchButtonAction,
+    isNewHomePage = _ref.isNewHomePage;
   var _useContext = useContext(AppContext),
     authenticatedUser = _useContext.authenticatedUser,
     config = _useContext.config;
@@ -23,10 +25,11 @@ var StudioHeader = function StudioHeader(_ref) {
     number: number,
     org: org,
     title: title,
+    containerProps: containerProps,
     username: authenticatedUser === null || authenticatedUser === void 0 ? void 0 : authenticatedUser.username,
     isAdmin: authenticatedUser === null || authenticatedUser === void 0 ? void 0 : authenticatedUser.administrator,
     authenticatedUserAvatar: authenticatedUser === null || authenticatedUser === void 0 ? void 0 : authenticatedUser.avatar,
-    studioBaseUrl: config.STUDIO_BASE_URL,
+    studioBaseUrl: isNewHomePage ? '/home' : config.STUDIO_BASE_URL,
     logoutUrl: config.LOGOUT_URL,
     isHiddenMainMenu: isHiddenMainMenu,
     mainMenuDropdowns: mainMenuDropdowns,
@@ -48,21 +51,24 @@ StudioHeader.propTypes = {
   number: PropTypes.string,
   org: PropTypes.string,
   title: PropTypes.string.isRequired,
+  containerProps: HeaderBody.propTypes.containerProps,
   isHiddenMainMenu: PropTypes.bool,
   mainMenuDropdowns: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
-    buttonTitle: PropTypes.string,
+    buttonTitle: PropTypes.node,
     items: PropTypes.arrayOf(PropTypes.shape({
       href: PropTypes.string,
-      title: PropTypes.string
+      title: PropTypes.node
     }))
   })),
   outlineLink: PropTypes.string,
-  searchButtonAction: PropTypes.func
+  searchButtonAction: PropTypes.func,
+  isNewHomePage: PropTypes.bool.isRequired
 };
 StudioHeader.defaultProps = {
   number: '',
   org: '',
+  containerProps: {},
   isHiddenMainMenu: false,
   mainMenuDropdowns: [],
   outlineLink: null,

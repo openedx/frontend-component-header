@@ -16,9 +16,6 @@ var getUserMenuItems = function getUserMenuItems(_ref) {
       href: "".concat(studioBaseUrl),
       title: intl.formatMessage(messages['header.user.menu.studio'])
     }, {
-      href: "".concat(studioBaseUrl, "/maintenance"),
-      title: intl.formatMessage(messages['header.user.menu.maintenance'])
-    }, {
       href: "".concat(logoutUrl),
       title: intl.formatMessage(messages['header.user.menu.logout'])
     }];
