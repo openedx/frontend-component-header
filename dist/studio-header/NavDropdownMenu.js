@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown, DropdownButton } from '@openedx/paragon';
+import { Link } from 'react-router-dom';
 var NavDropdownMenu = function NavDropdownMenu(_ref) {
   var id = _ref.id,
     buttonTitle = _ref.buttonTitle,
@@ -12,18 +13,19 @@ var NavDropdownMenu = function NavDropdownMenu(_ref) {
     className: "mr-2"
   }, items.map(function (item) {
     return /*#__PURE__*/React.createElement(Dropdown.Item, {
+      as: Link,
       key: "".concat(item.title, "-dropdown-item"),
-      href: item.href,
+      to: item.href,
       className: "small"
     }, item.title);
   }));
 };
 NavDropdownMenu.propTypes = {
   id: PropTypes.string.isRequired,
-  buttonTitle: PropTypes.string.isRequired,
+  buttonTitle: PropTypes.node.isRequired,
   items: PropTypes.arrayOf(PropTypes.shape({
-    href: PropTypes.string,
-    title: PropTypes.string
+    href: PropTypes.string.isRequired,
+    title: PropTypes.node.isRequired
   })).isRequired
 };
 export default NavDropdownMenu;

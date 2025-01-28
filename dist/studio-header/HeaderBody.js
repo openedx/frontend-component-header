@@ -1,6 +1,11 @@
+var _excluded = ["className"];
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var n = Object.getOwnPropertySymbols(e); for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
+function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (-1 !== e.indexOf(n)) continue; t[n] = r[n]; } return t; }
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from '@edx/frontend-platform/i18n';
+import classNames from 'classnames';
 import { ActionRow, Button, Container, Icon, IconButton, Nav, Row } from '@openedx/paragon';
 import { Close, MenuIcon, Search } from '@openedx/paragon/icons';
 import CourseLockUp from './CourseLockUp';
@@ -26,17 +31,21 @@ var HeaderBody = function HeaderBody(_ref) {
     isHiddenMainMenu = _ref.isHiddenMainMenu,
     mainMenuDropdowns = _ref.mainMenuDropdowns,
     outlineLink = _ref.outlineLink,
-    searchButtonAction = _ref.searchButtonAction;
+    searchButtonAction = _ref.searchButtonAction,
+    containerProps = _ref.containerProps;
   var intl = useIntl();
   var renderBrandNav = /*#__PURE__*/React.createElement(BrandNav, {
     studioBaseUrl: studioBaseUrl,
     logo: logo,
     logoAltText: logoAltText
   });
-  return /*#__PURE__*/React.createElement(Container, {
+  var _ref2 = containerProps || {},
+    containerClassName = _ref2.className,
+    restContainerProps = _objectWithoutProperties(_ref2, _excluded);
+  return /*#__PURE__*/React.createElement(Container, _extends({
     size: "xl",
-    className: "px-2.5"
-  }, /*#__PURE__*/React.createElement(ActionRow, {
+    className: classNames('px-2.5', containerClassName)
+  }, restContainerProps), /*#__PURE__*/React.createElement(ActionRow, {
     as: "header"
   }, isHiddenMainMenu ? /*#__PURE__*/React.createElement(Row, {
     className: "flex-nowrap ml-4"
@@ -73,7 +82,8 @@ var HeaderBody = function HeaderBody(_ref) {
     src: Search,
     iconAs: Icon,
     onClick: searchButtonAction,
-    "aria-label": intl.formatMessage(messages['header.label.search.nav'])
+    "aria-label": intl.formatMessage(messages['header.label.search.nav']),
+    alt: intl.formatMessage(messages['header.label.search.nav'])
   })), /*#__PURE__*/React.createElement(Nav, null, /*#__PURE__*/React.createElement(UserMenu, {
     username: username,
     studioBaseUrl: studioBaseUrl,
@@ -100,14 +110,15 @@ HeaderBody.propTypes = {
   isHiddenMainMenu: PropTypes.bool,
   mainMenuDropdowns: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
-    buttonTitle: PropTypes.string,
+    buttonTitle: PropTypes.node,
     items: PropTypes.arrayOf(PropTypes.shape({
       href: PropTypes.string,
-      title: PropTypes.string
+      title: PropTypes.node
     }))
   })),
   outlineLink: PropTypes.string,
-  searchButtonAction: PropTypes.func
+  searchButtonAction: PropTypes.func,
+  containerProps: PropTypes.shape(Container.propTypes)
 };
 HeaderBody.defaultProps = {
   setModalPopupTarget: null,
@@ -125,7 +136,8 @@ HeaderBody.defaultProps = {
   isHiddenMainMenu: false,
   mainMenuDropdowns: [],
   outlineLink: null,
-  searchButtonAction: null
+  searchButtonAction: null,
+  containerProps: {}
 };
 export default HeaderBody;
 //# sourceMappingURL=HeaderBody.js.map

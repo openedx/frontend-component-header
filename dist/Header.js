@@ -10,8 +10,8 @@ import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { AppContext } from '@edx/frontend-platform/react';
 import { APP_CONFIG_INITIALIZED, ensureConfig, mergeConfig, getConfig, subscribe } from '@edx/frontend-platform';
 import PropTypes from 'prop-types';
-import DesktopHeader from './DesktopHeader';
-import MobileHeader from './MobileHeader';
+import DesktopHeaderSlot from './plugin-slots/DesktopHeaderSlot';
+import MobileHeaderSlot from './plugin-slots/MobileHeaderSlot';
 import messages from './Header.messages';
 ensureConfig(['LMS_BASE_URL', 'LOGOUT_URL', 'LOGIN_URL', 'SITE_NAME', 'LOGO_URL', 'ORDER_HISTORY_URL'], 'Header component');
 subscribe(APP_CONFIG_INITIALIZED, function () {
@@ -98,9 +98,13 @@ var Header = function Header(_ref) {
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Responsive, {
     maxWidth: 769
-  }, /*#__PURE__*/React.createElement(MobileHeader, props)), /*#__PURE__*/React.createElement(Responsive, {
+  }, /*#__PURE__*/React.createElement(MobileHeaderSlot, {
+    props: props
+  })), /*#__PURE__*/React.createElement(Responsive, {
     minWidth: 769
-  }, /*#__PURE__*/React.createElement(DesktopHeader, props)));
+  }, /*#__PURE__*/React.createElement(DesktopHeaderSlot, {
+    props: props
+  })));
 };
 Header.defaultProps = {
   mainMenuItems: null,

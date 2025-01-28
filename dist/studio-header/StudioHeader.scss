@@ -26,14 +26,14 @@
   }
 
   .course-title-lockup {
+    overflow: hidden;
+
     @media only screen and (min-width: 769px) {
       padding: .5rem;
       padding-right: var(--pgn-spacing-spacer-base);
       border-right: 1px solid #E5E5E5;
       width: 70%;
     }
-  
-    overflow: hidden;
   
     span {
       color: var(--pgn-color-gray-800);
