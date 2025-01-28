@@ -1,0 +1,15 @@
+# `frontend-component-header` Plugin Slots
+
+* [`logo_slot`](./LogoSlot/)
+* [`desktop_main_menu_slot`](./DesktopMainMenuSlot/)
+* [`desktop_secondary_menu_slot`](./DesktopSecondaryMenuSlot/)
+* [`mobile_main_menu_slot`](./MobileMainMenuSlot/)
+* [`course_info_slot`](./CourseInfoSlot/)
+* [`learning_help_slot`](./LearningHelpSlot/)
+* [`desktop_logged_out_items_slot`](./DesktopLoggedOutItemsSlot/)
+* [`mobile_logged_out_items_slot`](./MobileLoggedOutItemsSlot/)
+* [`mobile_user_menu_slot`](./MobileUserMenuSlot/)
+* [`desktop_user_menu_slot`](./DesktopUserMenuSlot/)
+* [`learning_user_menu_slot`](./LearningUserMenuSlot/)
+* [`learning_logged_out_items_slot`](./LearningLoggedOutItemsSlot/)
+* [`desktop_header_slot`](./DesktopHeaderSlot/)

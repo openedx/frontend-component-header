@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Collapsible } from '@openedx/paragon';
+import { Link } from 'react-router-dom';
 var MobileMenu = function MobileMenu(_ref) {
   var mainMenuDropdowns = _ref.mainMenuDropdowns;
   return /*#__PURE__*/React.createElement("div", {
@@ -22,8 +23,8 @@ var MobileMenu = function MobileMenu(_ref) {
     }, items.map(function (item) {
       return /*#__PURE__*/React.createElement("li", {
         className: "mobile-menu-item"
-      }, /*#__PURE__*/React.createElement("a", {
-        href: item.href
+      }, /*#__PURE__*/React.createElement(Link, {
+        to: item.href
       }, item.title));
     })));
   })));
@@ -31,10 +32,10 @@ var MobileMenu = function MobileMenu(_ref) {
 MobileMenu.propTypes = {
   mainMenuDropdowns: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
-    buttonTitle: PropTypes.string,
+    buttonTitle: PropTypes.node,
     items: PropTypes.arrayOf(PropTypes.shape({
       href: PropTypes.string,
-      title: PropTypes.string
+      title: PropTypes.node
     }))
   }))
 };

@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 var BrandNav = function BrandNav(_ref) {
   var studioBaseUrl = _ref.studioBaseUrl,
     logo = _ref.logo,
     logoAltText = _ref.logoAltText;
-  return /*#__PURE__*/React.createElement("a", {
-    href: studioBaseUrl
+  return /*#__PURE__*/React.createElement(Link, {
+    to: studioBaseUrl
   }, /*#__PURE__*/React.createElement("img", {
     src: logo,
     alt: logoAltText,

@@ -1,5 +1,11 @@
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
@@ -18,15 +24,21 @@ import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { getConfig } from '@edx/frontend-platform';
 
 // Local Components
-import { Menu, MenuTrigger, MenuContent } from './Menu';
-import Avatar from './Avatar';
-import { LinkedLogo, Logo } from './Logo';
+import { Menu, MenuTrigger, MenuContent } from '../Menu';
+import Avatar from '../Avatar';
+import LogoSlot from '../plugin-slots/LogoSlot';
+import MobileLoggedOutItemsSlot from '../plugin-slots/MobileLoggedOutItemsSlot';
+import { mobileHeaderLoggedOutItemsDataShape } from './MobileLoggedOutItems';
+import MobileMainMenuSlot from '../plugin-slots/MobileMainMenuSlot';
+import { mobileHeaderMainMenuDataShape } from './MobileHeaderMainMenu';
+import MobileUserMenuSlot from '../plugin-slots/MobileUserMenuSlot';
+import { mobileHeaderUserMenuDataShape } from './MobileHeaderUserMenu';
 
 // i18n
-import messages from './Header.messages';
+import messages from '../Header.messages';
 
 // Assets
-import { MenuIcon } from './Icons';
+import { MenuIcon } from '../Icons';
 var MobileHeader = /*#__PURE__*/function (_React$Component) {
   function MobileHeader(props) {
     _classCallCheck(this, MobileHeader);
@@ -35,110 +47,46 @@ var MobileHeader = /*#__PURE__*/function (_React$Component) {
   }
   _inherits(MobileHeader, _React$Component);
   return _createClass(MobileHeader, [{
-    key: "renderMenu",
-    value: function renderMenu(menu) {
-      // Nodes are accepted as a prop
-      if (!Array.isArray(menu)) {
-        return menu;
-      }
-      return menu.map(function (menuItem) {
-        var type = menuItem.type,
-          href = menuItem.href,
-          content = menuItem.content,
-          submenuContent = menuItem.submenuContent,
-          disabled = menuItem.disabled,
-          isActive = menuItem.isActive,
-          onClick = menuItem.onClick;
-        if (type === 'item') {
-          return /*#__PURE__*/React.createElement("a", {
-            key: "".concat(type, "-").concat(content),
-            className: "nav-link".concat(disabled ? ' disabled' : '').concat(isActive ? ' active' : ''),
-            href: href,
-            onClick: onClick || null
-          }, content);
-        }
-        return /*#__PURE__*/React.createElement(Menu, {
-          key: "".concat(type, "-").concat(content),
-          tag: "div",
-          className: "nav-item"
-        }, /*#__PURE__*/React.createElement(MenuTrigger, {
-          onClick: onClick || null,
-          tag: "a",
-          role: "button",
-          tabIndex: "0",
-          className: "nav-link"
-        }, content), /*#__PURE__*/React.createElement(MenuContent, {
-          className: "position-static pin-left pin-right py-2"
-        }, submenuContent));
-      });
-    }
-  }, {
     key: "renderMainMenu",
     value: function renderMainMenu() {
-      var mainMenu = this.props.mainMenu;
-      return this.renderMenu(mainMenu);
-    }
-  }, {
-    key: "renderSecondaryMenu",
-    value: function renderSecondaryMenu() {
-      var secondaryMenu = this.props.secondaryMenu;
-      return this.renderMenu(secondaryMenu);
+      var _this$props = this.props,
+        mainMenu = _this$props.mainMenu,
+        secondaryMenu = _this$props.secondaryMenu;
+      return /*#__PURE__*/React.createElement(MobileMainMenuSlot, {
+        menu: [].concat(_toConsumableArray(mainMenu), _toConsumableArray(secondaryMenu))
+      });
     }
   }, {
     key: "renderUserMenuItems",
     value: function renderUserMenuItems() {
       var userMenu = this.props.userMenu;
-      return userMenu.map(function (group) {
-        return group.items.map(function (_ref) {
-          var type = _ref.type,
-            content = _ref.content,
-            href = _ref.href,
-            disabled = _ref.disabled,
-            isActive = _ref.isActive,
-            onClick = _ref.onClick;
-          return /*#__PURE__*/React.createElement("li", {
-            className: "nav-item",
-            key: "".concat(type, "-").concat(content)
-          }, /*#__PURE__*/React.createElement("a", {
-            className: "nav-link".concat(isActive ? ' active' : '').concat(disabled ? ' disabled' : ''),
-            href: href,
-            onClick: onClick || null
-          }, content));
-        });
+      return /*#__PURE__*/React.createElement(MobileUserMenuSlot, {
+        menu: userMenu
       });
     }
   }, {
     key: "renderLoggedOutItems",
     value: function renderLoggedOutItems() {
       var loggedOutItems = this.props.loggedOutItems;
-      return loggedOutItems.map(function (_ref2, i, arr) {
-        var type = _ref2.type,
-          href = _ref2.href,
-          content = _ref2.content;
-        return /*#__PURE__*/React.createElement("li", {
-          className: "nav-item px-3 my-2",
-          key: "".concat(type, "-").concat(content)
-        }, /*#__PURE__*/React.createElement("a", {
-          className: i < arr.length - 1 ? 'btn btn-block btn-outline-primary' : 'btn btn-block btn-primary',
-          href: href
-        }, content));
+      return /*#__PURE__*/React.createElement(MobileLoggedOutItemsSlot, {
+        items: loggedOutItems
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-        logo = _this$props.logo,
-        logoAltText = _this$props.logoAltText,
-        logoDestination = _this$props.logoDestination,
-        loggedIn = _this$props.loggedIn,
-        avatar = _this$props.avatar,
-        username = _this$props.username,
-        stickyOnMobile = _this$props.stickyOnMobile,
-        intl = _this$props.intl,
-        mainMenu = _this$props.mainMenu,
-        userMenu = _this$props.userMenu,
-        loggedOutItems = _this$props.loggedOutItems;
+      var _this$props2 = this.props,
+        logo = _this$props2.logo,
+        logoAltText = _this$props2.logoAltText,
+        logoDestination = _this$props2.logoDestination,
+        loggedIn = _this$props2.loggedIn,
+        avatar = _this$props2.avatar,
+        username = _this$props2.username,
+        stickyOnMobile = _this$props2.stickyOnMobile,
+        intl = _this$props2.intl,
+        mainMenu = _this$props2.mainMenu,
+        userMenu = _this$props2.userMenu,
+        loggedOutItems = _this$props2.loggedOutItems;
       var logoProps = {
         src: logo,
         alt: logoAltText,
@@ -173,15 +121,9 @@ var MobileHeader = /*#__PURE__*/function (_React$Component) {
         tag: "nav",
         "aria-label": intl.formatMessage(messages['header.label.main.nav']),
         className: "nav flex-column pin-left pin-right border-top shadow py-2"
-      }, this.renderMainMenu(), this.renderSecondaryMenu()))) : null, /*#__PURE__*/React.createElement("div", {
+      }, this.renderMainMenu()))) : null, /*#__PURE__*/React.createElement("div", {
         className: "w-100 d-flex ".concat(logoClasses)
-      }, logoDestination === null ? /*#__PURE__*/React.createElement(Logo, {
-        className: "logo",
-        src: logo,
-        alt: logoAltText
-      }) : /*#__PURE__*/React.createElement(LinkedLogo, _extends({
-        className: "logo"
-      }, logoProps, {
+      }, /*#__PURE__*/React.createElement(LogoSlot, _extends({}, logoProps, {
         itemType: "http://schema.org/Organization"
       }))), userMenu.length > 0 || loggedOutItems.length > 0 ? /*#__PURE__*/React.createElement("div", {
         className: "w-100 d-flex justify-content-end align-items-center"
@@ -205,31 +147,31 @@ var MobileHeader = /*#__PURE__*/function (_React$Component) {
     }
   }]);
 }(React.Component);
-MobileHeader.propTypes = {
-  mainMenu: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
-  secondaryMenu: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
-  userMenu: PropTypes.arrayOf(PropTypes.shape({
-    heading: PropTypes.string,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      type: PropTypes.oneOf(['item', 'menu']),
-      href: PropTypes.string,
-      content: PropTypes.string,
-      isActive: PropTypes.bool,
-      onClick: PropTypes.func
-    }))
-  })),
-  loggedOutItems: PropTypes.arrayOf(PropTypes.shape({
-    type: PropTypes.oneOf(['item', 'menu']),
-    href: PropTypes.string,
-    content: PropTypes.string
-  })),
+export var mobileHeaderDataShape = {
+  mainMenu: mobileHeaderMainMenuDataShape,
+  secondaryMenu: mobileHeaderMainMenuDataShape,
+  userMenu: mobileHeaderUserMenuDataShape,
+  loggedOutItems: mobileHeaderLoggedOutItemsDataShape,
   logo: PropTypes.string,
   logoAltText: PropTypes.string,
   logoDestination: PropTypes.string,
   avatar: PropTypes.string,
   username: PropTypes.string,
   loggedIn: PropTypes.bool,
-  stickyOnMobile: PropTypes.bool,
+  stickyOnMobile: PropTypes.bool
+};
+MobileHeader.propTypes = {
+  mainMenu: mobileHeaderDataShape.mainMenu,
+  secondaryMenu: mobileHeaderDataShape.secondaryMenu,
+  userMenu: mobileHeaderDataShape.userMenu,
+  loggedOutItems: mobileHeaderDataShape.loggedOutItems,
+  logo: mobileHeaderDataShape.logo,
+  logoAltText: mobileHeaderDataShape.logoAltText,
+  logoDestination: mobileHeaderDataShape.logoDestination,
+  avatar: mobileHeaderDataShape.avatar,
+  username: mobileHeaderDataShape.username,
+  loggedIn: mobileHeaderDataShape.loggedIn,
+  stickyOnMobile: mobileHeaderDataShape.stickyOnMobile,
   // i18n
   intl: intlShape.isRequired
 };

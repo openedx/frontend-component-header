@@ -2,18 +2,21 @@ import React from 'react';
 import { getConfig } from '@edx/frontend-platform';
 import { getLoginRedirectUrl } from '@edx/frontend-platform/auth';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
-import { Button } from '@openedx/paragon';
+import LearningLoggedOutItemsSlot from '../plugin-slots/LearningLoggedOutItemsSlot';
 import genericMessages from '../generic/messages';
 var AnonymousUserMenu = function AnonymousUserMenu(_ref) {
   var intl = _ref.intl;
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Button, {
-    className: "mr-3",
-    variant: "outline-primary",
+  var buttonsInfo = [{
+    message: intl.formatMessage(genericMessages.registerSentenceCase),
     href: "".concat(getConfig().LMS_BASE_URL, "/register?next=").concat(encodeURIComponent(global.location.href))
-  }, intl.formatMessage(genericMessages.registerSentenceCase)), /*#__PURE__*/React.createElement(Button, {
-    variant: "primary",
-    href: "".concat(getLoginRedirectUrl(global.location.href))
-  }, intl.formatMessage(genericMessages.signInSentenceCase)));
+  }, {
+    message: intl.formatMessage(genericMessages.signInSentenceCase),
+    href: getLoginRedirectUrl(global.location.href),
+    variant: 'primary'
+  }];
+  return /*#__PURE__*/React.createElement(LearningLoggedOutItemsSlot, {
+    buttonsInfo: buttonsInfo
+  });
 };
 AnonymousUserMenu.propTypes = {
   intl: intlShape.isRequired
