@@ -1,8 +1,0 @@
-# openedx.yaml
-
----
-owner: edx/fedx-team
-tags:
-  - library
-  - component
-  - react
