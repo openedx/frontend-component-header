@@ -1,3 +1,4 @@
+import { getConfig } from '@edx/frontend-platform';
 import messages from './messages';
 var getUserMenuItems = function getUserMenuItems(_ref) {
   var studioBaseUrl = _ref.studioBaseUrl,
@@ -15,6 +16,9 @@ var getUserMenuItems = function getUserMenuItems(_ref) {
     items = [{
       href: "".concat(studioBaseUrl),
       title: intl.formatMessage(messages['header.user.menu.studio'])
+    }, {
+      href: "".concat(getConfig().STUDIO_BASE_URL, "/maintenance"),
+      title: intl.formatMessage(messages['header.user.menu.maintenance'])
     }, {
       href: "".concat(logoutUrl),
       title: intl.formatMessage(messages['header.user.menu.logout'])
