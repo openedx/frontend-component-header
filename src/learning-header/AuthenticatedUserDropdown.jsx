@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { getConfig } from '@edx/frontend-platform';
@@ -12,6 +11,30 @@ import LearningUserMenuSlot from '../plugin-slots/LearningUserMenuSlot';
 import messages from './messages';
 
 const AuthenticatedUserDropdown = ({ intl, username }) => {
+  const firstMenuItemRef = useRef(null);
+  const lastMenuItemRef = useRef(null);
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+
+      const isShiftTab = event.shiftKey;
+      const currentElement = document.activeElement;
+      const focusElement = isShiftTab
+        ? currentElement.previousElementSibling
+        : currentElement.nextElementSibling;
+
+      // If the element has reached the start or end of the list, loop the focus
+      if (isShiftTab && currentElement === firstMenuItemRef.current) {
+        lastMenuItemRef.current.focus();
+      } else if (!isShiftTab && currentElement === lastMenuItemRef.current) {
+        firstMenuItemRef.current.focus();
+      } else if (focusElement && focusElement.tagName === 'A') {
+        focusElement.focus();
+      }
+    }
+  };
+
   const dropdownItems = [
     {
       message: intl.formatMessage(messages.dashboard),
@@ -43,8 +66,13 @@ const AuthenticatedUserDropdown = ({ intl, username }) => {
           {username}
         </span>
       </Dropdown.Toggle>
-      <Dropdown.Menu className="dropdown-menu-right">
-        <LearningUserMenuSlot items={dropdownItems} />
+      <Dropdown.Menu className="dropdown-menu-right" role="menu">
+        <LearningUserMenuSlot
+          items={dropdownItems}
+          firstMenuItemRef={firstMenuItemRef}
+          lastMenuItemRef={lastMenuItemRef}
+          handleKeyDown={handleKeyDown}
+        />
       </Dropdown.Menu>
     </Dropdown>
   );

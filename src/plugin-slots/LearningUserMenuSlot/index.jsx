@@ -4,6 +4,9 @@ import LearningHeaderUserMenuItems, { learningHeaderUserMenuDataShape } from '..
 
 const LearningUserMenuSlot = ({
   items,
+  handleKeyDown,
+  firstMenuItemRef,
+  lastMenuItemRef,
 }) => (
   <PluginSlot
     id="learning_user_menu_slot"
@@ -11,7 +14,12 @@ const LearningUserMenuSlot = ({
       mergeProps: true,
     }}
   >
-    <LearningHeaderUserMenuItems items={items} />
+    <LearningHeaderUserMenuItems
+      items={items}
+      handleKeyDown={handleKeyDown}
+      firstMenuItemRef={firstMenuItemRef}
+      lastMenuItemRef={lastMenuItemRef}
+    />
   </PluginSlot>
 );
 
