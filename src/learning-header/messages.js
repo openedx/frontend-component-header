@@ -36,6 +36,11 @@ const messages = defineMessages({
     defaultMessage: 'Sign Out',
     description: 'The label for the user menu Sign Out action.',
   },
+  userOptionsDropdownLabel: {
+    id: 'header.menu.aria-label',
+    defaultMessage: 'User Options',
+    description: 'The aria-label for the user options dropdown.',
+  },
 });
 
 export default messages;
