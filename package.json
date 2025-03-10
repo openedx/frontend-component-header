@@ -35,7 +35,7 @@
   "devDependencies": {
     "@edx/brand": "npm:@openedx/brand-openedx@^1.2.2",
     "@edx/browserslist-config": "^1.1.1",
-    "@edx/frontend-platform": "8.2.1",
+    "@edx/frontend-platform": "8.3.1",
     "@edx/reactifex": "^2.1.1",
     "@openedx/frontend-build": "14.2.2",
     "@openedx/paragon": "22.15.3",
