@@ -35,10 +35,10 @@
   "devDependencies": {
     "@edx/brand": "npm:@openedx/brand-openedx@^1.2.2",
     "@edx/browserslist-config": "^1.1.1",
-    "@edx/frontend-platform": "^8.3.0",
+    "@edx/frontend-platform": "^8.3.1",
     "@edx/reactifex": "^2.1.1",
     "@openedx/frontend-build": "14.2.2",
-    "@openedx/paragon": "^23.3.0",
+    "@openedx/paragon": "^23.0.0",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "10.4.9",
@@ -70,7 +70,7 @@
   },
   "peerDependencies": {
     "@edx/frontend-platform": "^7.0.0 || ^8.0.0",
-    "@openedx/paragon": ">= 23.0.0",
+    "@openedx/paragon": ">= 22.0.0 < 24.0.0",
     "prop-types": "^15.5.10",
     "react": "^16.9.0 || ^17.0.0",
     "react-dom": "^16.9.0 || ^17.0.0",

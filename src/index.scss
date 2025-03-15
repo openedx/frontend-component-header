@@ -1,6 +1,9 @@
-
 $spacer: 1rem;
+$blue: #007db8;
 $white: #fff;
+$component-active-bg: #0A3055FF !default;
+$component-active-color: $white !default;
+$rounded-pill: 50rem  !default;
 
 @import './Menu/menu.scss';
 @import './studio-header/StudioHeader.scss';
