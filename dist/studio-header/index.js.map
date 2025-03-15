@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","names":["StudioHeader"],"sources":["../../src/studio-header/index.js"],"sourcesContent":["import StudioHeader from './StudioHeader';\n\nexport default StudioHeader;\n"],"mappings":"AAAA,OAAOA,YAAY,MAAM,gBAAgB;AAEzC,eAAeA,YAAY","ignoreList":[]}
