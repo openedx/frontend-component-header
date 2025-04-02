@@ -1,0 +1,311 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LanguageSelector should change the language when different language is selected: after-language-change 1`] = `
+<div>
+  <div
+    data-testid="browser-router"
+  >
+    <div
+      class=" language-selector"
+      id="language-selector"
+    >
+      <div
+        class="pgn__dropdown pgn__dropdown-light dropdown"
+        data-testid="dropdown"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="dropdown-toggle btn btn-outline-primary btn-sm"
+          id="lang-selector-dropdown"
+          type="button"
+        >
+          <span
+            class="pgn__icon pgn__icon__sm btn-icon-before"
+          >
+            <div>
+              LanguageIcon
+            </div>
+          </span>
+          <span
+            class="lang-label-medium"
+          >
+            EN
+          </span>
+          <span
+            class="lang-label-large"
+          >
+            English
+          </span>
+        </button>
+        <div
+          aria-labelledby="lang-selector-dropdown"
+          class="dropdown-menu"
+          style="position: absolute; top: 0px; left: 0px; opacity: 0; pointer-events: none; margin: 0px;"
+          x-placement="bottom-start"
+        >
+          <a
+            class="pgn__dropdown-item dropdown-item"
+            href="#"
+            role="button"
+          >
+            Español
+          </a>
+          <a
+            class="pgn__dropdown-item dropdown-item"
+            href="#"
+            role="button"
+          >
+            English
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LanguageSelector should change the language when different language is selected: before-language-change 1`] = `
+<div>
+  <div
+    data-testid="browser-router"
+  >
+    <div
+      class=" language-selector"
+      id="language-selector"
+    >
+      <div
+        class="pgn__dropdown pgn__dropdown-light dropdown"
+        data-testid="dropdown"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="dropdown-toggle btn btn-outline-primary btn-sm"
+          id="lang-selector-dropdown"
+          type="button"
+        >
+          <span
+            class="pgn__icon pgn__icon__sm btn-icon-before"
+          >
+            <div>
+              LanguageIcon
+            </div>
+          </span>
+          <span
+            class="lang-label-medium"
+          >
+            EN
+          </span>
+          <span
+            class="lang-label-large"
+          >
+            English
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LanguageSelector should display full language name on large screens: large-screen-button 1`] = `
+<button
+  aria-expanded="false"
+  aria-haspopup="true"
+  class="dropdown-toggle btn btn-outline-primary btn-sm"
+  id="lang-selector-dropdown"
+  type="button"
+>
+  <span
+    class="pgn__icon pgn__icon__sm btn-icon-before"
+  >
+    <div>
+      LanguageIcon
+    </div>
+  </span>
+  <span
+    class="lang-label-medium"
+  >
+    EN
+  </span>
+  <span
+    class="lang-label-large"
+  >
+    English
+  </span>
+</button>
+`;
+
+exports[`LanguageSelector should display language code on medium screens: medium-screen-button 1`] = `
+<button
+  aria-expanded="false"
+  aria-haspopup="true"
+  class="dropdown-toggle btn btn-outline-primary btn-sm"
+  id="lang-selector-dropdown"
+  type="button"
+>
+  <span
+    class="pgn__icon pgn__icon__sm btn-icon-before"
+  >
+    <div>
+      LanguageIcon
+    </div>
+  </span>
+  <span
+    class="lang-label-medium"
+  >
+    EN
+  </span>
+  <span
+    class="lang-label-large"
+  >
+    English
+  </span>
+</button>
+`;
+
+exports[`LanguageSelector should display only icon on small screens: small-screen-button 1`] = `
+<button
+  aria-expanded="false"
+  aria-haspopup="true"
+  class="dropdown-toggle btn btn-outline-primary btn-sm"
+  id="lang-selector-dropdown"
+  type="button"
+>
+  <span
+    class="pgn__icon pgn__icon__sm btn-icon-before"
+  >
+    <div>
+      LanguageIcon
+    </div>
+  </span>
+  <span
+    class="lang-label-medium"
+  >
+    EN
+  </span>
+  <span
+    class="lang-label-large"
+  >
+    English
+  </span>
+</button>
+`;
+
+exports[`LanguageSelector should not change language if the same language is selected: after-same-language-selection 1`] = `
+<div>
+  <div
+    data-testid="browser-router"
+  >
+    <div
+      class=" language-selector"
+      id="language-selector"
+    >
+      <div
+        class="pgn__dropdown pgn__dropdown-light dropdown"
+        data-testid="dropdown"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="dropdown-toggle btn btn-outline-primary btn-sm"
+          id="lang-selector-dropdown"
+          type="button"
+        >
+          <span
+            class="pgn__icon pgn__icon__sm btn-icon-before"
+          >
+            <div>
+              LanguageIcon
+            </div>
+          </span>
+          <span
+            class="lang-label-medium"
+          >
+            EN
+          </span>
+          <span
+            class="lang-label-large"
+          >
+            English
+          </span>
+        </button>
+        <div
+          aria-labelledby="lang-selector-dropdown"
+          class="dropdown-menu"
+          style="position: absolute; top: 0px; left: 0px; opacity: 0; pointer-events: none; margin: 0px;"
+          x-placement="bottom-start"
+        >
+          <a
+            class="pgn__dropdown-item dropdown-item"
+            href="#"
+            role="button"
+          >
+            Español
+          </a>
+          <a
+            class="pgn__dropdown-item dropdown-item"
+            href="#"
+            role="button"
+          >
+            English
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LanguageSelector should not change language if the same language is selected: before-same-language-selection 1`] = `
+<div>
+  <div
+    data-testid="browser-router"
+  >
+    <div
+      class=" language-selector"
+      id="language-selector"
+    >
+      <div
+        class="pgn__dropdown pgn__dropdown-light dropdown"
+        data-testid="dropdown"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="dropdown-toggle btn btn-outline-primary btn-sm"
+          id="lang-selector-dropdown"
+          type="button"
+        >
+          <span
+            class="pgn__icon pgn__icon__sm btn-icon-before"
+          >
+            <div>
+              LanguageIcon
+            </div>
+          </span>
+          <span
+            class="lang-label-medium"
+          >
+            EN
+          </span>
+          <span
+            class="lang-label-large"
+          >
+            English
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LanguageSelector should not render when no supported languages are available: no-supported-languages 1`] = `
+<div>
+  <div
+    data-testid="browser-router"
+  />
+</div>
+`;
