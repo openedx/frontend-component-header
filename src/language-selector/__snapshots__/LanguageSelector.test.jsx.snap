@@ -30,12 +30,12 @@ exports[`LanguageSelector should change the language when different language is 
           <span
             class="lang-label-medium"
           >
-            EN
+            ES
           </span>
           <span
             class="lang-label-large"
           >
-            English
+            Español
           </span>
         </button>
         <div
@@ -299,13 +299,5 @@ exports[`LanguageSelector should not change language if the same language is sel
       </div>
     </div>
   </div>
-</div>
-`;
-
-exports[`LanguageSelector should not render when no supported languages are available: no-supported-languages 1`] = `
-<div>
-  <div
-    data-testid="browser-router"
-  />
 </div>
 `;

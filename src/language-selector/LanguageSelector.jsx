@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { changeUserSessionLanguage, getPrimaryLanguageSubtag, injectIntl } from '@edx/frontend-platform/i18n';
-import { getCookies } from '@edx/frontend-platform/i18n/lib';
+import { getLocale } from '@edx/frontend-platform/i18n/lib';
 import { AppContext } from '@edx/frontend-platform/react';
 import { Dropdown } from '@openedx/paragon';
 import { Language } from '@openedx/paragon/icons';
@@ -38,11 +38,9 @@ const getDisplayName = (locale) => {
  */
 const LanguageSelector = ({ className }) => {
   const { config } = useContext(AppContext);
-  const cookies = getCookies();
 
   const languageOptions = config.SITE_SUPPORTED_LANGUAGES;
-  const langCookieName = config.LANGUAGE_PREFERENCE_COOKIE_NAME;
-  const currentLocale = cookies.get(langCookieName) || 'en';
+  const [currentLocale, setCurrentLocale] = useState(getLocale());
 
   /**
    * Handles the selection of a language from the dropdown.
@@ -53,6 +51,7 @@ const LanguageSelector = ({ className }) => {
   const handleSelect = (selectedLocale) => {
     if (currentLocale !== selectedLocale) {
       changeUserSessionLanguage(selectedLocale);
+      setCurrentLocale(selectedLocale);
     }
   };
 
