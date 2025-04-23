@@ -1,6 +1,9 @@
 # Course Info Slot
 
-### Slot ID: `course_info_slot`
+### Slot ID: `org.openedx.frontend.layout.header_learning_course_info.v1`
+
+### Slot ID Aliases
+* `course_info_slot`
 
 ## Description
 
@@ -24,7 +27,7 @@ const replaceCourseTitle = ( widget ) => {
 
 const config = {
   pluginSlots: {
-    course_info_slot: {
+    'org.openedx.frontend.layout.header_learning_course_info.v1': {
       keepDefault: true,
       plugins: [
         {
@@ -51,7 +54,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    course_info_slot: {
+    'org.openedx.frontend.layout.header_learning_course_info.v1': {
       keepDefault: false,
       plugins: [
         {
@@ -83,7 +86,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    course_info_slot: {
+    'org.openedx.frontend.layout.header_learning_course_info.v1': {
       keepDefault: true,
       plugins: [
         {

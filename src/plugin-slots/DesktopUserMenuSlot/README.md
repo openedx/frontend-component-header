@@ -1,6 +1,9 @@
 # Desktop User Menu Slot
 
-### Slot ID: `desktop_user_menu_slot`
+### Slot ID: `org.openedx.frontend.layout.header_desktop_user_menu.v1`
+
+### Slot ID Aliases
+* `desktop_user_menu_slot`
 
 ## Description
 
@@ -48,7 +51,7 @@ const modifyUserMenu = ( widget ) => {
 
 const config = {
   pluginSlots: {
-    desktop_user_menu_slot: {
+    'org.openedx.frontend.layout.header_desktop_user_menu.v1': {
       keepDefault: true,
       plugins: [
         {
@@ -75,7 +78,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    desktop_user_menu_slot: {
+    'org.openedx.frontend.layout.header_desktop_user_menu.v1': {
       keepDefault: false,
       plugins: [
         {
@@ -107,7 +110,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    desktop_user_menu_slot: {
+    'org.openedx.frontend.layout.header_desktop_user_menu.v1': {
       keepDefault: true,
       plugins: [
         {

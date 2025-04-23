@@ -6,7 +6,8 @@ const DesktopMainMenuSlot = ({
   menu,
 }) => (
   <PluginSlot
-    id="desktop_main_menu_slot"
+    id="org.openedx.frontend.layout.header_desktop_main_menu.v1"
+    idAliases={['desktop_main_menu_slot']}
     slotOptions={{
       mergeProps: true,
     }}

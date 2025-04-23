@@ -6,7 +6,8 @@ const MobileMainMenuSlot = ({
   menu,
 }) => (
   <PluginSlot
-    id="mobile_main_menu_slot"
+    id="org.openedx.frontend.layout.header_mobile_main_menu.v1"
+    idAliases={['mobile_main_menu_slot']}
     slotOptions={{
       mergeProps: true,
     }}

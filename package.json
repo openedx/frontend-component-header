@@ -10,6 +10,7 @@
     "build": "make build",
     "i18n_extract": "fedx-scripts formatjs extract",
     "lint": "fedx-scripts eslint --ext .js --ext .jsx .",
+    "lint:fix": "fedx-scripts eslint --fix --ext .js --ext .jsx .",
     "snapshot": "fedx-scripts jest --updateSnapshot",
     "start": "fedx-scripts webpack-dev-server --progress",
     "test": "fedx-scripts jest --coverage"
@@ -54,7 +55,7 @@
     "@fortawesome/free-regular-svg-icons": "6.6.0",
     "@fortawesome/free-solid-svg-icons": "6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@openedx/frontend-plugin-framework": "^1.6.0",
+    "@openedx/frontend-plugin-framework": "^1.7.0",
     "axios-mock-adapter": "1.22.0",
     "babel-polyfill": "6.26.0",
     "classnames": "^2.5.1",

@@ -6,7 +6,8 @@ const LogoSlot = ({
   href, src, alt, ...attributes
 }) => (
   <PluginSlot
-    id="logo_slot"
+    id="org.openedx.frontend.layout.header_logo.v1"
+    idAliases={['logo_slot']}
     slotOptions={{
       mergeProps: true,
     }}

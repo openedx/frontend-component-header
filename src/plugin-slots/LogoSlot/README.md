@@ -1,6 +1,9 @@
 # Logo Slot
 
-### Slot ID: `logo_slot`
+### Slot ID: `org.openedx.frontend.layout.header_logo.v1`
+
+### Slot ID Aliases
+* `logo_slot`
 
 ## Description
 
@@ -22,7 +25,7 @@ const modifyLogoHref = ( widget ) => {
 
 const config = {
   pluginSlots: {
-    logo_slot: {
+    'org.openedx.frontend.layout.header_logo.v1': {
       keepDefault: true,
       plugins: [
         {
@@ -47,7 +50,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    logo_slot: {
+    'org.openedx.frontend.layout.header_logo.v1': {
       keepDefault: false,
       plugins: [
         {

@@ -6,7 +6,8 @@ const DesktopHeaderSlot = ({
   props,
 }) => (
   <PluginSlot
-    id="desktop_header_slot"
+    id="org.openedx.frontend.layout.header_desktop.v1"
+    idAliases={['desktop_header_slot']}
     slotOptions={{
       mergeProps: true,
     }}

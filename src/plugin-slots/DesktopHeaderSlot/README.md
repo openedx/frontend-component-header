@@ -1,6 +1,9 @@
 # Desktop Header Slot
 
-### Slot ID: `desktop_header_slot`
+### Slot ID: `org.openedx.frontend.layout.header_desktop.v1`
+
+### Slot ID Aliases
+* `desktop_header_slot`
 
 ## Description
 
@@ -19,7 +22,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    desktop_header_slot: {
+    'org.openedx.frontend.layout.header_desktop.v1': {
       keepDefault: false,
       plugins: [
         {

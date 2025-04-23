@@ -1,6 +1,9 @@
 # Desktop Logged Out Items Slot
 
-### Slot ID: `desktop_logged_out_items_slot`
+### Slot ID: `org.openedx.frontend.layout.header_desktop_logged_out_items.v1`
+
+### Slot ID Aliases
+* `desktop_logged_out_items_slot`
 
 ## Description
 
@@ -40,7 +43,7 @@ const modifyLoggedOutItems = ( widget ) => {
 
 const config = {
   pluginSlots: {
-    desktop_logged_out_items_slot: {
+    'org.openedx.frontend.layout.header_desktop_logged_out_items.v1': {
       keepDefault: true,
       plugins: [
         {
@@ -67,7 +70,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    desktop_logged_out_items_slot: {
+    'org.openedx.frontend.layout.header_desktop_logged_out_items.v1': {
       keepDefault: false,
       plugins: [
         {
@@ -99,7 +102,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    desktop_logged_out_items_slot: {
+    'org.openedx.frontend.layout.header_desktop_logged_out_items.v1': {
       keepDefault: true,
       plugins: [
         {

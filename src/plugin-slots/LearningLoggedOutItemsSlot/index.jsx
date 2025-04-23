@@ -6,7 +6,8 @@ const LearningLoggedOutItemsSlot = ({
   buttonsInfo,
 }) => (
   <PluginSlot
-    id="learning_logged_out_items_slot"
+    id="org.openedx.frontend.layout.header_learning_logged_out_items.v1"
+    idAliases={['learning_logged_out_items_slot']}
     slotOptions={{
       mergeProps: true,
     }}
