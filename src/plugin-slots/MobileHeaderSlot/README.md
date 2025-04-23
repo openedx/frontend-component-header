@@ -1,6 +1,9 @@
 # Mobile Header Slot
 
-### Slot ID: `mobile_header_slot`
+### Slot ID: `org.openedx.frontend.layout.header_mobile.v1`
+
+### Slot ID Aliases
+* `mobile_header_slot`
 
 ## Description
 
@@ -19,7 +22,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    mobile_header_slot: {
+    'org.openedx.frontend.layout.header_mobile.v1': {
       keepDefault: false,
       plugins: [
         {

@@ -6,7 +6,8 @@ const LearningUserMenuSlot = ({
   items,
 }) => (
   <PluginSlot
-    id="learning_user_menu_slot"
+    id="org.openedx.frontend.layout.header_learning_user_menu.v1"
+    idAliases={['learning_user_menu_slot']}
     slotOptions={{
       mergeProps: true,
     }}

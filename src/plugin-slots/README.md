@@ -1,15 +1,23 @@
 # `frontend-component-header` Plugin Slots
 
-* [`logo_slot`](./LogoSlot/)
-* [`desktop_main_menu_slot`](./DesktopMainMenuSlot/)
-* [`desktop_secondary_menu_slot`](./DesktopSecondaryMenuSlot/)
-* [`mobile_main_menu_slot`](./MobileMainMenuSlot/)
-* [`course_info_slot`](./CourseInfoSlot/)
-* [`learning_help_slot`](./LearningHelpSlot/)
-* [`desktop_logged_out_items_slot`](./DesktopLoggedOutItemsSlot/)
-* [`mobile_logged_out_items_slot`](./MobileLoggedOutItemsSlot/)
-* [`mobile_user_menu_slot`](./MobileUserMenuSlot/)
-* [`desktop_user_menu_slot`](./DesktopUserMenuSlot/)
-* [`learning_user_menu_slot`](./LearningUserMenuSlot/)
-* [`learning_logged_out_items_slot`](./LearningLoggedOutItemsSlot/)
-* [`desktop_header_slot`](./DesktopHeaderSlot/)
+### Shared
+* [`org.openedx.frontend.layout.header_logo.v1`](./LogoSlot/)
+
+### Desktop Header
+* [`org.openedx.frontend.layout.header_desktop.v1`](./DesktopHeaderSlot/)
+* [`org.openedx.frontend.layout.header_desktop_logged_out_items.v1`](./DesktopLoggedOutItemsSlot/)
+* [`org.openedx.frontend.layout.header_desktop_main_menu.v1`](./DesktopMainMenuSlot/)
+* [`org.openedx.frontend.layout.header_desktop_secondary_menu.v1`](./DesktopSecondaryMenuSlot/)
+* [`org.openedx.frontend.layout.header_desktop_user_menu.v1`](./DesktopUserMenuSlot/)
+
+### Learning Header
+* [`org.openedx.frontend.layout.header_learning_course_info.v1`](./CourseInfoSlot/)
+* [`org.openedx.frontend.layout.header_learning_help.v1`](./LearningHelpSlot/)
+* [`org.openedx.frontend.layout.header_learning_logged_out_items.v1`](./LearningLoggedOutItemsSlot/)
+* [`org.openedx.frontend.layout.header_learning_user_menu.v1`](./LearningUserMenuSlot/)
+
+### Mobile Header
+* [`org.openedx.frontend.layout.header_mobile.v1`](./MobileHeaderSlot/)
+* [`org.openedx.frontend.layout.header_mobile_logged_out_items.v1`](./MobileLoggedOutItemsSlot/)
+* [`org.openedx.frontend.layout.header_mobile_main_menu.v1`](./MobileMainMenuSlot/)
+* [`org.openedx.frontend.layout.header_mobile_user_menu.v1`](./MobileUserMenuSlot/)

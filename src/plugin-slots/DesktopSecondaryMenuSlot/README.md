@@ -1,6 +1,9 @@
 # Desktop Secondary Menu Slot
 
-### Slot ID: `desktop_secondary_menu_slot`
+### Slot ID: `org.openedx.frontend.layout.header_desktop_secondary_menu.v1`
+
+### Slot ID Aliases
+* `desktop_secondary_menu_slot`
 
 ## Description
 
@@ -35,7 +38,7 @@ const modifySecondaryMenu = ( widget ) => {
 
 const config = {
   pluginSlots: {
-    desktop_secondary_menu_slot: {
+    'org.openedx.frontend.layout.header_desktop_secondary_menu.v1': {
       keepDefault: true,
       plugins: [
         {
@@ -62,7 +65,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    desktop_secondary_menu_slot: {
+    'org.openedx.frontend.layout.header_desktop_secondary_menu.v1': {
       keepDefault: false,
       plugins: [
         {
@@ -94,7 +97,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    desktop_secondary_menu_slot: {
+    'org.openedx.frontend.layout.header_desktop_secondary_menu.v1': {
       keepDefault: true,
       plugins: [
         {

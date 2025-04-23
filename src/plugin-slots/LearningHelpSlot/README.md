@@ -1,6 +1,9 @@
 # Learning Help Slot
 
-### Slot ID: `learning_help_slot`
+### Slot ID: `org.openedx.frontend.layout.header_learning_help.v1`
+
+### Slot ID Aliases
+* `learning_help_slot`
 
 ## Description
 
@@ -19,7 +22,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    learning_help_slot: {
+    'org.openedx.frontend.layout.header_learning_help.v1': {
       keepDefault: false,
       plugins: [
         {

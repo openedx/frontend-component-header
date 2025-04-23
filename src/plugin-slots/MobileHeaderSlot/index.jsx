@@ -6,7 +6,8 @@ const MobileHeaderSlot = ({
   props,
 }) => (
   <PluginSlot
-    id="mobile_header_slot"
+    id="org.openedx.frontend.layout.header_mobile.v1"
+    idAliases={['mobile_header_slot']}
     slotOptions={{
       mergeProps: true,
     }}

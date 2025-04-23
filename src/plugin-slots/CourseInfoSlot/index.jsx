@@ -9,7 +9,8 @@ const CourseInfoSlot = ({
   ...attributes
 }) => (
   <PluginSlot
-    id="course_info_slot"
+    id="org.openedx.frontend.layout.header_learning_course_info.v1"
+    idAliases={['course_info_slot']}
     slotOptions={{
       mergeProps: true,
     }}

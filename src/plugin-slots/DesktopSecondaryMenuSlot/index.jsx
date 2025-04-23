@@ -6,7 +6,8 @@ const DesktopSecondaryMenuSlot = ({
   menu,
 }) => (
   <PluginSlot
-    id="desktop_secondary_menu_slot"
+    id="org.openedx.frontend.layout.header_desktop_secondary_menu.v1"
+    idAliases={['desktop_secondary_menu_slot']}
     slotOptions={{
       mergeProps: true,
     }}
