@@ -82,20 +82,11 @@ const LearningHeader = ({
         </div>
         {getConfig().ENABLE_HEADER_LANG_SELECTOR && (
           <div className="mx-2 d-md-inline-flex">
-            <Responsive maxWidth={1200}>
-              <LanguageSelector
-                options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
-                compact
-                authenticatedUser={authenticatedUser}
-              />
-            </Responsive>
-            <Responsive minWidth={1200}>
-              <LanguageSelector
-                options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
-                compact={false}
-                authenticatedUser={authenticatedUser}
-              />
-            </Responsive>
+            <LanguageSelector
+              options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
+              compact
+              authenticatedUser={authenticatedUser}
+            />
           </div>
         )}
         {showUserDropdown && authenticatedUser && (
