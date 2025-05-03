@@ -65,7 +65,7 @@ const LearningHeader = ({
   return (
     <header className="learning-header">
       <a className="sr-only sr-only-focusable" href="#main-content">{intl.formatMessage(messages.skipNavLink)}</a>
-      <div className="container-xl py-2 d-flex align-items-center">
+      <div className="container-xl py-2 d-flex align-items-center justify-content-between">
         {headerLogo}
         <div className="d-none d-md-block flex-grow-1 course-title-lockup">
           <div className={`d-md-flex ${enableOrgLogo && 'align-items-center justify-content-center'} w-100`}>
@@ -80,23 +80,34 @@ const LearningHeader = ({
             </span>
           </div>
         </div>
-        {getConfig().ENABLE_HEADER_LANG_SELECTOR && (
-          <div className="mx-2 d-md-inline-flex">
-            <LanguageSelector
-              options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
-              compact
-              authenticatedUser={authenticatedUser}
+        <div className="d-flex align-items-center">
+          {getConfig().ENABLE_HEADER_LANG_SELECTOR && (
+            <div className="mx-2 d-md-inline-flex">
+              <Responsive maxWidth={1200}>
+                <LanguageSelector
+                  options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
+                  compact
+                  authenticatedUser={authenticatedUser}
+                />
+              </Responsive>
+              <Responsive minWidth={1200}>
+                <LanguageSelector
+                  options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
+                  compact={false}
+                  authenticatedUser={authenticatedUser}
+                />
+              </Responsive>
+            </div>
+          )}
+          {showUserDropdown && authenticatedUser && (
+            <AuthenticatedUserDropdown
+              username={authenticatedUser.username}
             />
-          </div>
-        )}
-        {showUserDropdown && authenticatedUser && (
-          <AuthenticatedUserDropdown
-            username={authenticatedUser.username}
-          />
-        )}
-        {showUserDropdown && !authenticatedUser && (
-          <AnonymousUserMenu />
-        )}
+          )}
+          {showUserDropdown && !authenticatedUser && (
+            <AnonymousUserMenu />
+          )}
+        </div>
       </div>
     </header>
   );
