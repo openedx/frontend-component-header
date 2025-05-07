@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getConfig } from '@edx/frontend-platform';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import classNames from 'classnames';
 import {
@@ -12,7 +13,7 @@ import {
   Row,
 } from '@openedx/paragon';
 import { Close, MenuIcon, Search } from '@openedx/paragon/icons';
-
+import LanguageSelector from '../language-selector';
 import CourseLockUp from './CourseLockUp';
 import UserMenu from './UserMenu';
 import BrandNav from './BrandNav';
@@ -116,6 +117,7 @@ const HeaderBody = ({
           </>
         )}
         <ActionRow.Spacer />
+        {getConfig().ENABLE_HEADER_LANG_SELECTOR && (<LanguageSelector />)}
         {searchButtonAction && (
           <Nav>
             <IconButton
