@@ -137,7 +137,7 @@ export default config;
 
 ### Add Custom Marketing links
 
-This `env.config.jsx` will add new **Marketing links** to the desktop main menu.
+This `env.config.jsx` will add new custom **Marketing links** to the desktop main menu.
 
 ![Screenshot of custom marketing links](./images/desktop_main_menu_marketing_links.png)
 
@@ -147,25 +147,25 @@ import { PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
 const modifyMainMenu = (widget) => {
   const existingMenu = widget.RenderWidget.props.menu || [];
 
-  const newMenuItems = [
+  const newMarketingLinks = [
     {
       type: 'item',
-      href: '/how-it-works',
+      href: 'https://example.com/how-it-works',
       content: 'How it works',
     },
     {
       type: 'item',
-      href: '/courses',
+      href: 'https://example.com/courses',
       content: 'Courses',
     },
     {
       type: 'item',
-      href: '/schools',
+      href: 'https://example.com/schools',
       content: 'Schools',
     }
   ];
 
-  widget.content.menu = [...existingMenu, ...newMenuItems];
+  widget.content.menu = [...existingMenu, ...newMarketingLinks];
   return widget;
 };
 
