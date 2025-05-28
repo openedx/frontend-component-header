@@ -104,4 +104,30 @@ describe('<Header />', () => {
 
     expect(wrapper.toJSON()).toMatchSnapshot();
   });
+
+  it('renders correctly with custom logoDestination', () => {
+    const contextValue = {
+      authenticatedUser: null,
+      config: {
+        LMS_BASE_URL: process.env.LMS_BASE_URL,
+        SITE_NAME: process.env.SITE_NAME,
+        LOGIN_URL: process.env.LOGIN_URL,
+        LOGOUT_URL: process.env.LOGOUT_URL,
+        LOGO_URL: process.env.LOGO_URL,
+      },
+    };
+    const customLogoDestination = '/custom-destination';
+    const component = (
+      <ResponsiveContext.Provider value={{ width: 1280 }}>
+        <IntlProvider locale="en" messages={{}}>
+          <AppContext.Provider value={contextValue}>
+            <Header logoDestination={customLogoDestination} />
+          </AppContext.Provider>
+        </IntlProvider>
+      </ResponsiveContext.Provider>
+    );
+
+    const wrapper = TestRenderer.create(component);
+    expect(wrapper.toJSON()).toMatchSnapshot();
+  });
 });

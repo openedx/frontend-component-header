@@ -443,3 +443,63 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
   </div>
 </header>
 `;
+
+exports[`<Header /> renders correctly with custom logoDestination 1`] = `
+<header
+  className="site-header-desktop"
+>
+  <a
+    className="nav-skip sr-only sr-only-focusable"
+    href="#main"
+  >
+    Skip to main content
+  </a>
+  <div
+    className="container-fluid null"
+  >
+    <div
+      className="nav-container position-relative d-flex align-items-center"
+    >
+      <a
+        className="logo"
+        href="/custom-destination"
+      >
+        <img
+          alt="edX"
+          className="d-block"
+          src="https://edx-cdn.org/v3/default/logo.svg"
+        />
+      </a>
+      <nav
+        aria-label="Main"
+        className="nav main-nav"
+      >
+        <a
+          className="nav-link"
+          href="http://localhost:18000/dashboard"
+          onClick={null}
+        >
+          Courses
+        </a>
+      </nav>
+      <nav
+        aria-label="Secondary"
+        className="nav secondary-menu-container align-items-center ml-auto"
+      >
+        <a
+          className="btn mr-2 btn-link"
+          href="http://localhost:18000/login"
+        >
+          Login
+        </a>
+        <a
+          className="btn mr-2 btn-outline-primary"
+          href="http://localhost:18000/register"
+        >
+          Sign Up
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+`;
