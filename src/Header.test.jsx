@@ -33,6 +33,7 @@ describe('<Header />', () => {
     };
     const component = <HeaderComponent width={{ width: 1280 }} contextValue={contextValue} />;
 
+    // FIXME: react-test-renderer is deprecated. Convert to @testing-library/react.
     const wrapper = TestRenderer.create(component);
 
     expect(wrapper.toJSON()).toMatchSnapshot();
@@ -56,6 +57,7 @@ describe('<Header />', () => {
     };
     const component = <HeaderComponent width={{ width: 1280 }} contextValue={contextValue} />;
 
+    // FIXME: react-test-renderer is deprecated. Convert to @testing-library/react.
     const wrapper = TestRenderer.create(component);
 
     expect(wrapper.toJSON()).toMatchSnapshot();
@@ -74,6 +76,7 @@ describe('<Header />', () => {
     };
     const component = <HeaderComponent width={{ width: 500 }} contextValue={contextValue} />;
 
+    // FIXME: react-test-renderer is deprecated. Convert to @testing-library/react.
     const wrapper = TestRenderer.create(component);
 
     expect(wrapper.toJSON()).toMatchSnapshot();

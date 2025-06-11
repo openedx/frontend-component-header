@@ -4,8 +4,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
-import 'babel-polyfill';
-import 'jest-chain';
 import { getConfig, mergeConfig } from '@edx/frontend-platform';
 import { configure as configureLogging } from '@edx/frontend-platform/logging';
 import { configure as configureI18n } from '@edx/frontend-platform/i18n';
