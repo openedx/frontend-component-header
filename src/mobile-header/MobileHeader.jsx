@@ -21,7 +21,7 @@ import messages from '../Header.messages';
 import { MenuIcon } from '../Icons';
 
 class MobileHeader extends React.Component {
-  constructor(props) { // eslint-disable-line no-useless-constructor
+  constructor(props) { // eslint-disable-line @typescript-eslint/no-useless-constructor
     super(props);
   }
 

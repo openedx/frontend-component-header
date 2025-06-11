@@ -13,6 +13,7 @@ const MobileHeader = ({
 
   return (
     <>
+      {/* @ts-expect-error The type of 'props' is any until we convert from propTypes to TypeScript interface/types */}
       <HeaderBody
         {...props}
         isMobile
