@@ -16,7 +16,7 @@ const mockProps = {
 
 const RootWrapper = (props) => (
   <MemoryRouter>
-    <IntlProvider locale="en" messages={messages}>
+    <IntlProvider locale="en" messages={{}}>
       <CourseLockUp {...props} />
     </IntlProvider>
   </MemoryRouter>
@@ -52,7 +52,8 @@ describe('CourseLockUp Component', () => {
   it('navigates to an absolute URL when clicked', () => {
     render(<RootWrapper {...mockProps} />);
 
-    const link = screen.getByTestId('course-lock-up-block');
+    // FIXME: don't use testId - https://testing-library.com/docs/queries/about#priority
+    const link = screen.getByTestId('course-lock-up-block') as HTMLAnchorElement;
     expect(link.href).toBe(mockProps.outlineLink);
   });
 });
