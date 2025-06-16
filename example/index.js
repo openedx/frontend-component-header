@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { initialize, getConfig, subscribe, APP_READY } from '@edx/frontend-platform';
