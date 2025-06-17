@@ -11,6 +11,7 @@ const MobileHeaderSlot = ({
     slotOptions={{
       mergeProps: true,
     }}
+    pluginProps={props}
   >
     <MobileHeader {...props} />
   </PluginSlot>

@@ -11,6 +11,7 @@ const DesktopLoggedOutItemsSlot = ({
     slotOptions={{
       mergeProps: true,
     }}
+    pluginPrope={{ items }}
   >
     <DesktopLoggedOutItems items={items} />
   </PluginSlot>

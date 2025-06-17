@@ -11,6 +11,7 @@ const LearningUserMenuSlot = ({
     slotOptions={{
       mergeProps: true,
     }}
+    pluginProps={{ items }}
   >
     <LearningHeaderUserMenuItems items={items} />
   </PluginSlot>

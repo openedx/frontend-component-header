@@ -11,6 +11,7 @@ const LearningLoggedOutItemsSlot = ({
     slotOptions={{
       mergeProps: true,
     }}
+    pluginProps={{ buttonsInfo }}
   >
     <LearningLoggedOutButtons buttonsInfo={buttonsInfo} />
   </PluginSlot>

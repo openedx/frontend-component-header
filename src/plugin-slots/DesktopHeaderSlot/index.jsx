@@ -11,6 +11,7 @@ const DesktopHeaderSlot = ({
     slotOptions={{
       mergeProps: true,
     }}
+    pluginProps={props}
   >
     <DesktopHeader {...props} />
   </PluginSlot>

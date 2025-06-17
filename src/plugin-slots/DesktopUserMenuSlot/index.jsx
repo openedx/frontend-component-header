@@ -11,6 +11,7 @@ const DesktopUserMenuSlot = ({
     slotOptions={{
       mergeProps: true,
     }}
+    pluginProps={{ menu }}
   >
     <DesktopHeaderUserMenu menu={menu} />
   </PluginSlot>

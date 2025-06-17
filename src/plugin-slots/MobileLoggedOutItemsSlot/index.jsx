@@ -11,6 +11,7 @@ const MobileLoggedOutItemsSlot = ({
     slotOptions={{
       mergeProps: true,
     }}
+    pluginProps={{ items }}
   >
     <MobileLoggedOutItems items={items} />
   </PluginSlot>

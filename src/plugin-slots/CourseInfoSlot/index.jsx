@@ -18,6 +18,7 @@ const CourseInfoSlot = ({
       courseOrg,
       courseNumber,
       courseTitle,
+      attributes,
     }}
   >
     <LearningHeaderCourseInfo
