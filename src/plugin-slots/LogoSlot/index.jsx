@@ -11,6 +11,9 @@ const LogoSlot = ({
     slotOptions={{
       mergeProps: true,
     }}
+    props={{
+      href, src, alt, attributes,
+    }}
   >
     <Logo href={href} src={src} alt={alt} {...attributes} />
   </PluginSlot>

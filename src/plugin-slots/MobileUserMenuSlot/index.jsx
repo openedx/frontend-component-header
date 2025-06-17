@@ -11,6 +11,7 @@ const MobileUserMenuSlot = ({
     slotOptions={{
       mergeProps: true,
     }}
+    pluginProps={{ menu }}
   >
     <MobileHeaderUserMenu menu={menu} />
   </PluginSlot>
