@@ -72,9 +72,9 @@ Cloning and Startup
 
     ``git clone https://github.com/openedx/frontend-component-header.git``
 
-  2. Use node v18.x.
+  2. Use node v24.x.
 
-    The current version of the micro-frontend build scripts support node 18.
+    The current version of the micro-frontend build scripts support node 24.
     Using other major versions of node *may* work, but this is unsupported.  For
     convenience, this repository includes an .nvmrc file to help in setting the
     correct node version via `nvm <https://github.com/nvm-sh/nvm>`_.
