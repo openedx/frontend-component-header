@@ -14,6 +14,7 @@
     "snapshot": "fedx-scripts jest --updateSnapshot",
     "start": "fedx-scripts webpack-dev-server --progress",
     "test": "fedx-scripts jest --coverage",
+    "test:dev": "fedx-scripts jest --watchAll",
     "types": "tsc --noEmit"
   },
   "files": [
@@ -70,3 +71,4 @@
     "react-router-dom": "^6.14.2"
   }
 }
+
