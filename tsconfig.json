@@ -1,0 +1,12 @@
+{
+    "extends": "@edx/typescript-config",
+    "compilerOptions": {
+      "noEmit": true,
+      "baseUrl": "./src",
+      "paths": {
+        "*": ["*"]
+      }
+    },
+    "include": ["*.js", ".eslintrc.js", "src/**/*", "plugins/**/*"],
+    "exclude": ["dist", "node_modules"]
+}
