@@ -13,7 +13,8 @@
     "lint:fix": "fedx-scripts eslint --fix --ext .js --ext .jsx .",
     "snapshot": "fedx-scripts jest --updateSnapshot",
     "start": "fedx-scripts webpack-dev-server --progress",
-    "test": "fedx-scripts jest --coverage"
+    "test": "fedx-scripts jest --coverage",
+    "types": "tsc --noEmit"
   },
   "files": [
     "/dist"

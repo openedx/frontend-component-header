@@ -34,7 +34,7 @@ describe('BrandNav Component', () => {
   it('displays a link that navigates to studioBaseUrl', () => {
     render(<RootWrapper />);
 
-    const link = screen.getByRole('link');
+    const link = screen.getByRole('link') as HTMLAnchorElement;
     expect(link.href).toBe(studioBaseUrl);
   });
 });
