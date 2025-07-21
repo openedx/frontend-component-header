@@ -35,7 +35,7 @@ const defaultProps = {
 
 const RootWrapper = (props) => (
   <MemoryRouter>
-    <IntlProvider locale="en" messages={messages}>
+    <IntlProvider locale="en" messages={{}}>
       <HeaderBody {...props} />
     </IntlProvider>
   </MemoryRouter>

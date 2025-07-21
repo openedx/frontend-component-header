@@ -26,7 +26,7 @@ let screenWidth = 1280;
 
 const RootWrapper = ({
   ...props
-}) => {
+}: React.ComponentProps<typeof StudioHeader>) => {
   const appContextValue = useMemo(() => ({
     authenticatedUser: currentUser,
     config: {
@@ -55,7 +55,7 @@ const RootWrapper = ({
   );
 };
 
-const props = {
+const props: React.ComponentProps<typeof StudioHeader> = {
   number: '123',
   org: 'Ed',
   title: 'test',
@@ -74,6 +74,10 @@ const props = {
   outlineLink: 'tEsTLInK',
   searchButtonAction: null,
   isNewHomePage: true,
+  // These default values shouldn't be needed but typescript is confused by propTypes; can remove after converting
+  // from propTypes to TypeScript:
+  containerProps: {},
+  isHiddenMainMenu: false,
 };
 
 describe('Header', () => {

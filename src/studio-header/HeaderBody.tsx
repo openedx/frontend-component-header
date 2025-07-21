@@ -135,6 +135,7 @@ const HeaderBody = ({
               logoutUrl,
               authenticatedUserAvatar,
               isAdmin,
+              isMobile,
             }}
           />
         </Nav>
