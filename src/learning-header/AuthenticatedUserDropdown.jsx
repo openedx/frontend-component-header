@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { getConfig } from '@edx/frontend-platform';
-import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@edx/frontend-platform/i18n';
 import { Dropdown } from '@openedx/paragon';
 
 import LearningUserMenuSlot from '../plugin-slots/LearningUserMenuSlot';
 
 import messages from './messages';
 
-const AuthenticatedUserDropdown = ({ intl, username }) => {
+const AuthenticatedUserDropdown = ({ username }) => {
+  const intl = useIntl();
   const dropdownItems = [
     {
       message: intl.formatMessage(messages.dashboard),
@@ -51,8 +52,7 @@ const AuthenticatedUserDropdown = ({ intl, username }) => {
 };
 
 AuthenticatedUserDropdown.propTypes = {
-  intl: intlShape.isRequired,
   username: PropTypes.string.isRequired,
 };
 
-export default injectIntl(AuthenticatedUserDropdown);
+export default AuthenticatedUserDropdown;
