@@ -4,8 +4,8 @@ import { useIntl } from '@edx/frontend-platform/i18n';
 import { getConfig } from '@edx/frontend-platform';
 
 // Local Components
+import MobileUserMenuToggleSlot from '../plugin-slots/MobileUserMenuToggleSlot';
 import { Menu, MenuTrigger, MenuContent } from '../Menu';
-import Avatar from '../Avatar';
 import LogoSlot from '../plugin-slots/LogoSlot';
 import MobileLoggedOutItemsSlot from '../plugin-slots/MobileLoggedOutItemsSlot';
 import { mobileHeaderLoggedOutItemsDataShape } from './MobileLoggedOutItems';
@@ -40,6 +40,8 @@ const MobileHeader = ({
   const renderUserMenuItems = () => <MobileUserMenuSlot menu={userMenu} />;
 
   const renderLoggedOutItems = () => <MobileLoggedOutItemsSlot items={loggedOutItems} />;
+
+  const renderUserMenuToggle = () => <MobileUserMenuToggleSlot avatar={avatar} label={username} />;
 
   const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
   const stickyClassName = stickyOnMobile ? 'sticky-top' : '';
@@ -85,7 +87,7 @@ const MobileHeader = ({
               aria-label={intl.formatMessage(messages['header.label.account.menu'])}
               title={intl.formatMessage(messages['header.label.account.menu'])}
             >
-              <Avatar size="1.5rem" src={avatar} alt={username} />
+              {renderUserMenuToggle()}
             </MenuTrigger>
             <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
               {loggedIn ? renderUserMenuItems() : renderLoggedOutItems()}

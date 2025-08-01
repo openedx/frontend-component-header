@@ -4,8 +4,9 @@ import { useIntl } from '@edx/frontend-platform/i18n';
 import { getConfig } from '@edx/frontend-platform';
 
 // Local Components
+import DesktopUserMenuToggleSlot
+  from '../plugin-slots/DesktopUserMenuToggleSlot';
 import { Menu, MenuTrigger, MenuContent } from '../Menu';
-import Avatar from '../Avatar';
 import LogoSlot from '../plugin-slots/LogoSlot';
 import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot';
 import { desktopLoggedOutItemsDataShape } from './DesktopLoggedOutItems';
@@ -19,7 +20,6 @@ import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 import messages from '../Header.messages';
 
 // Assets
-import { CaretIcon } from '../Icons';
 
 const DesktopHeader = ({
   mainMenu,
@@ -46,8 +46,7 @@ const DesktopHeader = ({
         aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
         className="btn btn-outline-primary d-inline-flex align-items-center pl-2 pr-3"
       >
-        <Avatar size="1.5em" src={avatar} alt="" className="mr-2" />
-        {username} <CaretIcon role="img" aria-hidden focusable="false" />
+        <DesktopUserMenuToggleSlot avatar={avatar} label={username} />
       </MenuTrigger>
       <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
         <DesktopUserMenuSlot menu={userMenu} />
