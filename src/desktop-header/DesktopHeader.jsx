@@ -4,8 +4,9 @@ import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { getConfig } from '@edx/frontend-platform';
 
 // Local Components
+import DesktopUserMenuToggleSlot
+  from '../plugin-slots/DesktopUserMenuToggleSlot';
 import { Menu, MenuTrigger, MenuContent } from '../Menu';
-import Avatar from '../Avatar';
 import LogoSlot from '../plugin-slots/LogoSlot';
 import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot';
 import { desktopLoggedOutItemsDataShape } from './DesktopLoggedOutItems';
@@ -19,7 +20,6 @@ import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 import messages from '../Header.messages';
 
 // Assets
-import { CaretIcon } from '../Icons';
 
 class DesktopHeader extends React.Component {
   constructor(props) { // eslint-disable-line @typescript-eslint/no-useless-constructor
@@ -51,8 +51,7 @@ class DesktopHeader extends React.Component {
           aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
           className="btn btn-outline-primary d-inline-flex align-items-center pl-2 pr-3"
         >
-          <Avatar size="1.5em" src={avatar} alt="" className="mr-2" />
-          {username} <CaretIcon role="img" aria-hidden focusable="false" />
+          <DesktopUserMenuToggleSlot avatar={avatar} label={username} />
         </MenuTrigger>
         <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
           <DesktopUserMenuSlot menu={userMenu} />
@@ -123,15 +122,15 @@ export const desktopHeaderDataShape = {
 
 DesktopHeader.propTypes = {
   mainMenu: desktopHeaderDataShape.mainMenu,
-  secondaryMenu: desktopHeaderDataShape.secondaryMenumainMenu,
-  userMenu: desktopHeaderDataShape.userMenumainMenu,
-  loggedOutItems: desktopHeaderDataShape.loggedOutItemsmainMenu,
-  logo: desktopHeaderDataShape.logomainMenu,
-  logoAltText: desktopHeaderDataShape.logoAltTextmainMenu,
-  logoDestination: desktopHeaderDataShape.logoDestinationmainMenu,
-  avatar: desktopHeaderDataShape.avatarmainMenu,
-  username: desktopHeaderDataShape.usernamemainMenu,
-  loggedIn: desktopHeaderDataShape.loggedInmainMenu,
+  secondaryMenu: desktopHeaderDataShape.secondaryMenu,
+  userMenu: desktopHeaderDataShape.userMenu,
+  loggedOutItems: desktopHeaderDataShape.loggedOutItems,
+  logo: desktopHeaderDataShape.logo,
+  logoAltText: desktopHeaderDataShape.logoAltText,
+  logoDestination: desktopHeaderDataShape.logoDestination,
+  avatar: desktopHeaderDataShape.avatar,
+  username: desktopHeaderDataShape.username,
+  loggedIn: desktopHeaderDataShape.loggedIn,
 
   // i18n
   intl: intlShape.isRequired,
