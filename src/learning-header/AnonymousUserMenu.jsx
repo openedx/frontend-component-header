@@ -2,12 +2,13 @@ import React from 'react';
 
 import { getConfig } from '@edx/frontend-platform';
 import { getLoginRedirectUrl } from '@edx/frontend-platform/auth';
-import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@edx/frontend-platform/i18n';
 import LearningLoggedOutItemsSlot from '../plugin-slots/LearningLoggedOutItemsSlot';
 
 import genericMessages from '../generic/messages';
 
-const AnonymousUserMenu = ({ intl }) => {
+const AnonymousUserMenu = () => {
+  const intl = useIntl();
   const buttonsInfo = [
     {
       message: intl.formatMessage(genericMessages.registerSentenceCase),
@@ -23,8 +24,4 @@ const AnonymousUserMenu = ({ intl }) => {
   return <LearningLoggedOutItemsSlot buttonsInfo={buttonsInfo} />;
 };
 
-AnonymousUserMenu.propTypes = {
-  intl: intlShape.isRequired,
-};
-
-export default injectIntl(AnonymousUserMenu);
+export default AnonymousUserMenu;
