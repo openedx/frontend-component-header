@@ -45,10 +45,9 @@ subscribe(APP_CONFIG_INITIALIZED, () => {
  * See the documentation for the structure of secondary menu item.
  * @param {list} userMenuItems - The list of user menu items to display.
  * See the documentation for the structure of user menu item.
- * @param {string} logoDestination - The destination of the logo.
  */
 const Header = ({
-  intl, mainMenuItems, secondaryMenuItems, userMenuItems, logoDestination,
+  intl, mainMenuItems, secondaryMenuItems, userMenuItems,
 }) => {
   const { authenticatedUser, config } = useContext(AppContext);
 
@@ -111,7 +110,7 @@ const Header = ({
   const props = {
     logo: config.LOGO_URL,
     logoAltText: config.SITE_NAME,
-    logoDestination: logoDestination || `${config.LMS_BASE_URL}/dashboard`,
+    logoDestination: `${config.LMS_BASE_URL}/dashboard`,
     loggedIn: authenticatedUser !== null,
     username: authenticatedUser !== null ? authenticatedUser.username : null,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
@@ -137,7 +136,6 @@ Header.defaultProps = {
   mainMenuItems: null,
   secondaryMenuItems: null,
   userMenuItems: null,
-  logoDestination: null,
 };
 
 Header.propTypes = {
@@ -159,10 +157,6 @@ Header.propTypes = {
       isActive: PropTypes.bool,
     })),
   })),
-  logoDestination: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.oneOf([false, null]),
-  ]),
 };
 
 export default injectIntl(Header);
