@@ -48,7 +48,7 @@ subscribe(APP_CONFIG_INITIALIZED, () => {
  * @param {string} logoDestination - The destination of the logo.
  */
 const Header = ({
-  intl, mainMenuItems, secondaryMenuItems, userMenuItems, logoDestination,
+  mainMenuItems, secondaryMenuItems, userMenuItems, logoDestination,
 }) => {
   const { authenticatedUser, config } = useContext(AppContext);
   const intl = useIntl();
