@@ -161,7 +161,7 @@ Header.propTypes = {
   })),
   logoDestination: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.oneOf([false, null]),
+    PropTypes.oneOf([null]),
   ]),
 };
 

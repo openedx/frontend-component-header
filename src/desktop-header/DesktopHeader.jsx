@@ -98,7 +98,7 @@ export const desktopHeaderDataShape = {
   logoAltText: PropTypes.string,
   logoDestination: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.oneOf([false, null]),
+    PropTypes.oneOf([null]),
   ]),
   avatar: PropTypes.string,
   username: PropTypes.string,
