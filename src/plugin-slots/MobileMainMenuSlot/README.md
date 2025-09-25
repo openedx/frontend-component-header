@@ -134,3 +134,55 @@ const config = {
 
 export default config;
 ```
+
+### Add Custom Marketing links
+
+This `env.config.jsx` will add new custom **Marketing links** to the mobile main menu.
+
+![Screenshot of custom marketing links](./images/mobile_main_menu_marketing_links.png)
+
+```jsx
+import { PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
+
+const modifyMainMenu = (widget) => {
+  const existingMenu = widget.RenderWidget.props.menu || [];
+
+  const newMarketingLinks = [
+    {
+      type: 'item',
+      href: 'https://example.com/how-it-works',
+      content: 'How it works',
+    },
+    {
+      type: 'item',
+      href: 'https://example.com/courses',
+      content: 'Courses',
+    },
+    {
+      type: 'item',
+      href: 'https://example.com/schools',
+      content: 'Schools',
+    }
+  ];
+
+  widget.content.menu = [...existingMenu, ...newMarketingLinks];
+  return widget;
+};
+
+const config = {
+  pluginSlots: {
+    'org.openedx.frontend.layout.header_mobile_main_menu.v1': {
+      keepDefault: true,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Modify,
+          widgetId: 'default_contents',
+          fn: modifyMainMenu,
+        },
+      ]
+    },
+  },
+}
+
+export default config;
+```
