@@ -7,13 +7,13 @@ import { Context as ResponsiveContext } from 'react-responsive';
 
 import Header from './index';
 
-const HeaderComponent = ({ width, contextValue, logoDestination }) => (
+const HeaderComponent = ({ width, contextValue }) => (
   <ResponsiveContext.Provider value={width}>
     <IntlProvider locale="en" messages={{}}>
       <AppContext.Provider
         value={contextValue}
       >
-        <Header logoDestination={logoDestination} />
+        <Header />
       </AppContext.Provider>
     </IntlProvider>
   </ResponsiveContext.Provider>
@@ -102,54 +102,6 @@ describe('<Header />', () => {
 
     const wrapper = TestRenderer.create(component);
 
-    expect(wrapper.toJSON()).toMatchSnapshot();
-  });
-
-  it('renders correctly with custom logoDestination on mobile', () => {
-    const contextValue = {
-      authenticatedUser: null,
-      config: {
-        LMS_BASE_URL: process.env.LMS_BASE_URL,
-        SITE_NAME: process.env.SITE_NAME,
-        LOGIN_URL: process.env.LOGIN_URL,
-        LOGOUT_URL: process.env.LOGOUT_URL,
-        LOGO_URL: process.env.LOGO_URL,
-      },
-    };
-
-    const component = (
-      <HeaderComponent
-        width={{ width: 500 }}
-        contextValue={contextValue}
-        logoDestination="/custom-destination"
-      />
-    );
-
-    const wrapper = TestRenderer.create(component);
-    expect(wrapper.toJSON()).toMatchSnapshot();
-  });
-
-  it('renders correctly with custom logoDestination on desktop', () => {
-    const contextValue = {
-      authenticatedUser: null,
-      config: {
-        LMS_BASE_URL: process.env.LMS_BASE_URL,
-        SITE_NAME: process.env.SITE_NAME,
-        LOGIN_URL: process.env.LOGIN_URL,
-        LOGOUT_URL: process.env.LOGOUT_URL,
-        LOGO_URL: process.env.LOGO_URL,
-      },
-    };
-
-    const component = (
-      <HeaderComponent
-        width={{ width: 1280 }}
-        contextValue={contextValue}
-        logoDestination="/custom-destination"
-      />
-    );
-
-    const wrapper = TestRenderer.create(component);
     expect(wrapper.toJSON()).toMatchSnapshot();
   });
 });

@@ -96,10 +96,7 @@ export const desktopHeaderDataShape = {
   loggedOutItems: desktopLoggedOutItemsDataShape,
   logo: PropTypes.string,
   logoAltText: PropTypes.string,
-  logoDestination: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.oneOf([null]),
-  ]),
+  logoDestination: PropTypes.string,
   avatar: PropTypes.string,
   username: PropTypes.string,
   loggedIn: PropTypes.bool,
