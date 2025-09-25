@@ -34,7 +34,6 @@
     "@edx/brand": "npm:@openedx/brand-openedx@^1.2.2",
     "@edx/browserslist-config": "^1.1.1",
     "@edx/frontend-platform": "^8.3.1",
-    "@edx/reactifex": "^2.1.1",
     "@openedx/frontend-build": "^14.3.2",
     "@openedx/paragon": "^23.0.0",
     "@testing-library/dom": "^10.4.0",
@@ -71,4 +70,3 @@
     "react-router-dom": "^6.14.2"
   }
 }
-
