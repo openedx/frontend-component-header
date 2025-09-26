@@ -13,9 +13,11 @@ This slot is used to replace/modify/hide the desktop main menu.
 
 ### Modify Items
 
-The following `env.config.jsx` will modify the items in the desktop main menu.
+#### Replace All Items
 
-![Screenshot of modified items](./images/desktop_main_menu_modify_items.png)
+The following `env.config.jsx` will replace all items in the desktop main menu.
+
+![Screenshot of modified items](./images/desktop_main_menu_replace_all_items.png)
 
 ```jsx
 import { PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
@@ -38,6 +40,58 @@ const modifyMainMenu = ( widget ) => {
       content: 'Forums',
     }
   ];
+  return widget;
+};
+
+const config = {
+  pluginSlots: {
+    'org.openedx.frontend.layout.header_desktop_main_menu.v1': {
+      keepDefault: true,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Modify,
+          widgetId: 'default_contents',
+          fn: modifyMainMenu,
+        },
+      ]
+    },
+  },
+}
+
+export default config;
+```
+
+#### Add Items
+
+The following `env.config.jsx` will add items in the desktop main menu.
+
+![Screenshot of custom marketing links](./images/desktop_main_menu_add_items.png)
+
+```jsx
+import { PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
+
+const modifyMainMenu = (widget) => {
+  const existingMenu = widget.RenderWidget.props.menu || [];
+
+  const newMarketingLinks = [
+    {
+      type: 'item',
+      href: 'https://example.com/how-it-works',
+      content: 'How it works',
+    },
+    {
+      type: 'item',
+      href: 'https://example.com/courses',
+      content: 'Courses',
+    },
+    {
+      type: 'item',
+      href: 'https://example.com/schools',
+      content: 'Schools',
+    }
+  ];
+
+  widget.content.menu = [...existingMenu, ...newMarketingLinks];
   return widget;
 };
 
@@ -126,58 +180,6 @@ const config = {
               <h1 style={{textAlign: 'center'}}>🌛</h1>
             ),
           },
-        },
-      ]
-    },
-  },
-}
-
-export default config;
-```
-
-### Add Custom Marketing links
-
-This `env.config.jsx` will add new custom **Marketing links** to the desktop main menu.
-
-![Screenshot of custom marketing links](./images/desktop_main_menu_marketing_links.png)
-
-```jsx
-import { PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
-
-const modifyMainMenu = (widget) => {
-  const existingMenu = widget.RenderWidget.props.menu || [];
-
-  const newMarketingLinks = [
-    {
-      type: 'item',
-      href: 'https://example.com/how-it-works',
-      content: 'How it works',
-    },
-    {
-      type: 'item',
-      href: 'https://example.com/courses',
-      content: 'Courses',
-    },
-    {
-      type: 'item',
-      href: 'https://example.com/schools',
-      content: 'Schools',
-    }
-  ];
-
-  widget.content.menu = [...existingMenu, ...newMarketingLinks];
-  return widget;
-};
-
-const config = {
-  pluginSlots: {
-    'org.openedx.frontend.layout.header_desktop_main_menu.v1': {
-      keepDefault: true,
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Modify,
-          widgetId: 'default_contents',
-          fn: modifyMainMenu,
         },
       ]
     },
