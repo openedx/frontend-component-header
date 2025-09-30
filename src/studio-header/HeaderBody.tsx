@@ -18,6 +18,7 @@ import UserMenu from './UserMenu';
 import BrandNav from './BrandNav';
 import NavDropdownMenu from './NavDropdownMenu';
 import messages from './messages';
+import NotificationTraySlot from '../plugin-slots/NotificationSlot';
 
 const HeaderBody = ({
   logo,
@@ -116,6 +117,9 @@ const HeaderBody = ({
           </>
         )}
         <ActionRow.Spacer />
+        <Nav>
+          <NotificationTraySlot />
+        </Nav>
         {searchButtonAction && (
           <Nav>
             <IconButton
