@@ -13,6 +13,7 @@ import MobileMainMenuSlot from '../plugin-slots/MobileMainMenuSlot';
 import { mobileHeaderMainMenuDataShape } from './MobileHeaderMainMenu';
 import MobileUserMenuSlot from '../plugin-slots/MobileUserMenuSlot';
 import { mobileHeaderUserMenuDataShape } from './MobileHeaderUserMenu';
+import MobileHeaderItemSlot from '../plugin-slots/MobileHeaderItemSlot';
 
 // i18n
 import messages from '../Header.messages';
@@ -81,6 +82,7 @@ const MobileHeader = ({
       {userMenu.length > 0 || loggedOutItems.length > 0 ? (
         <div className="w-100 d-flex justify-content-end align-items-center">
           <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="position-static">
+            <MobileHeaderItemSlot />
             <MenuTrigger
               tag="button"
               className="icon-button"
