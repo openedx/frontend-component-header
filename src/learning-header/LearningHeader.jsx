@@ -48,7 +48,7 @@ const LearningHeader = ({
           </>
         )}
         {showUserDropdown && !authenticatedUser && (
-          <AnonymousUserMenu />
+        <AnonymousUserMenu />
         )}
       </div>
     </header>
