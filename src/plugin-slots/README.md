@@ -2,6 +2,7 @@
 
 ### Shared
 * [`org.openedx.frontend.layout.header_logo.v1`](./LogoSlot/)
+* [`org.openedx.frontend.layout.notification_tray.v1`](./NotificationSlot/)
 
 ### Desktop Header
 * [`org.openedx.frontend.layout.header_desktop.v1`](./DesktopHeaderSlot/)

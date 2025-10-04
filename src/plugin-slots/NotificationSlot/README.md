@@ -9,6 +9,12 @@ This slot is used to replace, modify, or hide the contents of the notification t
 The slot is kept empty so that it can only be enabled when it is required else
 nothing is displayed.
 
+![Screenshot for frontend-app-learning]('./images/learner_header_notification.png')
+
+![Screenshot for frontend-app-learner-dashboard]('./images/learner_dashboard_notification.png')
+
+![Screenshot for frontend-app-authroing]('./images/studio_header_notification.png')
+
 ## Examples
 
 ### Insert Notification Tray with Custom Component
