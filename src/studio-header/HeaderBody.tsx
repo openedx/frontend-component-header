@@ -58,7 +58,7 @@ const HeaderBody = ({
   return (
     <Container
       size="xl"
-      className={classNames('px-2.5', containerClassName)}
+      className={classNames('px-0', containerClassName)}
       {...restContainerProps}
     >
       <ActionRow as="header">
