@@ -13,6 +13,7 @@ import MobileMainMenuSlot from '../plugin-slots/MobileMainMenuSlot';
 import { mobileHeaderMainMenuDataShape } from './MobileHeaderMainMenu';
 import MobileUserMenuSlot from '../plugin-slots/MobileUserMenuSlot';
 import { mobileHeaderUserMenuDataShape } from './MobileHeaderUserMenu';
+import NotificationTraySlot from '../plugin-slots/NotificationSlot';
 
 // i18n
 import messages from '../Header.messages';
@@ -42,6 +43,8 @@ const MobileHeader = ({
   const renderLoggedOutItems = () => <MobileLoggedOutItemsSlot items={loggedOutItems} />;
 
   const renderUserMenuToggle = () => <MobileUserMenuToggleSlot avatar={avatar} label={username} />;
+
+  const renderNotificationTray = () => <NotificationTraySlot />;
 
   const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
   const stickyClassName = stickyOnMobile ? 'sticky-top' : '';
@@ -87,6 +90,7 @@ const MobileHeader = ({
               aria-label={intl.formatMessage(messages['header.label.account.menu'])}
               title={intl.formatMessage(messages['header.label.account.menu'])}
             >
+              {renderNotificationTray()}
               {renderUserMenuToggle()}
             </MenuTrigger>
             <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
