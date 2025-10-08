@@ -18,6 +18,7 @@ import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 
 // i18n
 import messages from '../Header.messages';
+import NotificationTraySlot from '../plugin-slots/NotificationSlot';
 
 // Assets
 
@@ -38,6 +39,8 @@ const DesktopHeader = ({
   const renderMainMenu = () => <DesktopMainMenuSlot menu={mainMenu} />;
 
   const renderSecondaryMenu = () => <DesktopSecondaryMenuSlot menu={secondaryMenu} />;
+
+  const renderNotificationTray = () => <NotificationTraySlot />;
 
   const renderUserMenu = () => (
     <Menu transitionClassName="menu-dropdown" transitionTimeout={250}>
@@ -78,6 +81,7 @@ const DesktopHeader = ({
             {loggedIn
               ? (
                 <>
+                  {renderNotificationTray()}
                   {renderSecondaryMenu()}
                   {renderUserMenu()}
                 </>
