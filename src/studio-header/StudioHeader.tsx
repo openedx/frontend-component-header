@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { type FunctionComponent, useContext } from 'react';
 import Responsive from 'react-responsive';
 import { AppContext } from '@edx/frontend-platform/react';
 import { ensureConfig } from '@edx/frontend-platform';
 
 import MobileHeader from './MobileHeader';
-import HeaderBody from './HeaderBody';
+import HeaderBody, { HeaderBodyProps } from './HeaderBody';
 
 ensureConfig([
   'STUDIO_BASE_URL',
@@ -15,9 +14,29 @@ ensureConfig([
   'LOGO_URL',
 ], 'Studio Header component');
 
-const StudioHeader = ({
-  number, org, title, containerProps, isHiddenMainMenu, mainMenuDropdowns,
-  outlineLink, searchButtonAction, isNewHomePage,
+type Props = Pick<HeaderBodyProps,
+| 'number'
+| 'org'
+| 'title'
+| 'containerProps'
+| 'isHiddenMainMenu'
+| 'mainMenuDropdowns'
+| 'outlineLink'
+| 'searchButtonAction'
+> & {
+  isNewHomePage: boolean;
+};
+
+const StudioHeader: FunctionComponent<Props> = ({
+  number,
+  org,
+  title,
+  containerProps,
+  isHiddenMainMenu,
+  mainMenuDropdowns,
+  outlineLink,
+  searchButtonAction,
+  isNewHomePage,
 }) => {
   // @ts-expect-error - frontend-platform doesn't yet have type information :/
   const { authenticatedUser, config } = useContext(AppContext);
@@ -50,35 +69,6 @@ const StudioHeader = ({
       </Responsive>
     </div>
   );
-};
-
-StudioHeader.propTypes = {
-  number: PropTypes.string,
-  org: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  containerProps: HeaderBody.propTypes.containerProps,
-  isHiddenMainMenu: PropTypes.bool,
-  mainMenuDropdowns: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    buttonTitle: PropTypes.node,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      href: PropTypes.string,
-      title: PropTypes.node,
-    })),
-  })),
-  outlineLink: PropTypes.string,
-  searchButtonAction: PropTypes.func,
-  isNewHomePage: PropTypes.bool.isRequired,
-};
-
-StudioHeader.defaultProps = {
-  number: '',
-  org: '',
-  containerProps: {},
-  isHiddenMainMenu: false,
-  mainMenuDropdowns: [],
-  outlineLink: null,
-  searchButtonAction: null,
 };
 
 export default StudioHeader;
