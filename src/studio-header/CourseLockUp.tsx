@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { type FunctionComponent } from 'react';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import {
   OverlayTrigger,
@@ -9,14 +8,19 @@ import { Link } from 'react-router-dom';
 
 import messages from './messages';
 
-const CourseLockUp = (
-  {
-    outlineLink,
-    org,
-    number,
-    title,
-  },
-) => {
+interface Props {
+  outlineLink?: string;
+  org?: string;
+  number?: string;
+  title?: string;
+}
+
+const CourseLockUp: FunctionComponent<Props> = ({
+  outlineLink = '',
+  org = '',
+  number = '',
+  title = '',
+}) => {
   const intl = useIntl();
 
   return (
@@ -39,20 +43,6 @@ const CourseLockUp = (
       </Link>
     </OverlayTrigger>
   );
-};
-
-CourseLockUp.propTypes = {
-  number: PropTypes.string,
-  org: PropTypes.string,
-  title: PropTypes.string,
-  outlineLink: PropTypes.string,
-};
-
-CourseLockUp.defaultProps = {
-  number: null,
-  org: null,
-  title: null,
-  outlineLink: null,
 };
 
 export default CourseLockUp;

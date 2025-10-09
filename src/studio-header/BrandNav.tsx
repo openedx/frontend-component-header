@@ -1,8 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { type FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 
-const BrandNav = ({
+interface Props {
+  studioBaseUrl: string;
+  logo: string;
+  logoAltText: string;
+}
+
+const BrandNav: FunctionComponent<Props> = ({
   studioBaseUrl,
   logo,
   logoAltText,
@@ -15,11 +20,5 @@ const BrandNav = ({
     />
   </Link>
 );
-
-BrandNav.propTypes = {
-  studioBaseUrl: PropTypes.string.isRequired,
-  logo: PropTypes.string.isRequired,
-  logoAltText: PropTypes.string.isRequired,
-};
 
 export default BrandNav;

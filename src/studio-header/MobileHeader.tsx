@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { type FunctionComponent, useState } from 'react';
 import { useToggle, ModalPopup } from '@openedx/paragon';
-import HeaderBody from './HeaderBody';
+import HeaderBody, { type HeaderBodyProps } from './HeaderBody';
 import MobileMenu from './MobileMenu';
 
-const MobileHeader = ({
+type Props = Pick<HeaderBodyProps,
+| 'studioBaseUrl'
+| 'logoutUrl'
+| 'number'
+| 'org'
+| 'title'
+| 'logo'
+| 'logoAltText'
+| 'authenticatedUserAvatar'
+| 'username'
+| 'isAdmin'
+| 'mainMenuDropdowns'
+| 'outlineLink'
+>;
+
+const MobileHeader: FunctionComponent<Props> = ({
   mainMenuDropdowns,
   ...props
 }) => {
   const [isOpen, , close, toggle] = useToggle(false);
-  const [target, setTarget] = useState(null);
+  const [target, setTarget] = useState<HTMLButtonElement | null>(null);
 
   return (
     <>
-      {/* @ts-expect-error The type of 'props' is any until we convert from propTypes to TypeScript interface/types */}
       <HeaderBody
         {...props}
         isMobile
@@ -34,41 +47,6 @@ const MobileHeader = ({
       </ModalPopup>
     </>
   );
-};
-
-MobileHeader.propTypes = {
-  studioBaseUrl: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-  logoutUrl: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-  number: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-  org: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-  title: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-  logo: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-  logoAltText: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-  authenticatedUserAvatar: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-  username: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-  isAdmin: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-  mainMenuDropdowns: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    buttonTitle: PropTypes.node,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      href: PropTypes.string,
-      title: PropTypes.node,
-    })),
-  })),
-  outlineLink: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
-};
-
-MobileHeader.defaultProps = {
-  logo: null,
-  logoAltText: null,
-  number: null,
-  org: null,
-  title: null,
-  authenticatedUserAvatar: null,
-  username: null,
-  isAdmin: false,
-  mainMenuDropdowns: [],
-  outlineLink: null,
 };
 
 export default MobileHeader;

@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { type ReactNode, type ComponentProps } from 'react';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import classNames from 'classnames';
 import {
@@ -19,6 +18,32 @@ import BrandNav from './BrandNav';
 import NavDropdownMenu from './NavDropdownMenu';
 import messages from './messages';
 
+export interface HeaderBodyProps {
+  studioBaseUrl: string;
+  logoutUrl: string;
+  setModalPopupTarget?: ((instance: HTMLButtonElement | null) => void) | null;
+  toggleModalPopup?: React.MouseEventHandler<HTMLButtonElement>;
+  isModalPopupOpen?: boolean;
+  number?: string;
+  org?: string;
+  title: string;
+  logo: string;
+  logoAltText: string;
+  authenticatedUserAvatar?: string;
+  username?: string;
+  isAdmin?: boolean;
+  isMobile?: boolean;
+  isHiddenMainMenu?: boolean;
+  mainMenuDropdowns?: {
+    id: string;
+    buttonTitle: ReactNode;
+    items: { title: ReactNode; href: string; }[];
+  }[];
+  outlineLink?: string;
+  searchButtonAction?: React.MouseEventHandler<HTMLButtonElement>;
+  containerProps?: Omit<ComponentProps<typeof Container>, 'children'>;
+}
+
 const HeaderBody = ({
   logo,
   logoAltText,
@@ -31,15 +56,15 @@ const HeaderBody = ({
   logoutUrl,
   authenticatedUserAvatar,
   isMobile,
-  setModalPopupTarget,
+  setModalPopupTarget = null,
   toggleModalPopup,
-  isModalPopupOpen,
-  isHiddenMainMenu,
-  mainMenuDropdowns,
+  isModalPopupOpen = false,
+  isHiddenMainMenu = false,
+  mainMenuDropdowns = [],
   outlineLink,
   searchButtonAction,
-  containerProps,
-}) => {
+  containerProps = {},
+}: HeaderBodyProps) => {
   const intl = useIntl();
 
   const renderBrandNav = (
@@ -52,7 +77,7 @@ const HeaderBody = ({
     />
   );
 
-  const { className: containerClassName, ...restContainerProps } = containerProps || {};
+  const { className: containerClassName, ...restContainerProps } = containerProps;
 
   return (
     <Container
@@ -142,55 +167,6 @@ const HeaderBody = ({
       </ActionRow>
     </Container>
   );
-};
-
-HeaderBody.propTypes = {
-  studioBaseUrl: PropTypes.string.isRequired,
-  logoutUrl: PropTypes.string.isRequired,
-  setModalPopupTarget: PropTypes.func,
-  toggleModalPopup: PropTypes.func,
-  isModalPopupOpen: PropTypes.bool,
-  number: PropTypes.string,
-  org: PropTypes.string,
-  title: PropTypes.string,
-  logo: PropTypes.string,
-  logoAltText: PropTypes.string,
-  authenticatedUserAvatar: PropTypes.string,
-  username: PropTypes.string,
-  isAdmin: PropTypes.bool,
-  isMobile: PropTypes.bool,
-  isHiddenMainMenu: PropTypes.bool,
-  mainMenuDropdowns: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    buttonTitle: PropTypes.node,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      href: PropTypes.string,
-      title: PropTypes.node,
-    })),
-  })),
-  outlineLink: PropTypes.string,
-  searchButtonAction: PropTypes.func,
-  containerProps: PropTypes.shape(Container.propTypes),
-};
-
-HeaderBody.defaultProps = {
-  setModalPopupTarget: null,
-  toggleModalPopup: null,
-  isModalPopupOpen: false,
-  logo: null,
-  logoAltText: null,
-  number: '',
-  org: '',
-  title: '',
-  authenticatedUserAvatar: null,
-  username: null,
-  isAdmin: false,
-  isMobile: false,
-  isHiddenMainMenu: false,
-  mainMenuDropdowns: [],
-  outlineLink: null,
-  searchButtonAction: null,
-  containerProps: {},
 };
 
 export default HeaderBody;

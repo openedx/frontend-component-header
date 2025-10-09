@@ -71,12 +71,8 @@ const props: React.ComponentProps<typeof StudioHeader> = {
     },
   ],
   outlineLink: 'tEsTLInK',
-  searchButtonAction: null,
+  searchButtonAction: undefined,
   isNewHomePage: true,
-  // These default values shouldn't be needed but typescript is confused by propTypes; can remove after converting
-  // from propTypes to TypeScript:
-  containerProps: {},
-  isHiddenMainMenu: false,
 };
 
 describe('Header', () => {
@@ -146,7 +142,7 @@ describe('Header', () => {
     });
 
     it('should not show search button', async () => {
-      const testProps = { ...props, searchButtonAction: null };
+      const testProps = { ...props, searchButtonAction: undefined };
       const { queryByRole } = render(<RootWrapper {...testProps} />);
       expect(queryByRole('button', { name: 'Search content' })).not.toBeInTheDocument();
     });

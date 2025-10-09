@@ -1,16 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { type ReactNode } from 'react';
 import {
   Dropdown,
   DropdownButton,
 } from '@openedx/paragon';
 import { Link } from 'react-router-dom';
 
+interface Props {
+  id: string;
+  buttonTitle: ReactNode;
+  items: { title: ReactNode; href: string; }[];
+}
+
 const NavDropdownMenu = ({
   id,
   buttonTitle,
   items,
-}) => (
+}: Props) => (
   <DropdownButton
     id={id}
     title={buttonTitle}
@@ -29,14 +34,5 @@ const NavDropdownMenu = ({
     ))}
   </DropdownButton>
 );
-
-NavDropdownMenu.propTypes = {
-  id: PropTypes.string.isRequired,
-  buttonTitle: PropTypes.node.isRequired,
-  items: PropTypes.arrayOf(PropTypes.shape({
-    href: PropTypes.string.isRequired,
-    title: PropTypes.node.isRequired,
-  })).isRequired,
-};
 
 export default NavDropdownMenu;
