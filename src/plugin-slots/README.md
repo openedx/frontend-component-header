@@ -10,7 +10,6 @@
 * [`org.openedx.frontend.layout.header_desktop_secondary_menu.v1`](./DesktopSecondaryMenuSlot/)
 * [`org.openedx.frontend.layout.header_desktop_user_menu.v1`](./DesktopUserMenuSlot/)
 * [`org.openedx.frontend.layout.header_desktop_user_menu_toggle.v1`](./DesktopUserMenuToggleSlot/)
-* [`org.openedx.frontend.layout.desktop_header_item_slot.v1`](./DesktopHeaderItemSlot/)
 
 ### Learning Header
 * [`org.openedx.frontend.layout.header_learning_course_info.v1`](./CourseInfoSlot/)
@@ -18,7 +17,6 @@
 * [`org.openedx.frontend.layout.header_learning_logged_out_items.v1`](./LearningLoggedOutItemsSlot/)
 * [`org.openedx.frontend.layout.header_learning_user_menu.v1`](./LearningUserMenuSlot/)
 * [`org.openedx.frontend.layout.header_learning_user_menu.v1`](./LearningUserMenuSlot/)
-* [`org.openedx.frontend.layout.learning_header_item_slot.v1`](./LearningHeaderItemSlot/)
 
 ### Mobile Header
 * [`org.openedx.frontend.layout.header_mobile.v1`](./MobileHeaderSlot/)
