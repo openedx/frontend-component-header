@@ -38,12 +38,12 @@ const LearningHeader = ({
           <CourseInfoSlot courseOrg={courseOrg} courseNumber={courseNumber} courseTitle={courseTitle} />
         </div>
         {showUserDropdown && authenticatedUser && (
-          <>
-            <LearningHelpSlot />
-            <AuthenticatedUserDropdown
-              username={authenticatedUser.username}
-            />
-          </>
+        <>
+          <LearningHelpSlot />
+          <AuthenticatedUserDropdown
+            username={authenticatedUser.username}
+          />
+        </>
         )}
         {showUserDropdown && !authenticatedUser && (
         <AnonymousUserMenu />
