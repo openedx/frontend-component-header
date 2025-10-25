@@ -15,7 +15,6 @@ import CourseLockUp from './CourseLockUp';
 import UserMenu from './UserMenu';
 import BrandNav from './BrandNav';
 import NavDropdownMenu from './NavDropdownMenu';
-import messages from './messages';
 import StudioHeaderItemSlot from '../plugin-slots/StudioHeaderItemSlot';
 
 export interface HeaderBodyProps {
@@ -143,8 +142,6 @@ const HeaderBody = ({
         <ActionRow.Spacer />
         <StudioHeaderItemSlot
           searchButtonAction={searchButtonAction}
-          ariaLabel={intl.formatMessage(messages['header.label.search.nav'])}
-          alt={intl.formatMessage(messages['header.label.search.nav'])}
         />
         <Nav>
           <UserMenu
