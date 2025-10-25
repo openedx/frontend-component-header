@@ -1,11 +1,9 @@
 import React, { type ReactNode, type ComponentProps } from 'react';
-import { useIntl } from '@edx/frontend-platform/i18n';
 import classNames from 'classnames';
 import {
   ActionRow,
   Button,
   Container,
-  Icon,
   Nav,
   Row,
 } from '@openedx/paragon';
@@ -64,7 +62,6 @@ const HeaderBody = ({
   searchButtonAction,
   containerProps = {},
 }: HeaderBodyProps) => {
-  const intl = useIntl();
 
   const renderBrandNav = (
     <BrandNav
