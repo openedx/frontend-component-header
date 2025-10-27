@@ -24,3 +24,6 @@
 * [`org.openedx.frontend.layout.header_mobile_main_menu.v1`](./MobileMainMenuSlot/)
 * [`org.openedx.frontend.layout.header_mobile_user_menu.v1`](./MobileUserMenuSlot/)
 * [`org.openedx.frontend.layout.header_mobile_user_menu_trigger.v1`](./MobileUserMenuToggleSlot/)
+
+### Studio Header
+* [`org.openedx.frontend.layout.studio_header_search_button_slot.v1`](./StudioHeaderSearchButtonSlot/)

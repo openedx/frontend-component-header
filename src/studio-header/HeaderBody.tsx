@@ -1,22 +1,19 @@
 import React, { type ReactNode, type ComponentProps } from 'react';
-import { useIntl } from '@edx/frontend-platform/i18n';
 import classNames from 'classnames';
 import {
   ActionRow,
   Button,
   Container,
-  Icon,
-  IconButton,
   Nav,
   Row,
 } from '@openedx/paragon';
-import { Close, MenuIcon, Search } from '@openedx/paragon/icons';
+import { Close, MenuIcon } from '@openedx/paragon/icons';
 
 import CourseLockUp from './CourseLockUp';
 import UserMenu from './UserMenu';
 import BrandNav from './BrandNav';
 import NavDropdownMenu from './NavDropdownMenu';
-import messages from './messages';
+import StudioHeaderSearchButtonSlot from '../plugin-slots/StudioHeaderSearchButtonSlot';
 
 export interface HeaderBodyProps {
   studioBaseUrl: string;
@@ -65,7 +62,6 @@ const HeaderBody = ({
   searchButtonAction,
   containerProps = {},
 }: HeaderBodyProps) => {
-  const intl = useIntl();
 
   const renderBrandNav = (
     <BrandNav
@@ -141,17 +137,9 @@ const HeaderBody = ({
           </>
         )}
         <ActionRow.Spacer />
-        {searchButtonAction && (
-          <Nav>
-            <IconButton
-              src={Search}
-              iconAs={Icon}
-              onClick={searchButtonAction}
-              aria-label={intl.formatMessage(messages['header.label.search.nav'])}
-              alt={intl.formatMessage(messages['header.label.search.nav'])}
-            />
-          </Nav>
-        )}
+        <StudioHeaderSearchButtonSlot
+          searchButtonAction={searchButtonAction}
+        />
         <Nav>
           <UserMenu
             {...{
