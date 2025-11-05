@@ -64,6 +64,11 @@ export function initializeMockApp() {
     CSRF_TOKEN_API_PATH: process.env.CSRF_TOKEN_API_PATH || null,
     LOGO_URL: process.env.LOGO_URL || null,
     SITE_NAME: process.env.SITE_NAME || null,
+    ACCOUNT_PROFILE_URL: process.env.ACCOUNT_PROFILE_URL || null,
+    ACCOUNT_SETTINGS_URL: process.env.ACCOUNT_SETTINGS_URL || null,
+    ORDER_HISTORY_URL: process.env.ORDER_HISTORY_URL || null,
+    ECOMMERCE_BASE_URL: process.env.ECOMMERCE_BASE_URL || null,
+    CREDENTIALS_BASE_URL: process.env.CREDENTIALS_BASE_URL || null,
 
     authenticatedUser: {
       userId: 'abc123',
