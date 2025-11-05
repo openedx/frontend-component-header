@@ -14,7 +14,7 @@ describe('AuthenticatedUserDropdown', () => {
 
   const renderComponent = () => {
     render(
-      <AuthenticatedUserDropdown username={username} />
+      <AuthenticatedUserDropdown username={username} />,
     );
   };
 
@@ -27,7 +27,6 @@ describe('AuthenticatedUserDropdown', () => {
   it('renders dropdown items after toggle click', async () => {
     renderComponent();
 
-    // 🔽 ВИПРАВЛЕННЯ 1 🔽
     const toggleButton = screen.getByRole('button', { name: 'User Options' });
     await fireEvent.click(toggleButton);
 
@@ -43,7 +42,6 @@ describe('AuthenticatedUserDropdown', () => {
   it('loops focus from last to first and vice versa with Tab and Shift+Tab', async () => {
     renderComponent();
 
-    // 🔽 ВИПРАВЛЕННЯ 2 🔽
     const toggleButton = screen.getByRole('button', { name: 'User Options' });
     await fireEvent.click(toggleButton);
 
@@ -67,7 +65,6 @@ describe('AuthenticatedUserDropdown', () => {
   it('focuses next link when Tab is pressed on middle item', async () => {
     renderComponent();
 
-    // 🔽 ВИПРАВЛЕННЯ 3 🔽
     const toggleButton = screen.getByRole('button', { name: 'User Options' });
     await fireEvent.click(toggleButton);
 
