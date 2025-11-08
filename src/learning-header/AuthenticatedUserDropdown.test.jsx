@@ -27,7 +27,7 @@ describe('AuthenticatedUserDropdown', () => {
   it('renders dropdown items after toggle click', async () => {
     renderComponent();
 
-    const toggleButton = screen.getByRole('button', { name: 'User Options' });
+    const toggleButton = screen.getByRole('button', { name: messages.userOptionsDropdownLabel.defaultMessage });
     await fireEvent.click(toggleButton);
 
     expect(await screen.findByText(messages.dashboard.defaultMessage))

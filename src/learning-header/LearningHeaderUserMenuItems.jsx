@@ -8,17 +8,25 @@ const LearningHeaderUserMenuItems = ({
   handleKeyDown,
   firstMenuItemRef,
   lastMenuItemRef,
-}) => items.map((item, index) => (
-  <Dropdown.Item
-    href={item.href}
-    role="menuitem"
-    onKeyDown={handleKeyDown}
-    // eslint-disable-next-line no-nested-ternary
-    ref={index === 0 ? firstMenuItemRef : index === items.length - 1 ? lastMenuItemRef : null}
-  >
-    {item.message}
-  </Dropdown.Item>
-));
+}) => {
+  const getRefForIndex = (index, length) => {
+    if (index === 0) { return firstMenuItemRef; }
+    if (index === length - 1) { return lastMenuItemRef; }
+    return null;
+  };
+
+  return items.map((item, index) => (
+    <Dropdown.Item
+      key={item.href}
+      href={item.href}
+      role="menuitem"
+      onKeyDown={handleKeyDown}
+      ref={getRefForIndex(index, items.length)}
+    >
+      {item.message}
+    </Dropdown.Item>
+  ));
+};
 
 export const learningHeaderUserMenuDataShape = {
   items: PropTypes.arrayOf(PropTypes.shape({
