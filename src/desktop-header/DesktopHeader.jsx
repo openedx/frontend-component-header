@@ -21,7 +21,7 @@ import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 import messages from '../Header.messages';
 
 // Assets
-import LanguageSelector from './LanguageSelector';
+import LanguageSelector from '../LanguageSelector';
 
 class DesktopHeader extends React.Component {
   constructor(props) { // eslint-disable-line @typescript-eslint/no-useless-constructor
