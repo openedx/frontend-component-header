@@ -1,7 +1,7 @@
 import React from 'react';
 import { mergeConfig } from '@edx/frontend-platform';
 import { getLocale } from '@edx/frontend-platform/i18n/lib';
-import { changeUserSessionLanguage } from '@edx/frontend-platform/i18n';
+import { changeUserSessionLanguage, getSupportedLocaleList } from '@edx/frontend-platform/i18n';
 import {
   act, fireEvent, initializeMockApp, render, screen,
 } from '../setupTest';
@@ -10,6 +10,7 @@ import LanguageSelector from './LanguageSelector';
 jest.mock('@edx/frontend-platform/i18n', () => ({
   ...jest.requireActual('@edx/frontend-platform/i18n'),
   changeUserSessionLanguage: jest.fn().mockResolvedValue({}),
+  getSupportedLocaleList: jest.fn(),
 }));
 
 jest.mock('@edx/frontend-platform/i18n/lib', () => ({
@@ -29,33 +30,21 @@ jest.mock('@openedx/paragon', () => ({
 const LANGUAGE_PREFERENCE_COOKIE_NAME = 'language-preference';
 
 describe('LanguageSelector', () => {
-  let mockReload;
-
   beforeEach(() => {
     jest.clearAllMocks();
 
     mergeConfig({
       ENABLE_HEADER_LANG_SELECTOR: true,
       LANGUAGE_PREFERENCE_COOKIE_NAME,
-      SITE_SUPPORTED_LANGUAGES: ['es', 'en'],
     });
-
+    getSupportedLocaleList.mockReturnValue(['es', 'en']);
     initializeMockApp();
-
-    mockReload = jest.fn();
-    Object.defineProperty(window, 'location', {
-      configurable: true,
-      writable: true,
-      value: { reload: mockReload },
-    });
 
     global.innerWidth = 1200;
   });
 
   it('should not render when no supported languages are available', () => {
-    mergeConfig({
-      SITE_SUPPORTED_LANGUAGES: [],
-    });
+    getSupportedLocaleList.mockReturnValue([]);
 
     const { container } = render(<LanguageSelector />);
     // expect(container).toMatchSnapshot('no-supported-languages');
