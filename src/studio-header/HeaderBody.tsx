@@ -1,4 +1,5 @@
 import React, { type ReactNode, type ComponentProps } from 'react';
+import { getConfig } from '@edx/frontend-platform';
 import classNames from 'classnames';
 import {
   ActionRow,
@@ -7,6 +8,7 @@ import {
   Nav,
   Row,
 } from '@openedx/paragon';
+import LanguageSelector from '../language-selector';
 import { Close, MenuIcon } from '@openedx/paragon/icons';
 
 import CourseLockUp from './CourseLockUp';
@@ -137,6 +139,7 @@ const HeaderBody = ({
           </>
         )}
         <ActionRow.Spacer />
+        {getConfig().ENABLE_HEADER_LANG_SELECTOR && (<LanguageSelector />)}
         <StudioHeaderSearchButtonSlot
           searchButtonAction={searchButtonAction}
         />
