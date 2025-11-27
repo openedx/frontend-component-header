@@ -1,15 +1,27 @@
 import React from 'react';
-import AuthenticatedUserDropdown from './AuthenticatedUserDropdown';
-import messages from './messages';
+
+import { mergeConfig, getConfig } from '@edx/frontend-platform';
+
 import {
   render, screen, fireEvent, initializeMockApp,
 } from '../setupTest';
+import AuthenticatedUserDropdown from './AuthenticatedUserDropdown';
+import messages from './messages';
 
 describe('AuthenticatedUserDropdown', () => {
   const username = 'testuser';
 
+  const MOCK_CONFIG = {
+    LMS_BASE_URL: 'http://localhost:18000',
+    ACCOUNT_PROFILE_URL: 'http://localhost:18000/u',
+    ACCOUNT_SETTINGS_URL: 'http://localhost:18000/account',
+    ORDER_HISTORY_URL: 'http://localhost:18000/orders',
+    LOGOUT_URL: 'http://localhost:18000/logout',
+  };
+
   beforeEach(() => {
     initializeMockApp();
+    mergeConfig(MOCK_CONFIG);
   });
 
   const renderComponent = () => {
@@ -20,7 +32,6 @@ describe('AuthenticatedUserDropdown', () => {
 
   it('renders username in toggle button', () => {
     renderComponent();
-
     expect(screen.getByText(username)).toBeInTheDocument();
   });
 
@@ -31,18 +42,25 @@ describe('AuthenticatedUserDropdown', () => {
     await fireEvent.click(toggleButton);
 
     expect(await screen.findByText(messages.dashboard.defaultMessage))
-      .toHaveAttribute('href', `${process.env.LMS_BASE_URL}/dashboard`);
+      .toHaveAttribute('href', `${getConfig().LMS_BASE_URL}/dashboard`);
 
-    expect(screen.getByText(messages.profile.defaultMessage)).toHaveAttribute('href', `${process.env.ACCOUNT_PROFILE_URL}/u/${username}`);
-    expect(screen.getByText(messages.account.defaultMessage)).toHaveAttribute('href', process.env.ACCOUNT_SETTINGS_URL);
-    expect(screen.getByText(messages.orderHistory.defaultMessage)).toHaveAttribute('href', process.env.ORDER_HISTORY_URL);
-    expect(screen.getByText(messages.signOut.defaultMessage)).toHaveAttribute('href', process.env.LOGOUT_URL);
+    expect(screen.getByText(messages.profile.defaultMessage))
+      .toHaveAttribute('href', `${getConfig().ACCOUNT_PROFILE_URL}/u/${username}`);
+
+    expect(screen.getByText(messages.account.defaultMessage))
+      .toHaveAttribute('href', getConfig().ACCOUNT_SETTINGS_URL);
+
+    expect(screen.getByText(messages.orderHistory.defaultMessage))
+      .toHaveAttribute('href', getConfig().ORDER_HISTORY_URL);
+
+    expect(screen.getByText(messages.signOut.defaultMessage))
+      .toHaveAttribute('href', getConfig().LOGOUT_URL);
   });
 
   it('loops focus from last to first and vice versa with Tab and Shift+Tab', async () => {
     renderComponent();
 
-    const toggleButton = screen.getByRole('button', { name: 'User Options' });
+    const toggleButton = screen.getByRole('button', { name: messages.userOptionsDropdownLabel.defaultMessage });
     await fireEvent.click(toggleButton);
 
     const menuItems = await screen.findAllByRole('menuitem');
@@ -65,7 +83,7 @@ describe('AuthenticatedUserDropdown', () => {
   it('focuses next link when Tab is pressed on middle item', async () => {
     renderComponent();
 
-    const toggleButton = screen.getByRole('button', { name: 'User Options' });
+    const toggleButton = screen.getByRole('button', { name: messages.userOptionsDropdownLabel.defaultMessage });
     await fireEvent.click(toggleButton);
 
     const menuItems = await screen.findAllByRole('menuitem');

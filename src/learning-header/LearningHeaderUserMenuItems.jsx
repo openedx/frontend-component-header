@@ -10,8 +10,12 @@ const LearningHeaderUserMenuItems = ({
   lastMenuItemRef,
 }) => {
   const getRefForIndex = (index, length) => {
-    if (index === 0) { return firstMenuItemRef; }
-    if (index === length - 1) { return lastMenuItemRef; }
+    if (index === 0) {
+      return firstMenuItemRef;
+    }
+    if (index === length - 1) {
+      return lastMenuItemRef;
+    }
     return null;
   };
 
