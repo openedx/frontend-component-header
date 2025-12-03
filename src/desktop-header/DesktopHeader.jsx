@@ -90,13 +90,13 @@ class DesktopHeader extends React.Component {
             >
               {this.renderMainMenu()}
             </nav>
-			{getConfig().ENABLE_HEADER_LANG_SELECTOR && (
-              <div className="mx-2">
-                <LanguageSelector
-                  options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
-                  authenticatedUser={getAuthenticatedUser()}
-                />
-              </div>
+            {getConfig().ENABLE_HEADER_LANG_SELECTOR && (
+            <div className="mx-2">
+              <LanguageSelector
+                options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
+                authenticatedUser={getAuthenticatedUser()}
+              />
+            </div>
             )}
             <nav
               aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}

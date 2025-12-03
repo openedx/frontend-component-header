@@ -8,8 +8,6 @@ import { AppContext } from '@edx/frontend-platform/react';
 import AnonymousUserMenu from './AnonymousUserMenu';
 import AuthenticatedUserDropdown from './AuthenticatedUserDropdown';
 import LogoSlot from '../plugin-slots/LogoSlot';
-import CourseInfoSlot from '../plugin-slots/CourseInfoSlot';
-import { courseInfoDataShape } from './LearningHeaderCourseInfo';
 import messages from './messages';
 import getCourseLogoOrg from './data/api';
 import LanguageSelector from '../LanguageSelector';
