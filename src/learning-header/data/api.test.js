@@ -1,5 +1,4 @@
 import { logError } from '@edx/frontend-platform/logging';
-import { getConfig } from '@edx/frontend-platform';
 import { getAuthenticatedHttpClient, getAuthenticatedUser } from '@edx/frontend-platform/auth';
 import getCourseLogoOrg from './api';
 import { initializeMockApp } from '../../setupTest';
@@ -19,30 +18,40 @@ class CustomError extends Error {
 }
 
 describe('getCourseLogoOrg', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     // We need to mock AuthService to implicitly use `getAuthenticatedHttpClient` within `AppContext.Provider`.
     await initializeMockApp();
-    delete window.location;
+  });
+
+  beforeEach(() => {
     getAuthenticatedHttpClient.mockReset();
     getAuthenticatedUser.mockReset();
+    logError.mockReset();
   });
 
   it('should return the organization logo when the URL is valid', async () => {
-    window.location = new URL(`${getConfig().BASE_URL}/learning/course/course-v1:edX+DemoX+Demo_Course/home`);
+    // Use history.pushState to change the URL
+    window.history.pushState({}, '', '/learning/course/course-v1:edX+DemoX+Demo_Course/home');
+
     getAuthenticatedUser.mockImplementation(() => ({ username: 'someone' }));
+    const mockGet = jest.fn().mockResolvedValue({
+      data: {
+        logo: 'https://example.com/logo.svg',
+      },
+    });
     getAuthenticatedHttpClient.mockReturnValue({
-      get: async () => Promise.resolve({
-        data: {
-          logo: 'https://example.com/logo.svg',
-        },
-      }),
+      get: mockGet,
     });
     const logoOrg = await getCourseLogoOrg();
+    expect(mockGet).toHaveBeenCalledWith(
+      expect.stringContaining('/api/organizations/v0/organizations/edX/'),
+      { useCache: true },
+    );
     expect(logoOrg).toBe('https://example.com/logo.svg');
   });
 
   it('should return null when the organization logo is not found', async () => {
-    window.location = new URL(`${getConfig().BASE_URL}/learning/course/course-v1:edX+DemoX+Nonexistent_Course/home`);
+    window.history.pushState({}, '', '/learning/course/course-v1:edX+DemoX+Nonexistent_Course/home');
     getAuthenticatedUser.mockImplementation(() => ({ username: 'someone' }));
     getAuthenticatedHttpClient.mockReturnValue({
       get: async () => {
@@ -54,7 +63,7 @@ describe('getCourseLogoOrg', () => {
   });
 
   it('should return null if the user is not authenticated', async () => {
-    window.location = new URL(`${getConfig().BASE_URL}/learning/course/course-v1:edX+DemoX+Demo_Course/home`);
+    window.history.pushState({}, '', '/learning/course/course-v1:edX+DemoX+Demo_Course/home');
     getAuthenticatedUser.mockImplementation(() => ({}));
     getAuthenticatedHttpClient.mockReturnValue({
       get: async () => Promise.resolve({
@@ -69,9 +78,10 @@ describe('getCourseLogoOrg', () => {
   });
 
   it('should throw an error when an unexpected error occurs', async () => {
+    window.history.pushState({}, '', '/learning/course/course-v1:edX+DemoX+Demo_Course/home');
+
     getAuthenticatedUser.mockImplementation(() => ({ username: 'someone' }));
     const customError = new CustomError(500);
-    window.location = new URL(`${getConfig().BASE_URL}/learning/course/course-v1:edX+DemoX+Demo_Course/home`);
     getAuthenticatedHttpClient.mockReturnValue({
       get: async () => {
         throw customError;
