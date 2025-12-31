@@ -11,6 +11,7 @@ import CourseInfoSlot from '../plugin-slots/CourseInfoSlot';
 import { courseInfoDataShape } from './LearningHeaderCourseInfo';
 import messages from './messages';
 import LearningHelpSlot from '../plugin-slots/LearningHelpSlot';
+import LanguageSelector from '../language-selector';
 
 const LearningHeader = ({
   courseOrg,
@@ -37,6 +38,7 @@ const LearningHeader = ({
         <div className="flex-grow-1 course-title-lockup d-flex" style={{ lineHeight: 1 }}>
           <CourseInfoSlot courseOrg={courseOrg} courseNumber={courseNumber} courseTitle={courseTitle} />
         </div>
+        {getConfig().ENABLE_HEADER_LANG_SELECTOR && (<LanguageSelector />)}
         {showUserDropdown && authenticatedUser && (
         <>
           <LearningHelpSlot />
