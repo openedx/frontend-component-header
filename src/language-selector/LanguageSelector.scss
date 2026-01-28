@@ -1,0 +1,22 @@
+.language-selector {
+  padding: .75rem;
+
+  .dropdown-toggle {
+    .lang-label-medium,
+    .lang-label-large {
+      display: none;
+    }
+
+    @media (min-width: 576px) and (max-width: 767px) {
+      .lang-label-medium {
+        display: inline;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .lang-label-large {
+        display: inline;
+      }
+    }
+  }
+}
