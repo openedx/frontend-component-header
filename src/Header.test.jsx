@@ -3,6 +3,7 @@ import React from 'react';
 import { IntlProvider } from '@edx/frontend-platform/i18n';
 import TestRenderer from 'react-test-renderer';
 import { AppContext } from '@edx/frontend-platform/react';
+import { MemoryRouter } from 'react-router-dom';
 import { Context as ResponsiveContext } from 'react-responsive';
 
 import Header from './index';
@@ -13,7 +14,9 @@ const HeaderComponent = ({ width, contextValue }) => (
       <AppContext.Provider
         value={contextValue}
       >
-        <Header />
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>
       </AppContext.Provider>
     </IntlProvider>
   </ResponsiveContext.Provider>

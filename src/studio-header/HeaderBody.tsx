@@ -14,6 +14,7 @@ import UserMenu from './UserMenu';
 import BrandNav from './BrandNav';
 import NavDropdownMenu from './NavDropdownMenu';
 import StudioHeaderSearchButtonSlot from '../plugin-slots/StudioHeaderSearchButtonSlot';
+import HeaderNotificationsSlot from '../plugin-slots/HeaderNotificationsSlot';
 
 export interface HeaderBodyProps {
   studioBaseUrl: string;
@@ -137,6 +138,7 @@ const HeaderBody = ({
           </>
         )}
         <ActionRow.Spacer />
+        <HeaderNotificationsSlot />
         <StudioHeaderSearchButtonSlot
           searchButtonAction={searchButtonAction}
         />
