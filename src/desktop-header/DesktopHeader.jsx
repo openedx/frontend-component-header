@@ -14,7 +14,6 @@ import DesktopMainMenuSlot from '../plugin-slots/DesktopMainMenuSlot';
 import { desktopHeaderMainOrSecondaryMenuDataShape } from './DesktopHeaderMainOrSecondaryMenu';
 import DesktopSecondaryMenuSlot from '../plugin-slots/DesktopSecondaryMenuSlot';
 import DesktopUserMenuSlot from '../plugin-slots/DesktopUserMenuSlot';
-import HeaderNotificationsSlot from '../plugin-slots/HeaderNotificationsSlot';
 import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 
 // i18n
@@ -79,7 +78,6 @@ const DesktopHeader = ({
             {loggedIn
               ? (
                 <>
-                  <HeaderNotificationsSlot />
                   {renderSecondaryMenu()}
                   {renderUserMenu()}
                 </>

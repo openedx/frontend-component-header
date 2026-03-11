@@ -10,8 +10,7 @@ import LogoSlot from '../plugin-slots/LogoSlot';
 import CourseInfoSlot from '../plugin-slots/CourseInfoSlot';
 import { courseInfoDataShape } from './LearningHeaderCourseInfo';
 import messages from './messages';
-import LearningHelpSlot from '../plugin-slots/LearningHelpSlot';
-import HeaderNotificationsSlot from '../plugin-slots/HeaderNotificationsSlot';
+import LearningHeaderActionsSlot from '../plugin-slots/LearningHeaderActionsSlot';
 
 const LearningHeader = ({
   courseOrg,
@@ -40,8 +39,7 @@ const LearningHeader = ({
         </div>
         {showUserDropdown && authenticatedUser && (
         <>
-          <HeaderNotificationsSlot />
-          <LearningHelpSlot />
+          <LearningHeaderActionsSlot />
           <AuthenticatedUserDropdown
             username={authenticatedUser.username}
           />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import DesktopHeaderMainOrSecondaryMenu, { desktopHeaderMainOrSecondaryMenuDataShape } from '../../desktop-header/DesktopHeaderMainOrSecondaryMenu';
+import HeaderNotificationsSlot from '../HeaderNotificationsSlot';
 
 const DesktopSecondaryMenuSlot = ({
   menu,
@@ -12,6 +13,7 @@ const DesktopSecondaryMenuSlot = ({
       mergeProps: true,
     }}
   >
+    <HeaderNotificationsSlot />
     <DesktopHeaderMainOrSecondaryMenu menu={menu} />
   </PluginSlot>
 );
