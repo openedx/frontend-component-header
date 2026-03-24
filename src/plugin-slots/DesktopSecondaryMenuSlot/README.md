@@ -13,7 +13,16 @@ This slot is used to replace/modify/hide the desktop secondary menu.
 - **Notification Tray** (via `HeaderNotificationsSlot`) — Rendered before menu items
 - **Secondary Menu Items** — Links like "New", "Help", etc.
 
-The notification tray is included by default to ensure authenticated users see notifications out-of-the-box. To hide notifications in the Desktop header only, use `PLUGIN_OPERATIONS.Hide` with `widgetId: 'header_notifications_tray'` (see examples below).
+### Why Include Notifications Here?
+
+The `org.openedx.frontend.layout.header_notifications_tray.v1` slot is rendered in **multiple headers** (Desktop, Learning, and Studio). Modifying that slot directly would impact notifications across all header types.
+
+By embedding notifications in this slot's default content, operators can:
+- **Hide notifications in Desktop header only** — without affecting Learning or Studio headers
+- **Customize the entire secondary menu area** — including both notifications and menu items
+- **Maintain control** — each header type can be configured independently
+
+To hide notifications in the Desktop header only, use `PLUGIN_OPERATIONS.Hide` with `widgetId: 'org.openedx.frontend.layout.header_notifications_tray.v1'` (see examples below).
 
 ## Examples
 
@@ -31,7 +40,7 @@ const config = {
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Hide,
-          widgetId: 'header_notifications_tray',
+          widgetId: 'org.openedx.frontend.layout.header_notifications_tray.v1',
         },
       ]
     },

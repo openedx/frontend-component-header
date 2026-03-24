@@ -3,8 +3,8 @@ import React from 'react';
 import { IntlProvider } from '@edx/frontend-platform/i18n';
 import TestRenderer from 'react-test-renderer';
 import { AppContext } from '@edx/frontend-platform/react';
-import { MemoryRouter } from 'react-router-dom';
 import { Context as ResponsiveContext } from 'react-responsive';
+import { MemoryRouter } from 'react-router-dom';
 
 import Header from './index';
 

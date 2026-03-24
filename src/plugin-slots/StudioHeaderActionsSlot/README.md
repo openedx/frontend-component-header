@@ -2,21 +2,27 @@
 
 ### Slot ID: `org.openedx.frontend.layout.studio_header_actions.v1`
 
-### Slot ID Aliases
-* `studio_header_actions_slot`
-
 ## Description
 
 This slot wraps the notification tray and search button in the Studio header (both desktop and mobile). It provides a single location for operators to customize the action area before the user menu in Studio.
 
 By default, this slot renders:
 1. **HeaderNotificationsSlot** — The notification bell from `@edx/frontend-plugin-notifications`
-2. **StudioHeaderSearchButtonSlot** — The search button (only visible when `searchButtonAction` is provided)
+2. **StudioHeaderSearchButtonSlot** — The search button slot
 
 This wrapper slot ensures that:
 - Notifications are enabled by default in Studio
 - Operators can customize the entire action area using one slot ID
 - The existing `org.openedx.frontend.layout.studio_header_search_button_slot.v1` remains functional for backward compatibility
+
+## Why This Wrapper Slot?
+
+The `org.openedx.frontend.layout.header_notifications_tray.v1` slot is rendered in **multiple headers** (Desktop, Learning, and Studio). Modifying that slot directly would impact notifications across all header types.
+
+This wrapper slot allows operators to:
+- **Hide notifications in Studio only** — without affecting Desktop or Learning headers
+- **Customize the action area** — replace or extend both notifications and search button together
+- **Maintain control** — each header type can be configured independently
 
 ## Examples
 
@@ -34,7 +40,7 @@ const config = {
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Hide,
-          widgetId: 'header_notifications_tray',
+          widgetId: 'org.openedx.frontend.layout.header_notifications_tray.v1',
         },
       ]
     },
@@ -79,24 +85,10 @@ export default config;
 
 ### Modify Search Button Only
 
-To customize just the search button while keeping notifications, use the nested slot:
-
-```jsx
-const config = {
-  pluginSlots: {
-    'org.openedx.frontend.layout.studio_header_search_button_slot.v1': {
-      // Your search button customization
-    },
-  },
-}
-
-export default config;
-```
+To customize just the search button while keeping notifications, see the [StudioHeaderSearchButtonSlot documentation](../StudioHeaderSearchButtonSlot/).
 
 ## Slot Hierarchy
 
 This slot contains two child slots:
 - `org.openedx.frontend.layout.header_notifications_tray.v1` (HeaderNotificationsSlot)
 - `org.openedx.frontend.layout.studio_header_search_button_slot.v1` (StudioHeaderSearchButtonSlot)
-
-Operators can customize at either the parent level (this slot) or the child level for more granular control.

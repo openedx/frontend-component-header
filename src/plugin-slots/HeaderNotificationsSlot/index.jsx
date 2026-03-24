@@ -5,7 +5,6 @@ import NotificationsTray from '@edx/frontend-plugin-notifications';
 const HeaderNotificationsSlot = () => (
   <PluginSlot
     id="org.openedx.frontend.layout.header_notifications_tray.v1"
-    idAliases={['header_notifications_tray']}
   >
     <NotificationsTray />
   </PluginSlot>

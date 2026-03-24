@@ -2,9 +2,6 @@
 
 ### Slot ID: `org.openedx.frontend.layout.learning_header_actions.v1`
 
-### Slot ID Aliases
-* `learning_header_actions_slot`
-
 ## Description
 
 This slot wraps the notification tray and help link in the Learning header. It provides a single location for operators to customize the action area before the user menu in the Learning (course) header.
@@ -17,6 +14,15 @@ This wrapper slot ensures that:
 - Notifications are enabled by default in the Learning header
 - Operators can customize the entire action area using one slot ID
 - The existing `org.openedx.frontend.layout.header_learning_help.v1` remains functional for backward compatibility
+
+## Why This Wrapper Slot?
+
+The `org.openedx.frontend.layout.header_notifications_tray.v1` slot is rendered in **multiple headers** (Desktop, Learning, and Studio). Modifying that slot directly would impact notifications across all header types.
+
+This wrapper slot allows operators to:
+- **Hide notifications in Learning header only** — without affecting Desktop or Studio
+- **Customize the action area** — replace or extend both notifications and help link together
+- **Maintain control** — each header type can be configured independently
 
 ## Examples
 
@@ -34,7 +40,7 @@ const config = {
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Hide,
-          widgetId: 'header_notifications_tray',
+          widgetId: 'org.openedx.frontend.layout.header_notifications_tray.v1',
         },
       ]
     },
@@ -79,24 +85,10 @@ export default config;
 
 ### Modify Help Link Only
 
-To customize just the help link while keeping notifications, use the nested slot:
-
-```jsx
-const config = {
-  pluginSlots: {
-    'org.openedx.frontend.layout.header_learning_help.v1': {
-      // Your help link customization
-    },
-  },
-}
-
-export default config;
-```
+To customize just the help link while keeping notifications, see the [LearningHelpSlot documentation](../LearningHelpSlot/).
 
 ## Slot Hierarchy
 
 This slot contains two child slots:
 - `org.openedx.frontend.layout.header_notifications_tray.v1` (HeaderNotificationsSlot)
 - `org.openedx.frontend.layout.header_learning_help.v1` (LearningHelpSlot)
-
-Operators can customize at either the parent level (this slot) or the child level for more granular control.

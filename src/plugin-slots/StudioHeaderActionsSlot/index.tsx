@@ -12,7 +12,6 @@ const StudioHeaderActionsSlot: FunctionComponent<StudioHeaderActionsSlotProps> =
 }) => (
   <PluginSlot
     id="org.openedx.frontend.layout.studio_header_actions.v1"
-    idAliases={['studio_header_actions_slot']}
   >
     <HeaderNotificationsSlot />
     <StudioHeaderSearchButtonSlot searchButtonAction={searchButtonAction} />
