@@ -7,14 +7,25 @@ interface StudioHeaderActionsSlotProps {
   searchButtonAction?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const StudioHeaderActionsSlot: FunctionComponent<StudioHeaderActionsSlotProps> = ({
+export const StudioHeaderActionsSlotV1: FunctionComponent<StudioHeaderActionsSlotProps> = ({
   searchButtonAction,
 }) => (
   <PluginSlot
     id="org.openedx.frontend.layout.studio_header_actions.v1"
   >
-    <HeaderNotificationsSlot />
     <StudioHeaderSearchButtonSlot searchButtonAction={searchButtonAction} />
+  </PluginSlot>
+);
+
+const StudioHeaderActionsSlot: FunctionComponent<StudioHeaderActionsSlotProps> = ({
+  searchButtonAction,
+}) => (
+  <PluginSlot
+    id="org.openedx.frontend.layout.studio_header_actions.v2"
+    pluginProps={{ searchButtonAction }}
+  >
+    <HeaderNotificationsSlot />
+    <StudioHeaderActionsSlotV1 searchButtonAction={searchButtonAction} />
   </PluginSlot>
 );
 

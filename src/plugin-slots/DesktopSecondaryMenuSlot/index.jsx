@@ -3,7 +3,7 @@ import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import DesktopHeaderMainOrSecondaryMenu, { desktopHeaderMainOrSecondaryMenuDataShape } from '../../desktop-header/DesktopHeaderMainOrSecondaryMenu';
 import HeaderNotificationsSlot from '../HeaderNotificationsSlot';
 
-const DesktopSecondaryMenuSlot = ({
+export const DesktopSecondaryMenuSlotV1 = ({
   menu,
 }) => (
   <PluginSlot
@@ -13,8 +13,23 @@ const DesktopSecondaryMenuSlot = ({
       mergeProps: true,
     }}
   >
-    <HeaderNotificationsSlot />
     <DesktopHeaderMainOrSecondaryMenu menu={menu} />
+  </PluginSlot>
+);
+
+DesktopSecondaryMenuSlotV1.propTypes = {
+  menu: desktopHeaderMainOrSecondaryMenuDataShape,
+};
+
+const DesktopSecondaryMenuSlot = ({
+  menu,
+}) => (
+  <PluginSlot
+    id="org.openedx.frontend.layout.header_desktop_secondary_menu.v2"
+    pluginProps={{ menu }}
+  >
+    <HeaderNotificationsSlot />
+    <DesktopSecondaryMenuSlotV1 menu={menu} />
   </PluginSlot>
 );
 
