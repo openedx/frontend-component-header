@@ -1,30 +1,10 @@
 # Learning Header Actions Slot
 
-## Slots
-
-| Slot ID | Description |
-|---------|-------------|
-| `org.openedx.frontend.layout.learning_header_actions.v2` | Full actions area: notification tray + help link |
-| `org.openedx.frontend.layout.learning_header_actions.v1` | Help link only (no notifications) |
-
----
-
-## `v2` — Full Actions Area
-
-### Slot ID: `org.openedx.frontend.layout.learning_header_actions.v2`
-
-**Default Content:**
-- **Notification Tray** (via `HeaderNotificationsSlot`) — Rendered before the help link
-- **`LearningHeaderActionsSlotV1`** — Wraps the help link
-
----
-
-## `v1` — Help Link Only
-
 ### Slot ID: `org.openedx.frontend.layout.learning_header_actions.v1`
 
 **Default Content:**
-- **LearningHelpSlot** — The help link (question mark icon)
+- **Notification Tray** (via `HeaderNotificationsSlot`) — Rendered before the help link
+- **Help Link** (via `LearningHelpSlot`)
 
 ---
 
@@ -32,7 +12,7 @@
 
 ### Hide Notifications Tray
 
-The following `env.config.jsx` hides the notification. For Learning-only, see example above.
+The following `env.config.jsx` hides the notification. see example above.
 ![Screenshot of Hiding Notifications Tray](./images/hide_notifications_tray.png)
 
 ```jsx
@@ -81,7 +61,7 @@ export default config;
 
 ### Replace Help Link with Custom Component
 
-To customize just the help link, target `v1` (or `header_learning_help.v1` directly):
+To customize just the help link, target `LearningHelpSlot` directly:
 ![Screenshot of Replacing Help Link with Custom Component](./images/replace_help_link_with_custom_component.png)
 
 
@@ -91,7 +71,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    'org.openedx.frontend.layout.learning_header_actions.v1': {
+    'org.openedx.frontend.layout.header_learning_help.v1': {
       keepDefault: false,
       plugins: [
         {
@@ -101,7 +81,7 @@ const config = {
             type: DIRECT_PLUGIN,
             priority: 50,
             RenderWidget: () => (
-              <a href="https://support.example.com">Help</a>
+              <a href="https://support.example.com">Help me me</a>
             ),
           },
         },
@@ -124,7 +104,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    'org.openedx.frontend.layout.learning_header_actions.v1': {
+    'org.openedx.frontend.layout.header_learning_help.v1': {
       keepDefault: true,
       plugins: [
         {

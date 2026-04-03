@@ -1,30 +1,10 @@
 # Studio Header Actions Slot
 
-## Slots
-
-| Slot ID | Description |
-|---------|-------------|
-| `org.openedx.frontend.layout.studio_header_actions.v2` | Full actions area: notification tray + search button |
-| `org.openedx.frontend.layout.studio_header_actions.v1` | Search button only (no notifications) |
-
----
-
-## `v2` — Full Actions Area
-
-### Slot ID: `org.openedx.frontend.layout.studio_header_actions.v2`
-
-**Default Content:**
-- **Notification Tray** (via `HeaderNotificationsSlot`) — Rendered before the search button
-- **`StudioHeaderActionsSlotV1`** — Wraps the search button
-
----
-
-## `v1` — Search Button Only
-
 ### Slot ID: `org.openedx.frontend.layout.studio_header_actions.v1`
 
 **Default Content:**
-- **StudioHeaderSearchButtonSlot** — The search button (magnifier icon)
+- **Notification Tray** (via `HeaderNotificationsSlot`) — Rendered before the search button
+- **Search Button** (via `StudioHeaderSearchButtonSlot`)
 
 ---
 
@@ -80,10 +60,10 @@ export default config;
 ```
 
 ### Replace Search Button with Custom Component
+
+To customize just the search button, target `StudioHeaderSearchButtonSlot` directly:
 ![Screenshot of Replacing Search Button with Custom Component](./images/search_button_with_custom_component.png)
 
-
-To customize just the search button, target `v1` (or `studio_header_search_button_slot.v1` directly):
 
 ```jsx
 import React from 'react';
@@ -91,7 +71,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    'org.openedx.frontend.layout.studio_header_actions.v1': {
+    'org.openedx.frontend.layout.studio_header_search_button_slot.v1': {
       keepDefault: false,
       plugins: [
         {
@@ -124,7 +104,7 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    'org.openedx.frontend.layout.studio_header_actions.v1': {
+    'org.openedx.frontend.layout.studio_header_search_button_slot.v1': {
       keepDefault: true,
       plugins: [
         {
