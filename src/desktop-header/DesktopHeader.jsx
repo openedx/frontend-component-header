@@ -15,6 +15,7 @@ import { desktopHeaderMainOrSecondaryMenuDataShape } from './DesktopHeaderMainOr
 import DesktopSecondaryMenuSlot from '../plugin-slots/DesktopSecondaryMenuSlot';
 import DesktopUserMenuSlot from '../plugin-slots/DesktopUserMenuSlot';
 import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
+import LanguageSelector from '../language-selector';
 
 // i18n
 import messages from '../Header.messages';
@@ -75,6 +76,7 @@ const DesktopHeader = ({
             aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
             className="nav secondary-menu-container align-items-center ml-auto"
           >
+            {getConfig().ENABLE_HEADER_LANG_SELECTOR && (<LanguageSelector />)}
             {loggedIn
               ? (
                 <>
