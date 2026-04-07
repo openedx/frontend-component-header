@@ -8,6 +8,7 @@ import { AppContext } from '@edx/frontend-platform/react';
 import AnonymousUserMenu from './AnonymousUserMenu';
 import AuthenticatedUserDropdown from './AuthenticatedUserDropdown';
 import LogoSlot from '../plugin-slots/LogoSlot';
+import LearningHelpSlot from '../plugin-slots/LearningHelpSlot';
 import messages from './messages';
 import getCourseLogoOrg from './data/api';
 import LanguageSelector from '../LanguageSelector';
@@ -98,9 +99,12 @@ const LearningHeader = ({
             </div>
           )}
           {showUserDropdown && authenticatedUser && (
-            <AuthenticatedUserDropdown
-              username={authenticatedUser.username}
-            />
+            <>
+              <LearningHelpSlot />
+              <AuthenticatedUserDropdown
+                username={authenticatedUser.username}
+              />
+            </>
           )}
           {showUserDropdown && !authenticatedUser && (
             <AnonymousUserMenu />
