@@ -10,3 +10,4 @@ module.config.js
 
 .vscode
 src/i18n/messages
+env.config.jsx

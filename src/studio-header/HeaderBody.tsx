@@ -13,7 +13,7 @@ import CourseLockUp from './CourseLockUp';
 import UserMenu from './UserMenu';
 import BrandNav from './BrandNav';
 import NavDropdownMenu from './NavDropdownMenu';
-import StudioHeaderSearchButtonSlot from '../plugin-slots/StudioHeaderSearchButtonSlot';
+import StudioHeaderActionsSlot from '../plugin-slots/StudioHeaderActionsSlot';
 
 export interface HeaderBodyProps {
   studioBaseUrl: string;
@@ -62,7 +62,6 @@ const HeaderBody = ({
   searchButtonAction,
   containerProps = {},
 }: HeaderBodyProps) => {
-
   const renderBrandNav = (
     <BrandNav
       {...{
@@ -137,7 +136,7 @@ const HeaderBody = ({
           </>
         )}
         <ActionRow.Spacer />
-        <StudioHeaderSearchButtonSlot
+        <StudioHeaderActionsSlot
           searchButtonAction={searchButtonAction}
         />
         <Nav>
