@@ -8,28 +8,11 @@
 
 ---
 
-## Examples
+### Add Custom Components before and after Studio Header Actions
 
-### Hide Notifications Tray
+The following `env.config.jsx` inserts a custom component before the notification tray (`priority: 10`) and another after the search button (`priority: 90`).
 
-The following `env.config.jsx` hides the notification tray across.
-![Screenshot of Hiding Notifications Tray](./images/hide_notifications_tray.png)
-
-```jsx
-const config = {
-  pluginSlots: {
-    'org.openedx.frontend.layout.header_notifications_tray.v1': {
-      keepDefault: false,
-      plugins: [],
-    },
-  },
-};
-
-export default config;
-```
-
-### Replace Notifications Tray with Custom Component
-![Screenshot of Replacing Notifications Tray with Custom Component](./images/replace_notifications_tray_with_custom_component.png)
+![Screenshot of custom components before and after studio header actions](./images/custom_components_before_and_after_studio_actions.png)
 
 ```jsx
 import React from 'react';
@@ -37,80 +20,13 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    'org.openedx.frontend.layout.header_notifications_tray.v1': {
-      keepDefault: false,
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Insert,
-          widget: {
-            id: 'custom_notifications_component',
-            type: DIRECT_PLUGIN,
-            priority: 50,
-            RenderWidget: () => (
-              <span>🔔 My Custom Notifications</span>
-            ),
-          },
-        },
-      ],
-    },
-  },
-};
-
-export default config;
-```
-
-### Replace Search Button with Custom Component
-
-To customize just the search button, target `StudioHeaderSearchButtonSlot` directly:
-![Screenshot of Replacing Search Button with Custom Component](./images/search_button_with_custom_component.png)
-
-
-```jsx
-import React from 'react';
-import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
-
-const config = {
-  pluginSlots: {
-    'org.openedx.frontend.layout.studio_header_search_button_slot.v1': {
-      keepDefault: false,
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Insert,
-          widget: {
-            id: 'custom_search_component',
-            type: DIRECT_PLUGIN,
-            priority: 50,
-            RenderWidget: () => (
-              <button type="button">🔍 Custom Search</button>
-            ),
-          },
-        },
-      ],
-    },
-  },
-};
-
-export default config;
-```
-
-### Add Custom Components before and after Search Button
-
-Components with `priority < 50` appear before the default content; `priority > 50` appear after:
-![Screenshot of Adding Custom Components before and after Search Button](./images/custom_components_before_and_after_search_button.png)
-
-```jsx
-import React from 'react';
-import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
-
-const config = {
-  pluginSlots: {
-    'org.openedx.frontend.layout.studio_header_search_button_slot.v1': {
+    'org.openedx.frontend.layout.studio_header_actions.v1': {
       keepDefault: true,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
           widget: {
-            id: 'custom_before_search_component',
+            id: 'custom_before_studio_actions',
             type: DIRECT_PLUGIN,
             priority: 10,
             RenderWidget: () => (
@@ -121,7 +37,7 @@ const config = {
         {
           op: PLUGIN_OPERATIONS.Insert,
           widget: {
-            id: 'custom_after_search_component',
+            id: 'custom_after_studio_actions',
             type: DIRECT_PLUGIN,
             priority: 90,
             RenderWidget: () => (
@@ -137,3 +53,62 @@ const config = {
 export default config;
 ```
 
+### Hide the Entire Studio Header Actions Area
+
+The following `env.config.jsx` removes both the notification tray and the search button from the studio header.
+
+![Screenshot of hiding studio header actions area](./images/hide_studio_actions.png)
+
+```jsx
+import { PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
+
+const config = {
+  pluginSlots: {
+    'org.openedx.frontend.layout.studio_header_actions.v1': {
+      keepDefault: true,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widgetId: 'default_contents',
+        },
+      ],
+    },
+  },
+};
+
+export default config;
+```
+
+### Replace the Entire Studio Header Actions Area with a Custom Component
+
+The following `env.config.jsx` replaces the notification tray and search button with a single custom component.
+
+![Screenshot of replacing studio header actions area with custom component](./images/replace_studio_actions_with_custom_component.png)
+
+```jsx
+import React from 'react';
+import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
+
+const config = {
+  pluginSlots: {
+    'org.openedx.frontend.layout.studio_header_actions.v1': {
+      keepDefault: false,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: 'custom_studio_actions',
+            type: DIRECT_PLUGIN,
+            priority: 50,
+            RenderWidget: () => (
+              <span>My Custom Studio Actions</span>
+            ),
+          },
+        },
+      ],
+    },
+  },
+};
+
+export default config;
+```

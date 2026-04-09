@@ -64,11 +64,18 @@ The following `env.config.jsx` removes both the notification tray and the second
 ![Screenshot of hide Secondary Area](../images/hide_secondary_area.png)
 
 ```jsx
+import { PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
+
 const config = {
   pluginSlots: {
     'org.openedx.frontend.layout.header_desktop_secondary_menu.v2': {
-      keepDefault: false,
-      plugins: [],
+      keepDefault: true,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widgetId: 'default_contents',
+        },
+      ],
     },
   },
 };

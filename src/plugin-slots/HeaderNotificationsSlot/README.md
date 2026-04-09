@@ -64,10 +64,10 @@ const config = {
 export default config;
 ```
 
-### Add Custom Alert Icon Before Notifications
+### Replace notifications bell with Alert Icon
 
-The following `env.config.jsx` will insert a custom alert icon before the notifications bell:
-![Screenshot of Custom Alert Icon](./images/add_custom_alert_icon_before_notifications.png)
+The following `env.config.jsx` will replace the notifications bell with a custom alert icon:
+![Screenshot of Custom Alert Icon](./images/replace_notifications_bell_with_alert_icon.png)
 
 ```jsx
 import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';

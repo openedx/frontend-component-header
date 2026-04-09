@@ -8,28 +8,11 @@
 
 ---
 
-## Examples
+### Add Custom Components before and after Learning Header Actions
 
-### Hide Notifications Tray
+The following `env.config.jsx` inserts a custom component before the notification tray (`priority: 10`) and another after the help link (`priority: 90`).
 
-The following `env.config.jsx` hides the notification. see example above.
-![Screenshot of Hiding Notifications Tray](./images/hide_notifications_tray.png)
-
-```jsx
-const config = {
-  pluginSlots: {
-    'org.openedx.frontend.layout.header_notifications_tray.v1': {
-      keepDefault: false,
-      plugins: [],
-    },
-  },
-};
-
-export default config;
-```
-
-### Replace Notifications Tray with Custom Component
-![Screenshot of Replacing Notifications Tray with Custom Component](./images/replace_notifications_tray_with_custom_component.png)
+![Screenshot of custom components before and after learning header actions](./images/custom_components_before_and_after_learning_actions.png)
 
 ```jsx
 import React from 'react';
@@ -37,80 +20,13 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    'org.openedx.frontend.layout.header_notifications_tray.v1': {
-      keepDefault: false,
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Insert,
-          widget: {
-            id: 'custom_notifications_component',
-            type: DIRECT_PLUGIN,
-            priority: 50,
-            RenderWidget: () => (
-              <span>🔔 My Custom Notifications</span>
-            ),
-          },
-        },
-      ],
-    },
-  },
-};
-
-export default config;
-```
-
-### Replace Help Link with Custom Component
-
-To customize just the help link, target `LearningHelpSlot` directly:
-![Screenshot of Replacing Help Link with Custom Component](./images/replace_help_link_with_custom_component.png)
-
-
-```jsx
-import React from 'react';
-import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
-
-const config = {
-  pluginSlots: {
-    'org.openedx.frontend.layout.header_learning_help.v1': {
-      keepDefault: false,
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Insert,
-          widget: {
-            id: 'custom_help_component',
-            type: DIRECT_PLUGIN,
-            priority: 50,
-            RenderWidget: () => (
-              <a href="https://support.example.com">Help me me</a>
-            ),
-          },
-        },
-      ],
-    },
-  },
-};
-
-export default config;
-```
-
-### Add Custom Components before and after Help Link
-
-Components with `priority < 50` appear before the default content; `priority > 50` appear after:
-![Screenshot of Adding Custom Components before and after Help Link](./images/custom_components_before_and_after_help_link.png)
-
-```jsx
-import React from 'react';
-import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
-
-const config = {
-  pluginSlots: {
-    'org.openedx.frontend.layout.header_learning_help.v1': {
+    'org.openedx.frontend.layout.learning_header_actions.v1': {
       keepDefault: true,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
           widget: {
-            id: 'custom_before_help_component',
+            id: 'custom_before_learning_actions',
             type: DIRECT_PLUGIN,
             priority: 10,
             RenderWidget: () => (
@@ -121,7 +37,7 @@ const config = {
         {
           op: PLUGIN_OPERATIONS.Insert,
           widget: {
-            id: 'custom_after_help_component',
+            id: 'custom_after_learning_actions',
             type: DIRECT_PLUGIN,
             priority: 90,
             RenderWidget: () => (
@@ -137,9 +53,37 @@ const config = {
 export default config;
 ```
 
-### Add Custom Components before and after Notifications Tray
-![Screenshot of Adding Custom Components before and after Notifications Tray](./images/custom_components_before_and_after_notifications_tray.png)
+### Hide the Entire Learning Header Actions Area
 
+The following `env.config.jsx` removes both the notification tray and the help link from the learning header.
+
+![Screenshot of hiding learning header actions area](./images/hide_learning_actions.png)
+
+```jsx
+import { PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
+
+const config = {
+  pluginSlots: {
+    'org.openedx.frontend.layout.learning_header_actions.v1': {
+      keepDefault: true,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widgetId: 'default_contents',
+        },
+      ],
+    },
+  },
+};
+
+export default config;
+```
+
+### Replace the Entire Learning Header Actions Area with a Custom Component
+
+The following `env.config.jsx` replaces the notification tray and help link with a single custom component.
+
+![Screenshot of replacing learning header actions area with custom component](./images/replace_learning_actions_with_custom_component.png)
 
 ```jsx
 import React from 'react';
@@ -147,28 +91,17 @@ import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-frame
 
 const config = {
   pluginSlots: {
-    'org.openedx.frontend.layout.header_notifications_tray.v1': {
-      keepDefault: true,
+    'org.openedx.frontend.layout.learning_header_actions.v1': {
+      keepDefault: false,
       plugins: [
         {
           op: PLUGIN_OPERATIONS.Insert,
           widget: {
-            id: 'custom_before_notifications_component',
+            id: 'custom_learning_actions',
             type: DIRECT_PLUGIN,
-            priority: 10,
+            priority: 50,
             RenderWidget: () => (
-              <h1 style={{ textAlign: 'center' }}>🌜</h1>
-            ),
-          },
-        },
-        {
-          op: PLUGIN_OPERATIONS.Insert,
-          widget: {
-            id: 'custom_after_notifications_component',
-            type: DIRECT_PLUGIN,
-            priority: 90,
-            RenderWidget: () => (
-              <h1 style={{ textAlign: 'center' }}>🌛</h1>
+              <span>My Custom Learning Actions</span>
             ),
           },
         },

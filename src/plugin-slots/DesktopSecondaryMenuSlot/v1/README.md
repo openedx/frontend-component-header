@@ -21,7 +21,7 @@ The following `env.config.jsx` replaces the secondary menu links with custom one
 
 ```jsx
 import React from 'react';
-import { PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
+import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
 
 const modifySecondaryMenu = (widget) => {
   widget.content.menu = [
@@ -48,6 +48,22 @@ const config = {
           op: PLUGIN_OPERATIONS.Modify,
           widgetId: 'default_contents',
           fn: modifySecondaryMenu,
+        },
+      ],
+    },
+    'org.openedx.frontend.layout.header_notifications_tray.v1': {
+      keepDefault: false,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: 'custom_notifications_component',
+            type: DIRECT_PLUGIN,
+            priority: 50,
+            RenderWidget: () => (
+              <span>🔔 My Custom Notifications</span>
+            ),
+          },
         },
       ],
     },
