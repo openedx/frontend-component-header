@@ -5,7 +5,7 @@ import Avatar from '../Avatar';
 
 const DesktopUserMenuToggle = ({ avatar, label }) => (
   <>
-    <Avatar size="1.5em" src={avatar} alt="" className="mr-2" />
+    <Avatar size="1.5em" src={avatar} alt="" className="mr-2" username={label} />
     {label} <CaretIcon role="img" aria-hidden focusable="false" />
   </>
 );

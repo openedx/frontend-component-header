@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from '@edx/frontend-platform/i18n';
-import {
-  Avatar,
-} from '@openedx/paragon';
+import Avatar from '../Avatar';
 import NavDropdownMenu from './NavDropdownMenu';
 import getUserMenuItems from './utils';
 
@@ -24,12 +22,14 @@ const UserMenu = ({
       data-testid="avatar-image"
     />
   ) : (
-    <Avatar
-      size="sm"
-      className="mr-2"
-      alt={username}
-      data-testid="avatar-icon"
-    />
+    <span data-testid="avatar-icon">
+      <Avatar
+        size="1.5rem"
+        className="mr-2"
+        alt={username}
+        username={username}
+      />
+    </span>
   );
   const title = isMobile ? avatar : <>{avatar}{username}</>;
 
