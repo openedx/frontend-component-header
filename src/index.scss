@@ -3,7 +3,7 @@ $blue: #007db8;
 $white: #fff;
 $component-active-bg: #0A3055FF !default;
 $component-active-color: $white !default;
-$rounded-pill: 50rem  !default;
+$rounded-pill: 50rem !default;
 
 // Learner dashboard nav pill styles
 $nav-pill-active-bg: #D1FAE5;
@@ -38,9 +38,10 @@ $nav-link-color: #374151;
   width: 3rem;
   padding: .75rem;
   justify-content: center;
-  align-items:center;
+  align-items: center;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: rgba(0, 0, 0, .1);
   }
 }
@@ -69,9 +70,11 @@ $nav-link-color: #374151;
   a {
     border-bottom: 2px solid transparent;
   }
+
   .course-link {
     border-bottom: 2px solid !important;
   }
+
   .course-link:hover {
     border-bottom: inherit !important;
   }
@@ -79,7 +82,7 @@ $nav-link-color: #374151;
 
 // Small collapsed nav menu items
 .nav-small-menu {
-  > * {
+  >* {
     justify-content: flex-start !important;
     border-radius: 0 !important;
     border-top: 1px solid #ddd !important;
@@ -136,6 +139,7 @@ $nav-link-color: #374151;
 
   // ─── Layout: logo left | nav centered | account right ────────────────────
   .nav-container {
+
     // True-center the main nav; .nav-container carries position-relative already.
     .main-nav {
       position: absolute;
@@ -148,9 +152,11 @@ $nav-link-color: #374151;
       margin-left: auto;
     }
   }
+
   // ─────────────────────────────────────────────────────────────────────────
 
   .secondary-menu-container {
+
     .nav-link:hover,
     .nav-link:focus,
     .nav-link.active,
@@ -176,7 +182,7 @@ $nav-link-color: #374151;
       }
 
       // Caret — direct child SVG of the button (not inside .avatar)
-      > svg {
+      >svg {
         width: 0.75rem;
         height: 0.75rem;
       }
@@ -206,6 +212,11 @@ $nav-link-color: #374151;
       color: $nav-pill-hover-color;
     }
 
+    .nav-link:has(.lw-search-wrapper):hover {
+      background: none;
+      color: inherit;
+    }
+
     .nav-link.active,
     .expanded .nav-link {
       background: $nav-pill-active-bg;
@@ -220,7 +231,7 @@ $nav-link-color: #374151;
         border-top: solid 2px var(--pgn-color-bg-active);
         left: 0;
         right: 0;
-        box-shadow: var(--pgn-elevation-box-shadow-down-1, 0 1px 2px rgba(0,0,0,.25));
+        box-shadow: var(--pgn-elevation-box-shadow-down-1, 0 1px 2px rgba(0, 0, 0, .25));
         border-bottom-left-radius: 2px;
         border-bottom-right-radius: 2px;
         padding: var(--pgn-spacing-spacer-base, $spacer);
@@ -243,6 +254,7 @@ $nav-link-color: #374151;
   height: 1rem;
   flex-shrink: 0;
 }
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ─── Pill search input (secondary slot, before bell icon) ─────────────────────
@@ -287,18 +299,21 @@ $nav-link-color: #374151;
     }
   }
 }
+
 // ─────────────────────────────────────────────────────────────────────────────
 
-.custom-header-container{
+.custom-header-container {
   padding-left: 24px;
   padding-right: 24px;
 }
-.custom-header-container .nav{
+
+.custom-header-container .nav {
   flex-wrap: nowrap;
 }
+
 .custom-header-container .lw-notification-btn {
- border: 0;
- background: none;
- padding:0;
- padding-right: 8px;
+  border: 0;
+  background: none;
+  padding: 0;
+  padding-right: 8px;
 }
