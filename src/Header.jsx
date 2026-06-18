@@ -15,6 +15,7 @@ import DesktopHeaderSlot from './plugin-slots/DesktopHeaderSlot';
 import MobileHeaderSlot from './plugin-slots/MobileHeaderSlot';
 
 import messages from './Header.messages';
+import getLearnerHeaderMenu from './LearnerDashboardMenu';
 
 ensureConfig([
   'LMS_BASE_URL',
@@ -52,48 +53,16 @@ const Header = ({
   const { authenticatedUser, config } = useContext(AppContext);
   const intl = useIntl();
 
-  const defaultMainMenu = [
-    {
-      type: 'item',
-      href: `${config.LMS_BASE_URL}/dashboard`,
-      content: intl.formatMessage(messages['header.links.courses']),
-    },
-  ];
-  const defaultUserMenu = authenticatedUser === null ? [] : [{
-    heading: '',
-    items: [
-      {
-        type: 'item',
-        href: `${config.LMS_BASE_URL}/dashboard`,
-        content: intl.formatMessage(messages['header.user.menu.dashboard']),
-      },
-      {
-        type: 'item',
-        href: `${config.ACCOUNT_PROFILE_URL}/u/${authenticatedUser.username}`,
-        content: intl.formatMessage(messages['header.user.menu.profile']),
-      },
-      {
-        type: 'item',
-        href: config.ACCOUNT_SETTINGS_URL,
-        content: intl.formatMessage(messages['header.user.menu.account.settings']),
-      },
-      // Users should only see Order History if have a ORDER_HISTORY_URL define in the environment.
-      ...(config.ORDER_HISTORY_URL ? [{
-        type: 'item',
-        href: config.ORDER_HISTORY_URL,
-        content: intl.formatMessage(messages['header.user.menu.order.history']),
-      }] : []),
-      {
-        type: 'item',
-        href: config.LOGOUT_URL,
-        content: intl.formatMessage(messages['header.user.menu.logout']),
-      },
-    ],
-  }];
+  const courseSearchUrl = getConfig().SEARCH_CATALOG_URL || null;
+  const learnerMenu = authenticatedUser === null ? null : getLearnerHeaderMenu(
+    intl.formatMessage,
+    courseSearchUrl,
+    authenticatedUser,
+  );
 
-  const mainMenu = mainMenuItems || defaultMainMenu;
-  const secondaryMenu = secondaryMenuItems || [];
-  const userMenu = authenticatedUser === null ? [] : userMenuItems || defaultUserMenu;
+  const mainMenu = mainMenuItems || (learnerMenu ? learnerMenu.mainMenu : []);
+  const secondaryMenu = secondaryMenuItems || (learnerMenu ? learnerMenu.secondaryMenu : null) || [];
+  const userMenu = authenticatedUser === null ? [] : userMenuItems || (learnerMenu ? learnerMenu.userMenu : []);
 
   const loggedOutItems = [
     {

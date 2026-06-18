@@ -11,8 +11,8 @@ const DesktopSecondaryMenuSlot = ({
     id="org.openedx.frontend.layout.header_desktop_secondary_menu.v2"
     pluginProps={{ menu }}
   >
-    <HeaderNotificationsSlot />
     <DesktopSecondaryMenuSlotV1 menu={menu} />
+    <HeaderNotificationsSlot />
   </PluginSlot>
 );
 

@@ -106,6 +106,11 @@ const messages = defineMessages({
     defaultMessage: 'App',
     description: 'The aria label for the app Nav',
   },
+  'header.search.placeholder': {
+    id: 'header.search.placeholder',
+    defaultMessage: 'Search courses...',
+    description: 'Placeholder text for the header course search input.',
+  },
 });
 
 export default messages;

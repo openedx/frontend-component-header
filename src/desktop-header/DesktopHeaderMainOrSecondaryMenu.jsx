@@ -24,7 +24,7 @@ const DesktopHeaderMainOrSecondaryMenu = ({ menu }) => {
     if (type === 'item') {
       return (
         <a
-          key={`${type}-${content}`}
+          key={`${type}-${href}`}
           className={`nav-link${disabled ? ' disabled' : ''}${isActive ? ' active' : ''}`}
           href={href}
           onClick={onClick || null}
@@ -35,7 +35,7 @@ const DesktopHeaderMainOrSecondaryMenu = ({ menu }) => {
     }
 
     return (
-      <Menu key={`${type}-${content}`} tag="div" className="nav-item" respondToPointerEvents>
+      <Menu key={`${type}-${href}`} tag="div" className="nav-item" respondToPointerEvents>
         <MenuTrigger onClick={onClick || null} tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
           {content} <CaretIcon role="img" aria-hidden focusable="false" />
         </MenuTrigger>

@@ -57,32 +57,33 @@ const DesktopHeader = ({
   const renderLoggedOutItems = () => <DesktopLoggedOutItemsSlot items={loggedOutItems} />;
 
   const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
-  const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'mw-100' : null;
 
   return (
     <header className="site-header-desktop">
       <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
-      <div className={`container-fluid ${logoClasses}`}>
-        <div className="nav-container position-relative d-flex align-items-center">
-          <LogoSlot {...logoProps} />
-          <nav
-            aria-label={intl.formatMessage(messages['header.label.main.nav'])}
-            className="nav main-nav"
-          >
-            {renderMainMenu()}
-          </nav>
-          <nav
-            aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
-            className="nav secondary-menu-container align-items-center ml-auto"
-          >
-            {loggedIn
-              ? (
-                <>
-                  {renderSecondaryMenu()}
-                  {renderUserMenu()}
-                </>
-              ) : renderLoggedOutItems()}
-          </nav>
+      <div className={`container-fluid`}>
+        <div className="custom-header-container">
+          <div className="nav-container position-relative d-flex align-items-center">
+            <LogoSlot {...logoProps} />
+            <nav
+              aria-label={intl.formatMessage(messages['header.label.main.nav'])}
+              className="nav main-nav"
+            >
+              {renderMainMenu()}
+            </nav>
+            <nav
+              aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
+              className="nav secondary-menu-container align-items-center ml-auto"
+            >
+              {loggedIn
+                ? (
+                  <>
+                    {renderSecondaryMenu()}
+                    {renderUserMenu()}
+                  </>
+                ) : renderLoggedOutItems()}
+            </nav>
+          </div>
         </div>
       </div>
     </header>
