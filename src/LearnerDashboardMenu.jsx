@@ -35,6 +35,10 @@ const getLearnerHeaderMenu = (
   exploreCoursesClick,
 ) => {
   const BASE_URL = getConfig().LMS_BASE_URL;
+  const toLmsUrl = (url) => (
+    !url || url.startsWith('http') ? url : `${BASE_URL}${url}`
+  );
+  const searchCatalogUrl = getConfig().SEARCH_CATALOG_URL;
 
   // ─────────────────────────────────────────────────────────────────────────
   // Read nav links from MFE_CONFIG (set once in openlms_brand.py).
@@ -90,7 +94,7 @@ const getLearnerHeaderMenu = (
       }] : []),
     ];
 
-  const searchItem = courseSearchUrl ? [{
+  const searchItem = searchCatalogUrl ? [{
     type: 'item',
     href: null,
     className: 'lw-search-item',
@@ -105,7 +109,7 @@ const getLearnerHeaderMenu = (
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               const q = e.target.value.trim();
-              window.location.href = urls.baseAppUrl(courseSearchUrl)
+              window.location.href = toLmsUrl(searchCatalogUrl)
                 + (q ? `?q=${encodeURIComponent(q)}` : '');
             }
           }}
