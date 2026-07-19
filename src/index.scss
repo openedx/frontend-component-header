@@ -94,13 +94,9 @@ $nav-link-color: #374151;
   }
 }
 
-.site-header-mobile,
-.site-header-desktop {
+.site-header-mobile {
   position: relative;
   z-index: 1000;
-}
-
-.site-header-mobile {
   height: 3rem;
 
   .nav-link {
@@ -115,6 +111,11 @@ $nav-link-color: #374151;
 
 
 .site-header-desktop {
+  // Match LMS header.global-header (fixed on lg+); sticky keeps flow without body margin-top
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, .1);
   background: var(--pgn-color-white, $white);
 
@@ -137,18 +138,26 @@ $nav-link-color: #374151;
     }
   }
 
-  // ─── Layout: logo left | nav centered | account right ────────────────────
+  // ─── Same as LMS: logo shrink-0 | nav-links flex:1 + center | secondary auto ─
   .nav-container {
+    display: flex;
+    align-items: center;
 
-    // True-center the main nav; .nav-container carries position-relative already.
-    .main-nav {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+    .logo {
       flex: 0 0 auto;
     }
 
+    .main-nav {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-width: 0;
+    }
+
     .secondary-menu-container {
+      flex: 0 0 auto;
       margin-left: auto;
     }
   }
@@ -190,14 +199,14 @@ $nav-link-color: #374151;
   }
 
   .main-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
       padding: 5px 10px;
       margin: 0.25rem 0.125rem;
       text-decoration: none;
+      font-family: 'Rockford Sans', sans-serif;
       font-size: 0.9rem;
       font-weight: 500;
       letter-spacing: .01em;
@@ -244,11 +253,7 @@ $nav-link-color: #374151;
   }
 }
 
-// ─── Nav icon + label pairing ─────────────────────────────────────────────────
-.lw-nav-item {
-  gap: 0.375rem;
-}
-
+// ─── Nav icon (LMS .nav-tab a .lw-nav-icon) ───────────────────────────────────
 .lw-nav-icon {
   width: 1rem;
   height: 1rem;
