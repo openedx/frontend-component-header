@@ -35,7 +35,12 @@ const MobileHeader = ({
 }) => {
   const intl = useIntl();
 
-  const renderMainMenu = () => <MobileMainMenuSlot menu={[...mainMenu, ...secondaryMenu]} />;
+  // LD / OpenLMS menus pass secondaryMenu as a React node (e.g. bell button),
+  // matching DesktopHeader. Only array items belong in the hamburger list.
+  const secondaryMenuItems = Array.isArray(secondaryMenu) ? secondaryMenu : [];
+  const secondaryMenuNode = Array.isArray(secondaryMenu) ? null : secondaryMenu;
+
+  const renderMainMenu = () => <MobileMainMenuSlot menu={[...mainMenu, ...secondaryMenuItems]} />;
 
   const renderUserMenuItems = () => <MobileUserMenuSlot menu={userMenu} />;
 
@@ -46,6 +51,7 @@ const MobileHeader = ({
   const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
   const stickyClassName = stickyOnMobile ? 'sticky-top' : '';
   const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'justify-content-left pl-3' : 'justify-content-center';
+  const showAccountColumn = userMenu.length > 0 || loggedOutItems.length > 0 || secondaryMenuNode;
 
   return (
     <header
@@ -78,21 +84,24 @@ const MobileHeader = ({
       <div className={`w-100 d-flex ${logoClasses}`}>
         <LogoSlot {...logoProps} itemType="http://schema.org/Organization" />
       </div>
-      {userMenu.length > 0 || loggedOutItems.length > 0 ? (
+      {showAccountColumn ? (
         <div className="w-100 d-flex justify-content-end align-items-center">
-          <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="position-static">
-            <MenuTrigger
-              tag="button"
-              className="icon-button"
-              aria-label={intl.formatMessage(messages['header.label.account.menu'])}
-              title={intl.formatMessage(messages['header.label.account.menu'])}
-            >
-              {renderUserMenuToggle()}
-            </MenuTrigger>
-            <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
-              {loggedIn ? renderUserMenuItems() : renderLoggedOutItems()}
-            </MenuContent>
-          </Menu>
+          {secondaryMenuNode}
+          {(userMenu.length > 0 || loggedOutItems.length > 0) ? (
+            <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="position-static">
+              <MenuTrigger
+                tag="button"
+                className="icon-button"
+                aria-label={intl.formatMessage(messages['header.label.account.menu'])}
+                title={intl.formatMessage(messages['header.label.account.menu'])}
+              >
+                {renderUserMenuToggle()}
+              </MenuTrigger>
+              <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
+                {loggedIn ? renderUserMenuItems() : renderLoggedOutItems()}
+              </MenuContent>
+            </Menu>
+          ) : null}
         </div>
       ) : null}
     </header>
