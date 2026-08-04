@@ -120,6 +120,8 @@ describe('Header', () => {
       const avatarIcon = getByTestId('avatar-icon');
 
       expect(avatarIcon).toBeVisible();
+      expect(avatarIcon).toHaveAttribute('alt', authenticatedUser.username);
+      expect(avatarIcon).toHaveClass('pgn__avatar-sm', 'mr-2');
     });
 
     it('user menu should use avatar icon when hydrated profile image has no image', async () => {
@@ -152,6 +154,8 @@ describe('Header', () => {
 
       expect(avatarImage).toBeVisible();
       expect(avatarImage).toHaveAttribute('src', '/profile-images/abc123-medium.png');
+      expect(avatarImage).toHaveAttribute('alt', authenticatedUser.username);
+      expect(avatarImage).toHaveClass('pgn__avatar-sm', 'mr-2');
     });
 
     it('user menu should prefer avatar over hydrated profile image', async () => {
