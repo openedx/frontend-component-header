@@ -16,6 +16,7 @@ import MobileHeaderSlot from './plugin-slots/MobileHeaderSlot';
 
 import messages from './Header.messages';
 import getLearnerHeaderMenu from './LearnerDashboardMenu';
+import RockfordSansFonts from './RockfordSansFonts';
 
 ensureConfig([
   'LMS_BASE_URL',
@@ -92,6 +93,7 @@ const Header = ({
 
   return (
     <>
+      <RockfordSansFonts />
       <Responsive maxWidth={769}>
         <MobileHeaderSlot props={props} />
       </Responsive>
