@@ -16,19 +16,13 @@ const UserMenu = ({
   isAdmin,
 }) => {
   const intl = useIntl();
-  const avatar = authenticatedUserAvatar ? (
-    <img
-      className="d-block w-100 h-100"
-      src={authenticatedUserAvatar}
-      alt={username}
-      data-testid="avatar-image"
-    />
-  ) : (
+  const avatar = (
     <Avatar
+      src={authenticatedUserAvatar}
       size="sm"
       className="mr-2"
       alt={username}
-      data-testid="avatar-icon"
+      data-testid={authenticatedUserAvatar ? 'avatar-image' : 'avatar-icon'}
     />
   );
   const title = isMobile ? avatar : <>{avatar}{username}</>;

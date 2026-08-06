@@ -18,7 +18,6 @@ const authenticatedUser = {
   username: 'abc123',
   administrator: true,
   roles: [],
-  avatar: '/imges/test.png',
 };
 let currentUser;
 let screenWidth = 1280;
@@ -115,17 +114,17 @@ describe('Header', () => {
     });
 
     it('user menu should use avatar icon', async () => {
-      currentUser = { ...authenticatedUser, avatar: null };
       const { getByTestId } = render(<RootWrapper {...props} />);
       const avatarIcon = getByTestId('avatar-icon');
 
       expect(avatarIcon).toBeVisible();
+      expect(avatarIcon).toHaveAttribute('alt', authenticatedUser.username);
+      expect(avatarIcon).toHaveClass('pgn__avatar-sm', 'mr-2');
     });
 
     it('user menu should use avatar icon when hydrated profile image has no image', async () => {
       currentUser = {
         ...authenticatedUser,
-        avatar: null,
         profileImage: {
           hasImage: false,
           imageUrlMedium: '/profile-images/abc123-medium.png',
@@ -138,10 +137,9 @@ describe('Header', () => {
       expect(queryByTestId('avatar-image')).not.toBeInTheDocument();
     });
 
-    it('user menu should use hydrated profile image when avatar is not present', async () => {
+    it('user menu should use hydrated profile image when available', async () => {
       currentUser = {
         ...authenticatedUser,
-        avatar: null,
         profileImage: {
           hasImage: true,
           imageUrlMedium: '/profile-images/abc123-medium.png',
@@ -152,21 +150,8 @@ describe('Header', () => {
 
       expect(avatarImage).toBeVisible();
       expect(avatarImage).toHaveAttribute('src', '/profile-images/abc123-medium.png');
-    });
-
-    it('user menu should prefer avatar over hydrated profile image', async () => {
-      currentUser = {
-        ...authenticatedUser,
-        profileImage: {
-          hasImage: true,
-          imageUrlMedium: '/profile-images/abc123-medium.png',
-        },
-      };
-      const { getByTestId } = render(<RootWrapper {...props} />);
-      const avatarImage = getByTestId('avatar-image');
-
-      expect(avatarImage).toBeVisible();
-      expect(avatarImage).toHaveAttribute('src', authenticatedUser.avatar);
+      expect(avatarImage).toHaveAttribute('alt', authenticatedUser.username);
+      expect(avatarImage).toHaveClass('pgn__avatar-sm', 'mr-2');
     });
 
     it('should hide nav items if prop isHiddenMainMenu true', async () => {
@@ -222,11 +207,19 @@ describe('Header', () => {
       expect(desktopMenu).toBeNull();
     });
 
-    it('user menu should use avatar image', async () => {
+    it('user menu should use hydrated profile image', async () => {
+      currentUser = {
+        ...authenticatedUser,
+        profileImage: {
+          hasImage: true,
+          imageUrlMedium: '/profile-images/abc123-medium.png',
+        },
+      };
       const { getByTestId } = render(<RootWrapper {...props} />);
       const avatarImage = getByTestId('avatar-image');
 
       expect(avatarImage).toBeVisible();
+      expect(avatarImage).toHaveAttribute('src', '/profile-images/abc123-medium.png');
     });
 
     it('should hide nav items if prop isHiddenMainMenu true', async () => {
