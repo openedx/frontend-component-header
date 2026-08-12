@@ -4,6 +4,9 @@ import LearningHeaderUserMenuItems, { learningHeaderUserMenuDataShape } from '..
 
 const LearningUserMenuSlot = ({
   items,
+  handleKeyDown,
+  firstMenuItemRef,
+  lastMenuItemRef,
 }) => (
   <PluginSlot
     id="org.openedx.frontend.layout.header_learning_user_menu.v1"
@@ -12,7 +15,12 @@ const LearningUserMenuSlot = ({
       mergeProps: true,
     }}
   >
-    <LearningHeaderUserMenuItems items={items} />
+    <LearningHeaderUserMenuItems
+      items={items}
+      handleKeyDown={handleKeyDown}
+      firstMenuItemRef={firstMenuItemRef}
+      lastMenuItemRef={lastMenuItemRef}
+    />
   </PluginSlot>
 );
 
