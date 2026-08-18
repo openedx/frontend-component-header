@@ -10,6 +10,7 @@ import {
 import { getConfig } from '@edx/frontend-platform';
 
 import messages from './Header.messages';
+import { getLinkPath, isSearchCatalogLink, normalizePath } from './navUtils';
 
 // Icon map — allows HEADER_NAV_LINKS to reference icons by string name
 const ICON_MAP = {
@@ -47,15 +48,15 @@ const getLearnerHeaderMenu = (
   // ─────────────────────────────────────────────────────────────────────────
   const configNavLinks = getConfig().HEADER_NAV_LINKS;
 
-  // /dashboard redirects into this MFE, so mark it active by APP_ID.
+  // /dashboard redirects into learner-dashboard MFE; search catalog URL into search MFE.
   const isLinkActive = (link) => {
     if (link.url === '/dashboard' || link.url.endsWith('/dashboard')) {
       return getConfig().APP_ID === 'learner-dashboard';
     }
-    const linkPath = link.url.startsWith('http')
-      ? new URL(link.url).pathname
-      : link.url;
-    return window.location.pathname === linkPath;
+    if (isSearchCatalogLink(link.url, searchCatalogUrl)) {
+      return getConfig().APP_ID === 'search';
+    }
+    return normalizePath(window.location.pathname) === normalizePath(getLinkPath(link.url));
   };
 
   const mainMenu = configNavLinks
@@ -75,30 +76,39 @@ const getLearnerHeaderMenu = (
         ),
       };
     })
-    : [
-      {
-        type: 'item',
-        href: `${BASE_URL}/dashboard`,
-        content: formatMessage(messages['header.links.courses']),
-        isActive: getConfig().APP_ID === 'learner-dashboard',
-        onClick: getConfig().APP_ID === 'learner-dashboard'
-          ? (e) => e.preventDefault()
-          : undefined,
-      },
-      ...(getConfig().ENABLE_PROGRAMS ? [{
-        type: 'item',
-        href: `${BASE_URL}/dashboard/programs`,
-        content: formatMessage(messages['header.links.programs']),
-      }] : []),
-      ...(!getConfig().NON_BROWSABLE_COURSES && courseSearchUrl ? [{
-        type: 'item',
-        href: courseSearchUrl,
-        content: formatMessage(messages['header.links.content.search']),
-        onClick: (e) => {
-          if (exploreCoursesClick) { exploreCoursesClick(e); }
+    : (() => {
+      const coursesActive = getConfig().APP_ID === 'learner-dashboard';
+      const discoverActive = getConfig().APP_ID === 'search';
+      return [
+        {
+          type: 'item',
+          href: `${BASE_URL}/dashboard`,
+          content: formatMessage(messages['header.links.courses']),
+          isActive: coursesActive,
+          onClick: coursesActive ? (e) => e.preventDefault() : undefined,
         },
-      }] : []),
-    ];
+        ...(getConfig().ENABLE_PROGRAMS ? [{
+          type: 'item',
+          href: `${BASE_URL}/dashboard/programs`,
+          content: formatMessage(messages['header.links.programs']),
+        }] : []),
+        ...(!getConfig().NON_BROWSABLE_COURSES && courseSearchUrl ? [{
+          type: 'item',
+          href: courseSearchUrl,
+          content: formatMessage(messages['header.links.content.search']),
+          isActive: discoverActive,
+          onClick: (e) => {
+            if (discoverActive) {
+              e.preventDefault();
+              return;
+            }
+            if (exploreCoursesClick) {
+              exploreCoursesClick(e);
+            }
+          },
+        }] : []),
+      ];
+    })();
 
   const searchItem = searchCatalogUrl ? [{
     type: 'item',
@@ -130,7 +140,7 @@ const getLearnerHeaderMenu = (
       <button className="lw-notification-btn" aria-label="Notifications">
         <IconBell size={24} />
       </button>
-    ),  
+    ),
     userMenu: [
       {
         heading: '',
