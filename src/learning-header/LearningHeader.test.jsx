@@ -26,4 +26,11 @@ describe('Header', () => {
     expect(screen.getByText(`${courseData.courseOrg} ${courseData.courseNumber}`)).toBeInTheDocument();
     expect(screen.getByText(courseData.courseTitle)).toBeInTheDocument();
   });
+
+  it('hides the user dropdown and the header actions when showUserDropdown is false', () => {
+    render(<Header showUserDropdown={false} />);
+
+    expect(screen.queryByText(authenticatedUser.username)).not.toBeInTheDocument();
+    expect(screen.queryByText('Help')).not.toBeInTheDocument();
+  });
 });
