@@ -6,7 +6,7 @@
 - **Notification Tray** (via `HeaderNotificationsSlot`) — Rendered before the help link
 - **Help Link** (via `LearningHelpSlot`)
 
-> **Note:** This slot is only rendered when `showUserDropdown` is `true`. To render content regardless of `showUserDropdown`, use the parent [`v2` slot](../v2/).
+> **Note:** This slot is only rendered when `showUserDropdown` is `true` and a user is authenticated. To render content regardless of `showUserDropdown` or authentication, use the parent [`v2` slot](../v2/).
 
 ---
 
