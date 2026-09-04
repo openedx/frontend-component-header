@@ -37,13 +37,11 @@ const LearningHeader = ({
         <div className="flex-grow-1 course-title-lockup d-flex" style={{ lineHeight: 1 }}>
           <CourseInfoSlot courseOrg={courseOrg} courseNumber={courseNumber} courseTitle={courseTitle} />
         </div>
-        {showUserDropdown && authenticatedUser && (
-        <>
-          <LearningHeaderActionsSlot />
+        <LearningHeaderActionsSlot showDefaultActions={showUserDropdown && !!authenticatedUser} />
+        {authenticatedUser && showUserDropdown && (
           <AuthenticatedUserDropdown
             username={authenticatedUser.username}
           />
-        </>
         )}
         {showUserDropdown && !authenticatedUser && (
         <AnonymousUserMenu />
