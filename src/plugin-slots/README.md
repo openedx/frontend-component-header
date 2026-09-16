@@ -15,7 +15,7 @@
 
 ### Learning Header
 * [`org.openedx.frontend.layout.header_learning_course_info.v1`](./CourseInfoSlot/)
-* [`org.openedx.frontend.layout.learning_header_actions.v1`](./LearningHeaderActionsSlot/v1/)
+* [`org.openedx.frontend.layout.learning_header_actions.v1`](./LearningHeaderActionsSlot/v1/) **(Deprecated, use `.v2`)**
 * [`org.openedx.frontend.layout.learning_header_actions.v2`](./LearningHeaderActionsSlot/v2/)
 * [`org.openedx.frontend.layout.header_learning_help.v1`](./LearningHelpSlot/)
 * [`org.openedx.frontend.layout.header_learning_logged_out_items.v1`](./LearningLoggedOutItemsSlot/)

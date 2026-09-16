@@ -1,5 +1,10 @@
 # Learning Header Actions Slot — v1 (Notification Tray + Help Link)
 
+> **⚠️ Deprecated:** This slot is deprecated and will be removed. Use the
+> [`v2` slot](../v2/) instead, which renders unconditionally regardless of
+> `showUserDropdown`. See [DEPR ticket #681](https://github.com/openedx/frontend-component-header/issues/681)
+> for the removal plan and timeline.
+
 ### Slot ID: `org.openedx.frontend.layout.learning_header_actions.v1`
 
 **Default Content:**
