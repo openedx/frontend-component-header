@@ -1,15 +1,4 @@
-import React from 'react';
-import { PluginSlot } from '@openedx/frontend-plugin-framework';
-import HeaderNotificationsSlot from '../HeaderNotificationsSlot';
-import LearningHelpSlot from '../LearningHelpSlot';
+import LearningHeaderActionsSlot from './v2';
 
-const LearningHeaderActionsSlot = () => (
-  <PluginSlot
-    id="org.openedx.frontend.layout.learning_header_actions.v1"
-  >
-    <HeaderNotificationsSlot />
-    <LearningHelpSlot />
-  </PluginSlot>
-);
-
+export { default as LearningHeaderActionsSlotV1 } from './v1';
 export default LearningHeaderActionsSlot;

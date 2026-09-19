@@ -12,7 +12,7 @@ This slot renders the notifications tray (bell icon + notification popover) from
 1. **Desktop Header** — via `org.openedx.frontend.layout.header_desktop_secondary_menu.v2`
    Notifications appear before secondary menu items (e.g., "New", "Help")
 
-2. **Learning Header** — via `org.openedx.frontend.layout.learning_header_actions.v1`
+2. **Learning Header** — via `org.openedx.frontend.layout.learning_header_actions.v1` (nested within [`.v2`](../LearningHeaderActionsSlot/v2/))
    Notifications appear before the help link
 
 3. **Studio Header** — via `org.openedx.frontend.layout.studio_header_actions.v1`
@@ -27,9 +27,10 @@ Desktop Header
     └── org.openedx.frontend.layout.header_desktop_secondary_menu.v1 (menu items only)
 
 Learning Header
-└── org.openedx.frontend.layout.learning_header_actions.v1
-    ├── org.openedx.frontend.layout.header_notifications_tray.v1 ← This slot
-    └── org.openedx.frontend.layout.header_learning_help.v1
+└── org.openedx.frontend.layout.learning_header_actions.v2
+    └── org.openedx.frontend.layout.learning_header_actions.v1 (only when showUserDropdown is true and a user is authenticated)
+        ├── org.openedx.frontend.layout.header_notifications_tray.v1 ← This slot
+        └── org.openedx.frontend.layout.header_learning_help.v1
 
 Studio Header
 └── org.openedx.frontend.layout.studio_header_actions.v1
