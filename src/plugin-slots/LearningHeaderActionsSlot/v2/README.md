@@ -3,7 +3,8 @@
 ### Slot ID: `org.openedx.frontend.layout.learning_header_actions.v2`
 
 **Default Content:**
-- **Learning Header Actions v1** (via [`LearningHeaderActionsSlotV1`](../v1/)) — Notification tray + help link, only rendered when `showUserDropdown` is `true`
+- **Notification Tray** (via [`HeaderNotificationsSlot`](../../HeaderNotificationsSlot/)) — Rendered before the help link
+- **Help Link** (via [`LearningHelpSlot`](../../LearningHelpSlot/))
 
 This slot always renders, regardless of the `showUserDropdown` prop passed to `LearningHeader`. Use it to add, hide, or replace the whole actions area independently of `showUserDropdown`.
 
