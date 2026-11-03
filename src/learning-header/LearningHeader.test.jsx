@@ -54,11 +54,16 @@ describe('Header', () => {
     expect(screen.getByText(courseData.courseTitle)).toBeInTheDocument();
   });
 
-  it('hides the user dropdown and the header actions when showUserDropdown is false', () => {
+  it('displays the header actions for an authenticated user', () => {
+    render(<Header />);
+    expect(screen.getByText('Help')).toBeInTheDocument();
+  });
+
+  it('hides only the user dropdown, not the header actions, when showUserDropdown is false', () => {
     render(<Header showUserDropdown={false} />);
 
     expect(screen.queryByText(authenticatedUser.username)).not.toBeInTheDocument();
-    expect(screen.queryByText('Help')).not.toBeInTheDocument();
+    expect(screen.getByText('Help')).toBeInTheDocument();
   });
 
   it('renders v2 slot content for an authenticated user even when showUserDropdown is false', () => {
@@ -67,7 +72,7 @@ describe('Header', () => {
 
     expect(screen.getByText(V2_WIDGET_TEXT)).toBeInTheDocument();
     expect(screen.queryByText(authenticatedUser.username)).not.toBeInTheDocument();
-    expect(screen.queryByText('Help')).not.toBeInTheDocument();
+    expect(screen.getByText('Help')).toBeInTheDocument();
   });
 
   it('renders v2 slot content for an anonymous user', () => {
