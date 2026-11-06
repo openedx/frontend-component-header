@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
 import '@testing-library/jest-dom/extend-expect';
@@ -77,5 +78,27 @@ describe('MobileMenu Component', () => {
 
     const menuItems = screen.queryAllByRole('listitem');
     expect(menuItems.length).toBe(0);
+  });
+
+  test('applies item target and the safe rel default for _blank', async () => {
+    const user = userEvent.setup();
+    const mainMenuDropdowns = [{
+      id: 'menu3',
+      buttonTitle: 'Menu 3',
+      items: [
+        { href: '/same-tab', title: 'Same tab' },
+        { href: '/new-tab', title: 'New tab', target: '_blank' as const },
+      ],
+    }];
+    render(<RootWrapper mainMenuDropdowns={mainMenuDropdowns} />);
+    await user.click(screen.getByText('Menu 3'));
+
+    const sameTab = screen.getByText('Same tab');
+    expect(sameTab).not.toHaveAttribute('target');
+    expect(sameTab).not.toHaveAttribute('rel');
+
+    const newTab = screen.getByText('New tab');
+    expect(newTab).toHaveAttribute('target', '_blank');
+    expect(newTab).toHaveAttribute('rel', 'noopener noreferrer');
   });
 });

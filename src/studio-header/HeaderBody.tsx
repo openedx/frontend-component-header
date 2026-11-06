@@ -12,7 +12,7 @@ import { Close, MenuIcon } from '@openedx/paragon/icons';
 import CourseLockUp from './CourseLockUp';
 import UserMenu from './UserMenu';
 import BrandNav from './BrandNav';
-import NavDropdownMenu from './NavDropdownMenu';
+import NavDropdownMenu, { type NavDropdownMenuItem } from './NavDropdownMenu';
 import StudioHeaderActionsSlot from '../plugin-slots/StudioHeaderActionsSlot';
 
 export interface HeaderBodyProps {
@@ -34,7 +34,7 @@ export interface HeaderBodyProps {
   mainMenuDropdowns?: {
     id: string;
     buttonTitle: ReactNode;
-    items: { title: ReactNode; href: string; }[];
+    items: NavDropdownMenuItem[];
   }[];
   outlineLink?: string;
   searchButtonAction?: React.MouseEventHandler<HTMLButtonElement>;
