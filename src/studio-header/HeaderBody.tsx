@@ -15,6 +15,16 @@ import BrandNav from './BrandNav';
 import NavDropdownMenu from './NavDropdownMenu';
 import StudioHeaderActionsSlot from '../plugin-slots/StudioHeaderActionsSlot';
 
+/** A link in a header menu. Shared by the desktop dropdowns and the mobile menu. */
+export interface NavDropdownMenuItem {
+  title: ReactNode;
+  href: string;
+  /** Where to open the link, e.g. `_blank` for a new tab. Omit to open it in the current tab. */
+  target?: React.HTMLAttributeAnchorTarget;
+  /** Defaults to `noopener noreferrer` when `target` is `_blank`; set it to override. */
+  rel?: string;
+}
+
 export interface HeaderBodyProps {
   studioBaseUrl: string;
   logoutUrl: string;
@@ -34,7 +44,7 @@ export interface HeaderBodyProps {
   mainMenuDropdowns?: {
     id: string;
     buttonTitle: ReactNode;
-    items: { title: ReactNode; href: string; }[];
+    items: NavDropdownMenuItem[];
   }[];
   outlineLink?: string;
   searchButtonAction?: React.MouseEventHandler<HTMLButtonElement>;

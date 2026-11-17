@@ -64,4 +64,46 @@ describe('NavDropdownMenu Component', () => {
     const externalLink = screen.getByText(defaultProps.items[1].title);
     expect(externalLink.getAttribute('href')).toBe(defaultProps.items[1].href);
   });
+
+  describe('link target and rel', () => {
+    const items = [
+      { href: '/same-tab', title: 'Same tab' },
+      { href: '/new-tab', title: 'New tab', target: '_blank' as const },
+      {
+        href: '/custom-rel', title: 'Custom rel', target: '_blank' as const, rel: 'noopener',
+      },
+      { href: '/named-target', title: 'Named target', target: 'studio-help' },
+    ];
+
+    const openMenu = () => {
+      render(<RootWrapper {...defaultProps} items={items} />);
+      fireEvent.click(screen.getByRole('button', { name: defaultProps.buttonTitle }));
+    };
+
+    test('leaves target and rel unset when the item has no target', () => {
+      openMenu();
+      const link = screen.getByText('Same tab');
+      expect(link).not.toHaveAttribute('target');
+      expect(link).not.toHaveAttribute('rel');
+    });
+
+    test('adds a safe rel default when target is _blank', () => {
+      openMenu();
+      const link = screen.getByText('New tab');
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    });
+
+    test('uses the item rel when one is provided', () => {
+      openMenu();
+      expect(screen.getByText('Custom rel')).toHaveAttribute('rel', 'noopener');
+    });
+
+    test('passes through any other target value without a rel', () => {
+      openMenu();
+      const link = screen.getByText('Named target');
+      expect(link).toHaveAttribute('target', 'studio-help');
+      expect(link).not.toHaveAttribute('rel');
+    });
+  });
 });

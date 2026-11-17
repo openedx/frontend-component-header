@@ -5,10 +5,13 @@ import {
 } from '@openedx/paragon';
 import { Link } from 'react-router-dom';
 
+import type { NavDropdownMenuItem } from './HeaderBody';
+import { getItemLinkProps } from './utils';
+
 interface Props {
   id: string;
   buttonTitle: ReactNode;
-  items: { title: ReactNode; href: string; }[];
+  items: NavDropdownMenuItem[];
 }
 
 const NavDropdownMenu = ({
@@ -27,6 +30,7 @@ const NavDropdownMenu = ({
         as={Link}
         key={`${item.title}-dropdown-item`}
         to={item.href}
+        {...getItemLinkProps(item)}
         className="small"
       >
         {item.title}
