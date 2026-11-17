@@ -1,5 +1,5 @@
 import messages from './messages';
-import type { NavDropdownMenuItem } from './NavDropdownMenu';
+import type { NavDropdownMenuItem } from './HeaderBody';
 
 const getUserMenuItems = ({
   studioBaseUrl,

@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
 import '@testing-library/jest-dom/extend-expect';
@@ -80,8 +79,7 @@ describe('MobileMenu Component', () => {
     expect(menuItems.length).toBe(0);
   });
 
-  test('applies item target and the safe rel default for _blank', async () => {
-    const user = userEvent.setup();
+  test('applies item target and the safe rel default for _blank', () => {
     const mainMenuDropdowns = [{
       id: 'menu3',
       buttonTitle: 'Menu 3',
@@ -91,7 +89,7 @@ describe('MobileMenu Component', () => {
       ],
     }];
     render(<RootWrapper mainMenuDropdowns={mainMenuDropdowns} />);
-    await user.click(screen.getByText('Menu 3'));
+    fireEvent.click(screen.getByText('Menu 3'));
 
     const sameTab = screen.getByText('Same tab');
     expect(sameTab).not.toHaveAttribute('target');

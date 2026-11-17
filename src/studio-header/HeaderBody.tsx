@@ -12,8 +12,18 @@ import { Close, MenuIcon } from '@openedx/paragon/icons';
 import CourseLockUp from './CourseLockUp';
 import UserMenu from './UserMenu';
 import BrandNav from './BrandNav';
-import NavDropdownMenu, { type NavDropdownMenuItem } from './NavDropdownMenu';
+import NavDropdownMenu from './NavDropdownMenu';
 import StudioHeaderActionsSlot from '../plugin-slots/StudioHeaderActionsSlot';
+
+/** A link in a header menu. Shared by the desktop dropdowns and the mobile menu. */
+export interface NavDropdownMenuItem {
+  title: ReactNode;
+  href: string;
+  /** Where to open the link, e.g. `_blank` for a new tab. Omit to open it in the current tab. */
+  target?: React.HTMLAttributeAnchorTarget;
+  /** Defaults to `noopener noreferrer` when `target` is `_blank`; set it to override. */
+  rel?: string;
+}
 
 export interface HeaderBodyProps {
   studioBaseUrl: string;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
 import NavDropdownMenu from './NavDropdownMenu';
@@ -76,33 +75,32 @@ describe('NavDropdownMenu Component', () => {
       { href: '/named-target', title: 'Named target', target: 'studio-help' },
     ];
 
-    const openMenu = async () => {
-      const user = userEvent.setup();
+    const openMenu = () => {
       render(<RootWrapper {...defaultProps} items={items} />);
-      await user.click(screen.getByRole('button', { name: defaultProps.buttonTitle }));
+      fireEvent.click(screen.getByRole('button', { name: defaultProps.buttonTitle }));
     };
 
-    test('leaves target and rel unset when the item has no target', async () => {
-      await openMenu();
+    test('leaves target and rel unset when the item has no target', () => {
+      openMenu();
       const link = screen.getByText('Same tab');
       expect(link).not.toHaveAttribute('target');
       expect(link).not.toHaveAttribute('rel');
     });
 
-    test('adds a safe rel default when target is _blank', async () => {
-      await openMenu();
+    test('adds a safe rel default when target is _blank', () => {
+      openMenu();
       const link = screen.getByText('New tab');
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
-    test('uses the item rel when one is provided', async () => {
-      await openMenu();
+    test('uses the item rel when one is provided', () => {
+      openMenu();
       expect(screen.getByText('Custom rel')).toHaveAttribute('rel', 'noopener');
     });
 
-    test('passes through any other target value without a rel', async () => {
-      await openMenu();
+    test('passes through any other target value without a rel', () => {
+      openMenu();
       const link = screen.getByText('Named target');
       expect(link).toHaveAttribute('target', 'studio-help');
       expect(link).not.toHaveAttribute('rel');
