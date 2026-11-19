@@ -13,6 +13,11 @@ $white: #FFFFFF;
     border-color: var(--pgn-color-white, $white);
   }
 
+  #user-dropdown-menu {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+  }
+
   .logo {
     display: block;
     box-sizing: content-box;
